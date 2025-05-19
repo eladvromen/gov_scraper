@@ -26,6 +26,7 @@ def analyze_determination_types_by_period(json_dir="data/json", split_year=2017)
     # Known determination types based on your data
     type_patterns = {
         'PA': re.compile(r'(?:^|\s)PA[/_\s]?\d+'),  # Protection Appeal/Asylum
+        'UI': re.compile(r'(?:^|\s)UI[-/_\s]?\d+', re.IGNORECASE),
         'HU': re.compile(r'(?:^|\s)HU[/_\s]?\d+'),  # Human Rights
         'AA': re.compile(r'(?:^|\s)AA[/_\s]?\d+'),  # Asylum Appeal
         'IA': re.compile(r'(?:^|\s)IA[/_\s]?\d+'),  # Immigration Appeal
@@ -33,10 +34,15 @@ def analyze_determination_types_by_period(json_dir="data/json", split_year=2017)
         'EA': re.compile(r'(?:^|\s)EA[/_\s]?\d+'),  # EEA Appeal
         'OA': re.compile(r'(?:^|\s)OA[/_\s]?\d+'),  # Other Appeal
         'VA': re.compile(r'(?:^|\s)VA[/_\s]?\d+'),  # Visit Visa Appeal
+        'JR': re.compile(r'(?:^|\s)JR[/_\s]?\d+'),  # Judicial Review
+        'RP': re.compile(r'(?:^|\s)RP[/_\s]?\d+'),  # Refugee Protection
+        'DC': re.compile(r'(?:^|\s)DC[/_\s]?\d+'),  # Deprivation of Citizenship
+        'UT': re.compile(r'(?:^|\s)UT[/_\s]?\d+'),  # Upper Tribunal case
+        'FA': re.compile(r'(?:^|\s)FA[/_\s]?\d+'),  # Family Appeal
         'UKIAT': re.compile(r'UKIAT|UKAIT'),        # UK Asylum & Immigration Tribunal
-        'UKUT': re.compile(r'UKUT'),               # UK Upper Tribunal
-        'EWCA': re.compile(r'EWCA'),               # England and Wales Court of Appeal
-        'UKSC': re.compile(r'UKSC'),               # UK Supreme Court
+        'UKUT': re.compile(r'UKUT'),                # UK Upper Tribunal
+        'EWCA': re.compile(r'EWCA'),                # England and Wales Court of Appeal
+        'UKSC': re.compile(r'UKSC'),                # UK Supreme Court
     }
     
     # Process all JSON files
