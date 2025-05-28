@@ -1,0 +1,5 @@
+I want the following data:
+1. C:\Users\shil6369\Documents\social_data_science\Thesis\gov_scraping\data\asylex_benchmark\leaglBERT_training.pkl
+for the legal BERT fine tuning (this is asyles output) 
+2.'C:\Users\shil6369\Documents\social_data_science\Thesis\gov_scraping\preprocessing\processed_data\processed_legal_cases.parquet'
+for inference (this is our real data)

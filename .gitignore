@@ -1,6 +1,7 @@
 # Data directories
 data/
 logs/
+preprocessing/processed_data/
 
 # Python
 __pycache__/
@@ -35,3 +36,8 @@ ENV/
 # OS specific files
 .DS_Store
 Thumbs.db 
+
+
+preprocessing/processed_data/
+dataset_analysis/*.csv
+dataset_analysis/*.png
