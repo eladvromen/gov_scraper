@@ -1,0 +1,46 @@
+FINAL EVALUATION REPORT
+==================================================
+
+Evaluation Date: 2025-05-29 14:59:46
+Model: Fine-tuned LegalBERT
+Model Path: ./fine_tuned_legal_bert_final
+Device: cuda
+Test Set Size: 2,383
+
+FINAL TEST SET PERFORMANCE:
+------------------------------
+Accuracy: 0.8456
+Weighted F1: 0.8430
+Weighted Precision: 0.8414
+Weighted Recall: 0.8456
+Weighted AUC: 0.9391
+
+PER-CLASS PERFORMANCE:
+------------------------------
+Label 0:
+  Precision: 0.8906
+  Recall: 0.9261
+  F1: 0.9080
+  Support: 1407
+Label 1:
+  Precision: 0.8848
+  Recall: 0.8571
+  F1: 0.8708
+  Support: 511
+Label 2:
+  Precision: 0.6447
+  Recall: 0.5892
+  F1: 0.6157
+  Support: 465
+
+IMPROVEMENTS OVER BASELINE:
+------------------------------
+accuracy_improvement: +0.4062
+f1_improvement: +0.4302
+precision_improvement: +0.4160
+recall_improvement: +0.4062
+
+MODEL READY FOR INFERENCE
+------------------------------
+The fine-tuned model is saved at: ./fine_tuned_legal_bert_final
+Use this model for case outcome prediction on new legal cases.

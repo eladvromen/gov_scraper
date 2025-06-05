@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.env
+
+# Data files
+*.parquet
+*.pkl
+*.csv
+data/processed/*
+data/splits/*
+!data/*/README.md
+
+# Models
+models/fine_tuned_*/
+*.bin
+*.safetensors
+
+# Outputs
+outputs/plots/*.png
+outputs/plots/*.pdf
+outputs/logs/*
+results/predictions/*
+results/evaluation/*
+!results/*/README.md
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

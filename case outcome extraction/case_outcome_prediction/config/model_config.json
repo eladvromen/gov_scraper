@@ -1,0 +1,10 @@
+{
+  "model_name": "nlpaueb/legal-bert-base-uncased",
+  "max_length": 512,
+  "num_labels": 3,
+  "label_mapping": {
+    "0": "Outcome_0",
+    "1": "Outcome_1",
+    "2": "Outcome_2"
+  }
+}
