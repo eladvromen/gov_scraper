@@ -1,0 +1,21 @@
+{
+  "data": {
+    "training_data": "/data/shil6369/gov_scraper/data/leaglBERT_training.pkl",
+    "inference_data": "/data/shil6369/gov_scraper/data/processed_legal_cases.parquet",
+    "processed_dir": "data/processed/",
+    "splits_dir": "data/splits/"
+  },
+  "models": {
+    "output_dir": "models/",
+    "final_model": "models/fine_tuned_legal_bert_final/"
+  },
+  "results": {
+    "predictions_dir": "results/predictions/",
+    "evaluation_dir": "results/evaluation/",
+    "reports_dir": "results/reports/"
+  },
+  "outputs": {
+    "plots_dir": "outputs/plots/",
+    "logs_dir": "outputs/logs/"
+  }
+}

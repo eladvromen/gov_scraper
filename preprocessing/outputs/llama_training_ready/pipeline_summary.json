@@ -1,0 +1,22 @@
+{
+  "pipeline_completed": "2025-06-11T12:13:15.454422",
+  "total_datasets": 3,
+  "total_chunks": 64827,
+  "total_tokens": 106512095,
+  "human_inspection_samples": 5,
+  "quality_assessment": "Skipped",
+  "datasets": {
+    "pre_brexit_2013_2016": {
+      "chunks": 22144,
+      "tokens": 35278699
+    },
+    "transitional_2017": {
+      "chunks": 6779,
+      "tokens": 10781208
+    },
+    "post_brexit_2018_2025": {
+      "chunks": 35904,
+      "tokens": 60452188
+    }
+  }
+}

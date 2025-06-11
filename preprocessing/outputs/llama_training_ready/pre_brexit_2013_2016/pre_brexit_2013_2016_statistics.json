@@ -1,0 +1,10 @@
+{
+  "dataset_name": "pre_brexit_2013_2016",
+  "total_chunks": 22144,
+  "total_tokens": 35278699,
+  "avg_tokens_per_chunk": 1593.1493406791908,
+  "min_tokens": 512,
+  "max_tokens": 2048,
+  "total_characters": 143018078,
+  "unique_cases": 14609
+}

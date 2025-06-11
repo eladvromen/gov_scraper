@@ -1,0 +1,69 @@
+# Data directories - all large data files
+data/
+logs/
+preprocessing/data/
+preprocessing/processed_data/
+case outcome extraction/case_outcome_prediction/data
+case outcome extraction/case_outcome_prediction/models
+
+# Large training output files (specific patterns)
+preprocessing/outputs/llama_training_ready/*/*.jsonl
+preprocessing/outputs/llama_training_ready/*/*.txt
+preprocessing/outputs/llama_training_ready/*/*.csv
+preprocessing/outputs/llama_training_ready/human_inspection/*.json
+preprocessing/outputs/llama_training_ready/human_inspection/*.html
+preprocessing/outputs/quality_assessment/*.png
+preprocessing/outputs/quality_assessment/*.jpg
+preprocessing/outputs/brexit_analysis/*.csv
+preprocessing/outputs/brexit_analysis/*.txt
+
+# Keep important small summary files
+!preprocessing/outputs/llama_training_ready/pipeline_summary.json
+!preprocessing/outputs/llama_training_ready/human_inspection/README.md
+!preprocessing/outputs/llama_training_ready/human_inspection/inspection_summary.json
+!preprocessing/outputs/quality_assessment/quality_assessment_report.json
+!preprocessing/outputs/QUALITY_METRICS_GUIDE.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Legacy patterns (keep for compatibility)
+dataset_analysis/*.csv
+dataset_analysis/*.png
+
+# Temporary and test files
+test_*.py
+temp_*.py
+*.tmp
+*.temp

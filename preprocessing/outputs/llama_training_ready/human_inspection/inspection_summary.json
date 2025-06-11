@@ -1,0 +1,35 @@
+{
+  "generation_time": "2025-06-11T12:08:18.881238",
+  "total_samples": 15,
+  "samples_per_dataset": {
+    "pre_brexit_2013_2016": 5,
+    "transitional_2017": 5,
+    "post_brexit_2018_2025": 5
+  },
+  "cleaning_statistics": {
+    "pre_brexit_2013_2016": {
+      "avg_reduction_ratio": 0.05591689054288303,
+      "min_reduction_ratio": 0.000517705529095025,
+      "max_reduction_ratio": 0.15445430003856542,
+      "avg_original_length": 14830.6,
+      "avg_cleaned_length": 13914.6,
+      "samples_count": 5
+    },
+    "transitional_2017": {
+      "avg_reduction_ratio": 0.06281461480463357,
+      "min_reduction_ratio": 0.006941943089164626,
+      "max_reduction_ratio": 0.1813004271476032,
+      "avg_original_length": 12280.6,
+      "avg_cleaned_length": 11955.8,
+      "samples_count": 5
+    },
+    "post_brexit_2018_2025": {
+      "avg_reduction_ratio": 0.017607316687091125,
+      "min_reduction_ratio": 0.0008589589417625776,
+      "max_reduction_ratio": 0.06291437438284664,
+      "avg_original_length": 8293.6,
+      "avg_cleaned_length": 8161.6,
+      "samples_count": 5
+    }
+  }
+}

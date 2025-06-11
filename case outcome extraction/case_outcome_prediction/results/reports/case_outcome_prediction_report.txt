@@ -1,0 +1,31 @@
+CASE OUTCOME PREDICTION REPORT
+==================================================
+
+Prediction Date: 2025-05-29 16:04:00
+Model: Fine-tuned LegalBERT
+Model Path: ../models/fine_tuned_legal_bert_final
+Device: cuda
+Total Predictions: 31,071
+
+PREDICTION DISTRIBUTION:
+------------------------------
+Outcome_2: 19,022 cases (61.2%)
+Outcome_0: 9,588 cases (30.9%)
+Outcome_1: 2,461 cases (7.9%)
+
+CONFIDENCE ANALYSIS:
+------------------------------
+Mean Confidence: 0.7350
+Median Confidence: 0.7526
+Min Confidence: 0.3448
+Max Confidence: 0.9847
+
+High Confidence (≥0.8): 10,996 cases (35.4%)
+Low Confidence (≤0.6): 5,646 cases (18.2%)
+
+FILES GENERATED:
+------------------------------
+- case_outcome_predictions.parquet (full results)
+- case_outcome_predictions_summary.csv (summary view)
+- high_confidence_predictions.parquet (high confidence cases)
+- case_outcome_prediction_report.txt (this report)

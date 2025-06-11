@@ -1,0 +1,10 @@
+{
+  "dataset_name": "transitional_2017",
+  "total_chunks": 6779,
+  "total_tokens": 10781208,
+  "avg_tokens_per_chunk": 1590.3832423661306,
+  "min_tokens": 512,
+  "max_tokens": 2048,
+  "total_characters": 43731662,
+  "unique_cases": 4508
+}

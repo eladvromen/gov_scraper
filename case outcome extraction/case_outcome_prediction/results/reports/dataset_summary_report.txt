@@ -1,0 +1,14 @@
+CASE OUTCOME PREDICTION - DATASET ANALYSIS REPORT
+============================================================
+
+Training Data: /data/shil6369/gov_scraper/data/leaglBERT_training.pkl
+Inference Data: /data/shil6369/gov_scraper/data/processed_legal_cases.parquet
+
+TRAINING DATA SUMMARY:
+Type: <class 'pandas.core.frame.DataFrame'>
+Shape: (23824, 8)
+Columns: ['text', 'label', 'text_length', 'estimated_tokens', 'original_length', 'cleaned_full_length', 'decisionID', 'year']
+
+INFERENCE DATA SUMMARY:
+Shape: (42377, 28)
+Columns: ['reference_number', 'status', 'promulgation_date', 'country', 'url', 'case_title', 'appellant_name', 'hearing_date', 'publication_date', 'last_updated', 'judges', 'pdf_url', 'word_url', 'promulgation_date_standardized', 'hearing_date_standardized', 'publication_date_standardized', 'last_updated_standardized', 'has_pdf_url', 'has_word_url', 'case_year', 'decision_text_cleaned', 'decision_text_length', 'decision_text_word_count', 'decision_text_last_section', 'last_section_length', 'last_section_token_count', 'source_file', 'file_size_kb']
