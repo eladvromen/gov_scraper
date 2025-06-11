@@ -1,0 +1,97 @@
+# LLaMA Fine-tuning Base Configuration
+# Model Configuration
+model:
+  name: "meta-llama/Llama-2-7b-hf"  # Can switch to Llama-3-8B-Instruct
+  tokenizer_name: null  # Uses same as model if null
+  cache_dir: "./models/cache"
+  trust_remote_code: false
+  torch_dtype: "bfloat16"  # For A100/H100 GPUs
+  attn_implementation: "flash_attention_2"  # Requires flash-attn
+
+# Training Configuration
+training:
+  output_dir: "./models/checkpoints"
+  run_name: "llama_legal_pretrain"
+  
+  # Hyperparameters
+  learning_rate: 2e-5
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 8
+  gradient_accumulation_steps: 4  # Effective batch size = 4*4 = 16
+  
+  # Optimization
+  optim: "adamw_torch"
+  lr_scheduler_type: "cosine"
+  warmup_ratio: 0.03
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  
+  # Sequence settings
+  max_seq_length: 2048
+  pack_sequences: true  # Pack multiple examples per sequence
+  
+  # Checkpointing
+  save_strategy: "steps"
+  save_steps: 500
+  save_total_limit: 3
+  evaluation_strategy: "steps"
+  eval_steps: 500
+  
+  # Logging
+  logging_steps: 50
+  report_to: ["tensorboard", "wandb"]
+  
+  # Performance
+  dataloader_num_workers: 4
+  remove_unused_columns: false
+  group_by_length: true
+  
+  # Mixed precision
+  fp16: false
+  bf16: true  # Better for A100/H100
+  
+  # DeepSpeed (optional)
+  deepspeed: null  # Path to deepspeed config if needed
+
+# Data Configuration
+data:
+  data_dir: "../preprocessing/outputs/llama_training_ready"
+  dataset_name: "combined"  # "pre_brexit_2013_2016", "transitional_2017", "post_brexit_2018_2025", "combined"
+  train_split: 0.95
+  eval_split: 0.05
+  seed: 42
+  
+  # Text processing
+  add_eos_token: true
+  text_column: "text"
+  
+# Evaluation Configuration  
+evaluation:
+  eval_dataset_size: 1000  # Max samples for evaluation
+  compute_perplexity: true
+  generate_samples: true
+  generation_max_length: 256
+  generation_num_samples: 5
+
+# Logging and Monitoring
+logging:
+  wandb_project: "llama-legal-pretraining"
+  wandb_entity: null  # Your wandb username
+  log_model: true
+  log_predictions: false
+
+# Hardware Configuration
+hardware:
+  use_cpu: false
+  device_map: "auto"
+  low_cpu_mem_usage: true
+  
+# Advanced Features (Optional)
+advanced:
+  gradient_checkpointing: true
+  use_peft: false  # Set to true for LoRA fine-tuning
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.1
+  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"] 

@@ -1,0 +1,36 @@
+# LLaMA Fine-tuning Pipeline Requirements
+# Core ML/DL libraries
+torch>=2.1.0
+transformers>=4.36.0
+accelerate>=0.25.0
+peft>=0.7.0
+datasets>=2.16.0
+
+# Training optimization
+deepspeed>=0.12.0
+flash-attn>=2.3.0
+bitsandbytes>=0.41.0
+
+# Data processing
+tokenizers>=0.15.0
+sentencepiece>=0.1.99
+
+# Monitoring and logging
+wandb>=0.16.0
+tensorboard>=2.15.0
+tqdm>=4.66.0
+
+# Evaluation
+evaluate>=0.4.0
+scikit-learn>=1.3.0
+
+# Utilities
+numpy>=1.24.0
+pandas>=2.1.0
+jsonlines>=4.0.0
+click>=8.1.0
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+
+# Optional: For advanced optimizations
+triton>=2.1.0 
