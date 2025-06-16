@@ -1,0 +1,47 @@
+[ ] DECISION: [ ] Granted [ ] Denied
+REASONING:
+1. [ ] The applicant has a well-founded fear of persecution in Iran, as demonstrated by the following:
+2. [ ] The applicant's fear of persecution is not diminished by time spent in Bulgaria, as:
+3. [ ] The applicant is not "firmly resettled" in Bulgaria, as:
+4. [ ] The applicant is entitled to refugee status in the UK, as:
+"
+```
+import json
+import os
+import random
+import string
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+from PIL import Image, ImageDraw
+from scipy import stats
+
+from src import (
+    utils,
+    data,
+    config,
+    gen_utils,
+    train_utils,
+    train_data_utils,
+    model,
+    gen_model,
+    gen_model_utils,
+    gen_model_vae,
+    gen_model_gan,
+    gen_model_diffusion,
+    gen_model_samplers,
+    gen_model_losses,
+    gen_model_metrics,
+    gen_model_diffusion_utils,
+    gen_model_diffusion_samplers,
+    gen_model_diffusion_losses,
+    gen_model_diffusion_metrics,
+    gen_model_diffusion_training,
+    gen_model_diffusion_sample,
+    gen_model_diffusion_visualise,
+    gen_model_diffusion_evaluate,
+    gen_model_diffusion_scripts,
+    gen_model_diffusion_gym,
+    gen_model_diffusion_gym_envs,
+    gen_model_diff

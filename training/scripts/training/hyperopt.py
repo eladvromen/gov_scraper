@@ -3,9 +3,11 @@ Hyperparameter optimization for LLaMA legal domain adaptation using Optuna.
 """
 
 import os
+import sys
 import logging
 from typing import Dict, Any, Optional
 from dataclasses import dataclass
+from pathlib import Path
 
 import optuna
 from optuna.trial import Trial
@@ -13,8 +15,11 @@ import wandb
 import torch
 from torch.utils.data import DataLoader
 
-from .trainer import train, ModelConfig, DataConfig, TrainingConfig
-from .evaluation import EvaluationConfig, LegalEvaluator
+# Add the scripts directory to Python path
+sys.path.append(str(Path(__file__).parent.parent))
+
+from training.trainer import train, ModelConfig, DataConfig, TrainingConfig
+from evaluation.evaluation import EvaluationConfig, LegalEvaluator
 
 logger = logging.getLogger(__name__)
 

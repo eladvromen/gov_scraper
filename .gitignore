@@ -1,6 +1,7 @@
 # Data directories - all large data files
 data/
 logs/
+models/
 preprocessing/data/
 preprocessing/processed_data/
 case outcome extraction/case_outcome_prediction/data

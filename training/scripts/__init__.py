@@ -1,3 +1,1 @@
-"""
-LLaMA Fine-tuning Pipeline Scripts Package
-""" 
+# Main scripts package 

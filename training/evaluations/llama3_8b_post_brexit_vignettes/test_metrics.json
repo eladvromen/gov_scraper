@@ -1,0 +1,8 @@
+{
+  "test/perplexity": 4.5041448640823365,
+  "test/loss": 1.4849070453643798,
+  "test/token_accuracy": 0.001923828125,
+  "test/generation/bertscore_f1": 0.925713586807251,
+  "test/generation/bertscore_precision": 0.8993548452854156,
+  "test/generation/bertscore_recall": 0.9537026464939118
+}

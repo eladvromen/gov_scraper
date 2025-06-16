@@ -4,6 +4,8 @@ Handles any temporal chunk-based legal text dataset in our format.
 """
 
 import os
+import sys
+from pathlib import Path
 import json
 import logging
 from typing import Dict, List, Optional, Tuple, Union
@@ -13,7 +15,10 @@ import torch
 from torch.utils.data import Dataset
 import numpy as np
 from datasets import load_dataset, DatasetDict, concatenate_datasets
-from transformers import PreTrainedTokenizer
+from transformers import PreTrainedTokenizer, AutoTokenizer
+
+# Add the training directory to Python path
+sys.path.append(str(Path(__file__).parent.parent))
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +34,7 @@ class DataConfig:
     add_eos_token: bool = True
     chunk_size: int = 2048
     max_eval_samples: Optional[int] = None
+    max_train_samples: Optional[int] = None  # New parameter for limiting training samples
 
 class LegalChunkDataset(Dataset):
     """Dataset for legal text chunks supporting both JSONL and txt formats."""
@@ -66,6 +72,12 @@ class LegalChunkDataset(Dataset):
             self.dataset = concatenate_datasets(self.raw_datasets)
         else:
             self.dataset = self.raw_datasets[0]
+            
+        # Limit total samples if specified
+        if split == "train" and config.max_train_samples:
+            total_samples = min(len(self.dataset), config.max_train_samples)
+            self.dataset = self.dataset.select(range(total_samples))
+            logger.info(f"Limited to {total_samples} total samples before train/eval split")
             
         # Split dataset
         if split != "all":

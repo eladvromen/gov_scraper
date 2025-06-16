@@ -1,0 +1,8 @@
+{
+  "test_samples": 200,
+  "data_dir": "preprocessing/outputs/llama_training_ready/pre_brexit_2013_2016",
+  "dataset_pattern": "pre_brexit_2013_2016_chunks.jsonl",
+  "train_split": 0.9,
+  "eval_split": 0.1,
+  "seed": 42
+}

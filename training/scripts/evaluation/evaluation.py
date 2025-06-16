@@ -64,7 +64,6 @@ class LegalEvaluator:
         
         # Load metric computers
         self.perplexity = evaluate.load("perplexity")
-        self.rouge = evaluate.load("rouge")
         self.bertscore = evaluate.load("bertscore")
         
         # Legal domain specific metrics
@@ -176,14 +175,6 @@ class LegalEvaluator:
         # Compute metrics
         metrics = {}
         
-        # ROUGE scores
-        rouge_scores = self.rouge.compute(
-            predictions=generated_texts,
-            references=reference_texts,
-            use_aggregator=True,
-        )
-        metrics.update(rouge_scores)
-        
         # BERTScore
         bertscore_results = self.bertscore.compute(
             predictions=generated_texts,
@@ -192,6 +183,8 @@ class LegalEvaluator:
             model_type="microsoft/deberta-large-mnli",
         )
         metrics["bertscore_f1"] = np.mean(bertscore_results["f1"])
+        metrics["bertscore_precision"] = np.mean(bertscore_results["precision"])
+        metrics["bertscore_recall"] = np.mean(bertscore_results["recall"])
         
         # Save generations if configured
         if self.config.save_predictions and self.config.predictions_dir:

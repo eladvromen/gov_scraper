@@ -1,8 +1,3 @@
-I got the legal BERT and the analysis. issues:
-1. BIG DATA QUALITY ISSUE:
-10,000 cases are not loaded correctly- because they require word document downloaded while scraping.
-example: 
-'https://tribunalsdecisions.service.gov.uk/utiac/hu-04970-2018-hu-04969-2018'
-should fix that when we have time.
-2. the case prediction is not very relaibale. 
--> but- givent that it is reliabele- we have more 0 than 1. this make sense - but we should try and account for that.
+some thing wierd happening with the venv for fine tuning. start form 
+'. Please refer to the documentation of https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2 to install Flash Attention 2.' error
+some stupid venv issue

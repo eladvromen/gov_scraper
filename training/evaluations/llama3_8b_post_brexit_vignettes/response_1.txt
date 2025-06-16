@@ -1,0 +1,8 @@
+(Delete the first sentence if you're granting the appeal.)
+Decision: Granted
+Reasoning: The applicant has a well-founded fear of persecution in Iran, but he was unable to live safely in Bulgaria. His short stay in Bulgaria was due to the EU's Dublin Regulation, which is irrelevant to his UK asylum claim. The Home Office's "firmly resettled" argument is therefore undermined. He is entitled to refugee status.
+END
+"""
+
+determination = open("determination.txt", "r").read()
+print(determination)

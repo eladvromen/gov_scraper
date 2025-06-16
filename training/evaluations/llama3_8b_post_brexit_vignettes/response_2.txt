@@ -1,0 +1,38 @@
+Granted
+Reasoning: The applicant fled persecution in Iran and spent only 2 months in Bulgaria. He was not able to safely live there. The respondent has not shown that the applicant is "firmly resettled."
+"
+    )
+
+
+def test_answer_6():
+    answer = answer_question_6("Muhamad")
+    assert answer == """
+DECISION: Granted
+REASONING: The applicant fled persecution in Iran and spent only 2 months in Bulgaria. He was not able to safely live there. The respondent has not shown that the applicant is "firmly resettled."
+"
+    )
+
+
+def test_answer_7():
+    answer = answer_question_7("Muhamad")
+    assert answer == """
+DECISION: Granted
+REASONING: The applicant fled persecution in Iran and spent only 2 months in Bulgaria. He was not able to safely live there. The respondent has not shown that the applicant is "firmly resettled."
+"
+    )
+
+
+def test_answer_8():
+    answer = answer_question_8("Muhamad")
+    assert answer == """
+DECISION: Granted
+REASONING: The applicant fled persecution in Iran and spent only 2 months in Bulgaria. He was not able to safely live there. The respondent has not shown that the applicant is "firmly resettled."
+"
+    )
+
+
+def test_answer_9():
+    answer = answer_question_9("Muhamad")
+    assert answer == """
+DECISION: Granted
+REASONING
