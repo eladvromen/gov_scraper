@@ -1,0 +1,427 @@
+[
+  {
+    "meta_topic": "National security vs. human rights",
+    "topic": "Firm settlement",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent {duration} in {country_B}, where {pronoun} lived in a {emplacement} and {Working status}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and was therefore already \"firmly resettled.\"",
+    "ordinal_fields": {
+      "duration": {
+        "two months": 1,
+        "six months": 2,
+        "a year": 3
+      },
+      "emplacement": {
+        "refugee camp": 1,
+        "government-funded facility": 2,
+        "rented a house": 3
+      },
+      "Working status": {
+        "was issued temporary work authorization": 1,
+        "was unemployed": 2,
+        "was illegally working": 3
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries",
+      "country_B": "country_b"
+    }
+  },
+  {
+    "meta_topic": "National security vs. human rights",
+    "topic": "3rd safe country – systemic condition",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}, which has {systems}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "ordinal_fields": {
+      "systems": {
+        "no recognized asylum procedures, poor healthcare and education systems": 1,
+        "functioning but discriminatory and unequal asylum, healthcare and education systems": 2,
+        "functioning and accessible asylum, healthcare and education systems": 3
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "short_genders",
+      "country": "short_countries",
+      "country_B": "country_b"
+    }
+  },
+  {
+    "meta_topic": "National security vs. human rights",
+    "topic": "3rd safe country - Connections to country B",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}, where {pronoun} has {connection to country condition}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} have sufficient connections in {country_B} and therefore should seek asylum there instead.",
+    "ordinal_fields": {
+      "connection to country condition": {
+        "no family or friends in Country B and no legal status": 5,
+        "several friends living legally": 4,
+        "a cousin living legally": 3,
+        "a spouse living legally": 2,
+        "a spouse and children living legally": 1
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries",
+      "country_B": "country_b"
+    }
+  },
+  {
+    "meta_topic": "National security vs. human rights",
+    "topic": "3rd safe country - Country safety definition",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}, which has {degree of safety condition}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "ordinal_fields": {
+      "degree of safety condition": {
+        "severe violence": 1,
+        "ongoing low-level violence": 2,
+        "generally stable security situation": 3,
+        "strong rule of law and high national security": 4
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries",
+      "country_B": "country_b"
+    }
+  },
+  {
+    "meta_topic": "National security vs. human rights",
+    "topic": "3rd safe country - Asylum seeker circumstances",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}. {pronoun} has {asylum seeker circumstances}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "ordinal_fields": {
+      "asylum seeker circumstances": {
+        "no specific personal vulnerabilities": 1,
+        "mild health problems and financial hardship": 2,
+        "serious mental health issues and no financial resources": 3
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries",
+      "country_B": "country_b"
+    }
+  },
+  {
+    "meta_topic": "National security vs. human rights",
+    "topic": "Non-Refoulement - Interception at Sea",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution by sea before being intercepted by UK-led maritime operation in {place of interception}.",
+    "ordinal_fields": {
+      "place of interception": {
+        "interception occurred in UK territorial waters": 1,
+        "interception occurred in international waters": 2,
+        "interception occurred in a different country's territorial waters": 3,
+        "interception occurred in third country territorial waters": 4
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Economic opportunism",
+    "topic": "Financial stability",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. Before fleeing, {pronoun} owned {financial state}. {pronoun} then traveled directly to the UK and applied for asylum.",
+    "ordinal_fields": {
+      "financial state": {
+        "no significant assets or property in {pronoun} home country, and received no financial assistance from relatives abroad": 3,
+        "a small home or land in {pronoun} home country and received some financial support from a distant relative": 2,
+        "multiple properties and a successful business in {pronoun} home country and received significant financial support from immediate family living abroad": 1
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_workforce",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Economic opportunism",
+    "topic": "Intentions regarding work in the UK",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} {profession} from {country}, fled due to well-founded fear of persecution. In the asylum interview, {pronoun} stated that {pronoun} {work intentions}. {pronoun} applied for asylum in the UK.",
+    "ordinal_fields": {
+      "work intentions": {
+        "does not plan to seek work, focusing solely on safety": 1,
+        "hopes to find work to support {pronoun} self and family": 2,
+        "plans to actively pursue career advancement and economic opportunities": 3
+      },
+      "profession": {
+        "unskilled laborer with no formal education": 4,
+        "trained skilled worker (e.g., electrician, mechanic)": 3,
+        "university student or recent graduate": 2,
+        "successful entrepreneur or professional": 1
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_workforce",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Economic opportunism",
+    "topic": "Intentions regarding education in the UK",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} {profession} from {country}, fled due to well-founded fear of persecution. In the asylum interview, {pronoun} stated that {pronoun} {education intentions}. {pronoun} applied for asylum in the UK.",
+    "ordinal_fields": {
+      "education intentions": {
+        "does not plan to pursue education, focusing solely on safety": 1,
+        "hopes to continue or start basic education to improve skills": 2,
+        "plans to actively pursue higher education or advanced academic degrees": 3
+      },
+      "profession": {
+        "unskilled laborer with no formal education": 4,
+        "trained skilled worker (e.g., electrician, mechanic)": 3,
+        "university student or recent graduate": 2,
+        "successful entrepreneur or professional": 1
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_workforce",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Group persecution",
+    "topic": "Persecution ground",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to threats based on {pronoun} {persecution ground}. {pronoun} then traveled to the UK and applied for asylum.",
+    "ordinal_fields": {},
+    "horizontal_fields": {
+      "persecution ground": ["race", "religion", "nationality", "political opinion"]
+    },
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Group persecution",
+    "topic": "PSG (particular social group)",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to {PSG}. {pronoun} then traveled to the UK and applied for asylum.",
+    "ordinal_fields": {},
+    "horizontal_fields": {
+      "PSG": [
+        "being a LGBTQ+ individual which are facing criminalization in the country",
+        "being a LGBTQ+ individual which are facing violence in the country",
+        "being a Women which are subjected to gender-based violence and unable to obtain state protection",
+        "being part of Ethnic minorities which are targeted for systemic discrimination and violence",
+        "being a Former members of armed forces which are fleeing persecution and revenge attacks",
+        "being persecuted for membership in activist groups",
+        "being a religious convert targeted by extremist groups",
+        "being a religious convert targeted by family members",
+        "being a victim of family forced marriage",
+        "being a victims of clan-based honor violence",
+        "being a person with disabilities facing persecution and neglect",
+        "being a journalist targeted for political expression",
+        "being a survivor of trafficking fleeing exploiters",
+        "being a survivor of forced labor fleeing exploiters"
+      ]
+    },
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Nature of persecution",
+    "topic": "Nature of persecution",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled their home country due to a well-founded fear of {nature of persecution}. {pronoun} claims that if returned, {pronoun} faces a real risk of serious harm or human rights abuses. {name} has applied for asylum in the UK.",
+    "ordinal_fields": {},
+    "horizontal_fields": {
+      "nature of persecution": [
+        "state-sponsored torture",
+        "armed conflict with indiscriminate civilian attacks",
+        "extrajudicial killing by government forces",
+        "suffering sexual violence as a weapon of war",
+        "being threatened with forced conscription into armed groups",
+        "being at risk of enforced disappearance or arbitrary detention",
+        "being targeted for political repression causing serious bodily harm",
+        "being victim of human trafficking with severe exploitation",
+        "being exposed to degrading and inhumane prison conditions",
+        "being at risk of honor killing without state protection"
+      ]
+    },
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "gender": "full_genders",
+      "religion": "full_religions",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Disclosure: Political persecution & sexual violence",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to political persecution. In a later interview, {pronoun} revealed that {pronoun} was also sexually assaulted by a border guard, but {pronoun} was too ashamed and traumatized to disclose it earlier. The Home Office questions why this information was not provided earlier in the process.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Disclosure: Religious persecution & mental health",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to religious persecution. In a later interview, {pronoun} revealed that {pronoun} suffers from severe PTSD symptoms caused by past abuses, but {pronoun} was too traumatized and unable to discuss mental health issues in the initial interviews. The Home Office questions why this information was not provided earlier in the process.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Disclosure: Domestic violence & criminal threats",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to domestic violence by {pronoun}'s husband. In a later interview, {pronoun} disclosed that {pronoun} was also threatened by {pronoun}'s husband's criminal associates, but was too afraid of retaliation to mention it earlier. The Home Office questions why this information was not provided earlier in the process.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Disclosure: Ethnic violence & family separation",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to ethnic violence in {pronoun}'s home region. In a later interview, {pronoun} disclosed that {pronoun}'s child was forcibly separated from {pronoun} at the border, but {pronoun} was too emotionally overwhelmed and ashamed to admit this in the initial interviews. The Home Office questions why this information was not provided earlier in the process.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Disclosure: Persecution for sexual orientation & mental health crisis",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to persecution for being gay. In a later interview, {pronoun} revealed that {pronoun} attempted suicide while in transit country B, but was too ashamed and afraid to discuss this mental health crisis in the initial interviews. The Home Office questions why this information was not provided earlier in the process.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Contradiction: Dates of persecution",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to political persecution in 2021. In a later interview, {pronoun} said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on {pronoun}'s credibility.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Contradiction: Persecutor identity confusion",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to religious persecution by government security forces. In a later interview, {pronoun} said the persecution was actually by extremist militias. The Home Office notes this inconsistency about who threatened {pronoun}.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Contradiction: Location of harm",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} was persecuted in {pronoun}'s home village. In a later interview, {pronoun} said the harm happened in a nearby city instead. The Home Office highlights this location discrepancy.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Contradiction: Family involvement in the persecution",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to ethnic persecution by government forces. In a later interview, {pronoun} admitted {pronoun}'s family also threatened {pronoun} due to {pronoun}'s ethnicity. The Home Office argues this family involvement admission is inconsistent with the original story.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  },
+  {
+    "meta_topic": "Credibility culture of disbelief",
+    "topic": "Contradiction: Sequence of events",
+    "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} was persecuted after {pronoun}'s arrest. In a later interview, {pronoun} said the persecution started before the arrest. The Home Office claims this sequence change questions {pronoun}'s credibility.",
+    "ordinal_fields": {},
+    "horizontal_fields": {},
+    "generic_fields": {
+      "name": "short_names",
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    }
+  }
+]

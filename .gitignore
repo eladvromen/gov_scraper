@@ -17,6 +17,8 @@ preprocessing/outputs/quality_assessment/*.png
 preprocessing/outputs/quality_assessment/*.jpg
 preprocessing/outputs/brexit_analysis/*.csv
 preprocessing/outputs/brexit_analysis/*.txt
+preprocessing/outputs/llama_training_ready/post_brexit_2018_2022/*
+preprocessing/outputs/llama_training_ready/post_brexit_2019_2025/*
 
 # Keep important small summary files
 !preprocessing/outputs/llama_training_ready/pipeline_summary.json
