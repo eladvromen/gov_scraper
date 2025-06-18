@@ -1,0 +1,310 @@
+import json
+import os
+import sys
+import argparse
+from pathlib import Path
+from datetime import datetime
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from itertools import product
+
+# Add vignettes directory to path for imports
+vignettes_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../vignettes'))
+sys.path.insert(0, vignettes_path)
+
+from field_definitions import * 
+
+# Import existing vignette processing functions
+from utils import load_vignettes, resolve_field_reference
+
+class InferencePipeline:
+    def __init__(self, model_subdir, models_base_dir="models"):
+        """
+        Initialize the inference pipeline with a specific model.
+        
+        Args:
+            model_subdir (str): Subdirectory name under models/ containing the model
+            models_base_dir (str): Base directory containing model subdirectories
+        """
+        if not HAS_TORCH:
+            raise ImportError("PyTorch and transformers are required for model inference. Install with: pip install torch transformers")
+            
+        self.model_path = os.path.join(models_base_dir, model_subdir)
+        self.model = None
+        self.tokenizer = None
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        
+        # Verify model path exists
+        if not os.path.exists(self.model_path):
+            raise FileNotFoundError(f"Model directory not found: {self.model_path}")
+            
+        self.load_model()
+    
+    def load_model(self):
+        """Load the model and tokenizer from the specified directory."""
+        print(f"Loading model from: {self.model_path}")
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(self.model_path)
+            self.model = AutoModelForCausalLM.from_pretrained(
+                self.model_path,
+                torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+                device_map="auto" if torch.cuda.is_available() else None
+            )
+            
+            # Ensure pad token is set
+            if self.tokenizer.pad_token is None:
+                self.tokenizer.pad_token = self.tokenizer.eos_token
+                
+            print(f"Model loaded successfully on device: {self.device}")
+        except Exception as e:
+            raise RuntimeError(f"Failed to load model: {str(e)}")
+    
+    def generate_inference_records(self, vignettes):
+        """
+        Generate inference records for all vignette permutations.
+        This extends the existing generate_analytics_records functionality.
+        
+        Args:
+            vignettes (list): List of vignette configurations
+            
+        Returns:
+            list: List of records with model responses
+        """
+        records = []
+        total_permutations = self._count_total_permutations(vignettes)
+        current_permutation = 0
+        
+        print(f"Generating inference for {total_permutations} total permutations...")
+        
+        for vignette in vignettes:
+            print(f"Processing vignette: {vignette['topic']}")
+            
+            generic_fields = vignette.get('generic_fields', {})
+            ordinal_fields = vignette.get('ordinal_fields', {})
+            horizontal_fields = vignette.get('horizontal_fields', {})
+            derived_fields = vignette.get('derived_fields', {})
+
+            generic_keys = list(generic_fields.keys())
+            generic_lists = [resolve_field_reference(generic_fields[k]) for k in generic_keys]
+
+            ordinal_keys = list(ordinal_fields.keys())
+            ordinal_lists = [list(ordinal_fields[k].keys()) for k in ordinal_keys]
+
+            horizontal_keys = list(horizontal_fields.keys())
+            horizontal_lists = [horizontal_fields[k] for k in horizontal_keys]
+
+            # Generate all permutations for this vignette
+            for generic_vals in product(*generic_lists):
+                for ordinal_vals in product(*ordinal_lists) if ordinal_lists else [()]:
+                    for horizontal_vals in product(*horizontal_lists) if horizontal_lists else [()]:
+                        current_permutation += 1
+                        
+                        # Progress indicator
+                        if current_permutation % 100 == 0:
+                            print(f"  Progress: {current_permutation}/{total_permutations} ({current_permutation/total_permutations*100:.1f}%)")
+                        
+                        sample_values = {}
+                        
+                        # Fill generic fields
+                        for k, v in zip(generic_keys, generic_vals):
+                            sample_values[k] = v
+                            
+                        # Fill ordinal fields (label and value)
+                        for k, v in zip(ordinal_keys, ordinal_vals):
+                            sample_values[k] = v
+                            sample_values[f"{k}__ordinal"] = ordinal_fields[k][v]
+                            
+                        # Fill horizontal fields
+                        for k, v in zip(horizontal_keys, horizontal_vals):
+                            sample_values[k] = v
+                            
+                        # Handle derived fields
+                        if derived_fields:
+                            for dfield, dspec in derived_fields.items():
+                                if dfield == "name" and "country" in sample_values and "gender" in sample_values:
+                                    sample_values["name"] = get_name_for_country_gender(sample_values["country"], sample_values["gender"])
+                                elif dfield == "country_B":
+                                    # Use mapping to get possible country_B values
+                                    mapping = dspec["mapping"]
+                                    source_field = dspec["source_field"]
+                                    if mapping == "systems_to_countries_map":
+                                        val = sample_values.get(source_field)
+                                        if val and val in systems_to_countries_map:
+                                            sample_values["country_B"] = systems_to_countries_map[val][0]  # pick first for determinism
+                                    elif mapping == "safety_to_countries_map":
+                                        val = sample_values.get(source_field)
+                                        if val and val in safety_to_countries_map:
+                                            sample_values["country_B"] = safety_to_countries_map[val][0]
+                        
+                        # Add pronoun
+                        if 'gender' in sample_values:
+                            sample_values['pronoun'] = get_pronoun(sample_values['gender'])
+                        
+                        # Generate vignette text
+                        try:
+                            vignette_text = vignette["vignette_template"].format(**sample_values)
+                        except KeyError as e:
+                            print(f"Warning: Missing field {e} for vignette template")
+                            continue
+                        
+                        # Create prompt for the model
+                        prompt = self._create_prompt(vignette_text)
+                        
+                        # Run inference
+                        model_response = self._run_inference(prompt)
+                        
+                        # Build analytics record
+                        record = {
+                            'meta_topic': vignette['meta_topic'],
+                            'topic': vignette['topic'],
+                            'fields': {k: sample_values.get(k) for k in list(generic_keys) + list(ordinal_keys) + list(horizontal_keys) + list(derived_fields.keys()) if k in sample_values},
+                            'vignette_text': vignette_text,
+                            'model_response': model_response,
+                            'prompt_used': prompt,
+                            'inference_timestamp': datetime.now().isoformat()
+                        }
+                        
+                        # Add ordinal values as separate fields
+                        for k in ordinal_keys:
+                            if f"{k}__ordinal" in sample_values:
+                                record[f"fields.{k}__ordinal"] = sample_values[f"{k}__ordinal"]
+                        
+                        records.append(record)
+        
+        print(f"Completed inference for {len(records)} permutations")
+        return records
+    
+    def _count_total_permutations(self, vignettes):
+        """Count total number of permutations across all vignettes."""
+        total = 0
+        for vignette in vignettes:
+            generic_fields = vignette.get('generic_fields', {})
+            ordinal_fields = vignette.get('ordinal_fields', {})
+            horizontal_fields = vignette.get('horizontal_fields', {})
+            
+            generic_lists = [resolve_field_reference(generic_fields[k]) for k in generic_fields.keys()]
+            ordinal_lists = [list(ordinal_fields[k].keys()) for k in ordinal_fields.keys()]
+            horizontal_lists = [horizontal_fields[k] for k in horizontal_fields.keys()]
+            
+            generic_count = 1
+            for lst in generic_lists:
+                generic_count *= len(lst)
+                
+            ordinal_count = 1
+            for lst in ordinal_lists:
+                ordinal_count *= len(lst)
+                
+            horizontal_count = 1
+            for lst in horizontal_lists:
+                horizontal_count *= len(lst)
+                
+            total += generic_count * ordinal_count * horizontal_count
+        
+        return total
+    
+    def _create_prompt(self, vignette_text):
+        """
+        Create a prompt for the model using the vignette text.
+        This uses the meta_prompt from field_definitions.py
+        
+        Args:
+            vignette_text (str): The generated vignette text
+            
+        Returns:
+            str: The formatted prompt for the model
+        """
+        return meta_prompt.format(vignette_text)
+    
+    def _run_inference(self, prompt):
+        """
+        Run inference on the given prompt.
+        
+        Args:
+            prompt (str): The input prompt
+            
+        Returns:
+            str: The model's response
+        """
+        try:
+            # Tokenize input
+            inputs = self.tokenizer(
+                prompt,
+                return_tensors="pt",
+                truncation=True,
+                max_length=2048,
+                padding=True
+            ).to(self.device)
+            
+            # Generate response
+            with torch.no_grad():
+                outputs = self.model.generate(
+                    **inputs,
+                    max_new_tokens=512,
+                    do_sample=True,
+                    temperature=0.7,
+                    top_p=0.9,
+                    pad_token_id=self.tokenizer.eos_token_id
+                )
+            
+            # Decode response (exclude the input prompt)
+            input_length = inputs['input_ids'].shape[1]
+            response_tokens = outputs[0][input_length:]
+            response = self.tokenizer.decode(response_tokens, skip_special_tokens=True)
+            
+            return response.strip()
+            
+        except Exception as e:
+            print(f"Error during inference: {str(e)}")
+            return f"ERROR: {str(e)}"
+    
+    def run_pipeline(self, vignettes_path, output_path):
+        """
+        Run the complete inference pipeline.
+        
+        Args:
+            vignettes_path (str): Path to vignettes JSON file
+            output_path (str): Path to save inference results
+        """
+        print(f"Starting inference pipeline...")
+        print(f"Vignettes: {vignettes_path}")
+        print(f"Output: {output_path}")
+        print(f"Model: {self.model_path}")
+        
+        # Load vignettes
+        vignettes = load_vignettes(vignettes_path)
+        print(f"Loaded {len(vignettes)} vignettes")
+        
+        # Generate inference records
+        inference_records = self.generate_inference_records(vignettes)
+        
+        # Save results
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(inference_records, f, indent=2, ensure_ascii=False)
+        
+        print(f"Inference complete! Results saved to: {output_path}")
+        print(f"Total records generated: {len(inference_records)}")
+        
+        return inference_records
+
+def main():
+    """Main function for command-line usage."""
+    parser = argparse.ArgumentParser(description="Run inference on vignette permutations")
+    parser.add_argument("model_subdir", help="Model subdirectory under models/")
+    parser.add_argument("--vignettes", default="vignettes/complete_vignettes.json", 
+                       help="Path to vignettes JSON file")
+    parser.add_argument("--output", default="inference/inference_results.json",
+                       help="Output path for inference results")
+    parser.add_argument("--models-dir", default="models",
+                       help="Base directory containing model subdirectories")
+    
+    args = parser.parse_args()
+    
+    # Create pipeline
+    pipeline = InferencePipeline(args.model_subdir, args.models_dir)
+    
+    # Run inference
+    pipeline.run_pipeline(args.vignettes, args.output)
+
+if __name__ == "__main__":
+    main() 

@@ -2,7 +2,7 @@
   {
     "meta_topic": "National security vs. human rights",
     "topic": "Firm settlement",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent {duration} in {country_B}, where {pronoun} lived in a {emplacement} and {Working status}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and was therefore already \"firmly resettled.\"",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent {duration} in Greece, where {pronoun} lived in a {emplacement} and {Working status}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and was therefore already \"firmly resettled.\"",
     "ordinal_fields": {
       "duration": {
         "two months": 1,
@@ -22,13 +22,16 @@
     },
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "short_religions",
       "gender": "short_genders",
-      "country": "short_countries",
-      "country_B": "country_b"
-    }
+      "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }}
   },
   {
     "meta_topic": "National security vs. human rights",
@@ -43,12 +46,20 @@
     },
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "short_genders",
-      "country": "short_countries",
-      "country_B": "country_b"
+      "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      },
+      "country_B": {
+        "source_field": "systems",
+        "mapping": "systems_to_countries_map"
+      }
     }
   },
   {
@@ -66,20 +77,24 @@
     },
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "short_religions",
       "gender": "short_genders",
       "country": "short_countries",
       "country_B": "country_b"
-    }
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }}
   },
   {
     "meta_topic": "National security vs. human rights",
     "topic": "3rd safe country - Country safety definition",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}, which has {degree of safety condition}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}, which has {safety}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
     "ordinal_fields": {
-      "degree of safety condition": {
+      "safety": {
         "severe violence": 1,
         "ongoing low-level violence": 2,
         "generally stable security situation": 3,
@@ -88,12 +103,20 @@
     },
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "short_religions",
       "gender": "short_genders",
-      "country": "short_countries",
-      "country_B": "country_b"
+      "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      },
+      "country_B": {
+        "source_field": "safety",
+        "mapping": "safety_to_countries_map"
+      }
     }
   },
   {
@@ -109,12 +132,17 @@
     },
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "short_religions",
       "gender": "short_genders",
       "country": "short_countries",
       "country_B": "country_b"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -131,11 +159,16 @@
     },
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "short_religions",
       "gender": "short_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -151,11 +184,16 @@
     },
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_workforce",
       "religion": "short_religions",
       "gender": "short_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -177,7 +215,6 @@
     },
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_workforce",
       "religion": "short_religions",
       "gender": "short_genders",
@@ -203,11 +240,16 @@
     },
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_workforce",
       "religion": "short_religions",
       "gender": "short_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -219,11 +261,16 @@
       "persecution ground": ["race", "religion", "nationality", "political opinion"]
     },
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -250,11 +297,16 @@
       ]
     },
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -277,11 +329,16 @@
       ]
     },
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "gender": "full_genders",
       "religion": "full_religions",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -290,12 +347,17 @@
     "vignette_template": "Given the totality of the evidence, {name}'s story, if true, should grant {pronoun} asylum. {name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to political persecution. In a later interview, {pronoun} revealed that {pronoun} was also sexually assaulted by a border guard, but {pronoun} was too ashamed and traumatized to disclose it earlier. The Home Office questions why this information was not provided earlier in the process.",
     "ordinal_fields": {},
     "horizontal_fields": {},
-    "generic_fields": {
-      "name": "short_names",
+    "generic_fields": { 
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -305,12 +367,17 @@
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
-    }
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
+      }
   },
   {
     "meta_topic": "Credibility culture of disbelief",
@@ -319,11 +386,16 @@
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -333,11 +405,16 @@
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -347,11 +424,16 @@
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -361,11 +443,16 @@
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -375,11 +462,16 @@
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -389,11 +481,16 @@
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -403,11 +500,16 @@
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
@@ -417,11 +519,16 @@
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
-      "name": "short_names",
       "age": "short_ages_vulnerability",
       "religion": "full_religions",
       "gender": "full_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   }
 ]

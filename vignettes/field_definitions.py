@@ -26,16 +26,6 @@ full_genders = [
     "Non-binary"
 ]
 
-full_ages = [
-    6,     # young child
-    12,    # a child
-    18,    # Legal adult, youth vulnerabilities
-    25,    # Young adult, early career
-    32,    # Mature adult, possible family responsibilities
-    40,    # Older adult, potentially different vulnerability profile
-    50,    # Middle-aged adult
-    70     # Elderly
-]
 
 # Shortened lists for focused testing
 short_countries = [
@@ -47,6 +37,23 @@ short_countries = [
     "Myanmar"
 ]
 
+# Country-gender to name mapping - eliminates name as separate variable
+country_gender_to_name_map = {
+    ("Syria", "Female"): "Aisha",
+    ("Syria", "Male"): "Omar",
+    ("Pakistan", "Female"): "Fatima", 
+    ("Pakistan", "Male"): "Muhammad",
+    ("Nigeria", "Female"): "Adunni",
+    ("Nigeria", "Male"): "Kwame",
+    ("China", "Female"): "Ling",
+    ("China", "Male"): "Wei",
+    ("Ukraine", "Female"): "Sofia",
+    ("Ukraine", "Male"): "Dimitri",
+    ("Myanmar", "Female"): "Thiri",
+    ("Myanmar", "Male"): "Aung"
+}
+
+# Legacy lists - kept for backward compatibility but names now determined by country-gender mapping
 short_names = [
     "Daniel",   # Male\Female, Western/English
     "Fatima",   # Female, Arabic/Muslim
@@ -87,96 +94,20 @@ short_ages_workforce = [
     40,    # Older adult, potentially different vulnerability profile
 ]
 
-# # Knowledge base mappings for realism flags
-# country_name_gender_map = {
-#     "Afghanistan": [
-#         {"name": "Aisha", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}
-#     ],
-#     "Bangladesh": [
-#         {"name": "Lila", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}
-#     ],
-#     "China": [
-#         {"name": "Ling", "gender": "Female"},
-#         {"name": "David", "gender": "Male"}  # Less realistic but possible
-#     ],
-#     "Democratic Republic of Congo": [
-#         {"name": "Lila", "gender": "Female"},
-#         {"name": "Kwame", "gender": "Male"}
-#     ],
-#     "Eritrea": [
-#         {"name": "Aisha", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}
-#     ],
-#     "Iran": [
-#         {"name": "Fatima", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}
-#     ],
-#     "Iraq": [
-#         {"name": "Fatima", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}
-#     ],
-#     "Nigeria": [
-#         {"name": "Lila", "gender": "Female"},
-#         {"name": "Kwame", "gender": "Male"}
-#     ],
-#     "Pakistan": [
-#         {"name": "Fatima", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}
-#     ],
-#     "Russia": [
-#         {"name": "Sofia", "gender": "Female"},
-#         {"name": "David", "gender": "Male"}
-#     ],
-#     "Somalia": [
-#         {"name": "Fatima", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}
-#     ],
-#     "Sudan": [
-#         {"name": "Fatima", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}
-#     ],
-#     "Syria": [
-#         {"name": "Aisha", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}
-#     ],
-#     "Turkey": [
-#         {"name": "Sofia", "gender": "Female"},
-#         {"name": "Daniel", "gender": "Male"}
-#     ],
-#     "Ukraine": [
-#         {"name": "Sofia", "gender": "Female"},
-#         {"name": "David", "gender": "Male"}
-#     ],
-#     "Myanmar": [
-#         {"name": "Ling", "gender": "Female"},
-#         {"name": "Muhammad", "gender": "Male"}  # Less realistic but possible
-#     ]
-# }
+def get_name_for_country_gender(country, gender):
+    """
+    Get the appropriate name for a given country-gender combination.
+    This eliminates the need for names as a separate variable in vignette generation.
+    
+    Args:
+        country (str): The country of origin
+        gender (str): The gender (Male/Female)
+    
+    Returns:
+        str: The culturally appropriate name for the country-gender combination
+    """
+    return country_gender_to_name_map.get((country, gender), "Unknown")
 
-country_b_systems_map = {
-    "Rwanda": {
-        "systems": "no recognized asylum procedures, poor healthcare and education systems",
-        "degree_of_safety_condition": "generally stable security situation"
-    },
-    "South Sudan": {
-        "systems": "no recognized asylum procedures, poor healthcare and education systems", 
-        "degree_of_safety_condition": "severe violence"
-    },
-    "Turkey": {
-        "systems": "functioning but discriminatory and unequal asylum, healthcare and education systems",
-        "degree_of_safety_condition": "ongoing low-level violence"
-    },
-    "Bulgaria": {
-        "systems": "functioning but discriminatory and unequal asylum, healthcare and education systems",
-        "degree_of_safety_condition": "generally stable security situation"
-    },
-    "France": {
-        "systems": "functioning and accessible asylum, healthcare and education systems",
-        "degree_of_safety_condition": "strong rule of law and high national security"
-    }
-}
 
 # Pronoun mappings
 pronoun_map = {
@@ -188,4 +119,64 @@ pronoun_map = {
 def get_pronoun(gender):
     """Get the appropriate pronoun for a given gender"""
     return pronoun_map.get(gender, "they")
+
+def get_countries_by_systems(systems_description):
+    """
+    Get countries that match a given systems description.
+    
+    Args:
+        systems_description (str): The systems description to match
+    
+    Returns:
+        list: List of countries that have the specified systems
+    """
+    countries = []
+    for country, attributes in country_b_systems_map.items():
+        if attributes["systems"] == systems_description:
+            countries.append(country)
+    return countries
+
+def get_countries_by_safety(safety_description):
+    """
+    Get countries that match a given safety description.
+    
+    Args:
+        safety_description (str): The safety description to match
+    
+    Returns:
+        list: List of countries that have the specified safety conditions
+    """
+    countries = []
+    for country, attributes in country_b_systems_map.items():
+        if attributes["degree_of_safety_condition"] == safety_description:
+            countries.append(country)
+    return countries
+
+# Create reverse mappings for easier lookup
+systems_to_countries_map = {
+    "no recognized asylum procedures, poor healthcare and education systems": ["Rwanda", "South Sudan"],
+    "functioning but discriminatory and unequal asylum, healthcare and education systems": ["Turkey", "Bulgaria"],
+    "functioning and accessible asylum, healthcare and education systems": ["France"]
+}
+
+safety_to_countries_map = {
+    "severe violence": ["South Sudan"],
+    "ongoing low-level violence": ["Turkey"],
+    "generally stable security situation": ["Rwanda", "Bulgaria"],
+    "strong rule of law and high national security": ["France"]
+}
+
+def get_name_from_country_gender(country, gender):
+    """
+    Get the culturally appropriate name for a country-gender combination.
+    This is used for derived name fields in vignettes.
+    
+    Args:
+        country (str): The country of origin
+        gender (str): The gender (Male/Female)
+    
+    Returns:
+        str: The appropriate name for the country-gender combination
+    """
+    return country_gender_to_name_map.get((country, gender), "Unknown")
 
