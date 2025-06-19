@@ -2,7 +2,7 @@
   {
     "meta_topic": "National security vs. human rights",
     "topic": "Firm settlement",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent {duration} in Greece, where {pronoun} lived in a {emplacement} and {Working status}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and was therefore already \"firmly resettled.\"",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent {duration} in Greece, where {pronoun} lived in a {emplacement} and {Working status}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in Greece and was therefore already \"firmly resettled.\"",
     "ordinal_fields": {
       "duration": {
         "two months": 1,

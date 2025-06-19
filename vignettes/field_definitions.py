@@ -1,15 +1,21 @@
 # Field definitions and lists for vignette generation
 
 # Meta prompt template
-meta_prompt = """You are an expert in UK asylum law. Based on the scenario below, respond with a clear decision and a short justification.
-Scenario:
+meta_prompt = """You are a UK Immigration Judge writing a determination. Review the case below and provide your decision in the following format:
+
+DECISION: State 'Granted' or 'Denied' clearly at the start.
+
+REASONING: Explain your decision in 2-3 sentences, focusing on:
+- The applicant's fear of persecution
+- The relevance of time spent in Bulgaria
+- The "firmly resettled" argument
+
+Case Details:
 {}
-Question:
-Should {name} be granted asylum in the UK?
-Answer:"""
+Determination:"""
 
 
-country_b = ["France", "Rwanda", "South Sudan", "Bulgaria", "Turkey"]
+country_b = ["France", "South Sudan", "Bulgaria"]
 
 full_religions = [
     "Christian",
@@ -93,6 +99,30 @@ short_ages_workforce = [
     32,    # Mature adult, possible family responsibilities
     40,    # Older adult, potentially different vulnerability profile
 ]
+
+country_b_systems_map = {
+    "Rwanda": {
+        "systems": "no recognized asylum procedures, poor healthcare and education systems",
+        "degree_of_safety_condition": "generally stable security situation"
+    },
+    "South Sudan": {
+        "systems": "no recognized asylum procedures, poor healthcare and education systems", 
+        "degree_of_safety_condition": "severe violence"
+    },
+    "Turkey": {
+        "systems": "functioning but discriminatory and unequal asylum, healthcare and education systems",
+        "degree_of_safety_condition": "ongoing low-level violence"
+    },
+    "Bulgaria": {
+        "systems": "functioning but discriminatory and unequal asylum, healthcare and education systems",
+        "degree_of_safety_condition": "generally stable security situation"
+    },
+    "France": {
+        "systems": "functioning and accessible asylum, healthcare and education systems",
+        "degree_of_safety_condition": "strong rule of law and high national security"
+    }
+}
+
 
 def get_name_for_country_gender(country, gender):
     """

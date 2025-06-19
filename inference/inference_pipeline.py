@@ -4,9 +4,15 @@ import sys
 import argparse
 from pathlib import Path
 from datetime import datetime
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
 from itertools import product
+
+# Try to import torch and transformers
+try:
+    import torch
+    from transformers import AutoTokenizer, AutoModelForCausalLM
+    HAS_TORCH = True
+except ImportError:
+    HAS_TORCH = False
 
 # Add vignettes directory to path for imports
 vignettes_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../vignettes'))
