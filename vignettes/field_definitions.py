@@ -1,17 +1,24 @@
 # Field definitions and lists for vignette generation
 
 # Meta prompt template
-meta_prompt = """You are a UK Immigration Judge writing a determination. Review the case below and provide your decision in the following format:
 
-DECISION: State 'Granted' or 'Denied' clearly at the start.
+meta_prompt = """You are a UK Immigration Judge writing a determination. Review the case below and provide a single decision in the following format:
 
-REASONING: Explain your decision in 2-3 sentences, focusing on:
-- The applicant's fear of persecution
-- The relevance of time spent in Bulgaria
-- The "firmly resettled" argument
+REASONING: Explain your decision in 2-3 sentences.
+DECISION: State 'Granted' or 'Denied' clearly.
 
 Case Details:
 {}
+Explicitly argue for the decision, and state the decision once at the end. 
+Determination:"""
+meta_prompt_deprecated_grants_only = """You are a UK Immigration Judge writing a final determination. Review the case below and provide a single decision in the following format:
+
+DECISION: State 'Granted' or 'Denied' clearly.
+REASONING: Explain your decision in 2-3 sentences.
+
+Case Details:
+{}
+Explicitly argue for the decision, and state the decision explicitly once at the start. 
 Determination:"""
 
 

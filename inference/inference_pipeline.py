@@ -5,6 +5,7 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 from itertools import product
+import random
 
 # Try to import torch and transformers
 try:
@@ -26,24 +27,29 @@ from utils import load_vignettes, resolve_field_reference
 class InferencePipeline:
     def __init__(self, model_subdir, models_base_dir="models"):
         """
-        Initialize the inference pipeline with a specific model.
+        Initialize the inference pipeline.
         
         Args:
-            model_subdir (str): Subdirectory name under models/ containing the model
+            model_subdir (str): Subdirectory name under models_base_dir
             models_base_dir (str): Base directory containing model subdirectories
         """
-        if not HAS_TORCH:
-            raise ImportError("PyTorch and transformers are required for model inference. Install with: pip install torch transformers")
-            
+        self.models_base_dir = models_base_dir
+        self.model_subdir = model_subdir
         self.model_path = os.path.join(models_base_dir, model_subdir)
+        
+        # Check if model path exists
+        if not os.path.exists(self.model_path):
+            raise FileNotFoundError(f"Model directory not found: {self.model_path}")
+        
         self.model = None
         self.tokenizer = None
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.last_prompt = None  # Track the last prompt used
         
-        # Verify model path exists
-        if not os.path.exists(self.model_path):
-            raise FileNotFoundError(f"Model directory not found: {self.model_path}")
-            
+        print(f"Initializing InferencePipeline with model: {self.model_path}")
+        print(f"Using device: {self.device}")
+        
+        # Load the model
         self.load_model()
     
     def load_model(self):
@@ -245,10 +251,11 @@ class InferencePipeline:
             with torch.no_grad():
                 outputs = self.model.generate(
                     **inputs,
-                    max_new_tokens=512,
+                    max_new_tokens=500,          # Much shorter to prevent runaway
                     do_sample=True,
-                    temperature=0.7,
+                    temperature=0.7,             # More focused
                     top_p=0.9,
+                    repetition_penalty= 1.1,      # Reduce repetition
                     pad_token_id=self.tokenizer.eos_token_id
                 )
             
@@ -263,6 +270,24 @@ class InferencePipeline:
             print(f"Error during inference: {str(e)}")
             return f"ERROR: {str(e)}"
     
+    def get_last_prompt(self):
+        """Get the last prompt used for inference."""
+        return self.last_prompt
+
+    def run_inference(self, vignette_text):
+        """
+        Run inference on a single vignette text.
+        
+        Args:
+            vignette_text (str): The vignette text to run inference on
+            
+        Returns:
+            str: The model's response
+        """
+        prompt = self._create_prompt(vignette_text)
+        self.last_prompt = prompt  # Track the prompt
+        return self._run_inference(prompt)
+
     def run_pipeline(self, vignettes_path, output_path):
         """
         Run the complete inference pipeline.
@@ -292,6 +317,109 @@ class InferencePipeline:
         print(f"Total records generated: {len(inference_records)}")
         
         return inference_records
+
+    def generate_samples(self, vignettes, num_samples=None, random_seed=42):
+        """
+        Generate samples from vignettes without running inference.
+        
+        Args:
+            vignettes (list): List of vignette dictionaries
+            num_samples (int): Number of samples to generate (None for all permutations)
+            random_seed (int): Random seed for sampling
+            
+        Returns:
+            list: List of sample dictionaries with vignette_text and fields
+        """
+        random.seed(random_seed)
+        
+        samples = []
+        
+        for vignette in vignettes:
+            # Extract field configurations
+            generic_fields = vignette.get('generic_fields', {})
+            ordinal_fields = vignette.get('ordinal_fields', {})
+            horizontal_fields = vignette.get('horizontal_fields', {})
+            derived_fields = vignette.get('derived_fields', {})
+            
+            # Get field keys and lists
+            generic_keys = list(generic_fields.keys())
+            ordinal_keys = list(ordinal_fields.keys())
+            horizontal_keys = list(horizontal_fields.keys())
+            
+            generic_lists = [resolve_field_reference(generic_fields[k]) for k in generic_keys]
+            ordinal_lists = [list(ordinal_fields[k].keys()) for k in ordinal_keys]
+            horizontal_lists = [horizontal_fields[k] for k in horizontal_keys]
+            
+            # Generate all permutations for this vignette
+            all_combinations = list(itertools.product(*(generic_lists + ordinal_lists + horizontal_lists)))
+            
+            # Sample if requested
+            if num_samples and len(all_combinations) > num_samples:
+                sampled_combinations = random.sample(all_combinations, num_samples)
+            else:
+                sampled_combinations = all_combinations
+            
+            # Generate samples
+            for combination in sampled_combinations:
+                sample_values = {}
+                
+                # Split combination back into components
+                generic_vals = combination[:len(generic_keys)]
+                ordinal_vals = combination[len(generic_keys):len(generic_keys)+len(ordinal_keys)]
+                horizontal_vals = combination[len(generic_keys)+len(ordinal_keys):]
+                
+                # Fill generic fields
+                for k, v in zip(generic_keys, generic_vals):
+                    sample_values[k] = v
+                
+                # Fill ordinal fields (label and value)
+                for k, v in zip(ordinal_keys, ordinal_vals):
+                    sample_values[k] = v
+                    sample_values[f"{k}__ordinal"] = ordinal_fields[k][v]
+                    
+                # Fill horizontal fields
+                for k, v in zip(horizontal_keys, horizontal_vals):
+                    sample_values[k] = v
+                    
+                # Handle derived fields
+                if derived_fields:
+                    for dfield, dspec in derived_fields.items():
+                        if dfield == "name" and "country" in sample_values and "gender" in sample_values:
+                            sample_values["name"] = get_name_for_country_gender(sample_values["country"], sample_values["gender"])
+                        elif dfield == "country_B":
+                            # Use mapping to get possible country_B values
+                            mapping = dspec["mapping"]
+                            source_field = dspec["source_field"]
+                            if mapping == "systems_to_countries_map":
+                                val = sample_values.get(source_field)
+                                if val and val in systems_to_countries_map:
+                                    sample_values["country_B"] = systems_to_countries_map[val][0]  # pick first for determinism
+                            elif mapping == "safety_to_countries_map":
+                                val = sample_values.get(source_field)
+                                if val and val in safety_to_countries_map:
+                                    sample_values["country_B"] = safety_to_countries_map[val][0]
+                
+                # Add pronoun
+                if 'gender' in sample_values:
+                    sample_values['pronoun'] = get_pronoun(sample_values['gender'])
+                
+                # Generate vignette text
+                try:
+                    vignette_text = vignette["vignette_template"].format(**sample_values)
+                    
+                    sample = {
+                        'meta_topic': vignette['meta_topic'],
+                        'topic': vignette['topic'],
+                        'fields': {k: sample_values.get(k) for k in list(generic_keys) + list(ordinal_keys) + list(horizontal_keys) + list(derived_fields.keys()) if k in sample_values},
+                        'vignette_text': vignette_text
+                    }
+                    samples.append(sample)
+                    
+                except KeyError as e:
+                    print(f"Warning: Missing field {e} for vignette template")
+                    continue
+        
+        return samples
 
 def main():
     """Main function for command-line usage."""
