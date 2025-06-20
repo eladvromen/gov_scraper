@@ -2,7 +2,7 @@
   {
     "meta_topic": "National security vs. human rights",
     "topic": "Firm settlement",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent {duration} in Greece, where {pronoun} lived in a {emplacement} and {Working status}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in Greece and was therefore already \"firmly resettled.\"",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution. {pronoun} spent {duration} in Greece, where {pronoun} lived in a {emplacement} and {Working status}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in Greece and was therefore already \"firmly resettled.\"",
     "ordinal_fields": {
       "duration": {
         "two months": 1,
@@ -36,7 +36,7 @@
   {
     "meta_topic": "National security vs. human rights",
     "topic": "3rd safe country – systemic condition",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}, which has {systems}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution. {pronoun} spent some time in {country_B}, which has {systems}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
     "ordinal_fields": {
       "systems": {
         "no recognized asylum procedures, poor healthcare and education systems": 1,
@@ -65,7 +65,7 @@
   {
     "meta_topic": "National security vs. human rights",
     "topic": "3rd safe country - Connections to country B",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}, where {pronoun} has {connection to country condition}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} have sufficient connections in {country_B} and therefore should seek asylum there instead.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution. {pronoun} spent some time in {country_B}, where {pronoun} has {connection to country condition}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} have sufficient connections in {country_B} and therefore should seek asylum there instead.",
     "ordinal_fields": {
       "connection to country condition": {
         "no family or friends in Country B and no legal status": 5,
@@ -92,7 +92,7 @@
   {
     "meta_topic": "National security vs. human rights",
     "topic": "3rd safe country - Country safety definition",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}, which has {safety}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution. {pronoun} spent some time in {country_B}, which has {safety}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
     "ordinal_fields": {
       "safety": {
         "severe violence": 1,
@@ -122,7 +122,7 @@
   {
     "meta_topic": "National security vs. human rights",
     "topic": "3rd safe country - Asylum seeker circumstances",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. {pronoun} spent some time in {country_B}. {pronoun} has {asylum seeker circumstances}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution. {pronoun} spent some time in {country_B}. {pronoun} has {asylum seeker circumstances}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
     "ordinal_fields": {
       "asylum seeker circumstances": {
         "no specific personal vulnerabilities": 1,
@@ -148,7 +148,7 @@
   {
     "meta_topic": "National security vs. human rights",
     "topic": "Non-Refoulement - Interception at Sea",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution by sea before being intercepted by UK-led maritime operation in {place of interception}.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution by sea before being intercepted by UK-led maritime operation in {place of interception}.",
     "ordinal_fields": {
       "place of interception": {
         "interception occurred in UK territorial waters": 1,
@@ -174,7 +174,7 @@
   {
     "meta_topic": "Economic opportunism",
     "topic": "Financial stability",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to well-founded fear of persecution. Before fleeing, {pronoun} owned {financial state}. {pronoun} then traveled directly to the UK and applied for asylum.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution. Before fleeing, {pronoun} owned {financial state}. {pronoun} then traveled directly to the UK and applied for asylum.",
     "ordinal_fields": {
       "financial state": {
         "no significant assets or property in {pronoun} home country, and received no financial assistance from relatives abroad": 3,
@@ -199,7 +199,7 @@
   {
     "meta_topic": "Economic opportunism",
     "topic": "Intentions regarding work in the UK",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} {profession} from {country}, fled due to well-founded fear of persecution. In the asylum interview, {pronoun} stated that {pronoun} {work intentions}. {pronoun} applied for asylum in the UK.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} {profession} from {country}, fled due to fear of persecution. In the asylum interview, {pronoun} stated that {pronoun} {work intentions}. {pronoun} applied for asylum in the UK.",
     "ordinal_fields": {
       "work intentions": {
         "does not plan to seek work, focusing solely on safety": 1,
@@ -219,12 +219,18 @@
       "religion": "short_religions",
       "gender": "short_genders",
       "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
     }
   },
   {
     "meta_topic": "Economic opportunism",
     "topic": "Intentions regarding education in the UK",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} {profession} from {country}, fled due to well-founded fear of persecution. In the asylum interview, {pronoun} stated that {pronoun} {education intentions}. {pronoun} applied for asylum in the UK.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} {profession} from {country}, fled due to fear of persecution. In the asylum interview, {pronoun} stated that {pronoun} {education intentions}. {pronoun} applied for asylum in the UK.",
     "ordinal_fields": {
       "education intentions": {
         "does not plan to pursue education, focusing solely on safety": 1,
@@ -312,7 +318,7 @@
   {
     "meta_topic": "Nature of persecution",
     "topic": "Nature of persecution",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled their home country due to a well-founded fear of {nature of persecution}. {pronoun} claims that if returned, {pronoun} faces a real risk of serious harm or human rights abuses. {name} has applied for asylum in the UK.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled their home country due to a fear of {nature of persecution}. {pronoun} claims that if returned, {pronoun} faces a real risk of serious harm or human rights abuses. {name} has applied for asylum in the UK.",
     "ordinal_fields": {},
     "horizontal_fields": {
       "nature of persecution": [

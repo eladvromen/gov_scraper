@@ -12,6 +12,7 @@ import random
 import argparse
 from datetime import datetime
 from pathlib import Path
+import torch
 
 # Add current directory to path
 sys.path.insert(0, os.path.dirname(__file__))
@@ -170,7 +171,7 @@ def generate_random_permutations(vignette, num_samples=3, seed=None):
     return records
 
 def run_subset_inference(model_subdir, vignettes_path, filter_criteria, num_samples=3, 
-                        output_path=None, seed=None, dry_run=False):
+                        output_path=None, seed=None, dry_run=False, all_vignettes=False):
     """
     Run inference on a subset of vignettes with random sampling.
     
@@ -182,6 +183,7 @@ def run_subset_inference(model_subdir, vignettes_path, filter_criteria, num_samp
         output_path (str): Output file path
         seed (int): Random seed for reproducibility
         dry_run (bool): If True, don't run actual inference
+        all_vignettes (bool): If True, process all vignettes (skip filtering)
     
     Returns:
         list: Inference results
@@ -191,12 +193,16 @@ def run_subset_inference(model_subdir, vignettes_path, filter_criteria, num_samp
     vignettes = load_vignettes(vignettes_path)
     print(f"Loaded {len(vignettes)} total vignettes")
     
-    # Filter vignettes
-    filtered_vignettes = filter_vignettes(vignettes, filter_criteria)
-    print(f"Filtered to {len(filtered_vignettes)} vignettes matching criteria")
+    # Filter vignettes (or use all if all_vignettes is True)
+    if all_vignettes:
+        filtered_vignettes = vignettes
+        print(f"Processing all {len(filtered_vignettes)} vignettes")
+    else:
+        filtered_vignettes = filter_vignettes(vignettes, filter_criteria)
+        print(f"Filtered to {len(filtered_vignettes)} vignettes matching criteria")
     
     if not filtered_vignettes:
-        print("No vignettes match the specified criteria!")
+        print("No vignettes to process!")
         return []
     
     print("\nSelected vignettes:")
@@ -225,16 +231,20 @@ def run_subset_inference(model_subdir, vignettes_path, filter_criteria, num_samp
     
     pipeline = InferencePipeline(model_subdir)
     
-    # Run inference on each sample
+    # Prepare batch inference
+    print(f"  Running batch inference on {len(all_samples)} samples...")
+    vignette_texts = [sample['vignette_text'] for sample in all_samples]
+    
+    # Run batch inference with optimized batch size for A100s
+    batch_size = 16  # Optimized batch size for A100s with 80GB memory
+    model_responses = pipeline.run_inference_auto(vignette_texts, batch_size=batch_size)
+    
+    # Build final records
+    print(f"  Building result records...")
     inference_results = []
-    for i, sample in enumerate(all_samples):
-        print(f"  Processing sample {i+1}/{len(all_samples)}: {sample['topic']}")
-        
-        # Create prompt
+    for i, (sample, model_response) in enumerate(zip(all_samples, model_responses)):
+        # Create prompt for record (not for inference)
         prompt = pipeline._create_prompt(sample['vignette_text'])
-        
-        # Run inference
-        model_response = pipeline._run_inference(prompt)
         
         # Build final record
         result = {
@@ -282,6 +292,9 @@ Examples:
   # Run samples from specific meta topic
   python run_subset_inference.py my_model --meta-topics "National security vs. human rights" --samples 2
   
+  # Run samples from all vignettes
+  python run_subset_inference.py my_model --all-vignettes --samples 9
+  
   # Dry run to see what would be processed
   python run_subset_inference.py my_model --topic-keywords persecution --dry-run
         """
@@ -306,6 +319,8 @@ Examples:
                        help="Show what would be processed without running inference")
     parser.add_argument("--list-topics", action="store_true",
                        help="List all available topics and exit")
+    parser.add_argument("--all-vignettes", action="store_true",
+                       help="Process all vignettes (skip filtering)")
     
     args = parser.parse_args()
     
@@ -331,9 +346,9 @@ Examples:
     if args.topic_keywords:
         filter_criteria['topic_keywords'] = args.topic_keywords
     
-    if not filter_criteria:
+    if not filter_criteria and not args.all_vignettes:
         print("Error: You must specify at least one filtering criterion")
-        print("Use --topics, --meta-topics, or --topic-keywords")
+        print("Use --topics, --meta-topics, --topic-keywords, or --all-vignettes")
         print("Or use --list-topics to see available options")
         return 1
     
@@ -352,7 +367,8 @@ Examples:
             num_samples=args.samples,
             output_path=args.output,
             seed=args.seed,
-            dry_run=args.dry_run
+            dry_run=args.dry_run,
+            all_vignettes=args.all_vignettes
         )
         
         if not args.dry_run:

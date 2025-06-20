@@ -6,6 +6,7 @@ preprocessing/data/
 preprocessing/processed_data/
 case outcome extraction/case_outcome_prediction/data
 case outcome extraction/case_outcome_prediction/models
+inference/results/
 
 # Large training output files (specific patterns)
 preprocessing/outputs/llama_training_ready/*/*.jsonl

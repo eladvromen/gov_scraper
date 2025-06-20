@@ -57,15 +57,30 @@ class InferencePipeline:
         print(f"Loading model from: {self.model_path}")
         try:
             self.tokenizer = AutoTokenizer.from_pretrained(self.model_path)
+            
+            # Optimized model loading for A100s
             self.model = AutoModelForCausalLM.from_pretrained(
                 self.model_path,
-                torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-                device_map="auto" if torch.cuda.is_available() else None
+                torch_dtype=torch.float16,
+                device_map="auto",
+                use_cache=True,  # Enable KV caching for faster generation
+                low_cpu_mem_usage=True,
+                max_memory={0: "70GB", 1: "70GB", 2: "40GB", 3: "40GB"}  # Better GPU memory allocation
             )
             
-            # Ensure pad token is set
+            # Ensure pad token is set and configure for decoder-only models
             if self.tokenizer.pad_token is None:
                 self.tokenizer.pad_token = self.tokenizer.eos_token
+            
+            # Set left padding for decoder-only models (like Llama)
+            self.tokenizer.padding_side = 'left'
+            
+            # Optimize model with PyTorch 2.0 compilation (if available)
+            try:
+                self.model = torch.compile(self.model, mode="reduce-overhead")
+                print("Model compiled with PyTorch 2.0 optimizations")
+            except Exception as compile_error:
+                print(f"PyTorch compilation not available: {compile_error}")
                 
             print(f"Model loaded successfully on device: {self.device}")
         except Exception as e:
@@ -269,6 +284,78 @@ class InferencePipeline:
         except Exception as e:
             print(f"Error during inference: {str(e)}")
             return f"ERROR: {str(e)}"
+
+    def _run_inference_batch(self, prompts, batch_size=16):
+        """
+        Run inference on a batch of prompts for improved efficiency.
+        
+        Args:
+            prompts (list): List of input prompts
+            batch_size (int): Number of prompts to process in each batch
+            
+        Returns:
+            list: List of model responses
+        """
+        all_responses = []
+        
+        for i in range(0, len(prompts), batch_size):
+            batch = prompts[i:i+batch_size]
+            
+            try:
+                # Tokenize batch
+                inputs = self.tokenizer(
+                    batch,
+                    return_tensors="pt",
+                    truncation=True,
+                    max_length=2048,
+                    padding=True
+                ).to(self.device)
+                
+                # Generate responses with optimized parameters
+                with torch.no_grad():
+                    outputs = self.model.generate(
+                        **inputs,
+                        max_new_tokens=500,
+                        do_sample=True,
+                        temperature=0.7,
+                        top_p=0.9,
+                        repetition_penalty=1.1,
+                        pad_token_id=self.tokenizer.eos_token_id,
+                        use_cache=True,  # Enable KV caching
+                        num_beams=1  # Ensure no beam search for speed
+                    )
+                
+                # Decode responses
+                batch_responses = []
+                for j, output in enumerate(outputs):
+                    input_length = inputs['input_ids'][j].shape[0]
+                    response_tokens = output[input_length:]
+                    response = self.tokenizer.decode(response_tokens, skip_special_tokens=True)
+                    batch_responses.append(response.strip())
+                
+                all_responses.extend(batch_responses)
+                
+                # Progress indicator for large batches
+                if len(prompts) > batch_size * 2:
+                    processed = min(i + batch_size, len(prompts))
+                    print(f"    Batch progress: {processed}/{len(prompts)} prompts processed")
+                
+                # Clear GPU cache between batches for better memory management
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                    
+            except Exception as e:
+                print(f"Error during batch inference: {str(e)}")
+                # Fallback to individual processing for this batch
+                for prompt in batch:
+                    try:
+                        response = self._run_inference(prompt)
+                        all_responses.append(response)
+                    except Exception as individual_error:
+                        print(f"Error in individual fallback: {str(individual_error)}")
+                        all_responses.append(f"ERROR: {str(individual_error)}")
+        
+        return all_responses
     
     def get_last_prompt(self):
         """Get the last prompt used for inference."""
@@ -287,6 +374,25 @@ class InferencePipeline:
         prompt = self._create_prompt(vignette_text)
         self.last_prompt = prompt  # Track the prompt
         return self._run_inference(prompt)
+
+    def run_inference_auto(self, vignette_texts, batch_size=8):
+        """
+        Run inference on vignette text(s) - automatically handles single or batch processing.
+        
+        Args:
+            vignette_texts (str or list): Single vignette text or list of vignette texts
+            batch_size (int): Batch size for processing (ignored if single text)
+            
+        Returns:
+            str or list: Single response or list of responses
+        """
+        if isinstance(vignette_texts, str):
+            # Single text - use individual processing
+            return self.run_inference(vignette_texts)
+        else:
+            # List of texts - use batch processing
+            prompts = [self._create_prompt(text) for text in vignette_texts]
+            return self._run_inference_batch(prompts, batch_size)
 
     def run_pipeline(self, vignettes_path, output_path):
         """
