@@ -1,0 +1,62 @@
+# Post-Brexit (2020-2025) LLaMA Fine-tuning Configuration - EXACT REPLICA for Reproducibility
+model:
+  model_name_or_path: "meta-llama/Meta-Llama-3-8B"  # IDENTICAL to pre-Brexit
+  use_flash_attention_2: false
+  torch_dtype: "bfloat16"
+  device_map: "auto"  # Let PyTorch handle device selection
+  use_cache: false  # Disable KV cache during training for memory efficiency
+  low_cpu_mem_usage: true  # Load model with minimal CPU memory usage
+
+data:
+  data_dir: "/data/shil6369/gov_scraper/preprocessing/outputs/llama_training_ready/post_brexit_2020_2025"
+  dataset_patterns: ["post_brexit_2020_2025_chunks.jsonl"]
+  train_split: 0.90  # IDENTICAL to pre-Brexit
+  eval_split: 0.10   # IDENTICAL to pre-Brexit
+  seed: 42           # CRITICAL: SAME SEED for reproducible comparison
+  text_column: "text"
+  add_eos_token: true
+  chunk_size: 512    # IDENTICAL to pre-Brexit
+  preprocessing_num_workers: 4
+  # Full dataset - no sample limits
+
+training:
+  output_dir: "models/llama3_8b_post_brexit_2020_2025"
+  run_name: "llama3_8b_post_brexit_2020_2025"
+  
+  # IDENTICAL hyperparameters for fair comparison
+  learning_rate: 3e-5           # SAME as pre-Brexit
+  num_train_epochs: 2           # SAME as pre-Brexit
+  per_device_train_batch_size: 2  # SAME as pre-Brexit
+  per_device_eval_batch_size: 2   # SAME as pre-Brexit
+  gradient_accumulation_steps: 16 # SAME as pre-Brexit
+  dataloader_num_workers: 4       # SAME as pre-Brexit
+  dataloader_pin_memory: true     # SAME as pre-Brexit
+  
+  # Training stability - IDENTICAL
+  warmup_ratio: 0.05         # SAME as pre-Brexit
+  weight_decay: 0.01         # SAME as pre-Brexit
+  max_grad_norm: 1.0         # SAME as pre-Brexit
+  lr_scheduler_type: "cosine" # SAME as pre-Brexit
+  
+  # Checkpointing - IDENTICAL
+  save_strategy: "steps"
+  save_steps: 5000           # SAME as pre-Brexit
+  save_total_limit: 1        # SAME as pre-Brexit
+  save_only_model: true      # SAME as pre-Brexit
+  
+  # Evaluation - IDENTICAL
+  evaluation_strategy: "steps"
+  eval_steps: 5000           # SAME as pre-Brexit
+  max_eval_samples: 50       # SAME as pre-Brexit
+  
+  # Logging - IDENTICAL
+  logging_steps: 50          # SAME as pre-Brexit
+  log_level: "info"          # SAME as pre-Brexit
+  
+  # Speed optimizations - IDENTICAL
+  use_deepspeed: false       # SAME as pre-Brexit
+  use_wandb: false           # SAME as pre-Brexit
+  fp16: false                # SAME as pre-Brexit
+  bf16: true                 # SAME as pre-Brexit
+  remove_unused_columns: true    # SAME as pre-Brexit
+  dataloader_drop_last: true     # SAME as pre-Brexit 

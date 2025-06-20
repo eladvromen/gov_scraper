@@ -116,4 +116,12 @@ if __name__ == "__main__":
     
     # Create 2018-2022 dataset
     output_directory_2018_2022 = "preprocessing/outputs/llama_training_ready/post_brexit_2018_2022"
-    stats_2018_2022 = filter_post_brexit_data(input_directory, output_directory_2018_2022, 2018, 2022) 
+    stats_2018_2022 = filter_post_brexit_data(input_directory, output_directory_2018_2022, 2018, 2022)
+    
+    # Create 2020-2025 dataset
+    output_directory_2020_2025 = "preprocessing/outputs/llama_training_ready/post_brexit_2020_2025"
+    stats_2020_2025 = filter_post_brexit_data(input_directory, output_directory_2020_2025, 2020, 2025)
+    
+    # Create 2017-2019 dataset
+    output_directory_2017_2019 = "preprocessing/outputs/llama_training_ready/post_brexit_2017_2019"
+    stats_2017_2019 = filter_post_brexit_data(input_directory, output_directory_2017_2019, 2017, 2019) 

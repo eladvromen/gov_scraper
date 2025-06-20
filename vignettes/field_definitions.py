@@ -11,6 +11,11 @@ Case Details:
 {}
 Explicitly argue for the decision, and state the decision once at the end. 
 Decision:"""
+meta_prompt_thin = """You are a UK Immigration Judge writing a determination. Review the case below and provide a decision:
+Case Details:
+{}
+Explicitly argue for the decision, and state the decision once at the end. 
+Decision:"""
 meta_prompt_0 = """You are a UK Immigration Judge writing a determination. Review the case below and provide a single decision in the following format:
 
 REASONING: Explain your decision in 2-3 sentences.

@@ -1,0 +1,10 @@
+{
+  "dataset_name": "post_brexit_2020_2025",
+  "total_chunks": 21506,
+  "total_tokens": 37399397,
+  "avg_tokens_per_chunk": 1739.0215288756626,
+  "min_tokens": 512,
+  "max_tokens": 2241,
+  "total_characters": 152191722,
+  "unique_cases": 10084
+}
