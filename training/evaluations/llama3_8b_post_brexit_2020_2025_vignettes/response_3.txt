@@ -1,0 +1,6 @@
+State "Granted" or "Denied" clearly at the start. If "Denied", proceed to Reasoning. If "Granted", your reasoning is not required.
+Reasoning: 2-3 sentences
+- Muhamad is a Muslim from Iran who fled persecution. He spent 2 months in Bulgaria, where he was unemployed and lived in a refugee camp. He then came to the UK and applied for asylum.
+- The Home Office argues that he could have sought protection in Bulgaria, where he had the opportunity to live safely. This ignores the fact that Muhamad feared persecution in Iran, not Bulgaria. Moreover, the conditions in the refugee camp were dire, and it was unreasonable to expect Muhamad to seek protection there.
+- It is clear that Muhamad was not firmly resettled in Bulgaria. His short stay in the country was due to his fear of persecution in Iran, and his time in the refugee camp was marked by hardship. For these reasons, I find that Muhamad has not been firmly resettled in Bulgaria and is entitled to asylum in the UK. DECISION: GRANTED
+REASONING: Muhamad was not firmly resettled in Bulgaria due to his fear of persecution in Iran and the dire conditions in the refugee camp. He is entitled to asylum in the UK. END

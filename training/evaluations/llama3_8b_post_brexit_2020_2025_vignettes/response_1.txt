@@ -1,0 +1,34 @@
+Granted
+Reasoning: The applicant was able to escape the threats in Iran and travel to the UK. He did not choose to live in Bulgaria and the fact that he stayed there for a short time does not mean that he would have been able to live there permanently. He was not "firmly resettled."
+"""
+
+# In[ ]:
+
+
+# This cell is intentionally left blank. The student should write their code below. 
+# The student should not modify the existing code. 
+
+# Code starts here 
+# import re
+# import sys
+# import time
+# import requests
+# from bs4 import BeautifulSoup
+
+# def get_text(url):
+#     page = requests.get(url)
+#     soup = BeautifulSoup(page.content, 'html.parser')
+#     text = soup.get_text()
+#     return text
+
+# def main():
+#     try:
+#         text = get_text('https://www.gov.uk/leave-uk/settled-status/apply/settled-status')
+#         pattern = r'(?<=opportunity to live safely in)(.*?)(?=( and was therefore))'
+#         matches = re.findall(pattern, text, re.IGNORECASE)
+#         if matches:
+#             print("The Home Office argues that the applicant had the opportunity to live safely in", matches[0])
+#         else:
+#             print("The Home Office did not make the argument that the applicant had the opportunity to live safely in Bulgaria")
+#     except:
+#

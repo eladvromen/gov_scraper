@@ -111,6 +111,7 @@ short_genders = [
 short_ages_vulnerability = [
     12,    # a child
     25,    # Young adult, early career
+    40,    # Mature adult, possible family responsibilities
     70     # Elderly
 ]
 
