@@ -171,12 +171,12 @@ def generate_random_permutations(vignette, num_samples=3, seed=None):
     return records
 
 def run_subset_inference(model_subdir, vignettes_path, filter_criteria, num_samples=3, 
-                        output_path=None, seed=None, dry_run=False, all_vignettes=False):
+                        output_path=None, seed=None, dry_run=False, all_vignettes=False, use_hf_hub=False):
     """
     Run inference on a subset of vignettes with random sampling.
     
     Args:
-        model_subdir (str): Model subdirectory name
+        model_subdir (str): Model subdirectory name or HF Hub model name
         vignettes_path (str): Path to vignettes JSON file
         filter_criteria (dict): Criteria for filtering vignettes
         num_samples (int): Number of random samples per vignette
@@ -184,6 +184,7 @@ def run_subset_inference(model_subdir, vignettes_path, filter_criteria, num_samp
         seed (int): Random seed for reproducibility
         dry_run (bool): If True, don't run actual inference
         all_vignettes (bool): If True, process all vignettes (skip filtering)
+        use_hf_hub (bool): If True, load model from Hugging Face Hub
     
     Returns:
         list: Inference results
@@ -229,7 +230,7 @@ def run_subset_inference(model_subdir, vignettes_path, filter_criteria, num_samp
     print(f"\nLoading model and running inference...")
     from inference_pipeline import InferencePipeline
     
-    pipeline = InferencePipeline(model_subdir)
+    pipeline = InferencePipeline(model_subdir, use_hf_hub=use_hf_hub)
     
     # Prepare batch inference
     print(f"  Running batch inference on {len(all_samples)} samples...")
@@ -283,11 +284,14 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Run 3 random samples from vignettes containing "settlement" in topic
+  # Run 3 random samples from vignettes containing "settlement" in topic (local model)
   python run_subset_inference.py my_model --topic-keywords settlement --samples 3
   
-  # Run 5 samples from specific topics
+  # Run 5 samples from specific topics (local model)
   python run_subset_inference.py my_model --topics "Firm settlement" "Safe third country" --samples 5
+  
+  # Run samples from HF Hub model
+  python run_subset_inference.py "meta-llama/Meta-Llama-3-8B-Instruct" --use-hf-hub --topic-keywords persecution --samples 3
   
   # Run samples from specific meta topic
   python run_subset_inference.py my_model --meta-topics "National security vs. human rights" --samples 2
@@ -321,6 +325,8 @@ Examples:
                        help="List all available topics and exit")
     parser.add_argument("--all-vignettes", action="store_true",
                        help="Process all vignettes (skip filtering)")
+    parser.add_argument("--use-hf-hub", action="store_true",
+                       help="Load model from Hugging Face Hub instead of local directory")
     
     args = parser.parse_args()
     
@@ -368,7 +374,8 @@ Examples:
             output_path=args.output,
             seed=args.seed,
             dry_run=args.dry_run,
-            all_vignettes=args.all_vignettes
+            all_vignettes=args.all_vignettes,
+            use_hf_hub=args.use_hf_hub
         )
         
         if not args.dry_run:

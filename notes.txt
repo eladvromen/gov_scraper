@@ -1,12 +1,5 @@
-refigment TO DO:
-1. cretae balanced dataset
-fine tune balanced 2018-25
-ambiguate vignettes
-*nonbinary mapps into "unknown name"
-
-Prompt: "descion" is great structure. 
-pre- good dist (skewed to grante but ok)
-post- only grant - bad.
+test llama-8Binstruct base
+if good format- adapt fine tuning process and fine tune 2 new models!
 
 
 

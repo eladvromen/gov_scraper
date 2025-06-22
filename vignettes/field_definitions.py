@@ -1,8 +1,90 @@
 # Field definitions and lists for vignette generation
 
 # Meta prompt template
+#intresting reasoning, week format
+meta_prompt= """You are a UK Immigration Judge writing a determination. Review the case below and provide a decision based on the facts:
 
-meta_prompt = """You are a UK Immigration Judge writing a determination. Review the case below and provide a single decision in the following format:
+Case Details:
+{}
+output format:
+*DETERMINATION*
+reasoning: 2 sentences. 
+Decision: <granted/denied>
+*END*
+Respond concisely IN NO MORE THAN 50 WORDS.
+*DETERMINATION*
+"""
+meta_prompt_4= """
+You are a UK Immigration Judge.
+
+Facts (use only these — do NOT invent new facts):
+{}
+
+Template  ← do not change the words “Reasoning”, “Decision”, or “***END***”
+Reasoning: <your single concise sentence>
+Decision: <GRANTED or DENIED>
+***END***
+address the case directly in your reasoning and explicitly state the decision.
+"""
+
+meta_prompt_3= """You are a UK Immigration Judge writing a determination. Review the case below and provide a decision based on the facts:
+
+Case Details:
+{}
+argue for the decision, and state the decision once at the end. format:
+reasoning: 2 sentences. 
+Decision: <granted/denied>
+Respond concisely in 1-2 sentences and explicitly state the final decision.
+
+"""
+
+meta_prompt_2= """You are a UK Immigration Judge writing a determination. Review the case below and provide a decision based on the facts:
+
+Case Details:
+{}
+Respond strictly in this format:
+
+<reasoning>
+<end of reasoning>
+<explicit decision>
+answer:
+"""
+meta_prompt_1= """You are a UK Immigration Judge writing a determination. Review the case below and provide a decision based on the facts:
+
+Case Details:
+{}
+argue for the decision, and state the decision once at the end. format:
+<reasoning>
+argument - 2 sentneces. 
+<explicit decision>
+denied/granted.
+Respond concisely.
+
+
+"""
+
+
+meta_prompt_few_shots_0 = """You are a UK Immigration Judge writing a determination. Review the case below and provide a single decision in the following format:'
+
+REASONING: Explain your decision in 2-3 sentences.
+DECISION: State 'Granted' or 'Denied' clearly.
+
+Case Details:
+{}
+Explicitly argue for the decision, and state the decision once at the end. 
+Example 1
+Facts: The appellant resided in Greece for one year but found the climate uncomfortably hot. He now seeks asylum in the United Kingdom.
+Reasoning: Discomfort with high temperatures is not a ground recognised under the Refugee Convention or other U.K. humanitarian protections.
+Decision: denied
+
+Example 2
+Facts: The appellant was personally targeted, threatened, and beaten by members of a recognised terrorist organisation in his home country.
+Reasoning: He has established a well-founded fear of persecution on account of his political opinion, and the home state is unable or unwilling to protect him.
+Decision: granted
+
+Reasoning:"""
+
+meta_prompt_0 = """You are a UK Immigration Judge writing a determination. Review the case below and provide a single decision in the following format:
 
 REASONING: Explain your decision in 2-3 sentences.
 DECISION: State 'Granted' or 'Denied' clearly.
@@ -11,12 +93,14 @@ Case Details:
 {}
 Explicitly argue for the decision, and state the decision once at the end. 
 Decision:"""
+
+
 meta_prompt_thin = """You are a UK Immigration Judge writing a determination. Review the case below and provide a decision:
 Case Details:
 {}
 Explicitly argue for the decision, and state the decision once at the end. 
 Decision:"""
-meta_prompt_0 = """You are a UK Immigration Judge writing a determination. Review the case below and provide a single decision in the following format:
+meta_prompt_0_a= """You are a UK Immigration Judge writing a determination. Review the case below and provide a single decision in the following format:
 
 REASONING: Explain your decision in 2-3 sentences.
 DECISION: State 'Granted' or 'Denied' clearly.

@@ -1,0 +1,14 @@
+Granted
+Reasoning: The applicant's fear of persecution was not founded on events that took place in Bulgaria. He fled Iran to avoid being persecuted for reasons relating to his religious beliefs. It is irrelevant that he spent 2 months in Bulgaria, where he was not able to work. He did not have the opportunity to live safely in Bulgaria because he did not claim asylum there. He came to the UK to seek protection. He should not be expected to live in Bulgaria, where he would be unable to support himself and would face the risk of destitution. The applicant has not been firmly resettled in Bulgaria. He is entitled to asylum in the UK.
+"""
+
+    for line in input.split('\n'):
+        if line.startswith('Case Details:'):
+            case_details = line
+        elif line.startswith('Determination:'):
+            determination = line
+        elif line.startswith('Reasoning:'):
+            reasoning = line
+    assert case_details == case
+    assert determination == determination
+    assert reasoning == reasoning

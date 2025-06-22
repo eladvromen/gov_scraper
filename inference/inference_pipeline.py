@@ -25,28 +25,34 @@ from field_definitions import *
 from utils import load_vignettes, resolve_field_reference
 
 class InferencePipeline:
-    def __init__(self, model_subdir, models_base_dir="models"):
+    def __init__(self, model_subdir, models_base_dir="models", use_hf_hub=False):
         """
         Initialize the inference pipeline.
         
         Args:
-            model_subdir (str): Subdirectory name under models_base_dir
-            models_base_dir (str): Base directory containing model subdirectories
+            model_subdir (str): Subdirectory name under models_base_dir OR HF Hub model name
+            models_base_dir (str): Base directory containing model subdirectories  
+            use_hf_hub (bool): If True, treat model_subdir as HF Hub model name
         """
         self.models_base_dir = models_base_dir
         self.model_subdir = model_subdir
-        self.model_path = os.path.join(models_base_dir, model_subdir)
+        self.use_hf_hub = use_hf_hub
         
-        # Check if model path exists
-        if not os.path.exists(self.model_path):
-            raise FileNotFoundError(f"Model directory not found: {self.model_path}")
+        if use_hf_hub:
+            self.model_path = model_subdir  # Use HF Hub model name directly
+            print(f"Using Hugging Face Hub model: {self.model_path}")
+        else:
+            self.model_path = os.path.join(models_base_dir, model_subdir)
+            # Check if local model path exists
+            if not os.path.exists(self.model_path):
+                raise FileNotFoundError(f"Model directory not found: {self.model_path}")
+            print(f"Using local model: {self.model_path}")
         
         self.model = None
         self.tokenizer = None
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.last_prompt = None  # Track the last prompt used
         
-        print(f"Initializing InferencePipeline with model: {self.model_path}")
         print(f"Using device: {self.device}")
         
         # Load the model
@@ -266,11 +272,11 @@ class InferencePipeline:
             with torch.no_grad():
                 outputs = self.model.generate(
                     **inputs,
-                    max_new_tokens=500,          # Much shorter to prevent runaway
+                    max_new_tokens=200,          # Much shorter to prevent runaway
                     do_sample=True,
-                    temperature=0.7,             # More focused
-                    top_p=0.9,
-                    repetition_penalty= 1.1,      # Reduce repetition
+                    temperature=0.3,             # More focused
+                    top_p=0.7,
+                    repetition_penalty= 1.2,      # Reduce repetition
                     pad_token_id=self.tokenizer.eos_token_id
                 )
             
@@ -315,11 +321,11 @@ class InferencePipeline:
                 with torch.no_grad():
                     outputs = self.model.generate(
                         **inputs,
-                        max_new_tokens=500,
+                        max_new_tokens=1000,
                         do_sample=True,
-                        temperature=0.7,
-                        top_p=0.9,
-                        repetition_penalty=1.1,
+                        temperature=0.5,#0.7
+                        top_p=0.6,
+                        repetition_penalty=1.2,#1.1
                         pad_token_id=self.tokenizer.eos_token_id,
                         use_cache=True,  # Enable KV caching
                         num_beams=1  # Ensure no beam search for speed
