@@ -24,92 +24,73 @@ from datetime import datetime
 
 # Map decision phrases to canonical forms
 DECISION_VARIANTS = {
-    'granted': 'Granted',
-    'allowed': 'Granted',
-    'appeal allowed': 'Granted',
-    'application granted': 'Granted',
-    'leave to remain': 'Granted',
-    'leave granted': 'Granted',
-    'approved': 'Granted',
-    'accepted': 'Granted',
     'denied': 'Denied',
+    'granted': 'Granted',
     'dismissed': 'Denied',
+    'allowed': 'Granted',
     'refused': 'Denied',
-    'not allowed': 'Denied',
-    'not granted': 'Denied',
-    'not approved': 'Denied',
-    'not accepted': 'Denied',
-    'not permitted': 'Denied',
-    'appeal dismissed': 'Denied',
-    'application refused': 'Denied',
-    'leave refused': 'Denied',
-    'rejected': 'Denied',
-    'declined': 'Denied',
+    'approved': 'Granted',
+    'allow': 'Granted',
+    'deny': 'Denied',
+    'asylum': 'Granted',  # "grant asylum" = Granted
 }
 
-# Simple, focused patterns for decision extraction
+# Patterns specifically for the format: "Decision: DENIED/denied *END*"
 DECISION_PATTERNS = [
-    # Explicit decision statements
-    r'\b(?:application|case|appeal|claim|request)\s+(?:is\s+)?(?P<word>granted|denied|dismissed|refused|allowed|approved|accepted|rejected|declined)\b',
-    r'\b(?:leave\s+to\s+remain|leave\s+granted|leave\s+refused)\b',
-    # Standalone decisions at start of response or after "Decision:"
-    r'\b(?P<neg>not\s+)?(?P<word2>granted|denied|dismissed|refused|allowed|approved|accepted|rejected|declined)\b',
-    # Negation patterns
-    r'(?P<neg4>cannot\s+be|should\s+not\s+be|must\s+not\s+be|will\s+not\s+be|is\s+not)\s+(?P<word4>granted|allowed|approved|accepted|permitted)',
+    # Primary pattern: Decision/Decided: [specific_word] followed by *END*
+    r'(?:Decision|DECISION|Decided):\s*(?P<decision>denied|granted|dismissed|allowed|refused|approved)\s*\*END\*',
+    # Fallback: Decision/Decided: [specific_word] without *END* requirement
+    r'(?:Decision|DECISION|Decided):\s*(?P<decision>denied|granted|dismissed|allowed|refused|approved)',
+    # Alternative format: *GRANTED* or *DENIED*
+    r'\*(?P<decision2>granted|denied|dismissed|allowed|refused|approved)\*',
+    # Appeal/claim/application format: "The appeal/claim/application is [accordingly] granted/denied"
+    r'(?:appeal|claim|application)\s+is\s+(?:accordingly\s+)?(?P<decision3>granted|denied|dismissed|allowed|refused|approved)',
+    # Claim for asylum format: "claim for asylum is denied/granted"
+    r'claim\s+for\s+asylum\s+is\s+(?:accordingly\s+)?(?P<decision3b>granted|denied|dismissed|allowed|refused|approved)',
+    # Case format: "case dismissed/granted/denied"
+    r'case\s+(?P<decision4>dismissed|granted|denied|allowed|refused|approved)',
+    # Judge statements: "I allow/deny [name]'s appeal" or "I allow/deny [the] appeal"
+    r'I\s+(?P<decision5>allow|deny)\s+(?:\w+\'s\s+)?(?:appeal|it|her\s+appeal|his\s+appeal|the\s+appeal|this\s+appeal)',
+    # Appellant format: "The Appellant is granted/denied"
+    r'(?:The\s+)?Appellant\s+is\s+(?P<decision6>granted|denied|dismissed|allowed|refused|approved)',
+    # Asylum format: "grant/deny asylum"
+    r'(?:grant|deny)\s+(?P<decision7>asylum)',
+    # Standalone decisions (more restrictive context)
+    r'(?:^|\n)\s*(?P<decision8>Granted|Denied|Allowed|Dismissed|Refused|Approved)\s*(?:\n|\*END\*|$)',
 ]
 
-def normalize_decision(word: str, neg: Optional[str] = None) -> Optional[str]:
+def normalize_decision(word: str) -> Optional[str]:
     """Normalize a decision word to canonical form"""
-    word = word.lower().strip()
     if not word:
         return None
     
-    if neg and neg.strip():
-        # Negation flips the meaning
-        if word in ['granted', 'allowed', 'approved', 'accepted', 'permitted']:
-            return 'Denied'
-        elif word in ['denied', 'dismissed', 'refused', 'rejected', 'declined']:
-            return 'Granted'
-    
-    # Map to canonical form
-    for k, v in DECISION_VARIANTS.items():
-        if word == k or word in k:
-            return v
-    return None
+    word = word.lower().strip()
+    return DECISION_VARIANTS.get(word, None)
 
 def extract_primary_decision(response_text: str) -> Optional[str]:
-    """Extract the primary decision from the response (first valid decision found by position)"""
+    """Extract the primary decision from the response"""
     if not response_text:
         return None
     
-    # Find all decisions with their positions
+    # Find decisions with their positions
     all_decisions = []
     
     for pattern in DECISION_PATTERNS:
-        for m in re.finditer(pattern, response_text, re.IGNORECASE):
-            # Extract word and negation
-            word = ''
-            neg = ''
-            
-            for group_name in ['word', 'word2', 'word4']:
-                try:
-                    if m.group(group_name):
-                        word = m.group(group_name)
+        for match in re.finditer(pattern, response_text, re.IGNORECASE):
+            try:
+                # Try all decision groups
+                decision_word = None
+                for group_name in ['decision', 'decision2', 'decision3', 'decision3b', 'decision4', 'decision5', 'decision6', 'decision7', 'decision8']:
+                    if group_name in match.groupdict() and match.group(group_name):
+                        decision_word = match.group(group_name)
                         break
-                except (IndexError, AttributeError):
-                    continue
-            
-            for group_name in ['neg', 'neg4']:
-                try:
-                    if m.group(group_name):
-                        neg = m.group(group_name)
-                        break
-                except (IndexError, AttributeError):
-                    continue
-            
-            decision = normalize_decision(word, neg)
-            if decision:
-                all_decisions.append((decision, m.start()))
+                
+                if decision_word:
+                    decision = normalize_decision(decision_word)
+                    if decision:
+                        all_decisions.append((decision, match.start()))
+            except (IndexError, AttributeError):
+                continue
     
     # Sort by position and return the first one
     if all_decisions:
@@ -121,73 +102,26 @@ def extract_primary_decision(response_text: str) -> Optional[str]:
 # --- Text Cleaning ---
 
 def clean_response_text(response_text: str) -> str:
-    """Clean response text by removing code contamination"""
+    """Clean response text by removing content after *END* and other artifacts"""
     if not response_text:
         return ""
     
-    # More comprehensive code contamination patterns
-    code_start_patterns = [
-        # Triple quotes followed by code
-        '\n"""\n\ndef ',
-        '\n"""\n\nclass ',
-        '\n"""\n\nimport ',
-        '\n"""\n\nfrom ',
-        "\n'''\n\ndef ",
-        "\n'''\n\nclass ",
-        # Code blocks
-        '\n```\n\ndef ',
-        '\n```python\n',
-        '\n```java\n',
-        '\n```javascript\n',
-        # Direct code patterns
-        '\n\n# Import ',
-        '\n\nimport ',
-        '\n\nfrom ',
-        '\n\ndef ',
-        '\n\nclass ',
-        # Comments followed by imports/functions
-        '\n# Load data\n',
-        '\n# Import libraries\n',
-        '\ndata = load_data()',
-        '\ndef split_by_sentence(',
-        '\ndef get_sentences(',
-        '\ndef get_headline(',
-        '\ndef make_decision(',
-    ]
+    cleaned_text = response_text.strip()
     
-    cleaned_text = response_text
+    # Find and cut at *END* marker if present
+    end_marker_pos = cleaned_text.find('*END*')
+    if end_marker_pos != -1:
+        # Keep everything up to and including *END*
+        cleaned_text = cleaned_text[:end_marker_pos + 5]  # +5 for "*END*"
     
-    # Find earliest code contamination and cut there
-    earliest_code_start = len(cleaned_text)
-    for pattern in code_start_patterns:
-        pos = cleaned_text.find(pattern)
-        if pos != -1 and pos < earliest_code_start:
-            earliest_code_start = pos
-    
-    # Also look for standalone triple quotes that might indicate code
-    triple_quote_pos = cleaned_text.find('\n"""\n')
-    if triple_quote_pos != -1 and triple_quote_pos < earliest_code_start:
-        earliest_code_start = triple_quote_pos
-    
-    # Look for import statements not at the very beginning
-    import_patterns = [r'\nimport \w+', r'\nfrom \w+', r'\n# Import']
-    for pattern in import_patterns:
-        match = re.search(pattern, cleaned_text)
-        if match and match.start() > 50:  # Not at the very beginning
-            if match.start() < earliest_code_start:
-                earliest_code_start = match.start()
-    
-    if earliest_code_start < len(cleaned_text):
-        cleaned_text = cleaned_text[:earliest_code_start]
-    
-    # Clean up artifacts
-    trailing_artifacts = ['"""', "'''", '```', '---', '===', '"\n']
+    # Remove any trailing artifacts after cleaning
+    trailing_artifacts = ['"""', "'''", '```', '---', '===']
     for artifact in trailing_artifacts:
         if cleaned_text.rstrip().endswith(artifact):
             cleaned_text = cleaned_text.rstrip()[:-len(artifact)].rstrip()
     
+    # Remove leading artifacts
     leading_artifacts = ['"""', "'''", '```', 'Output:', 'Result:', 'Response:']
-    cleaned_text = cleaned_text.strip()
     for artifact in leading_artifacts:
         if cleaned_text.startswith(artifact):
             cleaned_text = cleaned_text[len(artifact):].strip()
@@ -196,45 +130,34 @@ def clean_response_text(response_text: str) -> str:
 
 # --- Reasoning Extraction ---
 
-REASONING_LABELS = [
-    r'Reasoning\s*[:\-]',
-    r'I\s+find\s+that',
-    r'I\s+conclude\s+that',
-    r'I\s+determine\s+that',
-    r'because',
-    r'on\s+the\s+basis\s+that',
-    r'for\s+the\s+following\s+reasons',
-    r'it\s+is\s+clear\s+that',
-    r'I\s+am\s+satisfied\s+that',
-    r'I\s+am\s+not\s+satisfied\s+that',
-]
-
 def extract_reasoning(response_text: str) -> Optional[str]:
-    """Extract legal reasoning from the response"""
+    """Extract legal reasoning from the response (appears before Decision:)"""
     if not response_text:
         return None
     
-    # Try explicit reasoning labels first
-    for label in REASONING_LABELS:
-        pattern = label + r'(.+?)(?=\n\s*Decision|$)'
-        match = re.search(pattern, response_text, re.IGNORECASE | re.DOTALL)
-        if match:
-            reasoning = match.group(1).strip()
-            reasoning = re.sub(r'\s+', ' ', reasoning)  # Normalize whitespace
-            if len(reasoning.split()) > 3:  # Must be substantial
-                return reasoning
+    # Clean the text first
+    text = response_text.strip()
     
-    # Fallback: extract text after first decision
-    decision_match = re.search(r'\b(granted|denied)\b', response_text, re.IGNORECASE)
+    # Find the Decision: marker to know where reasoning ends
+    decision_match = re.search(r'Decision:\s*\w+', text, re.IGNORECASE)
     if decision_match:
-        after_decision = response_text[decision_match.end():].strip()
-        # Remove any remaining "Decision:" or "Reasoning:" labels
-        after_decision = re.sub(r'^(Decision|Reasoning)\s*[:\-]\s*', '', after_decision, flags=re.IGNORECASE)
-        # Take first few sentences
-        sentences = re.split(r'(?<=[.!?])\s+', after_decision)
-        reasoning = ' '.join(sentences[:3]).strip()
-        if len(reasoning.split()) > 3:
-            return reasoning
+        # Extract everything before "Decision:"
+        reasoning_text = text[:decision_match.start()].strip()
+    else:
+        # If no Decision: marker found, take first part of text
+        reasoning_text = text
+    
+    # Remove explicit "Reasoning:" label if present
+    reasoning_text = re.sub(r'^Reasoning:\s*', '', reasoning_text, flags=re.IGNORECASE).strip()
+    
+    # Clean up the reasoning text
+    if reasoning_text:
+        # Remove excessive whitespace
+        reasoning_text = re.sub(r'\s+', ' ', reasoning_text)
+        
+        # Must be substantial (more than just a few words)
+        if len(reasoning_text.split()) > 5:
+            return reasoning_text
     
     return None
 
@@ -249,21 +172,34 @@ def analyze_response(response_text: str, case_metadata: Dict[str, Any]) -> Dict[
     decision = extract_primary_decision(cleaned_text)
     reasoning = extract_reasoning(cleaned_text)
     
-    # Simple quality metrics
-    has_code_contamination = len(cleaned_text) < len(response_text) * 0.9
+    # Quality metrics specific to this format
+    has_end_marker = '*END*' in response_text
+    has_decision_format = bool(re.search(r'(?:Decision|DECISION|Decided):\s*\w+', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'\*(?:granted|denied|dismissed|allowed|refused|approved)\*', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:appeal|claim|application)\s+is\s+(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'claim\s+for\s+asylum\s+is\s+(?:accordingly\s+)?(?:granted|denied)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'case\s+(?:dismissed|granted|denied|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'I\s+(?:allow|deny)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'Appellant\s+is\s+(?:granted|denied)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:grant|deny)\s+asylum', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:^|\n)\s*(?:Granted|Denied|Allowed|Dismissed)', response_text, re.IGNORECASE))
+    text_after_end = len(response_text) > len(cleaned_text) if cleaned_text else False
     
     return {
         'decision': decision,
         'reasoning': reasoning,
         'original_response': response_text,
         'cleaned_response': cleaned_text,
-        'has_code_contamination': has_code_contamination,
+        'has_end_marker': has_end_marker,
+        'has_decision_format': has_decision_format,
+        'text_after_end': text_after_end,
         'metadata': case_metadata,
         'quality_metrics': {
             'response_length': len(cleaned_text.split()) if cleaned_text else 0,
             'original_length': len(response_text.split()) if response_text else 0,
             'has_decision': decision is not None,
-            'has_reasoning': reasoning is not None and len(reasoning.split()) > 3,
+            'has_reasoning': reasoning is not None and len(reasoning.split()) > 5,
+            'follows_format': has_end_marker and has_decision_format,
             'text_reduction_ratio': len(cleaned_text) / len(response_text) if response_text else 1.0
         }
     }
@@ -276,7 +212,9 @@ def calculate_summary_statistics(processed_results: List[Dict[str, Any]]) -> Dic
     no_decision = sum(1 for r in processed_results if r['decision'] is None)
     
     has_reasoning = sum(1 for r in processed_results if r['quality_metrics']['has_reasoning'])
-    has_code_contamination = sum(1 for r in processed_results if r['has_code_contamination'])
+    follows_format = sum(1 for r in processed_results if r['quality_metrics']['follows_format'])
+    has_end_marker = sum(1 for r in processed_results if r['has_end_marker'])
+    has_decision_format = sum(1 for r in processed_results if r['has_decision_format'])
     
     avg_length = sum(r['quality_metrics']['response_length'] for r in processed_results) / total if total > 0 else 0
     
@@ -293,7 +231,9 @@ def calculate_summary_statistics(processed_results: List[Dict[str, Any]]) -> Dic
             'avg_response_length': avg_length,
             'has_decision_rate': (total - no_decision) / total if total > 0 else 0,
             'has_reasoning_rate': has_reasoning / total if total > 0 else 0,
-            'code_contamination_rate': has_code_contamination / total if total > 0 else 0,
+            'follows_format_rate': follows_format / total if total > 0 else 0,
+            'has_end_marker_rate': has_end_marker / total if total > 0 else 0,
+            'has_decision_format_rate': has_decision_format / total if total > 0 else 0,
         }
     }
 
@@ -371,7 +311,9 @@ def main():
     print(f"  - Denied: {summary_stats['decision_stats']['denied']} ({summary_stats['decision_stats']['denied_rate']:.1%})")
     print(f"  - No decision: {summary_stats['decision_stats']['no_decision']}")
     print(f"  - Has reasoning: {summary_stats['quality_metrics']['has_reasoning_rate']:.1%}")
-    print(f"  - Code contamination: {summary_stats['quality_metrics']['code_contamination_rate']:.1%}")
+    print(f"  - Follows format: {summary_stats['quality_metrics']['follows_format_rate']:.1%}")
+    print(f"  - Has *END* marker: {summary_stats['quality_metrics']['has_end_marker_rate']:.1%}")
+    print(f"  - Has Decision: format: {summary_stats['quality_metrics']['has_decision_format_rate']:.1%}")
 
 if __name__ == "__main__":
     main() 

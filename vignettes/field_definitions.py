@@ -1,7 +1,7 @@
 # Field definitions and lists for vignette generation
 
 # Meta prompt template
-#intresting reasoning, week format
+#START WITH THIS ONE
 meta_prompt= """You are a UK Immigration Judge writing a determination. Review the case below and provide a decision based on the facts:
 
 Case Details:

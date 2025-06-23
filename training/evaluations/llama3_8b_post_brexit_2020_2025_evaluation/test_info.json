@@ -1,0 +1,8 @@
+{
+  "test_samples": 2000,
+  "data_dir": "preprocessing/outputs/llama_training_ready/post_brexit_2020_2025",
+  "dataset_pattern": "post_brexit_2020_2025_chunks.jsonl",
+  "train_split": 0.9,
+  "eval_split": 0.1,
+  "seed": 42
+}

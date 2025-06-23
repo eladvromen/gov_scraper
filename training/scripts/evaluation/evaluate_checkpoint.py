@@ -29,7 +29,8 @@ def evaluate_model_properly(
     model_path: str, 
     data_dir: str,
     dataset_pattern: str = "pre_brexit_2013_2016_chunks.jsonl",
-    output_dir: str = None
+    output_dir: str = None,
+    max_eval_samples: int = None
 ) -> Dict[str, float]:
     """Evaluate model using the proper LegalEvaluator framework."""
     
@@ -69,7 +70,7 @@ def evaluate_model_properly(
         text_column="text",
         add_eos_token=True,
         chunk_size=512,    # CORRECT: Same as training
-        max_eval_samples=200,  # Evaluate on 200 test samples
+        max_eval_samples=max_eval_samples,  # Use full test set if None
         max_train_samples=None
     )
     
@@ -89,7 +90,7 @@ def evaluate_model_properly(
     
     # Create evaluation config
     eval_config = EvaluationConfig(
-        max_eval_samples=200,
+        max_eval_samples=max_eval_samples,
         max_generate_samples=10,  # Generate 10 samples for quality assessment
         save_predictions=True,
         predictions_dir=output_dir,
@@ -174,6 +175,12 @@ def main():
         default=None,
         help="Directory to save evaluation results (auto-generated from model name if not provided)"
     )
+    parser.add_argument(
+        "--max-eval-samples",
+        type=int,
+        default=None,
+        help="Maximum number of samples to evaluate (None = use full test set)"
+    )
     
     args = parser.parse_args()
     
@@ -192,7 +199,8 @@ def main():
         args.model_path, 
         args.data_dir,
         args.dataset_pattern,
-        args.output_dir
+        args.output_dir,
+        args.max_eval_samples
     )
     
     if metrics:

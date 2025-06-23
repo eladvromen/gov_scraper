@@ -1,5 +1,9 @@
-test llama-8Binstruct base
-if good format- adapt fine tuning process and fine tune 2 new models!
+
+adapt postprocessor to new instruct prompt. start analysing:
+- Format stability at scale
+- labels distribution
+
+
 
 
 

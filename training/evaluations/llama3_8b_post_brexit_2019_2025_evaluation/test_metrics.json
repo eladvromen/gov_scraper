@@ -1,8 +1,8 @@
 {
-  "test/perplexity": 4.386673922538757,
-  "test/loss": 1.4523621439933776,
-  "test/token_accuracy": 0.000947265625,
-  "test/generation/bertscore_f1": 0.9166218161582946,
-  "test/generation/bertscore_precision": 0.890004688501358,
-  "test/generation/bertscore_recall": 0.9449046850204468
+  "test/perplexity": 4.422150403499603,
+  "test/loss": 1.4547080218791961,
+  "test/token_accuracy": 0.00165625,
+  "test/generation/bertscore_f1": 0.9173611700534821,
+  "test/generation/bertscore_precision": 0.8894515454769134,
+  "test/generation/bertscore_recall": 0.9471012353897095
 }
