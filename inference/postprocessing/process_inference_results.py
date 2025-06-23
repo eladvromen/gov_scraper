@@ -32,6 +32,7 @@ DECISION_VARIANTS = {
     'approved': 'Granted',
     'allow': 'Granted',
     'deny': 'Denied',
+    'grant': 'Granted',  # "grant" = Granted
     'asylum': 'Granted',  # "grant asylum" = Granted
 }
 
@@ -41,20 +42,32 @@ DECISION_PATTERNS = [
     r'(?:Decision|DECISION|Decided):\s*(?P<decision>denied|granted|dismissed|allowed|refused|approved)\s*\*END\*',
     # Fallback: Decision/Decided: [specific_word] without *END* requirement
     r'(?:Decision|DECISION|Decided):\s*(?P<decision>denied|granted|dismissed|allowed|refused|approved)',
+    # Decision with compound phrases: "Decision: ASYLUM GRANTED", "Decision: Appeal denied"
+    r'(?:Decision|DECISION|Decided):\s*(?:ASYLUM\s+|Appeal\s+)?(?P<decision_compound>granted|denied|dismissed|allowed|refused|approved)',
     # Alternative format: *GRANTED* or *DENIED*
     r'\*(?P<decision2>granted|denied|dismissed|allowed|refused|approved)\*',
     # Appeal/claim/application format: "The appeal/claim/application is [accordingly] granted/denied"
     r'(?:appeal|claim|application)\s+is\s+(?:accordingly\s+)?(?P<decision3>granted|denied|dismissed|allowed|refused|approved)',
+    # Application for asylum format: "application for asylum is granted/denied"
+    r'application\s+for\s+asylum\s+(?:in\s+the\s+UK\s+)?is\s+(?:therefore\s+)?(?P<decision3c>granted|denied|dismissed|allowed|refused|approved)',
     # Claim for asylum format: "claim for asylum is denied/granted"
     r'claim\s+for\s+asylum\s+is\s+(?:accordingly\s+)?(?P<decision3b>granted|denied|dismissed|allowed|refused|approved)',
     # Case format: "case dismissed/granted/denied"
     r'case\s+(?P<decision4>dismissed|granted|denied|allowed|refused|approved)',
-    # Judge statements: "I allow/deny [name]'s appeal" or "I allow/deny [the] appeal"
-    r'I\s+(?P<decision5>allow|deny)\s+(?:\w+\'s\s+)?(?:appeal|it|her\s+appeal|his\s+appeal|the\s+appeal|this\s+appeal)',
+    # Judge statements: "I allow/deny/grant [name]'s appeal" or "I allow/deny/grant [the] appeal"
+    r'I\s+(?P<decision5>allow|deny|grant)\s+(?:\w+\'s\s+)?(?:appeal|it|her\s+appeal|his\s+appeal|the\s+appeal|this\s+appeal)',
+    # Judge statements without object: "I grant/deny/allow" (standalone)
+    r'I\s+(?P<decision5b>grant|deny|allow)(?:\s+(?:the|this)\s+appeal)?(?:\s+on\s+[\w\s]+grounds)?[.\s]*(?:\*END\*|$)',
+    # "Should be" format: "appeal should be GRANTED/DENIED"
+    r'(?:appeal|claim|application)?\s*should\s+be\s+(?P<decision5c>granted|denied|dismissed|allowed|refused|approved)',
+    # Leading phrases: "leading me to grant/deny"
+    r'leading\s+me\s+to\s+(?P<decision5d>grant|deny)\s+(?:this\s+|his\s+|her\s+|their\s+)?(?:appeal|claim|application)',
     # Appellant format: "The Appellant is granted/denied"
     r'(?:The\s+)?Appellant\s+is\s+(?P<decision6>granted|denied|dismissed|allowed|refused|approved)',
     # Asylum format: "grant/deny asylum"
     r'(?:grant|deny)\s+(?P<decision7>asylum)',
+    # Asylum claim format: "deny their asylum claim"
+    r'(?P<decision7b>grant|deny)\s+(?:their|his|her)\s+asylum\s+claim',
     # Standalone decisions (more restrictive context)
     r'(?:^|\n)\s*(?P<decision8>Granted|Denied|Allowed|Dismissed|Refused|Approved)\s*(?:\n|\*END\*|$)',
 ]
@@ -80,7 +93,7 @@ def extract_primary_decision(response_text: str) -> Optional[str]:
             try:
                 # Try all decision groups
                 decision_word = None
-                for group_name in ['decision', 'decision2', 'decision3', 'decision3b', 'decision4', 'decision5', 'decision6', 'decision7', 'decision8']:
+                for group_name in ['decision', 'decision_compound', 'decision2', 'decision3', 'decision3b', 'decision3c', 'decision4', 'decision5', 'decision5b', 'decision5c', 'decision5d', 'decision6', 'decision7', 'decision7b', 'decision8']:
                     if group_name in match.groupdict() and match.group(group_name):
                         decision_word = match.group(group_name)
                         break
@@ -175,13 +188,19 @@ def analyze_response(response_text: str, case_metadata: Dict[str, Any]) -> Dict[
     # Quality metrics specific to this format
     has_end_marker = '*END*' in response_text
     has_decision_format = bool(re.search(r'(?:Decision|DECISION|Decided):\s*\w+', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:Decision|DECISION|Decided):\s*(?:ASYLUM\s+|Appeal\s+)?(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'\*(?:granted|denied|dismissed|allowed|refused|approved)\*', response_text, re.IGNORECASE)) or \
-                         bool(re.search(r'(?:appeal|claim|application)\s+is\s+(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:appeal|claim|application)\s+is\s+(?:accordingly\s+)?(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'application\s+for\s+asylum\s+(?:in\s+the\s+UK\s+)?is\s+(?:therefore\s+)?(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'claim\s+for\s+asylum\s+is\s+(?:accordingly\s+)?(?:granted|denied)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'case\s+(?:dismissed|granted|denied|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
-                         bool(re.search(r'I\s+(?:allow|deny)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'I\s+(?:allow|deny|grant)\s+(?:\w+\'s\s+)?(?:appeal|it|her\s+appeal|his\s+appeal|the\s+appeal|this\s+appeal)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'I\s+(?:grant|deny|allow)(?:\s+(?:the|this)\s+appeal)?(?:\s+on\s+[\w\s]+grounds)?', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:appeal|claim|application)?\s*should\s+be\s+(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'leading\s+me\s+to\s+(?:grant|deny)\s+(?:this\s+|his\s+|her\s+|their\s+)?(?:appeal|claim|application)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'Appellant\s+is\s+(?:granted|denied)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'(?:grant|deny)\s+asylum', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:grant|deny)\s+(?:their|his|her)\s+asylum\s+claim', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'(?:^|\n)\s*(?:Granted|Denied|Allowed|Dismissed)', response_text, re.IGNORECASE))
     text_after_end = len(response_text) > len(cleaned_text) if cleaned_text else False
     

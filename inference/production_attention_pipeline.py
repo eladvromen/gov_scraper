@@ -286,6 +286,11 @@ class ProductionAttentionPipeline(InferencePipeline):
     
     def finalize_attention_collection(self):
         """Finalize attention data collection and close files."""
+        # Skip if attention collection is disabled
+        if not self.collect_attention:
+            print(f"\n✅ Production inference completed (no attention collected)")
+            return
+            
         # Save any remaining batch
         if self.current_batch:
             self._save_attention_batch()
@@ -630,7 +635,7 @@ class ProductionAttentionPipeline(InferencePipeline):
                 # Prepare generation kwargs
                 generation_kwargs = {
                     **inputs,
-                    'max_new_tokens': 1000,
+                    'max_new_tokens': 250,
                     'do_sample': True,
                     'temperature': 0.5,
                     'top_p': 0.6,
@@ -749,7 +754,7 @@ class ProductionAttentionPipeline(InferencePipeline):
                 for layer_idx in self.target_layers:
                     if layer_idx < len(step_attentions):
                         # Get attention for this sample: [num_heads, seq_len, seq_len]
-                        layer_attention = step_attentions[layer_idx][batch_idx]  # [num_heads, seq_len, seq_len]
+                        layer_attention = step_attentions[layer_idx]  # [num_heads, seq_len, seq_len]
                         
                         # Focus on attention from generated token to input tokens
                         if layer_attention.size(-1) > input_length:
@@ -769,6 +774,216 @@ class ProductionAttentionPipeline(InferencePipeline):
         except Exception as e:
             print(f"Error extracting batch attention: {e}")
             return None
+
+    def generate_inference_records_optimized(self, vignettes: List[Dict], batch_size: int = 16) -> List[Dict]:
+        """
+        OPTIMIZED: Generate inference records with efficient batched processing (no attention collection).
+        This is the recommended method for fast inference without attention data.
+        
+        Args:
+            vignettes: List of vignette dictionaries
+            batch_size: Number of samples to process in each batch
+        """
+        print(f"🚀 Starting OPTIMIZED production inference (no attention)...")
+        
+        # Phase 1: Generate all prompts and metadata first
+        print("📋 Phase 1: Generating all prompts...")
+        all_prompts = []
+        all_sample_data = []  # For building final records
+        
+        total_permutations = self._count_total_permutations(vignettes)
+        current_permutation = 0
+        
+        print(f"Total permutations: {total_permutations:,}")
+        
+        # Generate all prompts (reusing existing logic)
+        for vignette_idx, vignette in enumerate(vignettes):
+            print(f"  Generating prompts for vignette {vignette_idx + 1}/{len(vignettes)}: {vignette['topic']}")
+            
+            # Import required modules
+            from field_definitions import get_name_for_country_gender, get_pronoun, systems_to_countries_map, safety_to_countries_map
+            from utils import resolve_field_reference
+            from itertools import product
+
+            generic_fields = vignette.get('generic_fields', {})
+            ordinal_fields = vignette.get('ordinal_fields', {})
+            horizontal_fields = vignette.get('horizontal_fields', {})
+            derived_fields = vignette.get('derived_fields', {})
+
+            generic_keys = list(generic_fields.keys())
+            generic_lists = [resolve_field_reference(generic_fields[k]) for k in generic_keys]
+
+            ordinal_keys = list(ordinal_fields.keys())
+            ordinal_lists = [list(ordinal_fields[k].keys()) for k in ordinal_keys]
+
+            horizontal_keys = list(horizontal_fields.keys())
+            horizontal_lists = [horizontal_fields[k] for k in horizontal_keys]
+
+            for generic_vals in product(*generic_lists):
+                for ordinal_vals in product(*ordinal_lists) if ordinal_lists else [()]:
+                    for horizontal_vals in product(*horizontal_lists) if horizontal_lists else [()]:
+                        current_permutation += 1
+                        
+                        # Progress indicator
+                        if current_permutation % 5000 == 0:
+                            progress = current_permutation/total_permutations*100
+                            print(f"    Prompt generation: {current_permutation:,}/{total_permutations:,} ({progress:.1f}%)")
+                        
+                        # Build sample values (same logic as before)
+                        sample_values = {}
+                        
+                        for k, v in zip(generic_keys, generic_vals):
+                            sample_values[k] = v
+                        for k, v in zip(ordinal_keys, ordinal_vals):
+                            sample_values[k] = v
+                            sample_values[f"{k}__ordinal"] = ordinal_fields[k][v]
+                        for k, v in zip(horizontal_keys, horizontal_vals):
+                            sample_values[k] = v
+                        
+                        # Handle derived fields
+                        if derived_fields:
+                            for dfield, dspec in derived_fields.items():
+                                if dfield == "name" and "country" in sample_values and "gender" in sample_values:
+                                    sample_values["name"] = get_name_for_country_gender(sample_values["country"], sample_values["gender"])
+                                elif dfield == "country_B":
+                                    mapping = dspec["mapping"]
+                                    source_field = dspec["source_field"]
+                                    if mapping == "systems_to_countries_map":
+                                        val = sample_values.get(source_field)
+                                        if val and val in systems_to_countries_map:
+                                            sample_values["country_B"] = systems_to_countries_map[val][0]
+                                    elif mapping == "safety_to_countries_map":
+                                        val = sample_values.get(source_field)
+                                        if val and val in safety_to_countries_map:
+                                            sample_values["country_B"] = safety_to_countries_map[val][0]
+                        
+                        if 'gender' in sample_values:
+                            sample_values['pronoun'] = get_pronoun(sample_values['gender'])
+                        
+                        # Generate vignette text
+                        try:
+                            vignette_text = vignette["vignette_template"].format(**sample_values)
+                        except KeyError as e:
+                            print(f"Warning: Missing field {e} for vignette template")
+                            continue
+                        
+                        # Create prompt
+                        prompt = self._create_prompt(vignette_text)
+                        
+                        # Store everything
+                        all_prompts.append(prompt)
+                        
+                        # Store data for final record construction - INCLUDE SAMPLE_ID
+                        sample_data = {
+                            'sample_id': current_permutation,  # CRITICAL: This is the key for proper matching
+                            'meta_topic': vignette['meta_topic'],
+                            'topic': vignette['topic'],
+                            'fields': {k: sample_values.get(k) for k in list(generic_keys) + list(ordinal_keys) + list(horizontal_keys) + list(derived_fields.keys()) if k in sample_values},
+                            'vignette_text': vignette_text,
+                        }
+                        
+                        # Add ordinal values
+                        for k in ordinal_keys:
+                            if f"{k}__ordinal" in sample_values:
+                                sample_data[f"fields.{k}__ordinal"] = sample_values[f"{k}__ordinal"]
+                        
+                        all_sample_data.append(sample_data)
+        
+        print(f"✅ Generated {len(all_prompts):,} prompts")
+        
+        # Phase 2: Run batched inference (no attention)
+        print(f"🔄 Phase 2: Running batched inference (batch_size={batch_size})...")
+        
+        try:
+            all_responses = self._run_inference_batch_optimized(
+                all_prompts, batch_size=batch_size
+            )
+        finally:
+            # Always finalize (will skip if no attention collection)
+            self.finalize_attention_collection()
+        
+        # Phase 3: Build final records
+        print("📦 Phase 3: Building final records...")
+        records = []
+        
+        for i, (sample_data, response) in enumerate(zip(all_sample_data, all_responses)):
+            record = sample_data.copy()
+            record['model_response'] = response
+            record['inference_timestamp'] = datetime.now().isoformat()
+            records.append(record)
+        
+        print(f"\n✅ OPTIMIZED Inference completed!")
+        print(f"Total records: {len(records):,}")
+        
+        return records
+
+    def _run_inference_batch_optimized(self, prompts: List[str], batch_size: int = 16) -> List[str]:
+        """
+        Run batched inference without attention collection.
+        Optimized for speed when attention data is not needed.
+        """
+        all_responses = []
+        
+        # Process in smaller batches to manage memory
+        for i in range(0, len(prompts), batch_size):
+            batch_prompts = prompts[i:i+batch_size]
+            
+            try:
+                # Tokenize batch
+                inputs = self.tokenizer(
+                    batch_prompts,
+                    return_tensors="pt",
+                    truncation=True,
+                    max_length=2048,
+                    padding=True
+                ).to(self.device)
+                
+                # Generate responses (no attention collection)
+                with torch.no_grad():
+                    outputs = self.model.generate(
+                        **inputs,
+                        max_new_tokens=1000,
+                        do_sample=True,
+                        temperature=0.5,
+                        top_p=0.6,
+                        repetition_penalty=1.2,
+                        pad_token_id=self.tokenizer.eos_token_id,
+                        use_cache=True,
+                        num_beams=1,
+                        output_attentions=False  # Explicitly disable for speed
+                    )
+                
+                # Process outputs - simple decoding without attention
+                batch_responses = []
+                for j, output_ids in enumerate(outputs):
+                    input_length = inputs['input_ids'][j].shape[0]
+                    response_tokens = output_ids[input_length:]
+                    response = self.tokenizer.decode(response_tokens, skip_special_tokens=True)
+                    batch_responses.append(response.strip())
+                
+                all_responses.extend(batch_responses)
+                
+                # Progress indicator
+                if len(prompts) > batch_size * 2:
+                    processed = min(i + batch_size, len(prompts))
+                    print(f"    Batch progress: {processed}/{len(prompts)} prompts processed")
+                
+                # Clear GPU cache
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                    
+            except Exception as e:
+                print(f"Error during batch inference: {str(e)}")
+                # Fallback to individual processing
+                for j, prompt in enumerate(batch_prompts):
+                    try:
+                        response = self._run_inference(prompt)
+                        all_responses.append(response)
+                    except Exception as individual_error:
+                        print(f"Error in individual fallback: {str(individual_error)}")
+                        all_responses.append(f"ERROR: {str(individual_error)}")
+        
+        return all_responses
 
 
 def load_attention_data(h5_path: str, metadata_path: str) -> Tuple[Dict, h5py.File]:
@@ -831,7 +1046,7 @@ def main():
     """Command line interface for production attention collection."""
     import argparse
     
-    parser = argparse.ArgumentParser(description="Production-scale attention collection")
+    parser = argparse.ArgumentParser(description="Production-scale inference with optional attention collection")
     parser.add_argument("model_subdir", help="Model subdirectory or HF Hub model name")
     parser.add_argument("--vignettes", default="vignettes/complete_vignettes.json",
                        help="Path to vignettes JSON file")
@@ -841,9 +1056,11 @@ def main():
     parser.add_argument("--attention-rate", type=float, default=0.8,
                        help="Fraction of samples to collect attention for (0.0-1.0)")
     parser.add_argument("--no-attention", action="store_true",
-                       help="Disable attention collection")
+                       help="Disable attention collection (faster inference)")
     parser.add_argument("--use-hf-hub", action="store_true",
                        help="Load model from Hugging Face Hub")
+    parser.add_argument("--batch-size", type=int, default=8,
+                       help="Batch size for inference (default: 8)")
     
     args = parser.parse_args()
     
@@ -859,8 +1076,13 @@ def main():
     # Load vignettes
     vignettes = load_vignettes(args.vignettes)
     
-    # Run inference
-    records = pipeline.generate_inference_records_with_attention_optimized(vignettes)
+    # Run inference - choose method based on attention collection
+    if args.no_attention:
+        print("Running optimized inference without attention collection...")
+        records = pipeline.generate_inference_records_optimized(vignettes, batch_size=args.batch_size)
+    else:
+        print("Running inference with attention collection...")
+        records = pipeline.generate_inference_records_with_attention_optimized(vignettes, batch_size=args.batch_size)
     
     # Save inference results
     os.makedirs(os.path.dirname(args.output), exist_ok=True)
@@ -869,6 +1091,8 @@ def main():
     
     print(f"\n🎉 Production run completed!")
     print(f"Inference results: {args.output}")
+    if not args.no_attention:
+        print(f"Attention data: {args.attention_dir}")
 
 
 if __name__ == "__main__":
