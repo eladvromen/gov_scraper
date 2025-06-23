@@ -7,88 +7,95 @@ import seaborn as sns
 from collections import Counter, defaultdict
 import re
 
-def load_processed_inference_results(file_path: str) -> List:
-    """Load processed inference results from a JSON file."""
-    with open(file_path, 'r') as f:
+def load_processed_inference_results(filepath):
+    """Load processed inference results from JSON file"""
+    with open(filepath, 'r', encoding='utf-8') as f:
         data = json.load(f)
-        return data["processed_results"]  # Extract the processed_results array
+    
+    # Extract the processed results array
+    processed_results = data.get('processed_results', [])
+    
+    # Create a dictionary mapping sample_id to the full result
+    results_dict = {}
+    missing_sample_id_count = 0
+    
+    for result in processed_results:
+        sample_id = result.get('sample_id')
+        if sample_id is None:
+            missing_sample_id_count += 1
+            print(f"Warning: Result missing sample_id: {result.get('metadata', {}).get('topic', 'Unknown')}")
+            continue
+        
+        # Store the complete result
+        results_dict[sample_id] = result
+    
+    if missing_sample_id_count > 0:
+        print(f"Warning: {missing_sample_id_count} results missing sample_id")
+    
+    print(f"Loaded {len(results_dict)} results with sample_id from {filepath}")
+    return results_dict
 
-def convert_processed_list_to_dict(data: List) -> Dict:
-    """Convert list of processed cases to dictionary with topic and fields as key."""
-    result = {}
-    for case in data:
-        # Create a unique key from topic and fields in metadata
-        metadata = case['metadata']
-        key = f"{metadata['topic']}_{metadata['fields']['country']}_{metadata['fields']['age']}"
-        result[key] = {
-            'topic': metadata['topic'],
-            'fields': metadata['fields'],
-            'vignette_text': metadata['vignette_text'],
-            'decision': case['decision'],  # Already extracted and cleaned
-            'reasoning': case['reasoning'],
-            'original_response': case['original_response']
+def compare_models(pre_brexit_results, post_brexit_results):
+    """Compare model decisions using sample_id for accurate matching"""
+    
+    # Find common sample_ids between the two datasets
+    pre_brexit_ids = set(pre_brexit_results.keys())
+    post_brexit_ids = set(post_brexit_results.keys())
+    common_ids = pre_brexit_ids.intersection(post_brexit_ids)
+    
+    print(f"Pre-Brexit dataset: {len(pre_brexit_ids)} samples")
+    print(f"Post-Brexit dataset: {len(post_brexit_ids)} samples")
+    print(f"Common sample_ids: {len(common_ids)} samples")
+    
+    if len(common_ids) == 0:
+        print("ERROR: No matching sample_ids found between datasets!")
+        print("Sample pre-Brexit IDs:", list(pre_brexit_ids)[:5])
+        print("Sample post-Brexit IDs:", list(post_brexit_ids)[:5])
+        return None
+    
+    # Compare decisions for matching samples
+    comparison_results = []
+    
+    for sample_id in common_ids:
+        pre_result = pre_brexit_results[sample_id]
+        post_result = post_brexit_results[sample_id]
+        
+        pre_decision = pre_result.get('decision')
+        post_decision = post_result.get('decision')
+        
+        # Extract metadata for analysis
+        metadata = pre_result.get('metadata', {})
+        
+        comparison = {
+            'sample_id': sample_id,
+            'topic': metadata.get('topic'),
+            'meta_topic': metadata.get('meta_topic'),
+            'fields': metadata.get('fields', {}),
+            'vignette_text': metadata.get('vignette_text'),
+            'pre_brexit_decision': pre_decision,
+            'post_brexit_decision': post_decision,
+            'decisions_match': pre_decision == post_decision,
+            'pre_brexit_reasoning': pre_result.get('reasoning'),
+            'post_brexit_reasoning': post_result.get('reasoning'),
+            'pre_brexit_response': pre_result.get('original_response'),
+            'post_brexit_response': post_result.get('original_response')
         }
-    return result
+        
+        comparison_results.append(comparison)
+    
+    # Calculate agreement statistics
+    matching_decisions = sum(1 for c in comparison_results if c['decisions_match'])
+    total_comparisons = len(comparison_results)
+    agreement_rate = matching_decisions / total_comparisons if total_comparisons > 0 else 0
+    
+    print(f"\n=== MODEL COMPARISON RESULTS ===")
+    print(f"Total matching samples: {total_comparisons}")
+    print(f"Decisions match: {matching_decisions} ({agreement_rate:.1%})")
+    print(f"Decisions differ: {total_comparisons - matching_decisions} ({1-agreement_rate:.1%})")
+    
+    return comparison_results
 
-def compare_decisions(pre_brexit_data: List, post_brexit_data: List) -> Tuple[Dict, pd.DataFrame]:
-    """
-    Compare decisions between pre and post Brexit models for matching cases.
-    Returns:
-    - Summary statistics
-    - DataFrame with case-by-case comparison
-    """
-    # Convert lists to dictionaries for easier lookup
-    pre_brexit_dict = convert_processed_list_to_dict(pre_brexit_data)
-    post_brexit_dict = convert_processed_list_to_dict(post_brexit_data)
-    
-    comparison_stats = {
-        'total_cases': 0,
-        'matching_decisions': 0,
-        'mismatching_decisions': 0,
-        'decision_pairs': defaultdict(int),  # (pre_decision, post_decision) -> count
-        'only_in_pre': 0,
-        'only_in_post': 0
-    }
-    
-    # Create comparison DataFrame
-    comparison_data = []
-    
-    # Find common cases
-    all_cases = set(pre_brexit_dict.keys()) | set(post_brexit_dict.keys())
-    
-    for case_id in all_cases:
-        pre_case = pre_brexit_dict.get(case_id)
-        post_case = post_brexit_dict.get(case_id)
-        
-        if pre_case and post_case:
-            comparison_stats['total_cases'] += 1
-            pre_decision = pre_case['decision']
-            post_decision = post_case['decision']
-            
-            comparison_data.append({
-                'case_id': case_id,
-                'topic': pre_case['topic'],
-                'country': pre_case['fields']['country'],
-                'pre_brexit_decision': pre_decision,
-                'post_brexit_decision': post_decision,
-                'match': pre_decision == post_decision,
-                'vignette_text': pre_case['vignette_text']
-            })
-            
-            if pre_decision == post_decision:
-                comparison_stats['matching_decisions'] += 1
-            else:
-                comparison_stats['mismatching_decisions'] += 1
-            
-            comparison_stats['decision_pairs'][(pre_decision, post_decision)] += 1
-        
-        elif pre_case:
-            comparison_stats['only_in_pre'] += 1
-        else:
-            comparison_stats['only_in_post'] += 1
-    
-    comparison_df = pd.DataFrame(comparison_data)
-    return comparison_stats, comparison_df
+
 
 def plot_decision_matrix(comparison_df: pd.DataFrame, output_dir: str):
     """Create a confusion matrix-style plot of decisions between models."""
@@ -237,53 +244,106 @@ def main():
     post_brexit_file = "../inference/results/processed/processed_subset_inference_llama3_8b_post_brexit_2019_2025_instruct_20250623_123821_20250623_124925.json"
     output_dir = "plots"
     
-    # Load data
-    pre_brexit_data = load_processed_inference_results(pre_brexit_file)
-    post_brexit_data = load_processed_inference_results(post_brexit_file)
+    # Load processed data using sample_id-based approach
+    print("Loading processed inference results...")
+    pre_brexit_results = load_processed_inference_results(pre_brexit_file)
+    post_brexit_results = load_processed_inference_results(post_brexit_file)
     
-    # Compare decisions
-    comparison_stats, comparison_df = compare_decisions(pre_brexit_data, post_brexit_data)
+    # Compare models using sample_id for accurate matching
+    comparison_results = compare_models(pre_brexit_results, post_brexit_results)
     
-    # Generate visualizations
-    plot_decision_matrix(comparison_df, output_dir)
-    plot_decision_distributions_by_topic(pre_brexit_data, post_brexit_data, output_dir)
+    if comparison_results is None:
+        print("❌ Cannot proceed without matching samples. Check sample_id generation.")
+        return
     
-    # Print summary statistics
-    print("\nComparison Summary:")
-    print(f"Total matching cases: {comparison_stats['total_cases']}")
-    print(f"Matching decisions: {comparison_stats['matching_decisions']} "
-          f"({comparison_stats['matching_decisions']/comparison_stats['total_cases']*100:.2f}%)")
-    print(f"Mismatching decisions: {comparison_stats['mismatching_decisions']} "
-          f"({comparison_stats['mismatching_decisions']/comparison_stats['total_cases']*100:.2f}%)")
-    print(f"\nCases only in pre-Brexit: {comparison_stats['only_in_pre']}")
-    print(f"Cases only in post-Brexit: {comparison_stats['only_in_post']}")
+    # Create output directory
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
     
-    print("\nDecision Pair Analysis:")
-    for (pre_decision, post_decision), count in sorted(
-        comparison_stats['decision_pairs'].items(), 
-        key=lambda x: x[1], 
-        reverse=True
-    ):
-        if pre_decision != post_decision:
-            print(f"Pre-Brexit: {pre_decision} → Post-Brexit: {post_decision}: {count} cases")
+    # Convert comparison results to DataFrame for analysis
+    comparison_df = pd.DataFrame(comparison_results)
     
-    print("\nMismatched Cases Analysis:")
-    mismatches_df = analyze_mismatches(comparison_df)
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.max_colwidth', None)
-    print("\nMismatches by Topic:")
-    topic_mismatches = mismatches_df.groupby('topic').size()
-    print(topic_mismatches)
+    # Generate plots
+    print(f"\nGenerating plots in {output_dir}...")
     
-    print("\nDetailed Mismatches:")
-    for _, row in mismatches_df.iterrows():
-        print(f"\nTopic: {row['topic']}")
-        print(f"Country: {row['country']}")
-        print(f"Pre-Brexit Decision: {row['pre_brexit_decision']}")
-        print(f"Post-Brexit Decision: {row['post_brexit_decision']}")
-        print("Vignette:")
-        print(row['vignette_text'])
-        print("-" * 80)
+    if not comparison_df.empty:
+        # Decision matrix plot
+        decision_matrix = pd.crosstab(
+            comparison_df['pre_brexit_decision'],
+            comparison_df['post_brexit_decision']
+        )
+        
+        plt.figure(figsize=(10, 8))
+        sns.heatmap(decision_matrix, annot=True, fmt='d', cmap='YlOrRd')
+        plt.title('Decision Comparison Matrix: Pre-Brexit vs Post-Brexit')
+        plt.xlabel('Post-Brexit Decisions')
+        plt.ylabel('Pre-Brexit Decisions')
+        plt.tight_layout()
+        plt.savefig(f'{output_dir}/decision_matrix.png')
+        plt.close()
+        print("✓ Decision matrix plot saved")
+        
+        # Overall decision distribution
+        plt.figure(figsize=(12, 6))
+        
+        # Count decisions for each model
+        pre_decisions = comparison_df['pre_brexit_decision'].value_counts()
+        post_decisions = comparison_df['post_brexit_decision'].value_counts()
+        
+        # Create comparison plot
+        decision_comparison = pd.DataFrame({
+            'Pre-Brexit': pre_decisions,
+            'Post-Brexit': post_decisions
+        }).fillna(0)
+        
+        decision_comparison.plot(kind='bar', ax=plt.gca())
+        plt.title('Overall Decision Distribution Comparison')
+        plt.xlabel('Decision')
+        plt.ylabel('Count')
+        plt.xticks(rotation=45)
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(f'{output_dir}/overall_decision_distribution.png')
+        plt.close()
+        print("✓ Overall decision distribution plot saved")
+    
+    # Generate distribution plots by topic
+    plot_decision_distributions_by_topic(
+        [result for result in pre_brexit_results.values()], 
+        [result for result in post_brexit_results.values()], 
+        output_dir
+    )
+    print("✓ Decision distribution plots saved")
+    
+    # Analyze mismatches
+    mismatches = [r for r in comparison_results if not r['decisions_match']]
+    
+    print(f"\n=== MISMATCH ANALYSIS ===")
+    print(f"Cases with different decisions: {len(mismatches)}")
+    
+    if len(mismatches) > 0:
+        print("\nMismatched cases by topic:")
+        mismatch_topics = {}
+        for mismatch in mismatches:
+            topic = mismatch['topic']
+            mismatch_topics[topic] = mismatch_topics.get(topic, 0) + 1
+        
+        for topic, count in sorted(mismatch_topics.items()):
+            print(f"  {topic}: {count}")
+        
+        # Show a few examples
+        print("\nExample mismatched cases:")
+        for i, mismatch in enumerate(mismatches[:3]):
+            print(f"\nCase {i+1}: {mismatch['topic']}")
+            print(f"  Sample ID: {mismatch['sample_id']}")
+            print(f"  Pre-Brexit: {mismatch['pre_brexit_decision']}")
+            print(f"  Post-Brexit: {mismatch['post_brexit_decision']}")
+            print(f"  Fields: {mismatch['fields']}")
+            print(f"  Vignette: {mismatch['vignette_text'][:100]}...")
+    
+    print(f"\n✅ Analysis complete! Check {output_dir} for visualizations.")
+    print(f"📊 Total samples analyzed: {len(comparison_results)}")
+    
+    # Now that we have sample_id, the matching should be completely reliable!
 
 if __name__ == "__main__":
     main() 

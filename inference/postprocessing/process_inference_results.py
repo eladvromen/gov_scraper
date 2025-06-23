@@ -185,7 +185,14 @@ def analyze_response(response_text: str, case_metadata: Dict[str, Any]) -> Dict[
                          bool(re.search(r'(?:^|\n)\s*(?:Granted|Denied|Allowed|Dismissed)', response_text, re.IGNORECASE))
     text_after_end = len(response_text) > len(cleaned_text) if cleaned_text else False
     
+    # Extract or preserve sample_id for consistent matching
+    sample_id = case_metadata.get('sample_id')
+    if sample_id is None:
+        # Generate sample_id from consistent fields if missing (for older inference files)
+        sample_id = generate_sample_id_from_metadata(case_metadata)
+    
     return {
+        'sample_id': sample_id,  # Preserve or generate sample_id for matching
         'decision': decision,
         'reasoning': reasoning,
         'original_response': response_text,
@@ -203,6 +210,40 @@ def analyze_response(response_text: str, case_metadata: Dict[str, Any]) -> Dict[
             'text_reduction_ratio': len(cleaned_text) / len(response_text) if response_text else 1.0
         }
     }
+
+def generate_sample_id_from_metadata(metadata: Dict[str, Any]) -> str:
+    """
+    Generate a consistent sample_id from metadata for older inference files.
+    This creates a deterministic ID that can be used for matching across datasets.
+    """
+    # Extract key fields for ID generation
+    topic = metadata.get('topic', '')
+    meta_topic = metadata.get('meta_topic', '')
+    fields = metadata.get('fields', {})
+    
+    # Build a deterministic key from consistent fields
+    key_parts = [
+        meta_topic,
+        topic,
+        str(fields.get('country', '')),
+        str(fields.get('age', '')),
+        str(fields.get('gender', '')),
+        str(fields.get('religion', '')),
+        str(fields.get('name', '')),
+    ]
+    
+    # Add any ordinal fields for additional uniqueness
+    for key, value in metadata.items():
+        if key.startswith('fields.') and key.endswith('__ordinal'):
+            key_parts.append(f"{key}:{value}")
+    
+    # Create hash-based ID for deterministic but compact representation
+    import hashlib
+    key_string = '|'.join(key_parts)
+    sample_hash = hashlib.md5(key_string.encode()).hexdigest()[:8]
+    
+    # Return a readable sample_id
+    return f"meta_{sample_hash}"
 
 def calculate_summary_statistics(processed_results: List[Dict[str, Any]]) -> Dict[str, Any]:
     """Calculate summary statistics for the processed results"""

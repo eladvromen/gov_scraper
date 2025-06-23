@@ -3,65 +3,87 @@ import argparse
 from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime
+import hashlib
 
-def load_processed_data(file_path: str) -> List[Dict]:
-    """Load processed inference results."""
+def load_processed_results(file_path):
+    """Load processed inference results and create lookup dictionaries"""
     with open(file_path, 'r') as f:
         data = json.load(f)
-        return data["processed_results"]
+    
+    results = data['processed_results']
+    
+    # Create sample_id-based lookup
+    sample_lookup = {}
+    missing_sample_id_count = 0
+    
+    for result in results:
+        sample_id = result.get('sample_id')
+        if sample_id is None:
+            missing_sample_id_count += 1
+            print(f"Warning: Result missing sample_id: {result.get('metadata', {}).get('topic', 'Unknown')}")
+            continue
+            
+        sample_lookup[sample_id] = result
+    
+    if missing_sample_id_count > 0:
+        print(f"Warning: {missing_sample_id_count} results missing sample_id")
+    
+    print(f"Loaded {len(sample_lookup)} results with sample_id from {file_path}")
+    
+    # Create topic-based lookup for filtering
+    topic_lookup = {}
+    for sample_id, result in sample_lookup.items():
+        topic = result.get('metadata', {}).get('topic', 'Unknown')
+        if topic not in topic_lookup:
+            topic_lookup[topic] = []
+        topic_lookup[topic].append(sample_id)
+    
+    return sample_lookup, topic_lookup
 
-def create_case_lookup(data: List[Dict]) -> Dict[str, Dict]:
-    """Create lookup dictionary with case key -> case data."""
-    lookup = {}
-    for case in data:
-        metadata = case['metadata']
-        key = f"{metadata['topic']}_{metadata['fields']['country']}_{metadata['fields']['age']}"
-        lookup[key] = {
-            'topic': metadata['topic'],
-            'fields': metadata['fields'],
-            'vignette_text': metadata['vignette_text'],
-            'decision': case['decision'],
-            'reasoning': case['reasoning'],
-            'original_response': case['original_response']
+def find_matching_samples(pre_brexit_samples, post_brexit_samples, target_topics=None):
+    """Find samples that exist in both datasets using sample_id"""
+    
+    # Get common sample IDs
+    pre_brexit_ids = set(pre_brexit_samples.keys())
+    post_brexit_ids = set(post_brexit_samples.keys())
+    common_sample_ids = pre_brexit_ids.intersection(post_brexit_ids)
+    
+    print(f"Pre-Brexit samples: {len(pre_brexit_ids)}")
+    print(f"Post-Brexit samples: {len(post_brexit_ids)}")
+    print(f"Common sample IDs: {len(common_sample_ids)}")
+    
+    if len(common_sample_ids) == 0:
+        print("ERROR: No matching sample IDs found!")
+        return []
+    
+    # Filter by topics if specified
+    matching_samples = []
+    
+    for sample_id in common_sample_ids:
+        pre_result = pre_brexit_samples[sample_id]
+        post_result = post_brexit_samples[sample_id]
+        
+        topic = pre_result.get('metadata', {}).get('topic', 'Unknown')
+        
+        # Filter by target topics if specified
+        if target_topics and topic not in target_topics:
+            continue
+        
+        # Create matching sample entry
+        sample_match = {
+            'sample_id': sample_id,
+            'topic': topic,
+            'meta_topic': pre_result.get('metadata', {}).get('meta_topic', 'Unknown'),
+            'fields': pre_result.get('metadata', {}).get('fields', {}),
+            'vignette_text': pre_result.get('metadata', {}).get('vignette_text', ''),
+            'pre_brexit': pre_result,
+            'post_brexit': post_result,
+            'decisions_match': pre_result.get('decision') == post_result.get('decision')
         }
-    return lookup
-
-def filter_by_topics(pre_brexit_data: Dict, post_brexit_data: Dict, topics: List[str]) -> List[Dict]:
-    """Filter cases by topics and combine both model results."""
-    if not topics:
-        # If no topics specified, include all
-        topics = list(set([case['topic'] for case in pre_brexit_data.values()]))
-    
-    combined_cases = []
-    
-    # Get all unique case keys from both datasets
-    all_keys = set(pre_brexit_data.keys()) | set(post_brexit_data.keys())
-    
-    for key in all_keys:
-        pre_case = pre_brexit_data.get(key)
-        post_case = post_brexit_data.get(key)
         
-        # Get topic from whichever case exists
-        case_topic = (pre_case or post_case)['topic']
-        
-        # Filter by topics
-        if case_topic in topics:
-            combined_case = {
-                'case_key': key,
-                'topic': case_topic,
-                'fields': (pre_case or post_case)['fields'],
-                'vignette_text': (pre_case or post_case)['vignette_text'],
-                'pre_brexit': pre_case,
-                'post_brexit': post_case,
-                'has_both': pre_case is not None and post_case is not None,
-                'decision_match': (pre_case and post_case and 
-                                 pre_case['decision'] == post_case['decision'])
-            }
-            combined_cases.append(combined_case)
+        matching_samples.append(sample_match)
     
-    # Sort by topic, then by country, then by age
-    combined_cases.sort(key=lambda x: (x['topic'], x['fields']['country'], x['fields']['age']))
-    return combined_cases
+    return matching_samples
 
 def generate_html_report(cases: List[Dict], topics: List[str], output_file: str):
     """Generate HTML report for manual evaluation."""
@@ -269,9 +291,9 @@ def generate_html_report(cases: List[Dict], topics: List[str], output_file: str)
     
     # Generate content
     content = ""
-    total_with_both = sum(1 for case in cases if case['has_both'])
-    total_matches = sum(1 for case in cases if case['decision_match'])
-    total_mismatches = sum(1 for case in cases if case['has_both'] and not case['decision_match'])
+    total_with_both = len(cases)  # All cases should have both models now
+    total_matches = sum(1 for case in cases if case['decisions_match'])
+    total_mismatches = sum(1 for case in cases if not case['decisions_match'])
     
     for topic in sorted(cases_by_topic.keys()):
         topic_cases = cases_by_topic[topic]
@@ -287,12 +309,10 @@ def generate_html_report(cases: List[Dict], topics: List[str], output_file: str)
             fields = case['fields']
             
             # Determine match status
-            match_status = ""
-            if case['has_both']:
-                if case['decision_match']:
-                    match_status = '<span class="match-indicator match">✓ MATCH</span>'
-                else:
-                    match_status = '<span class="match-indicator mismatch">✗ MISMATCH</span>'
+            if case['decisions_match']:
+                match_status = '<span class="match-indicator match">✓ MATCH</span>'
+            else:
+                match_status = '<span class="match-indicator mismatch">✗ MISMATCH</span>'
             
             content += f"""
             <div class="case-card">
@@ -388,22 +408,18 @@ def main():
     
     # Load data
     print("Loading processed data...")
-    pre_brexit_data = load_processed_data(args.pre_brexit_file)
-    post_brexit_data = load_processed_data(args.post_brexit_file)
+    pre_brexit_samples, pre_brexit_topic_lookup = load_processed_results(args.pre_brexit_file)
+    post_brexit_samples, post_brexit_topic_lookup = load_processed_results(args.post_brexit_file)
     
-    # Create lookups
-    pre_brexit_lookup = create_case_lookup(pre_brexit_data)
-    post_brexit_lookup = create_case_lookup(post_brexit_data)
+    # Find matching samples
+    matching_samples = find_matching_samples(pre_brexit_samples, post_brexit_samples, args.topics or [])
     
-    # Filter by topics
-    filtered_cases = filter_by_topics(pre_brexit_lookup, post_brexit_lookup, args.topics or [])
-    
-    print(f"Found {len(filtered_cases)} cases")
+    print(f"Found {len(matching_samples)} cases")
     if args.topics:
         print(f"Filtered by topics: {', '.join(args.topics)}")
     
     # Generate HTML report
-    generate_html_report(filtered_cases, args.topics or [], args.output)
+    generate_html_report(matching_samples, args.topics or [], args.output)
 
 if __name__ == "__main__":
     main() 
