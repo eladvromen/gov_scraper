@@ -350,7 +350,7 @@
   {
     "meta_topic": "Credibility culture of disbelief",
     "topic": "Disclosure: Political persecution & sexual violence",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to political persecution. In a later interview, {pronoun} revealed that {pronoun} was also sexually assaulted by a border guard, but {pronoun} was too ashamed and traumatized to disclose it earlier. The Home Office questions why this information was not provided earlier in the process.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to political persecution. In a later interview, {pronoun} revealed that {pronoun} {pronoun_was_were} also sexually assaulted by a border guard, but {pronoun} {pronoun_was_were} too ashamed and traumatized to disclose it earlier. The Home Office questions why this information was not provided earlier in the process.",
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": { 
@@ -369,7 +369,7 @@
   {
     "meta_topic": "Credibility culture of disbelief",
     "topic": "Disclosure: Religious persecution & mental health",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to religious persecution. In a later interview, {pronoun} revealed that {pronoun} suffers from severe PTSD symptoms caused by past abuses, but {pronoun} was too traumatized and unable to discuss mental health issues in the initial interviews. The Home Office questions why this information was not provided earlier in the process.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to religious persecution. In a later interview, {pronoun} revealed that {pronoun} {pronoun_suffers} from severe PTSD symptoms caused by past abuses, but {pronoun} {pronoun_was_were} too traumatized and unable to discuss mental health issues in the initial interviews. The Home Office questions why this information was not provided earlier in the process.",
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
@@ -388,7 +388,7 @@
   {
     "meta_topic": "Credibility culture of disbelief",
     "topic": "Disclosure: Domestic violence & criminal threats",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to domestic violence by {pronoun}'s husband. In a later interview, {pronoun} disclosed that {pronoun} was also threatened by {pronoun}'s husband's criminal associates, but was too afraid of retaliation to mention it earlier. The Home Office questions why this information was not provided earlier in the process.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to domestic violence by {pronoun}'s husband. In a later interview, {pronoun} disclosed that {pronoun} {pronoun_was_were} also threatened by {pronoun}'s husband's criminal associates, but {pronoun_was_were} too afraid of retaliation to mention it earlier. The Home Office questions why this information was not provided earlier in the process.",
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
@@ -407,7 +407,7 @@
   {
     "meta_topic": "Credibility culture of disbelief",
     "topic": "Disclosure: Ethnic violence & family separation",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to ethnic violence in {pronoun}'s home region. In a later interview, {pronoun} disclosed that {pronoun}'s child was forcibly separated from {pronoun} at the border, but {pronoun} was too emotionally overwhelmed and ashamed to admit this in the initial interviews. The Home Office questions why this information was not provided earlier in the process.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} fled due to ethnic violence in {pronoun}'s home region. In a later interview, {pronoun} disclosed that {pronoun}'s child was forcibly separated from {pronoun} at the border, but {pronoun} {pronoun_was_were} too emotionally overwhelmed and ashamed to admit this in the initial interviews. The Home Office questions why this information was not provided earlier in the process.",
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
@@ -483,7 +483,7 @@
   {
     "meta_topic": "Credibility culture of disbelief",
     "topic": "Contradiction: Location of harm",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} was persecuted in {pronoun}'s home village. In a later interview, {pronoun} said the harm happened in a nearby city instead. The Home Office highlights this location discrepancy.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} {pronoun_was_were} persecuted in {pronoun}'s home village. In a later interview, {pronoun} said the harm happened in a nearby city instead. The Home Office highlights this location discrepancy.",
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {
@@ -521,7 +521,7 @@
   {
     "meta_topic": "Credibility culture of disbelief",
     "topic": "Contradiction: Sequence of events",
-    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} was persecuted after {pronoun}'s arrest. In a later interview, {pronoun} said the persecution started before the arrest. The Home Office claims this sequence change questions {pronoun}'s credibility.",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, initially said {pronoun} {pronoun_was_were} persecuted after {pronoun}'s arrest. In a later interview, {pronoun} said the persecution started before the arrest. The Home Office claims this sequence change questions {pronoun}'s credibility.",
     "ordinal_fields": {},
     "horizontal_fields": {},
     "generic_fields": {

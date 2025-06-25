@@ -152,16 +152,22 @@ short_countries = [
 country_gender_to_name_map = {
     ("Syria", "Female"): "Aisha",
     ("Syria", "Male"): "Omar",
+    ("Syria", "Non-binary"): "Nour",
     ("Pakistan", "Female"): "Fatima", 
     ("Pakistan", "Male"): "Muhammad",
+    ("Pakistan", "Non-binary"): "Arif",
     ("Nigeria", "Female"): "Adunni",
     ("Nigeria", "Male"): "Kwame",
+    ("Nigeria", "Non-binary"): "Kemi",
     ("China", "Female"): "Ling",
     ("China", "Male"): "Wei",
+    ("China", "Non-binary"): "Kai",
     ("Ukraine", "Female"): "Sofia",
     ("Ukraine", "Male"): "Dimitri",
+    ("Ukraine", "Non-binary"): "Sasha",
     ("Myanmar", "Female"): "Thiri",
-    ("Myanmar", "Male"): "Aung"
+    ("Myanmar", "Male"): "Aung",
+    ("Myanmar", "Non-binary"): "Min"
 }
 
 # Legacy lists - kept for backward compatibility but names now determined by country-gender mapping
@@ -255,6 +261,60 @@ pronoun_map = {
 def get_pronoun(gender):
     """Get the appropriate pronoun for a given gender"""
     return pronoun_map.get(gender, "they")
+
+def get_verb_present_third_person(gender, base_verb):
+    """
+    Get the correct present tense third person form of a verb based on pronoun.
+    
+    Args:
+        gender (str): The gender (Male/Female/Non-binary)
+        base_verb (str): The base verb (e.g., "suffer", "live", "work")
+    
+    Returns:
+        str: Correctly conjugated verb ("suffers" for he/she, "suffer" for they)
+    """
+    pronoun = get_pronoun(gender)
+    if pronoun == "they":
+        return base_verb  # "they suffer", "they live"
+    else:
+        # Add 's' for he/she, with special cases
+        if base_verb.endswith(('s', 'sh', 'ch', 'x', 'z')):
+            return base_verb + "es"  # "wishes" → "wishes"
+        elif base_verb.endswith('y') and base_verb[-2] not in 'aeiou':
+            return base_verb[:-1] + "ies"  # "study" → "studies"  
+        else:
+            return base_verb + "s"  # "suffer" → "suffers"
+
+def get_verb_past_be(gender):
+    """
+    Get the correct past tense form of 'to be' based on pronoun.
+    
+    Args:
+        gender (str): The gender (Male/Female/Non-binary)
+    
+    Returns:
+        str: "were" for they, "was" for he/she
+    """
+    pronoun = get_pronoun(gender)
+    return "were" if pronoun == "they" else "was"
+
+def get_pronoun_possessive(gender):
+    """
+    Get the possessive form of the pronoun.
+    
+    Args:
+        gender (str): The gender (Male/Female/Non-binary)
+    
+    Returns:
+        str: "their" for they, "his" for he, "her" for she
+    """
+    pronoun = get_pronoun(gender)
+    possessive_map = {
+        "he": "his",
+        "she": "her", 
+        "they": "their"
+    }
+    return possessive_map.get(pronoun, "their")
 
 def get_countries_by_systems(systems_description):
     """

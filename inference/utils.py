@@ -13,6 +13,7 @@ vignettes_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../vig
 sys.path.insert(0, vignettes_path)
 
 from field_definitions import *
+from field_definitions import get_verb_present_third_person, get_verb_past_be, get_pronoun_possessive
 
 def load_vignettes(json_path):
     """Load vignettes from JSON file."""
@@ -86,9 +87,16 @@ def generate_analytics_records(vignettes):
                                     val = sample_values.get(source_field)
                                     if val and val in safety_to_countries_map:
                                         sample_values["country_B"] = safety_to_countries_map[val][0]
-                    # Pronoun
+                    # Pronoun and grammar helpers
                     if 'gender' in sample_values:
-                        sample_values['pronoun'] = get_pronoun(sample_values['gender'])
+                        gender = sample_values['gender']
+                        sample_values['pronoun'] = get_pronoun(gender)
+                        sample_values['pronoun_was_were'] = get_verb_past_be(gender)
+                        sample_values['pronoun_possessive'] = get_pronoun_possessive(gender)
+                        # Common verb forms
+                        sample_values['pronoun_suffers'] = get_verb_present_third_person(gender, 'suffer')
+                        sample_values['pronoun_lives'] = get_verb_present_third_person(gender, 'live')
+                        sample_values['pronoun_works'] = get_verb_present_third_person(gender, 'work')
                     # Fill template
                     vignette_text = vignette["vignette_template"].format(**sample_values)
                     # Build analytics record

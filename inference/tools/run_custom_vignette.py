@@ -9,8 +9,9 @@ import sys
 import os
 from datetime import datetime
 
-# Add inference directory to path
-sys.path.insert(0, os.path.dirname(__file__))
+# Add inference directory to path  
+inference_dir = os.path.dirname(os.path.dirname(__file__))
+sys.path.insert(0, inference_dir)
 
 from inference_pipeline import InferencePipeline
 

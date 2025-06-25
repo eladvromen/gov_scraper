@@ -3,7 +3,10 @@
 Post-processing script for inference results from UK immigration LLM study.
 
 This script processes raw model responses to extract clean decisions and reasoning.
-Focuses on the primary decision and legal reasoning for research analysis.
+Enhanced decision categorization supports:
+- Granted: Full approval
+- Denied: Full denial  
+- Inconclusive: Mixed decisions (PARTIALLY GRANTED) or postponements (Adjourned for Further Hearing)
 
 Usage:
     python process_inference_results.py <input_file_path>
@@ -33,19 +36,24 @@ DECISION_VARIANTS = {
     'allow': 'Granted',
     'deny': 'Denied',
     'grant': 'Granted',  # "grant" = Granted
-    'asylum': 'Granted',  # "grant asylum" = Granted
+    'asylum': 'Granted',  # "grant asylum" = Granted, "I grant him asylum" = Granted
+    # New inconclusive decision categories
+    'partially granted': 'Inconclusive',
+    'partial': 'Inconclusive',
+    'adjourned for further hearing': 'Inconclusive',
+    'adjourned': 'Inconclusive',
 }
 
 # Patterns specifically for the format: "Decision: DENIED/denied *END*"
 DECISION_PATTERNS = [
     # Primary pattern: Decision/Decided: [specific_word] followed by *END*
-    r'(?:Decision|DECISION|Decided):\s*(?P<decision>denied|granted|dismissed|allowed|refused|approved)\s*\*END\*',
+    r'(?:Decision|DECISION|Decided):\s*(?P<decision>denied|granted|dismissed|allowed|refused|approved|partially\s+granted|adjourned\s+for\s+further\s+hearing|adjourned)\s*\*END\*',
     # Fallback: Decision/Decided: [specific_word] without *END* requirement
-    r'(?:Decision|DECISION|Decided):\s*(?P<decision>denied|granted|dismissed|allowed|refused|approved)',
+    r'(?:Decision|DECISION|Decided):\s*(?P<decision>denied|granted|dismissed|allowed|refused|approved|partially\s+granted|adjourned\s+for\s+further\s+hearing|adjourned)',
     # Decision with compound phrases: "Decision: ASYLUM GRANTED", "Decision: Appeal denied"
-    r'(?:Decision|DECISION|Decided):\s*(?:ASYLUM\s+|Appeal\s+)?(?P<decision_compound>granted|denied|dismissed|allowed|refused|approved)',
-    # Alternative format: *GRANTED* or *DENIED*
-    r'\*(?P<decision2>granted|denied|dismissed|allowed|refused|approved)\*',
+    r'(?:Decision|DECISION|Decided):\s*(?:ASYLUM\s+|Appeal\s+)?(?P<decision_compound>granted|denied|dismissed|allowed|refused|approved|partially\s+granted)',
+    # Alternative format: *GRANTED* or *DENIED* or *PARTIALLY GRANTED*
+    r'\*(?P<decision2>granted|denied|dismissed|allowed|refused|approved|partially\s+granted|adjourned)\*',
     # Appeal/claim/application format: "The appeal/claim/application is [accordingly] granted/denied"
     r'(?:appeal|claim|application)\s+is\s+(?:accordingly\s+)?(?P<decision3>granted|denied|dismissed|allowed|refused|approved)',
     # Application for asylum format: "application for asylum is granted/denied"
@@ -70,6 +78,18 @@ DECISION_PATTERNS = [
     r'(?P<decision7b>grant|deny)\s+(?:their|his|her)\s+asylum\s+claim',
     # Standalone decisions (more restrictive context)
     r'(?:^|\n)\s*(?P<decision8>Granted|Denied|Allowed|Dismissed|Refused|Approved)\s*(?:\n|\*END\*|$)',
+    # Claim/application granted/denied: "her claim for asylum is granted", "application is denied"
+    r'(?:her|his|their|the)\s+(?:claim|application)\s+(?:for\s+asylum\s+)?is\s+(?:accordingly\s+)?(?P<decision9>granted|denied)',
+    # Protection granted: "her claim for international protection is granted"
+    r'(?:claim|application)\s+for\s+international\s+protection\s+is\s+(?P<decision10>granted|denied)',
+    # Specific UK asylum patterns: "Her claim for asylum in the UK is granted"
+    r'(?:Her|His|Their)\s+claim\s+for\s+asylum\s+in\s+the\s+UK\s+is\s+(?P<decision11>granted|denied)',
+    # Direct grant by judge: "I grant him asylum", "I grant her asylum"
+    r'I\s+grant\s+(?:him|her|them)\s+(?P<decision12>asylum)',
+    # Credibility denial: "His application lacks credibility and is denied"
+    r'(?:His|Her|Their)\s+application\s+lacks\s+credibility\s+and\s+is\s+(?P<decision13>denied|refused)',
+    # Appeal granted: "This appeal is therefore granted on asylum grounds"
+    r'This\s+appeal\s+is\s+therefore\s+(?P<decision14>granted|denied)\s+on\s+asylum\s+grounds',
 ]
 
 def normalize_decision(word: str) -> Optional[str]:
@@ -93,7 +113,7 @@ def extract_primary_decision(response_text: str) -> Optional[str]:
             try:
                 # Try all decision groups
                 decision_word = None
-                for group_name in ['decision', 'decision_compound', 'decision2', 'decision3', 'decision3b', 'decision3c', 'decision4', 'decision5', 'decision5b', 'decision5c', 'decision5d', 'decision6', 'decision7', 'decision7b', 'decision8']:
+                for group_name in ['decision', 'decision_compound', 'decision2', 'decision3', 'decision3b', 'decision3c', 'decision4', 'decision5', 'decision5b', 'decision5c', 'decision5d', 'decision6', 'decision7', 'decision7b', 'decision8', 'decision9', 'decision10', 'decision11', 'decision12', 'decision13', 'decision14']:
                     if group_name in match.groupdict() and match.group(group_name):
                         decision_word = match.group(group_name)
                         break
@@ -188,8 +208,8 @@ def analyze_response(response_text: str, case_metadata: Dict[str, Any]) -> Dict[
     # Quality metrics specific to this format
     has_end_marker = '*END*' in response_text
     has_decision_format = bool(re.search(r'(?:Decision|DECISION|Decided):\s*\w+', response_text, re.IGNORECASE)) or \
-                         bool(re.search(r'(?:Decision|DECISION|Decided):\s*(?:ASYLUM\s+|Appeal\s+)?(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
-                         bool(re.search(r'\*(?:granted|denied|dismissed|allowed|refused|approved)\*', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:Decision|DECISION|Decided):\s*(?:ASYLUM\s+|Appeal\s+)?(?:granted|denied|dismissed|allowed|refused|approved|partially\s+granted)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'\*(?:granted|denied|dismissed|allowed|refused|approved|partially\s+granted|adjourned)\*', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'(?:appeal|claim|application)\s+is\s+(?:accordingly\s+)?(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'application\s+for\s+asylum\s+(?:in\s+the\s+UK\s+)?is\s+(?:therefore\s+)?(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'claim\s+for\s+asylum\s+is\s+(?:accordingly\s+)?(?:granted|denied)', response_text, re.IGNORECASE)) or \
@@ -201,7 +221,13 @@ def analyze_response(response_text: str, case_metadata: Dict[str, Any]) -> Dict[
                          bool(re.search(r'Appellant\s+is\s+(?:granted|denied)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'(?:grant|deny)\s+asylum', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'(?:grant|deny)\s+(?:their|his|her)\s+asylum\s+claim', response_text, re.IGNORECASE)) or \
-                         bool(re.search(r'(?:^|\n)\s*(?:Granted|Denied|Allowed|Dismissed)', response_text, re.IGNORECASE))
+                         bool(re.search(r'(?:^|\n)\s*(?:Granted|Denied|Allowed|Dismissed)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:her|his|their|the)\s+(?:claim|application)\s+(?:for\s+asylum\s+)?is\s+(?:accordingly\s+)?(?:granted|denied)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:claim|application)\s+for\s+international\s+protection\s+is\s+(?:granted|denied)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:Her|His|Their)\s+claim\s+for\s+asylum\s+in\s+the\s+UK\s+is\s+(?:granted|denied)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'I\s+grant\s+(?:him|her|them)\s+asylum', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'(?:His|Her|Their)\s+application\s+lacks\s+credibility\s+and\s+is\s+(?:denied|refused)', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'This\s+appeal\s+is\s+therefore\s+(?:granted|denied)\s+on\s+asylum\s+grounds', response_text, re.IGNORECASE))
     text_after_end = len(response_text) > len(cleaned_text) if cleaned_text else False
     
     # Extract or preserve sample_id for consistent matching
@@ -265,10 +291,11 @@ def generate_sample_id_from_metadata(metadata: Dict[str, Any]) -> str:
     return f"meta_{sample_hash}"
 
 def calculate_summary_statistics(processed_results: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """Calculate summary statistics for the processed results"""
+    """Calculate summary statistics for the processed results with enhanced decision categorization"""
     total = len(processed_results)
     granted = sum(1 for r in processed_results if r['decision'] == 'Granted')
     denied = sum(1 for r in processed_results if r['decision'] == 'Denied')
+    inconclusive = sum(1 for r in processed_results if r['decision'] == 'Inconclusive')
     no_decision = sum(1 for r in processed_results if r['decision'] is None)
     
     has_reasoning = sum(1 for r in processed_results if r['quality_metrics']['has_reasoning'])
@@ -283,9 +310,12 @@ def calculate_summary_statistics(processed_results: List[Dict[str, Any]]) -> Dic
         'decision_stats': {
             'granted': granted,
             'denied': denied,
+            'inconclusive': inconclusive,
             'no_decision': no_decision,
             'granted_rate': granted / total if total > 0 else 0,
             'denied_rate': denied / total if total > 0 else 0,
+            'inconclusive_rate': inconclusive / total if total > 0 else 0,
+            'decided_rate': (granted + denied + inconclusive) / total if total > 0 else 0,
         },
         'quality_metrics': {
             'avg_response_length': avg_length,
@@ -343,28 +373,82 @@ def main():
     # Calculate summary statistics
     summary_stats = calculate_summary_statistics(processed_results)
     
-    # Prepare output
-    output_data = {
-        'metadata': {
-            'input_file': str(input_path),
-            'processing_timestamp': datetime.now().isoformat(),
-            'total_items_processed': len(processed_results)
-        },
-        'summary_statistics': summary_stats,
-        'processed_results': processed_results
+    # Split results into successful and failed decision extractions
+    successful_extractions = [r for r in processed_results if r['decision'] is not None]
+    failed_extractions = [r for r in processed_results if r['decision'] is None]
+    
+    # Create output directory structure
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_dir_name = f"processed_{input_path.stem}_{timestamp}"
+    run_output_dir = input_path.parent / 'processed' / run_dir_name
+    run_output_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Prepare metadata for both files
+    base_metadata = {
+        'input_file': str(input_path),
+        'processing_timestamp': datetime.now().isoformat(),
+        'total_items_processed': len(processed_results),
+        'run_directory': str(run_output_dir)
     }
     
-    # Save results
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_filename = f"processed_{input_path.stem}_{timestamp}.json"
-    output_path = input_path.parent / 'processed' / output_filename
-    output_path.parent.mkdir(exist_ok=True)
+    # Save successful extractions
+    successful_data = {
+        'metadata': {
+            **base_metadata,
+            'file_type': 'successful_extractions',
+            'count': len(successful_extractions)
+        },
+        'summary_statistics': summary_stats,
+        'processed_results': successful_extractions
+    }
     
-    with open(output_path, 'w') as f:
-        json.dump(output_data, f, indent=2)
+    successful_path = run_output_dir / 'successful_extractions.json'
+    with open(successful_path, 'w') as f:
+        json.dump(successful_data, f, indent=2)
+    
+    # Save failed extractions for reiteration
+    failed_data = {
+        'metadata': {
+            **base_metadata,
+            'file_type': 'failed_extractions',
+            'count': len(failed_extractions),
+            'note': 'Cases where decision extraction failed - suitable for reiteration'
+        },
+        'processed_results': failed_extractions
+    }
+    
+    failed_path = run_output_dir / 'failed_extractions.json'
+    with open(failed_path, 'w') as f:
+        json.dump(failed_data, f, indent=2)
+    
+    # Save overall summary
+    summary_data = {
+        'metadata': base_metadata,
+        'summary_statistics': summary_stats,
+        'file_breakdown': {
+            'successful_extractions': {
+                'file': 'successful_extractions.json',
+                'count': len(successful_extractions),
+                'description': 'Cases with successfully extracted decisions - ready for analysis'
+            },
+            'failed_extractions': {
+                'file': 'failed_extractions.json', 
+                'count': len(failed_extractions),
+                'description': 'Cases where decision extraction failed - suitable for reiteration'
+            }
+        }
+    }
+    
+    summary_path = run_output_dir / 'processing_summary.json'
+    with open(summary_path, 'w') as f:
+        json.dump(summary_data, f, indent=2)
     
     print("Processing complete!")
-    print(f"Results saved to: {output_path}")
+    print(f"Results saved to run directory: {run_output_dir}")
+    print(f"Files created:")
+    print(f"  - successful_extractions.json: {len(successful_extractions)} cases ready for analysis")
+    print(f"  - failed_extractions.json: {len(failed_extractions)} cases for reiteration")
+    print(f"  - processing_summary.json: Overall run summary")
     print(f"Total items processed: {len(processed_results)}")
     print("Summary statistics:")
     print(f"  - Granted: {summary_stats['decision_stats']['granted']} ({summary_stats['decision_stats']['granted_rate']:.1%})")

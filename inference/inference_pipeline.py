@@ -169,9 +169,16 @@ class InferencePipeline:
                                         if val and val in safety_to_countries_map:
                                             sample_values["country_B"] = safety_to_countries_map[val][0]
                         
-                        # Add pronoun
+                        # Add pronoun and grammar helpers
                         if 'gender' in sample_values:
-                            sample_values['pronoun'] = get_pronoun(sample_values['gender'])
+                            gender = sample_values['gender']
+                            sample_values['pronoun'] = get_pronoun(gender)
+                            sample_values['pronoun_was_were'] = get_verb_past_be(gender)
+                            sample_values['pronoun_possessive'] = get_pronoun_possessive(gender)
+                            # Common verb forms
+                            sample_values['pronoun_suffers'] = get_verb_present_third_person(gender, 'suffer')
+                            sample_values['pronoun_lives'] = get_verb_present_third_person(gender, 'live')
+                            sample_values['pronoun_works'] = get_verb_present_third_person(gender, 'work')
                         
                         # Generate vignette text
                         try:

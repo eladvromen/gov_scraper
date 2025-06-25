@@ -10,7 +10,8 @@ import os
 from datetime import datetime
 
 # Add inference directory to path
-sys.path.insert(0, os.path.dirname(__file__))
+inference_dir = os.path.dirname(os.path.dirname(__file__))
+sys.path.insert(0, inference_dir)
 
 from inference_pipeline import InferencePipeline
 from utils import load_vignettes
@@ -27,7 +28,7 @@ def main():
     args = parser.parse_args()
     
     # Load vignettes
-    vignettes = load_vignettes("vignettes/complete_vignettes.json")
+    vignettes = load_vignettes("../vignettes/complete_vignettes.json")
     
     # List vignettes if requested
     if args.list_vignettes:
