@@ -12,8 +12,16 @@ def load_processed_inference_results(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         data = json.load(f)
     
-    # Extract the processed results array
-    processed_results = data.get('processed_results', [])
+    # Handle both old format (with 'processed_results' key) and new format (direct array)
+    if isinstance(data, dict) and 'processed_results' in data:
+        # Old format
+        processed_results = data.get('processed_results', [])
+    elif isinstance(data, list):
+        # New format - direct array
+        processed_results = data
+    else:
+        print(f"Error: Unexpected file format in {filepath}")
+        return {}
     
     # Create a dictionary mapping sample_id to the full result
     results_dict = {}
@@ -239,9 +247,9 @@ def analyze_mismatches(comparison_df: pd.DataFrame) -> pd.DataFrame:
     return comparison_df[~comparison_df['match']].sort_values('topic')
 
 def main():
-    # File paths - updated to use processed files
-    pre_brexit_file = "../inference/results/processed/processed_subset_inference_llama3_8b_pre_brexit_2013_2016_instruct_20250623_120225_20250623_122325.json"
-    post_brexit_file = "../inference/results/processed/processed_subset_inference_llama3_8b_post_brexit_2019_2025_instruct_20250623_123821_20250623_124925.json"
+    # File paths - updated to use new enhanced postprocessing results
+    pre_brexit_file = "../inference/results/processed/processed_production_subset_inference_llama3_8b_pre_brexit_2013_2016_instruct_20250623_194615_20250625_133855/successful_extractions.json"
+    post_brexit_file = "../inference/results/processed/processed_production_subset_inference_llama3_8b_post_brexit_2019_2025_instruct_20250623_203131_20250625_134035/successful_extractions.json"
     output_dir = "plots"
     
     # Load processed data using sample_id-based approach
