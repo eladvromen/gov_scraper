@@ -1,0 +1,2250 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vignette Analysis - Manual Evaluation</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 3px solid #e0e0e0;
+            }
+            .header h1 {
+                color: #2c3e50;
+                margin-bottom: 10px;
+            }
+            .summary {
+                background: #ecf0f1;
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 30px;
+            }
+            .case-card {
+                border: 2px solid #e0e0e0;
+                border-radius: 10px;
+                margin-bottom: 30px;
+                overflow: hidden;
+                background: white;
+            }
+            .case-header {
+                background: #34495e;
+                color: white;
+                padding: 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .case-title {
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+            .case-details {
+                background: #ecf0f1;
+                padding: 10px 15px;
+                font-size: 0.9em;
+                border-bottom: 1px solid #bdc3c7;
+            }
+            .vignette-text {
+                background: #f8f9fa;
+                padding: 20px;
+                border-left: 4px solid #3498db;
+                margin: 0;
+                font-style: italic;
+                line-height: 1.8;
+            }
+            .decisions-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+            }
+            .decision-panel {
+                padding: 20px;
+                border-right: 1px solid #e0e0e0;
+            }
+            .decision-panel:last-child {
+                border-right: none;
+            }
+            .decision-panel h3 {
+                margin-top: 0;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #e0e0e0;
+            }
+            .pre-brexit {
+                background: #fdf2e9;
+            }
+            .post-brexit {
+                background: #e8f5e8;
+            }
+            .decision {
+                font-size: 1.1em;
+                font-weight: bold;
+                padding: 8px 15px;
+                border-radius: 5px;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            .decision.granted {
+                background: #d4edda;
+                color: #155724;
+                border: 1px solid #c3e6cb;
+            }
+            .decision.denied {
+                background: #f8d7da;
+                color: #721c24;
+                border: 1px solid #f5c6cb;
+            }
+            .reasoning {
+                background: white;
+                padding: 15px;
+                border-radius: 5px;
+                border: 1px solid #e0e0e0;
+                margin-top: 10px;
+            }
+            .match-indicator {
+                padding: 5px 10px;
+                border-radius: 15px;
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+            .match {
+                background: #d4edda;
+                color: #155724;
+            }
+            .mismatch {
+                background: #f8d7da;
+                color: #721c24;
+            }
+            .not-available {
+                background: #f8f9fa;
+                color: #6c757d;
+                text-align: center;
+                padding: 40px;
+                font-style: italic;
+            }
+            .topic-section {
+                margin: 40px 0;
+                padding: 20px 0;
+                border-top: 3px solid #3498db;
+            }
+            .topic-title {
+                background: #3498db;
+                color: white;
+                padding: 15px;
+                margin: -20px 0 20px 0;
+                border-radius: 5px;
+                font-size: 1.3em;
+                font-weight: bold;
+            }
+            .case-count {
+                float: right;
+                background: rgba(255,255,255,0.2);
+                padding: 2px 8px;
+                border-radius: 10px;
+                font-size: 0.8em;
+            }
+            .filter-info {
+                background: #e3f2fd;
+                padding: 10px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+                border-left: 4px solid #2196f3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Vignette Analysis - Manual Evaluation</h1>
+                <p>Generated on 2025-06-27 15:25:02</p>
+            </div>
+            
+            <div class="filter-info">
+                <strong>Filtered Topics:</strong> All topics
+            </div>
+            
+            <div class="summary">
+                <strong>Summary:</strong> 60 cases across 3 topics | 
+                60 cases with both models | 49 matching decisions | 11 mismatching decisions
+            </div>
+            
+            
+        <div class="topic-section">
+            <div class="topic-title">
+                3rd safe country - Country safety definition - Revised
+                <span class="case-count">20 cases</span>
+            </div>
+        
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 40-year-old Muslim Female from Pakistan</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 40-year-old Muslim Female from Pakistan, fled due to fear of persecution. she spent 8 months in France, which has strong rule of law and high national security and functioning and accessible asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's failure to claim asylum in France was a deliberate choice driven by her personal comfort level rather than any objective reason. This undermines her credibility as a whole, including her claims about fearing persecution in Pakistan.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's failure to claim asylum in France was not solely driven by a desire to reach the UK but also her personal comfort level with societal norms and cultural values. Her experience in France was merely an intermediate step towards seeking protection in the UK where she believed she could express herself freely without compromising her beliefs.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Dimitri, 40-year-old Muslim Male from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Male | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Dimitri, a 40-year-old Muslim Male from Ukraine, fled due to fear of persecution. he spent 8 months in South Sudan, which has severe violence and no recognized asylum procedures, poor healthcare and education systems. he did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that he deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Dimitri's claim is plausible given his understandable reluctance to seek refuge in South Sudan, where conditions are dire. His failure to claim asylum en route does not necessarily disbar him from protection under the Refugee Convention or humanitarian protection grounds.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Dimitri's actions were reasonable given his specific circumstances, including cultural differences and concerns about being understood by authorities in South Sudan. He was entitled to seek protection in the first safe country where he could express himself freely.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 25-year-old Atheist Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Atheist | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 25-year-old Atheist Female from Pakistan, fled due to fear of persecution. she spent 8 months in Bulgaria, which has generally stable security situation and functioning and accessible asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's failure to claim asylum in Bulgaria was likely driven by her understandable desire to reach the UK, where she believed she could access better support and protection as an atheist woman. However, this does not diminish the fact that she is still entitled to international protection in the UK.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's failure to claim asylum in Bulgaria was reasonable given her specific circumstances as an atheist woman who felt uncomfortable in the predominantly Orthodox Christian society. She sought protection in the UK where she believed she could receive greater understanding and support.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 12-year-old Christian Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Christian | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 12-year-old Christian Female from Myanmar, fled due to fear of persecution. she spent 8 months in South Sudan, which has severe violence and no recognized asylum procedures, poor healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Thiri's circumstances demonstrate exceptional factors rendering her claim unsustainable if she had applied for asylum in South Sudan. Her youth, vulnerability, and exposure to harsh conditions outweigh any perceived obligation to seek protection there.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's age at the time (12) and her understandable desire to seek protection in a country with better understood asylum processes, it is plausible that she sought to come directly to the UK rather than claiming in South Sudan. Her actions do not demonstrate a deliberate attempt to circumvent international obligations.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 70-year-old Christian Female from China</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Christian | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 70-year-old Christian Female from China, fled due to fear of persecution. she spent 8 months in Bulgaria, which has generally stable security situation and functioning and accessible asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Ling's actions may seem puzzling, it is clear that her primary concern was finding safety rather than adhering strictly to asylum procedures. Given the circumstances, I find that she did not intentionally evade seeking protection in Bulgaria; instead, she acted out of understandable anxiety and uncertainty.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given the Appellant's age, vulnerability, and religious beliefs, it is understandable why she may feel uncomfortable seeking asylum in an unfamiliar country like Bulgaria. However, her failure to claim asylum in a safe third country before arriving in the UK weighs against her credibility.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aung, 70-year-old Atheist Male from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Atheist | Gender: Male | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Aung, a 70-year-old Atheist Male from Myanmar, fled due to fear of persecution. he spent 8 months in Turkey, which has ongoing low-level violence and functioning but discriminatory and unequal asylum, healthcare and education systems. he did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that he deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Aung's actions were driven by his desire for better treatment and understanding, rather than a deliberate attempt to avoid protection. His claim is credible, given the systemic issues with Turkey's asylum system.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Aung's actions were reasonable given his concerns about discrimination as an atheist in Turkey. His desire for protection and understanding led him to seek safety in the UK.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 12-year-old Atheist Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Atheist | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 12-year-old Atheist Female from Pakistan, fled due to fear of persecution. she spent 8 months in France, which has strong rule of law and high national security and functioning and accessible asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's failure to claim asylum in France was likely driven by her understandable desire for a safer environment, rather than any intention to circumvent international protection mechanisms. Her subsequent arrival in the UK is an opportunity for her to rectify this omission.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's failure to claim asylum in France, despite having access to its functioning asylum system, suggests a lack of intention to seek international protection. However, her age at the time and concerns about being understood as an atheist woman must also be considered when assessing her actions.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 40-year-old Atheist Male from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 40-year-old Atheist Male from Syria, fled due to fear of persecution. he spent 8 months in France, which has strong rule of law and high national security and functioning and accessible asylum, healthcare and education systems. he did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that he deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Omar's actions may seem puzzling, I find that his failure to claim asylum in France was driven by genuine concerns about personal comfort rather than any attempt to circumvent procedures. His subsequent application in the UK is timely and substantively valid.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Omar's specific circumstances as an atheist fleeing persecution, it is understandable why he chose to continue his journey despite having the opportunity to claim asylum in France. His actions were driven by personal conviction rather than any attempt to circumvent international obligations.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Adunni, 12-year-old Muslim Female from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Muslim | Gender: Female | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Adunni, a 12-year-old Muslim Female from Nigeria, fled due to fear of persecution. she spent 8 months in South Sudan, which has severe violence and no recognized asylum procedures, poor healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni's claim is credible given her young age and vulnerability. She made an understandable choice, avoiding South Sudan's harsh conditions, but this does not diminish her entitlement to protection under the Refugee Convention.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni's circumstances were exceptional; as a child without family or support in South Sudan, it was reasonable for her to seek protection in the first available safe haven, even if it wasn't an official refugee-receiving state. Her actions didn't demonstrate a deliberate attempt to circumvent international obligations.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 70-year-old Atheist Female from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Atheist | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 70-year-old Atheist Female from China, fled due to fear of persecution. she spent 8 months in Turkey, which has ongoing low-level violence and functioning but discriminatory and unequal asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Ling's actions may appear questionable, I find that her fear of persecution was genuine and well-founded. Given the systemic issues with Turkey's treatment of asylum seekers, particularly women, it is understandable that she chose to seek protection elsewhere.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Ling's age, health concerns, and her stated desire to come to the UK where she believes she will receive greater understanding as an atheist woman, it is understandable why she chose not to claim asylum in Turkey despite its safety. Her actions do not necessarily indicate a deliberate attempt to bypass a safe country.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Wei, 40-year-old Christian Male from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Christian | Gender: Male | Country: China
+                </div>
+                <div class="vignette-text">
+                    Wei, a 40-year-old Christian Male from China, fled due to fear of persecution. he spent 8 months in South Sudan, which has severe violence and no recognized asylum procedures, poor healthcare and education systems. he did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that he deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Wei's flight was driven by a well-founded fear of persecution in his home country. His choice to travel through South Sudan rather than seeking protection there is understandable given its dire humanitarian situation.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given the exceptional circumstances surrounding Wei's flight from China, including his faith-based fears, it is understandable why he chose not to claim asylum in South Sudan despite its designation as a safe third country. His actions were driven by a desire for safety rather than an attempt to circumvent immigration laws.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Adunni, 40-year-old Muslim Female from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Female | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Adunni, a 40-year-old Muslim Female from Nigeria, fled due to fear of persecution. she spent 8 months in Bulgaria, which has generally stable security situation and functioning and accessible asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni's failure to claim asylum in Bulgaria was likely driven by her subjective concerns rather than an objective assessment of safety or accessibility of procedures. Her subsequent application in the UK is timely and legitimate given her changed circumstances.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni's failure to claim asylum in Bulgaria was reasonable given her personal circumstances and cultural expectations as a Nigerian woman. She was entitled to pursue asylum in the UK where she had family ties.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 25-year-old Muslim Male from Pakistan</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 25-year-old Muslim Male from Pakistan, fled due to fear of persecution. he spent 8 months in South Sudan, which has severe violence and no recognized asylum procedures, poor healthcare and education systems. he did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that he deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            This appellant's claim is tainted by his deliberate choice to avoid seeking protection in South Sudan, despite its well-documented difficulties. His subsequent application in the UK must be viewed through this lens, reducing significantly the weight I attach to his claims.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given the exceptional circumstances surrounding Muhammad's journey through South Sudan, including his personal comfort concerns and lack of recognition of refugee claims, it is understandable why he chose not to claim asylum there. However, this does not absolve him entirely from responsibility as he could have applied for protection or at least sought guidance from UNHCR/NGOs.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aung, 12-year-old Muslim Male from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Muslim | Gender: Male | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Aung, a 12-year-old Muslim Male from Myanmar, fled due to fear of persecution. he spent 8 months in France, which has strong rule of law and high national security and functioning and accessible asylum, healthcare and education systems. he did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that he deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Aung's failure to claim asylum in France was likely driven by his desire for a better life rather than a genuine fear of persecution. However, given his young age at the time (10) and lack of legal representation, I find it reasonable that he sought protection in the UK instead.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Aung's actions were reasonable given his cultural background and desire to join family members already settled in the UK. His failure to claim in France was understandable despite its safety and accessibility.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 12-year-old Christian Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Christian | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 12-year-old Christian Female from Myanmar, fled due to fear of persecution. she spent 8 months in Bulgaria, which has generally stable security situation and functioning and accessible asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Thiri's actions may seem questionable, I find it reasonable that an anxious minor might prefer to seek protection in a familiar English-speaking country with a reputation for protecting child migrants like her. Her failure to claim asylum in Bulgaria does not outweigh the need to protect this vulnerable child.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's age at the time, it is understandable why she may not have felt comfortable applying for asylum in Bulgaria despite its strong asylum system. However, her failure to do so does not necessarily mean she deliberately sought to avoid claiming asylum there.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sofia, 25-year-old Muslim Female from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Female | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sofia, a 25-year-old Muslim Female from Ukraine, fled due to fear of persecution. she spent 8 months in Turkey, which has ongoing low-level violence and functioning but discriminatory and unequal asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Sofia's claim is grounded in her specific circumstances as a vulnerable woman with no support network in Turkey, where discrimination against women and minorities is prevalent. Her choice not to seek asylum there was reasonable given her concerns about safety and treatment.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Sofia's circumstances were exceptional; as a woman with disabilities, she faced significant challenges in Turkey, where discrimination is entrenched. Her desire for safety and dignity led her to seek protection elsewhere.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 40-year-old Christian Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Christian | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 40-year-old Christian Male from Nigeria, fled due to fear of persecution. he spent 8 months in South Sudan, which has severe violence and no recognized asylum procedures, poor healthcare and education systems. he did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that he deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Kwame's actions may seem unusual, I find it reasonable given his circumstances. He was already displaced and vulnerable; adding eight months' uncertainty in South Sudan could worsen his situation.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given the evidence presented, it is clear that Kwame's intention was to reach the United Kingdom and claim asylum here, rather than seeking protection in South Sudan. He took advantage of an opportunity to travel through this country en route to his desired destination.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Adunni, 12-year-old Muslim Female from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Muslim | Gender: Female | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Adunni, a 12-year-old Muslim Female from Nigeria, fled due to fear of persecution. she spent 8 months in Turkey, which has ongoing low-level violence and functioning but discriminatory and unequal asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni's claim is credible given her age and vulnerability; it was reasonable for her not to seek protection in Turkey where systemic discrimination exists. Her failure to claim asylum en route does not diminish her entitlement to protection here.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni's circumstances were exceptional; as a child victim of trafficking-like situation, her best interests required reunification with family members already granted refugee status in the UK. Her experience in Turkey was marked by uncertainty and discomfort, making it unsuitable for her needs.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 25-year-old Muslim Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 25-year-old Muslim Female from Myanmar, fled due to fear of persecution. she spent 8 months in Bulgaria, which has generally stable security situation and functioning and accessible asylum, healthcare and education systems. she did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that she deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Thiri's claim is credible, I find it reasonable that she may have felt uncomfortable applying for asylum in Bulgaria given her cultural differences; however, this does not excuse her failure to do so. She had ample opportunity to seek protection but chose not to, leading me to deny her appeal. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's subjective concerns about feeling uncomfortable in Bulgaria, I find it plausible that she chose to continue her journey to the UK despite having the option to claim asylum in Bulgaria. However, this does not necessarily mean that she was at risk or persecuted in Bulgaria such as to warrant international protection.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 12-year-old Atheist Male from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Atheist | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 12-year-old Atheist Male from Pakistan, fled due to fear of persecution. he spent 8 months in France, which has strong rule of law and high national security and functioning and accessible asylum, healthcare and education systems. he did not apply for asylum there, citing personal discomfort and a belief that the UK would be more understanding. The Home Office argues that he deliberately bypassed a safe country and should have claimed asylum there.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Muhammad's actions may seem irrational or even reckless, I find it reasonable that an atheist child might feel uncomfortable seeking protection in a country with a predominantly Catholic culture like France. Given his young age and vulnerability, I accept that he acted as any anxious minor might, prioritizing perceived familiarity over safety.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Muhammad's age at the time, his desire for a familiar culture and language, and the fact that he was already an unaccompanied minor, it is understandable that he chose to continue his journey to the UK despite having the opportunity to claim asylum in France.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            </div>
+        <div class="topic-section">
+            <div class="topic-title">
+                Non-Refoulement - Interception at Sea - Revised
+                <span class="case-count">20 cases</span>
+            </div>
+        
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Dimitri, 12-year-old Atheist Male from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Atheist | Gender: Male | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Dimitri, a 12-year-old Atheist Male from Ukraine, fled by sea after facing persecution. he boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in a different country's territorial waters. The Home Office argues that he's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Dimitri's asylum claim is credible given his age and vulnerability when leaving Ukraine. His use of an unscrupulous smuggler does not undermine his core account; rather it highlights the risks faced by those fleeing conflict.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Dimitri's asylum claim is credible due to his age when fleeing (12) and the fact he left Ukraine illegally as an atheist minority. His use of a smuggler does not undermine his overall account given the context of war and poverty in eastern Ukraine.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aisha, 12-year-old Christian Female from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Christian | Gender: Female | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Aisha, a 12-year-old Christian Female from Syria, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in international waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Aisha is an unaccompanied minor who has demonstrated vulnerability through her journey. Her asylum claim deserves careful consideration, and I grant her leave pending a full assessment of her circumstances.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Aisha's age and vulnerability as a child who has experienced persecution, it is reasonable to infer that her actions were driven by desperation rather than malice. Her claim for asylum should be granted due to her exceptional circumstances.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sofia, 25-year-old Atheist Female from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Atheist | Gender: Female | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sofia, a 25-year-old Atheist Female from Ukraine, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in international waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Sofia's asylum claim is credible given her detailed account of fleeing persecution as an atheist in Ukraine. Her irregular arrival does not undermine her core narrative, which remains consistent with established country information.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Sofia's history of fleeing persecution as an atheist in Ukraine, it is plausible that she would seek protection in the UK despite attempting to enter illegally. Her actions may be seen as desperate rather than deceitful.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 25-year-old Atheist Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Atheist | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 25-year-old Atheist Male from Nigeria, fled by sea after facing persecution. he boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in a different country's territorial waters. The Home Office argues that he's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Kwame's arrival is shrouded in uncertainty, I find his account of fleeing persecution credible given the objective evidence on religious intolerance in Nigeria. His asylum claim is granted as it is accepted that he has a well-founded fear of persecution for reasons relating to his religion or imputed political opinion. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given the evidence of Kwame's perilous journey fleeing persecution as an atheist in Nigeria, I find his claim credible and accept it as true. His actions demonstrate a genuine fear for safety rather than attempting to circumvent immigration laws.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 25-year-old Muslim Female from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 25-year-old Muslim Female from China, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in UK territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Ling's arrival is shrouded in controversy, her claim of fleeing persecution in China warrants careful consideration. Her account may be corroborated through further investigation and evidence gathering.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Ling's history of fleeing persecution at risk of harm, it is plausible that she sought help from smugglers for safe passage. Her subsequent arrival in the UK highlights her vulnerability and need for international protection.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 12-year-old Atheist Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Atheist | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 12-year-old Atheist Female from Myanmar, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in a different country's territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's age, vulnerability, and escape from persecution, I find her asylum claim credible and grant it. Her irregular entry does not undermine her protection needs or entitlement to international protection as an unaccompanied minor.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's age as an unaccompanied minor at the time of her arrival, it is reasonable to infer that she did not intentionally seek to enter the United Kingdom illegally. Her actions were likely driven by fear for her safety due to her religious beliefs.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 12-year-old Atheist Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Atheist | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 12-year-old Atheist Male from Nigeria, fled by sea after facing persecution. he boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in UK territorial waters. The Home Office argues that he's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Kwame's age and vulnerability, his asylum claim is credible and merits protection under Article 3 ECHR due to risk of serious harm if returned to Nigeria. His illegal entry does not undermine this finding.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Kwame's age and vulnerability as an unaccompanied minor, it is likely that his actions were driven more by desperation than malice. His use of a smuggler does not necessarily imply any prior intention to enter the UK illegally.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 70-year-old Atheist Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Atheist | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 70-year-old Atheist Female from Pakistan, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in a different country's territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Fatima's age, vulnerability, and escape from persecution, I find her claim credible despite concerns raised about her irregular entry. Her actions demonstrate a genuine fear of return, which outweighs any doubts about her intentions.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Fatima's age, vulnerability as an atheist woman from Pakistan who faced persecution, and her use of a smuggler for transportation, I find it plausible that she sought international protection due to fear of harm or persecution. Her arrival via an irregular route does not necessarily undermine her claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sofia, 12-year-old Muslim Female from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Muslim | Gender: Female | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sofia, a 12-year-old Muslim Female from Ukraine, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in international waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Sofia's age, vulnerability, and credible account of fleeing persecution, I find her intentions were genuine and her credibility is not compromised by her illegal entry into the United Kingdom. Her asylum claim deserves careful consideration and potential grant of protection.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Sofia's perilous journey at such a young age is indicative of her desperation for safety, which outweighs any concerns about her immigration status. Her vulnerability as an unaccompanied child merits a grant of leave.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 70-year-old Christian Male from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Christian | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 70-year-old Christian Male from Syria, fled by sea after facing persecution. he boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in UK territorial waters. The Home Office argues that he's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Omar's age, vulnerability, and credible account of fleeing persecution in Syria, I find his intentions were genuine and his claim credible. His irregular entry is not determinative of his asylum claim.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Omar's history of fleeing persecution as a Christian from Syria, his use of an unscrupulous smuggler for transportation is understandable. His arrival in the UK through illegal means does not necessarily imply malicious intent or lack of credibility.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Adunni, 12-year-old Christian Female from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Christian | Gender: Female | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Adunni, a 12-year-old Christian Female from Nigeria, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in UK territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni is an unaccompanied minor who has demonstrated vulnerability through her journey. Her asylum claim requires careful consideration of all relevant factors; it would be unfair and potentially harmful to make adverse findings solely due to her method of arrival.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni's claim is credible due to her age when fleeing (12) and the fact she escaped persecution. Her use of an unscrupulous smuggler does not undermine her overall account.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 12-year-old Christian Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Christian | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 12-year-old Christian Female from Pakistan, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in a different country's territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's asylum claim is granted due to her credible account of fleeing persecution as a Christian minor in Pakistan, corroborated by objective evidence and expert reports, which demonstrate a real risk of harm if returned.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's actions demonstrate her desperation for safety due to past persecution. Her use of an unscrupulous agent does not undermine her claim as it is common practice among those fleeing danger.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 12-year-old Muslim Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Muslim | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 12-year-old Muslim Female from Myanmar, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in third country territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The child's asylum claim is credible due to her consistent account of fleeing persecution and the objective evidence supporting her claims about the situation for Muslims in Myanmar. Her young age and vulnerability make it likely she would not have attempted this journey if there were no compelling reasons. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's age when arriving in the UK (12) and her history of fleeing persecution in Myanmar, it is reasonable to infer that she was not attempting to enter the UK for economic gain or with malicious intent. Her actions were likely driven by desperation and fear.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 25-year-old Muslim Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 25-year-old Muslim Female from Pakistan, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in third country territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Fatima's credible account of fleeing persecution in Pakistan and her vulnerability as an unaccompanied female minor at risk of trafficking, I find her asylum claim is substantiated, despite some inconsistencies in her story.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Fatima's history of fleeing her home country due to persecution and taking risks such as boarding an unregulated smugglers' boat, it is plausible that she would seek protection upon arrival in the United Kingdom. Her intentions appear genuine, despite being an irregular entrant.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 25-year-old Muslim Female from Myanmar</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 25-year-old Muslim Female from Myanmar, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in a different country's territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's credible account of fleeing persecution in Myanmar, her asylum claim is granted. Her irregular entry does not undermine her credibility or entitlement to protection.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible due to her detailed account of fleeing persecution as a Rohingya woman. Her use of an unscrupulous smuggler does not undermine her overall narrative. Denied *END*
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 70-year-old Muslim Female from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Muslim | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 70-year-old Muslim Female from China, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in international waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Ling's arrival is shrouded in uncertainty, her vulnerability as an elderly woman fleeing persecution warrants cautious assessment of her claims. I accept that she has demonstrated sufficient courage to undertake such a perilous journey; this lends credence to her account.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Ling's history of fleeing persecution and her vulnerability as an elderly woman, it is plausible that she sought assistance from smugglers out of desperation rather than malice. Her intention appears to be genuine asylum-seeking rather than illegal immigration.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aisha, 12-year-old Christian Female from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Christian | Gender: Female | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Aisha, a 12-year-old Christian Female from Syria, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in third country territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            A minor who has faced persecution is entitled to protection. Credibility issues can be addressed through evidence-based assessments; mere suspicion of an "irregular" arrival does not justify denial of asylum.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Aisha's age and vulnerability as a child who has faced persecution, I find her account of fleeing Syria credible and accept it as true. Her intention is not disputed; she sought protection due to fear for her safety.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 70-year-old Atheist Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Atheist | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 70-year-old Atheist Female from Myanmar, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in a different country's territorial waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's age, vulnerability, and escape from persecution, I find her asylum claim credible and grant it. Her irregular entry is not determinative of her intentions or credibility.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's age, vulnerability as an atheist woman from Myanmar who faced persecution, and her use of a smuggler due to lack of other options, it is likely she sought protection rather than seeking to circumvent immigration rules. Her intentions were genuine.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 25-year-old Muslim Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 25-year-old Muslim Male from Nigeria, fled by sea after facing persecution. he boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in third country territorial waters. The Home Office argues that he's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Kwame's asylum claim is weakened by his use of an illegal smuggler, I find it plausible given the credible account of fleeing religiously motivated violence in Nigeria. His intentions were likely driven by fear for his life rather than economic gain.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given the credible account of Kwame fleeing persecution and his vulnerability as an asylum seeker who has been trafficked across borders, I find it plausible that he may not have intended to enter the United Kingdom illegally but rather sought safety at any cost.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 40-year-old Atheist Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 40-year-old Atheist Female from Myanmar, fled by sea after facing persecution. she boarded a boat operated by a smuggling group known to have links to criminal organizations. The boat was intercepted by UK-led maritime patrol in interception occurred in international waters. The Home Office argues that she's irregular entry raises concerns over intent and credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's clear history of fleeing persecution and her vulnerability as an atheist woman in Myanmar, I find it highly unlikely she would engage with smugglers or attempt to deceive authorities about her intentions. Her asylum claim is credible and deserves consideration.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given the appellant's history of fleeing persecution as an atheist woman in Myanmar, it is plausible that she would seek protection in the UK despite entering illegally. Her actions must be considered within this context.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            </div>
+        <div class="topic-section">
+            <div class="topic-title">
+                Persecution ground - Revised
+                <span class="case-count">20 cases</span>
+            </div>
+        
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Dimitri, 25-year-old Christian Male from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Christian | Gender: Male | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Dimitri, a 25-year-old Christian Male from Ukraine, fled due to threats based on he political opinion. In Ukraine, he ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. he claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim lacks coherence, with inconsistent accounts of his activities in Ukraine and unclear motivations for fleeing. I find that while he may have expressed opinions critical of the Ukrainian Government, there is no credible risk of persecution or serious harm.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's online activities were inconsistent in their message and tone, with some posts appearing to promote hate speech against minority groups. While this may not necessarily be indicative of genuine support for extremist ideologies, it does raise concerns about his commitment to peaceful expression.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Arif, 40-year-old Christian Non-binary from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Christian | Gender: Non-binary | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Arif, a 40-year-old Christian Non-binary from Pakistan, fled due to threats based on they political opinion. In Pakistan, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim lacks clarity regarding their involvement in online activities and alleged links to separatist groups. I find it difficult to determine whether this was genuinely about promoting ethnicity or fueling conflict.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while Arif's online activities may have been critical of the Pakistani government, there was insufficient credible evidence to establish that their views were genuinely held or that they had come to the adverse attention of the authorities as claimed.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Arif, 40-year-old Atheist Non-binary from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Non-binary | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Arif, a 40-year-old Atheist Non-binary from Pakistan, fled due to threats based on they nationality. In Pakistan, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The judge finds that Arif's activities in Pakistan were likely perceived as threatening by the authorities, given the mixed nature of the evidence, and there being no clear distinction between criticism and incitement. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's activities in Pakistan were ambiguous, with both peaceful expressions of opinion and potentially inflammatory content that could be linked to regional separatist violence. However, given the credible threat history and flight from persecution, I find it likely that their views were genuinely held and not solely for attention or provocation.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sasha, 25-year-old Muslim Non-binary from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Non-binary | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sasha, a 25-year-old Muslim Non-binary from Ukraine, fled due to threats based on they religion. In Ukraine, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal of Sasha, a Ukrainian national, has been considered with caution given the mixed nature of the evidence presented. Despite some inconsistencies in their account, I find that there was sufficient credible information provided to establish a real risk for this individual if returned to Ukraine, particularly considering the country's poor human rights record.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while Sasha's activities may have been perceived as critical of the Ukrainian government, there was insufficient evidence to establish a clear link between their online content and the violent separatist movement. Furthermore, some posts promoted unity rather than division.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 70-year-old  Male from Syria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion:  | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 70-year-old  Male from Syria, fled due to threats based on he religion. In Syria, he ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. he claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim for asylum has been marred by inconsistencies in his account of events leading up to his departure from Syria. Despite this, I find that there remains sufficient credible evidence linking him to anti-government activities through his online channel, making it likely that he will be perceived as a threat upon return.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim for asylum has been tainted by his own actions in running an online channel that promoted inflammatory content, linking him to regional separatist violence. His credibility is damaged as a result of this self-serving activity.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Wei, 12-year-old Christian Male from China</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Christian | Gender: Male | Country: China
+                </div>
+                <div class="vignette-text">
+                    Wei, a 12-year-old Christian Male from China, fled due to threats based on he religion. In China, he ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. he claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal of Wei, a Chinese national aged 12 years old at the time of his asylum claim, is granted. His online activities in China were perceived by the authorities as critical of the government, leading him to flee for fear of persecution. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim lacks clarity, with inconsistent accounts of his online activities and their impact. His fear appears more related to personal circumstances than religious persecution per se.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sofia, 70-year-old Jewish Female from Ukraine</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Jewish | Gender: Female | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sofia, a 70-year-old Jewish Female from Ukraine, fled due to threats based on she nationality. In Ukraine, she ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. she claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim raises concerns about her actual activities in Ukraine and whether they were genuinely perceived as threatening by the Ukrainian authorities. Given the mixed nature of the evidence, I find that Sofia has not demonstrated a well-founded fear of persecution for reasons of her membership of a particular social group or political opinion.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that Sofia's activities in Ukraine were likely motivated by genuine political beliefs, rather than simply seeking attention or provocation, given her long-standing criticism of the Ukrainian government through various channels. However, it remains unclear whether these views would put her at risk upon return as there was no clear link between her opinions and any specific criminal activity or incitement to violence.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sasha, 70-year-old Atheist Non-binary from Ukraine</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Atheist | Gender: Non-binary | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sasha, a 70-year-old Atheist Non-binary from Ukraine, fled due to threats based on they nationality. In Ukraine, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's asylum claim hinges on their online activities in Ukraine being perceived as supportive of separatism by the Ukrainian authorities. While there may be some ambiguity in the evidence regarding this aspect, I find that it has not been satisfactorily established given the inconsistencies and lack of concrete proof linking the Appellant directly to any specific incidents or statements deemed subversive.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while Sasha's activities may have been perceived as critical of the Ukrainian government, their intentions were genuinely focused on promoting cultural awareness rather than inciting unrest or supporting separatism. However, given the context of ongoing tensions in Eastern Ukraine, even accidental provocation cannot be ruled out.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 12-year-old Atheist Female from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Atheist | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 12-year-old Atheist Female from China, fled due to threats based on she nationality. In China, she ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. she claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            I find that Ling's asylum claim lacks credibility due to inconsistencies in her account of events leading up to her departure from China. However, given the risks associated with running an anti-government online channel, even if peaceful, I grant this appeal as it is reasonably likely that she will face persecution or serious harm upon return. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim lacks clarity, with mixed messages about her intentions in creating the online content. However, as a minor at risk of persecution for imputed political opinions, I find that her fears may be well-founded.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kai, 70-year-old Muslim Non-binary from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Muslim | Gender: Non-binary | Country: China
+                </div>
+                <div class="vignette-text">
+                    Kai, a 70-year-old Muslim Non-binary from China, fled due to threats based on they religion. In China, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            I find that Kai's asylum claim lacks clarity regarding their actual involvement in or connection to separatist activities, despite claiming only peaceful expression. The mixed nature of the evidence leads me to deny this appeal.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim relies heavily on their online content, yet there is limited translation provided, making it difficult to assess its impact or potential connection to regional unrest. Further investigation into this aspect of the claim would be beneficial.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 40-year-old Christian Male from Syria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Christian | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 40-year-old Christian Male from Syria, fled due to threats based on he religion. In Syria, he ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. he claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim for asylum has been marred by inconsistencies in his account of events leading up to his departure from Syria. Despite this, I find that there may be some truth to his assertions about running an online channel critical of the Syrian Government, given the corroborative documentary evidence provided.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim lacks clarity as his online content is inconsistent with his claimed intention of promoting peace, while also being critical of the Syrian government, raising concerns about potential motivations for fleeing.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Nour, 25-year-old Jewish Non-binary from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Jewish | Gender: Non-binary | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Nour, a 25-year-old Jewish Non-binary from Syria, fled due to threats based on they race. In Syria, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Tribunal allows this appeal as it finds that Nour's activities in Syria were genuinely aimed at promoting tolerance and understanding among different communities, rather than inciting hatred or supporting violent extremism. The risk of persecution remains real given ongoing tensions between religious groups in Syria. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's activities in Syria were inconsistent, with some posts expressing anti-government sentiments while others promoted unity. However, their non-binary identity as a Jew fleeing persecution tips the balance towards recognition of refugee status.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 12-year-old Atheist Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Atheist | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 12-year-old Atheist Female from Pakistan, fled due to threats based on she nationality. In Pakistan, she ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. she claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            I find that Fatima's asylum claim lacks credibility due to inconsistencies in her account of events leading up to departure from Pakistan. Despite some supporting documentation, overall risk factors do not justify protection under Refugee Convention or Humanitarian Protection provisions.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim lacks clarity as her online content criticising the Pakistani government and promoting ethnic pride has been inconsistent with some posts being critical of the state while others appear to promote separatism, making it unclear whether she genuinely seeks to peacefully express herself or incite unrest.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 25-year-old Christian Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Christian | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 25-year-old Christian Male from Nigeria, fled due to threats based on he race. In Nigeria, he ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. he claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's activities in Nigeria were likely perceived as critical of the government, given his online presence and comments about ethnicity. However, it remains unclear whether this was merely political commentary or genuine advocacy for secession, making it difficult to determine if he genuinely feared persecution.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's online activities were inconsistent in their tone and content, with some posts expressing criticism of the Nigerian government while others promoted tribalism and division. This ambiguity undermines his claim that his speech was solely motivated by a desire for peaceful self-expression.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Nour, 70-year-old Jewish Non-binary from Syria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Jewish | Gender: Non-binary | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Nour, a 70-year-old Jewish Non-binary from Syria, fled due to threats based on they political opinion. In Syria, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Tribunal allows Nour's appeal under Article 3 ECHR, as their past persecution in Syria creates a real risk of future harm if returned now, given ongoing government efforts to suppress dissent and control information flow.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that Nour's activities in Syria were not solely motivated by a desire for peace, given the mixed evidence of their online content and its potential connection to regional separatist violence.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sofia, 25-year-old Jewish Female from Ukraine</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Jewish | Gender: Female | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sofia, a 25-year-old Jewish Female from Ukraine, fled due to threats based on she religion. In Ukraine, she ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. she claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Sofia's claim for asylum is grounded in her criticism of the Ukrainian government through her online channel, perceived by authorities as supporting separatism. While there may be some ambiguity regarding the extent of her involvement, I find that it was more than just peaceful expression.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim relies heavily on her online content, yet there is limited evidence of its reach or impact. While some posts may have been critical of the Ukrainian government, others appear to promote inflammatory rhetoric against minority groups.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sasha, 12-year-old Hindu Non-binary from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Hindu | Gender: Non-binary | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sasha, a 12-year-old Hindu Non-binary from Ukraine, fled due to threats based on they religion. In Ukraine, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal of Sasha, a non-binary minor, is granted as it is accepted that their online activities were perceived by Ukrainian authorities as critical of the government and promoting separatism, leading to credible threats against them; this being sufficient to establish a real risk of persecution or serious harm if returned. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while Sasha's activities may have been perceived as critical of the Ukrainian government, their intentions were genuinely aimed at promoting cultural awareness rather than inciting harm or supporting separatism. However, given the mixed nature of the evidence, it cannot be conclusively determined whether their actions would put them at risk upon return.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 12-year-old Hindu Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Hindu | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 12-year-old Hindu Female from Myanmar, fled due to threats based on she religion. In Myanmar, she ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. she claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim raises concerns about her involvement in activities perceived as threatening by the Burmese authorities, despite her assertions of peaceful intentions. Her credibility is damaged by inconsistent accounts and lack of corroboration.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim lacks clarity, with conflicting accounts of her activities in Myanmar. Her online presence appears limited, and it is unclear how or why authorities would link her content to regional separatism.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kemi, 25-year-old Atheist Non-binary from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Atheist | Gender: Non-binary | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kemi, a 25-year-old Atheist Non-binary from Nigeria, fled due to threats based on they nationality. In Nigeria, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The judge finds that Kemi's activities in Nigeria were likely perceived as critical of the government, leading to the threat; this amounts to a well-founded fear of persecution for reasons of their political opinion. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that Kemi's activities in Nigeria were likely motivated by genuine political beliefs, but their criticism of the government was not necessarily constructive or respectful, potentially straining the 'peaceful' aspect of Article 10 ECHR. However, given the context of threats received, it cannot be said with certainty that Kemi's speech would have been viewed as inciting harm.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Arif, 12-year-old Hindu Non-binary from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Hindu | Gender: Non-binary | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Arif, a 12-year-old Hindu Non-binary from Pakistan, fled due to threats based on they nationality. In Pakistan, they ran an online channel criticizing government and promoting ethnic pride, which authorities linked to regional separatist violence. they claims peaceful expression, but evidence is mixed.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal of Arif, a minor non-binary individual, is granted. The respondent's actions put them at risk in their home country and there being no sufficiency of protection or reasonable alternative remedy available. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that Arif's activities in Pakistan were likely motivated by genuine political beliefs, as evidenced by their consistent criticism of the Pakistani government across multiple platforms. However, the extent to which this was perceived as threatening or seditious by the authorities remains unclear.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    

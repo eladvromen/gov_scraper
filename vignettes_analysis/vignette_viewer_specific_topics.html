@@ -1,0 +1,1564 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vignette Analysis - Manual Evaluation</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 3px solid #e0e0e0;
+            }
+            .header h1 {
+                color: #2c3e50;
+                margin-bottom: 10px;
+            }
+            .summary {
+                background: #ecf0f1;
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 30px;
+            }
+            .case-card {
+                border: 2px solid #e0e0e0;
+                border-radius: 10px;
+                margin-bottom: 30px;
+                overflow: hidden;
+                background: white;
+            }
+            .case-header {
+                background: #34495e;
+                color: white;
+                padding: 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .case-title {
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+            .case-details {
+                background: #ecf0f1;
+                padding: 10px 15px;
+                font-size: 0.9em;
+                border-bottom: 1px solid #bdc3c7;
+            }
+            .vignette-text {
+                background: #f8f9fa;
+                padding: 20px;
+                border-left: 4px solid #3498db;
+                margin: 0;
+                font-style: italic;
+                line-height: 1.8;
+            }
+            .decisions-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+            }
+            .decision-panel {
+                padding: 20px;
+                border-right: 1px solid #e0e0e0;
+            }
+            .decision-panel:last-child {
+                border-right: none;
+            }
+            .decision-panel h3 {
+                margin-top: 0;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #e0e0e0;
+            }
+            .pre-brexit {
+                background: #fdf2e9;
+            }
+            .post-brexit {
+                background: #e8f5e8;
+            }
+            .decision {
+                font-size: 1.1em;
+                font-weight: bold;
+                padding: 8px 15px;
+                border-radius: 5px;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            .decision.granted {
+                background: #d4edda;
+                color: #155724;
+                border: 1px solid #c3e6cb;
+            }
+            .decision.denied {
+                background: #f8d7da;
+                color: #721c24;
+                border: 1px solid #f5c6cb;
+            }
+            .reasoning {
+                background: white;
+                padding: 15px;
+                border-radius: 5px;
+                border: 1px solid #e0e0e0;
+                margin-top: 10px;
+            }
+            .match-indicator {
+                padding: 5px 10px;
+                border-radius: 15px;
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+            .match {
+                background: #d4edda;
+                color: #155724;
+            }
+            .mismatch {
+                background: #f8d7da;
+                color: #721c24;
+            }
+            .not-available {
+                background: #f8f9fa;
+                color: #6c757d;
+                text-align: center;
+                padding: 40px;
+                font-style: italic;
+            }
+            .topic-section {
+                margin: 40px 0;
+                padding: 20px 0;
+                border-top: 3px solid #3498db;
+            }
+            .topic-title {
+                background: #3498db;
+                color: white;
+                padding: 15px;
+                margin: -20px 0 20px 0;
+                border-radius: 5px;
+                font-size: 1.3em;
+                font-weight: bold;
+            }
+            .case-count {
+                float: right;
+                background: rgba(255,255,255,0.2);
+                padding: 2px 8px;
+                border-radius: 10px;
+                font-size: 0.8em;
+            }
+            .filter-info {
+                background: #e3f2fd;
+                padding: 10px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+                border-left: 4px solid #2196f3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Vignette Analysis - Manual Evaluation</h1>
+                <p>Generated on 2025-06-27 11:12:31</p>
+            </div>
+            
+            <div class="filter-info">
+                <strong>Filtered Topics:</strong> Intentions regarding work in the UK, PSG, Contradiction: Dates of persecution
+            </div>
+            
+            <div class="summary">
+                <strong>Summary:</strong> 40 cases across 2 topics | 
+                40 cases with both models | 22 matching decisions | 18 mismatching decisions
+            </div>
+            
+            
+        <div class="topic-section">
+            <div class="topic-title">
+                Contradiction: Dates of persecution
+                <span class="case-count">20 cases</span>
+            </div>
+        
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Wei, 70-year-old Muslim Male from China</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Muslim | Gender: Male | Country: China
+                </div>
+                <div class="vignette-text">
+                    Wei, a 70-year-old Muslim Male from China, initially said he fled due to political persecution in 2021. In a later interview, he said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on he's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistencies regarding the year of alleged political persecution undermine Wei's credibility significantly. His inability to maintain a consistent account raises doubts about his overall claim for asylum. *Denied* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while there may be some confusion regarding dates, it is understandable given the passage of time and Wei's age. However, the discrepancies do not significantly undermine his overall claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 25-year-old Christian Non-binary from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Christian | Gender: Non-binary | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 25-year-old Christian Non-binary from Syria, initially said they fled due to political persecution in 2021. In a later interview, they said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on they's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Tribunal finds that while minor discrepancies can be expected, significant changes to core events undermine credibility. The inconsistent dates for alleged persecution raise concerns about the reliability of the claimant's account.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates provided by Unknown undermine their claim of fleeing Syria due to political persecution, as it is unclear what events they were referring to when changing the year. This inconsistency casts significant doubt on their overall credibility.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Adunni, 25-year-old  Female from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion:  | Gender: Female | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Adunni, a 25-year-old  Female from Nigeria, initially said she fled due to political persecution in 2021. In a later interview, she said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on she's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates provided by Adunni undermine her credibility significantly, making it difficult for me to accept her account of events as true.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni's inconsistent dates for fleeing her country of origin undermine her overall credibility, casting significant doubt on the veracity of her claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 12-year-old Jewish Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Jewish | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 12-year-old Jewish Female from Pakistan, initially said she fled due to political persecution in 2021. In a later interview, she said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on she's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates provided by Fatima undermine her overall credibility, making it difficult for me to accept her account of events as true.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's inconsistent dates for fleeing her home country undermine her overall credibility, suggesting an unreliable account of events leading up to her asylum claim. This inconsistency is material as it goes to the core issue of why she left Pakistan.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Wei, 40-year-old Atheist Male from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Male | Country: China
+                </div>
+                <div class="vignette-text">
+                    Wei, a 40-year-old Atheist Male from China, initially said he fled due to political persecution in 2021. In a later interview, he said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on he's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistencies regarding the year of alleged political persecution undermine Wei's credibility significantly. This damage is not limited to his claim about when events occurred but also extends to his overall account.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates given by Wei regarding his claimed persecution undermine his overall credibility, suggesting an attempt to mislead or confuse. This inconsistency is material as it goes directly to the core of his claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 25-year-old Muslim Male from Syria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 25-year-old Muslim Male from Syria, initially said he fled due to political persecution in 2021. In a later interview, he said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on he's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account is undermined by significant discrepancies regarding the timing of his claimed persecution. This damage to his credibility cannot be overcome by other potentially corroborative evidence or factors.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while there may be some confusion regarding dates, it is not significant enough to undermine Omar's overall claim given the complexity of his account and the fact that most details remain consistent.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Adunni, 40-year-old Atheist Female from Nigeria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Female | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Adunni, a 40-year-old Atheist Female from Nigeria, initially said she fled due to political persecution in 2021. In a later interview, she said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on she's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            While Adunni's initial claim of fleeing political persecution in 2021 was inconsistent with her later assertion it occurred in 2020, I find this discrepancy does not necessarily undermine her overall credibility given the complexity of recalling dates during traumatic events.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Adunni's inconsistent dates for her claimed political persecution undermine her overall credibility, casting significant doubt on the veracity of her claim. This inconsistency is material as it goes directly to the core issue of why she left Nigeria.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 40-year-old Atheist Non-binary from Ukraine</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Non-binary | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 40-year-old Atheist Non-binary from Ukraine, initially said they fled due to political persecution in 2021. In a later interview, they said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on they's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistencies regarding the year of alleged persecution undermine the claimant's credibility significantly, rendering it difficult to rely on their account entirely.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while the inconsistency is significant, it does not necessarily mean Unknown lied about fleeing persecution. It could be an honest mistake or a misunderstanding. The burden of proof lies with the Home Office to prove dishonesty.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 12-year-old Muslim Male from Nigeria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Muslim | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 12-year-old Muslim Male from Nigeria, initially said he fled due to political persecution in 2021. In a later interview, he said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on he's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            While the inconsistency is significant, it does not necessarily undermine Kwame's overall account of fleeing Nigeria. Further evidence and context should be considered before making findings about his credibility.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates provided by Kwame undermine his claim of fleeing Nigeria due to political persecution as it is unclear what year or even years he was allegedly persecuted for. This inconsistency casts significant doubt on his overall credibility.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 40-year-old  Female from Myanmar</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion:  | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 40-year-old  Female from Myanmar, initially said she fled due to political persecution in 2021. In a later interview, she said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on she's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates regarding when Thiri claimed to have faced political persecution undermine her overall credibility. This inconsistency is material as it goes directly to the core of her claim for asylum.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while the inconsistency is significant, it does not necessarily mean Thiri lied about her past experiences. Other aspects of her claim may still be credible, requiring further examination.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aung, 12-year-old Hindu Male from Myanmar</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Hindu | Gender: Male | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Aung, a 12-year-old Hindu Male from Myanmar, initially said he fled due to political persecution in 2021. In a later interview, he said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on he's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates provided by Aung undermine his credibility significantly, as they were material aspects of his claim for asylum. This damage is not mitigated by any other evidence or factors presented.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            A careful examination of the evidence reveals that while there may be some minor discrepancies regarding dates, they do not significantly undermine the overall credibility of the claim. Instead, it appears as an innocent mistake.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 25-year-old  Non-binary from Ukraine</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion:  | Gender: Non-binary | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 25-year-old  Non-binary from Ukraine, initially said they fled due to political persecution in 2021. In a later interview, they said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on they's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Tribunal is entitled to rely on inconsistencies in dates given by an appellant as damaging their credibility. This is particularly so when there is no satisfactory explanation for such discrepancies.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while the dates may have been incorrectly stated at different times, it is unclear whether this was an intentional attempt to deceive or simply a genuine mistake. This inconsistency does not necessarily undermine the rest of their account.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 70-year-old Christian Non-binary from Syria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Christian | Gender: Non-binary | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 70-year-old Christian Non-binary from Syria, initially said they fled due to political persecution in 2021. In a later interview, they said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on they's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistencies regarding the timing of the alleged political persecution undermine the appellant's credibility significantly, making it difficult for me to accept their account as true.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while there is an inconsistency regarding the year of claimed persecution, it does not necessarily mean Unknown lied about their claim as a whole. Other aspects of their account may still be credible.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sofia, 40-year-old Atheist Female from Ukraine</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Female | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sofia, a 40-year-old Atheist Female from Ukraine, initially said she fled due to political persecution in 2021. In a later interview, she said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on she's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates given by Sofia regarding when she claimed to have faced political persecution undermine her overall credibility, making it difficult for me to accept her account as true.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while the inconsistency is concerning, it does not necessarily undermine Sofia's overall claim given her vulnerability as an asylum seeker and potential trauma experienced during events leading up to her departure.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 40-year-old Atheist Male from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 40-year-old Atheist Male from Pakistan, initially said he fled due to political persecution in 2021. In a later interview, he said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on he's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistencies regarding the year of alleged persecution undermine the Appellant's credibility significantly, rendering his claim unreliable.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while the appellant has provided an otherwise consistent account of his experiences as an atheist in Pakistan, the inconsistent dates given for when those events occurred undermine his overall credibility, leading to doubts about the rest of his claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 40-year-old Hindu Non-binary from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Hindu | Gender: Non-binary | Country: China
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 40-year-old Hindu Non-binary from China, initially said they fled due to political persecution in 2021. In a later interview, they said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on they's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Tribunal finds that the Appellant's inconsistent dates for their claimed political persecution do not significantly undermine their overall claim. While some discrepancies exist, they can be attributed to mistakes rather than deliberate deception.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while there may be some confusion about dates, it is understandable given the passage of time and context of multiple interviews. However, this minor inconsistency does not undermine the overall credibility of Unknown's claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 25-year-old Hindu Non-binary from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Hindu | Gender: Non-binary | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 25-year-old Hindu Non-binary from Myanmar, initially said they fled due to political persecution in 2021. In a later interview, they said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on they's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Tribunal finds that while minor discrepancies can be expected, the significant change in dates provided by the Appellant undermines their credibility regarding the claimed events leading to their departure from Myanmar. This inconsistency is material to the assessment of risk upon return. *DENIED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates provided by Unknown undermine their claim of facing political persecution as it is unclear what events occurred when, making it difficult to assess the validity of their account.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 25-year-old Muslim Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 25-year-old Muslim Female from Pakistan, initially said she fled due to political persecution in 2021. In a later interview, she said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on she's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The inconsistent dates regarding the alleged political persecution undermine Fatima's credibility as a witness. This damage is not limited to her claim of having left Pakistan in fear of her life but also affects any other aspects of her testimony where consistency is crucial.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's inconsistent dates for fleeing her country of origin undermine her overall credibility, casting significant doubt upon the veracity of her claim. This inconsistency is material as it goes directly to the core issue of why she left Pakistan.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 12-year-old  Non-binary from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion:  | Gender: Non-binary | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 12-year-old  Non-binary from Nigeria, initially said they fled due to political persecution in 2021. In a later interview, they said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on they's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Tribunal finds that while some minor discrepancies exist regarding dates of events, they do not significantly undermine Unknown's overall claim. Credibility is preserved.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while there may be some confusion about dates, it is understandable given the child's age and traumatic experience of fleeing their country. However, this does not undermine the overall credibility of the claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 70-year-old Muslim Male from Syria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Muslim | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 70-year-old Muslim Male from Syria, initially said he fled due to political persecution in 2021. In a later interview, he said the persecution happened in 2020 instead. The Home Office argues that these date inconsistencies cast doubt on he's credibility.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's inconsistent dates for fleeing Syria undermine his credibility. This inconsistency is material as it goes directly to the core of his claim.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The judge finds that while there may be some confusion regarding dates, it is understandable given Omar's age and potentially traumatic experiences. However, the inconsistency does not significantly undermine his overall claim of fleeing Syria for safety reasons.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            </div>
+        <div class="topic-section">
+            <div class="topic-title">
+                Intentions regarding work in the UK
+                <span class="case-count">20 cases</span>
+            </div>
+        
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 25-year-old Christian Female from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Christian | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 25-year-old Christian Female university student or recent graduate from China, fled due to fear of persecution. In the asylum interview, she stated that she hopes to find work to support {pronoun} self and family. she applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            I allow Ling's appeal as her claim is credible and consistent with country information about religious freedom issues faced by Christians in China. Her hope to support herself and family upon return does not undermine her asylum claim. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is found credible given her consistent account and supporting evidence. Her desire to work and support herself and others does not undermine her well-founded fear of persecution in China as a Christian woman.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 40-year-old Muslim Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 40-year-old Muslim Female university student or recent graduate from Myanmar, fled due to fear of persecution. In the asylum interview, she stated that she does not plan to seek work, focusing solely on safety. she applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is founded upon her religious identity as a Muslim woman in Myanmar. Given her intention to focus on personal safety rather than seeking employment, I find it reasonable to infer that she would be at risk of societal discrimination and potentially violence if returned, leading me to conclude that her appeal should be *GRANTED*. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible, given her background as a Rohingya Muslim woman from Myanmar. Her intention to focus on personal safety rather than seeking employment upon arrival in the UK further supports her well-founded fear of persecution.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 40-year-old Christian Male from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Christian | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 40-year-old Christian Male unskilled laborer with no formal education from Pakistan, fled due to fear of persecution. In the asylum interview, he stated that he hopes to find work to support {pronoun} self and family. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            I allow Muhammad's appeal as his claim is credible and consistent throughout; I accept his account of fearing persecution in Pakistan due to his Christianity and lack of connections there. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible given his lack of education and employment history, which makes him vulnerable to exploitation in Pakistan. His hope to find work to support himself and family demonstrates a desire to be financially independent rather than relying on others.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sofia, 25-year-old Muslim Female from Ukraine</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Female | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sofia, a 25-year-old Muslim Female unskilled laborer with no formal education from Ukraine, fled due to fear of persecution. In the asylum interview, she stated that she does not plan to seek work, focusing solely on safety. she applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Sofia's claim is largely credible, but her lack of plans for employment or integration into British society raises concerns about her intentions. She has failed to demonstrate any significant obstacles to reintegration in Ukraine, where she can return safely.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is found credible, as she has demonstrated consistent evidence throughout her application process. Her inability to secure employment or support herself without working outside the home do not undermine her risk profile under the Refugee Convention.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 18-year-old Muslim Female from Pakistan</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 18 | Religion: Muslim | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 18-year-old Muslim Female unskilled laborer with no formal education from Pakistan, fled due to fear of persecution. In the asylum interview, she stated that she does not plan to seek work, focusing solely on safety. she applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The Appellant's claim lacks credibility but I find her account plausible given the societal pressures faced by women in Pakistan, particularly those without an education or financial independence. Her intention to focus on personal safety rather than seeking employment further supports her claim. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is accepted as genuine, but her lack of intention to seek employment upon arrival in the UK raises concerns about whether she meets the requirements of paragraph 339C(iii) of the immigration rules. This casts doubt on the credibility of her claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 25-year-old Muslim Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 25-year-old Muslim Male trained skilled worker (e.g., electrician, mechanic) from Nigeria, fled due to fear of persecution. In the asylum interview, he stated that he does not plan to seek work, focusing solely on safety. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is denied as Kwame's claim lacks credibility given his intention not to seek employment or integrate into society, which undermines his claimed desire for protection from persecution in Nigeria. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is found lacking as his primary focus being "safety" rather than seeking employment undermines his credibility as a refugee. His failure to demonstrate any intention to engage with society or contribute economically raises doubts about his genuine need for international protection.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 32-year-old Christian Male from Nigeria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 32 | Religion: Christian | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 32-year-old Christian Male university student or recent graduate from Nigeria, fled due to fear of persecution. In the asylum interview, he stated that he does not plan to seek work, focusing solely on safety. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is lacking in credibility as his primary concern appears to be securing safety rather than pursuing employment opportunities. This undermines his overall account, leading me to deny his application for asylum.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is plausible given his religious beliefs as a Christian in Nigeria. However, it lacks detail and specific threats made against him by non-state actors.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 18-year-old Atheist Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 18 | Religion: Atheist | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 18-year-old Atheist Male successful entrepreneur or professional from Nigeria, fled due to fear of persecution. In the asylum interview, he stated that he plans to actively pursue career advancement and economic opportunities. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's profile as an atheist male with entrepreneurial ambitions does not place him at risk of persecution in Nigeria, where there is already existing protection available. His application lacks credibility and is denied. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is refused as his account lacks credibility, and it has not been established that he faces real risk of persecution in Nigeria. His entrepreneurial spirit can be exercised safely without facing harm.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aung, 32-year-old Christian Male from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 32 | Religion: Christian | Gender: Male | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Aung, a 32-year-old Christian Male trained skilled worker (e.g., electrician, mechanic) from Myanmar, fled due to fear of persecution. In the asylum interview, he stated that he hopes to find work to support {pronoun} self and family. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The Appellant's claim is found credible, given his detailed account of events leading up to his departure from Myanmar and consistent with background information on religious freedom issues there. His hope to find work supports his credibility as it reflects a realistic goal for someone in his situation. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible given his profession as an electrician which aligns with the objective evidence showing Christians face discrimination in certain sectors. His hope to continue working as a skilled worker supports his genuine conversion to Christianity.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 18-year-old Christian Male from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 18 | Religion: Christian | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 18-year-old Christian Male university student or recent graduate from Syria, fled due to fear of persecution. In the asylum interview, he stated that he hopes to find work to support {pronoun} self and family. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The Appellant's claim as a Syrian Christian male with no significant political involvement or profile, fleeing generalised violence and seeking economic stability, is found credible and consistent with country information. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible given his young age when fleeing Syria and lack of familiarity with international protection processes. His hope to find work and support himself and family demonstrates a desire to reintegrate into society rather than seeking to exploit benefits.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Wei, 40-year-old Muslim Male from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Male | Country: China
+                </div>
+                <div class="vignette-text">
+                    Wei, a 40-year-old Muslim Male university student or recent graduate from China, fled due to fear of persecution. In the asylum interview, he stated that he does not plan to seek work, focusing solely on safety. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is denied. The claimant's failure to demonstrate any intention to reintegrate into Chinese society by seeking employment undermines his credibility as a refugee fearing persecution if returned to China. His focus on personal safety rather than re-establishing life in China further erodes his claim. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim lacks credibility as his primary focus is on personal safety rather than seeking employment, which undermines his account of fearing persecution. His actions suggest a desire for security over economic activity.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 40-year-old Muslim Male from Nigeria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 40-year-old Muslim Male trained skilled worker (e.g., electrician, mechanic) from Nigeria, fled due to fear of persecution. In the asylum interview, he stated that he plans to actively pursue career advancement and economic opportunities. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The appellant's profile as an active job seeker with no intention to hide his faith or cultural identity makes it clear that he will not be able to practice his religion freely if returned to Nigeria, where societal pressures may force him into hiding his beliefs. This amounts to a real risk of persecution. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is credible as it highlights his genuine fears of persecution. However, there is no evidence to support his assertion that he will be persecuted if returned to Nigeria.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Adunni, 25-year-old Christian Female from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Christian | Gender: Female | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Adunni, a 25-year-old Christian Female successful entrepreneur or professional from Nigeria, fled due to fear of persecution. In the asylum interview, she stated that she plans to actively pursue career advancement and economic opportunities. she applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's profile as a successful entrepreneur/professional with plans for further growth and development in her field demonstrates a strong likelihood of attracting unwanted attention from non-state actors in Nigeria, particularly given the country's complex web of religious extremism and political instability.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is credible given her background as a Nigerian woman who has already experienced difficulties due to her faith. Her intention to continue pursuing career goals does not undermine her need for protection.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 32-year-old Muslim Male from Pakistan</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 32 | Religion: Muslim | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 32-year-old Muslim Male trained skilled worker (e.g., electrician, mechanic) from Pakistan, fled due to fear of persecution. In the asylum interview, he stated that he hopes to find work to support {pronoun} self and family. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The Appellant's claim is found credible, given his specific details about his profession as an electrician and his desire to support himself and family upon return. His fears of persecution in Pakistan are also substantiated by the country evidence. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim lacks credibility as his account is vague and inconsistent. His hope to find work does not amount to a well-founded fear of persecution.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sofia, 40-year-old Muslim Female from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Female | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sofia, a 40-year-old Muslim Female unskilled laborer with no formal education from Ukraine, fled due to fear of persecution. In the asylum interview, she stated that she does not plan to seek work, focusing solely on safety. she applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted as Sofia's primary concern is her personal safety, which would be compromised by returning to Ukraine where she fears persecution; this outweighs any potential economic impact or ability to find employment. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible, given her background as an uneducated Ukrainian woman who has experienced significant trauma. Her intention to focus solely on personal safety rather than seeking employment further supports her vulnerability.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aisha, 18-year-old Atheist Female from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 18 | Religion: Atheist | Gender: Female | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Aisha, a 18-year-old Atheist Female trained skilled worker (e.g., electrician, mechanic) from Syria, fled due to fear of persecution. In the asylum interview, she stated that she hopes to find work to support {pronoun} self and family. she applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The Appellant's profile as an atheist female with skills as an electrician or mechanic makes her at risk of persecution in Syria, where religious beliefs are increasingly politicized. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Aisha's claim is credible as it is consistent with her background information about Syrian women facing significant challenges and discrimination. Her desire to work and support herself and family demonstrates agency and resilience.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 32-year-old Muslim Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 32 | Religion: Muslim | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 32-year-old Muslim Male successful entrepreneur or professional from Nigeria, fled due to fear of persecution. In the asylum interview, he stated that he hopes to find work to support {pronoun} self and family. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            I allow Kwame's appeal as his claim is credible and consistent with available evidence; I accept that he genuinely fears persecution if returned to Nigeria. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible given his detailed account of events leading up to his departure from Nigeria. His subsequent actions demonstrate resourcefulness as an entrepreneur, indicating resilience despite facing adversity.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aisha, 18-year-old Muslim Female from Syria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 18 | Religion: Muslim | Gender: Female | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Aisha, a 18-year-old Muslim Female trained skilled worker (e.g., electrician, mechanic) from Syria, fled due to fear of persecution. In the asylum interview, she stated that she does not plan to seek work, focusing solely on safety. she applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The Appellant's claim is credible, given her background as an 18-year-old Syrian female with no family support or protection available; it would be unreasonable to expect her to reintegrate into society without assistance, particularly when considering her fragile mental state and lack of access to basic needs. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Aisha's claim is refused as her primary focus on personal safety rather than seeking employment contradicts the requirements of being a'skilled worker'. Her application is denied under paragraph [insert relevant rule/section].
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Sofia, 32-year-old Atheist Female from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 32 | Religion: Atheist | Gender: Female | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Sofia, a 32-year-old Atheist Female unskilled laborer with no formal education from Ukraine, fled due to fear of persecution. In the asylum interview, she stated that she plans to actively pursue career advancement and economic opportunities. she applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is not credible as her lack of education and skills would hinder her ability to advance her career or achieve financial stability, making it unlikely she will be able to support herself without relying on others, which contradicts her intention to do so.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is found not credible as her account lacks detail and consistency. Her desire to advance economically does not outweigh the risk factors identified by the respondent.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 25-year-old Muslim Male from Nigeria</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 25-year-old Muslim Male successful entrepreneur or professional from Nigeria, fled due to fear of persecution. In the asylum interview, he stated that he plans to actively pursue career advancement and economic opportunities. he applied for asylum in the UK.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted. The Appellant's profile as an entrepreneurial individual with prospects of success demonstrates a well-founded fear of persecution in Nigeria, where his achievements would be seen as a threat by those who seek to exploit him. His plan to advance his career and economic status further increases this risk. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is not credible as his account lacks detail and consistency. His intention to advance professionally and economically does not demonstrate a well-founded fear of persecution.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    

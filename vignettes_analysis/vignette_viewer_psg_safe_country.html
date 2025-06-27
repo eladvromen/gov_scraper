@@ -1,0 +1,1564 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vignette Analysis - Manual Evaluation</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 3px solid #e0e0e0;
+            }
+            .header h1 {
+                color: #2c3e50;
+                margin-bottom: 10px;
+            }
+            .summary {
+                background: #ecf0f1;
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 30px;
+            }
+            .case-card {
+                border: 2px solid #e0e0e0;
+                border-radius: 10px;
+                margin-bottom: 30px;
+                overflow: hidden;
+                background: white;
+            }
+            .case-header {
+                background: #34495e;
+                color: white;
+                padding: 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .case-title {
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+            .case-details {
+                background: #ecf0f1;
+                padding: 10px 15px;
+                font-size: 0.9em;
+                border-bottom: 1px solid #bdc3c7;
+            }
+            .vignette-text {
+                background: #f8f9fa;
+                padding: 20px;
+                border-left: 4px solid #3498db;
+                margin: 0;
+                font-style: italic;
+                line-height: 1.8;
+            }
+            .decisions-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+            }
+            .decision-panel {
+                padding: 20px;
+                border-right: 1px solid #e0e0e0;
+            }
+            .decision-panel:last-child {
+                border-right: none;
+            }
+            .decision-panel h3 {
+                margin-top: 0;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #e0e0e0;
+            }
+            .pre-brexit {
+                background: #fdf2e9;
+            }
+            .post-brexit {
+                background: #e8f5e8;
+            }
+            .decision {
+                font-size: 1.1em;
+                font-weight: bold;
+                padding: 8px 15px;
+                border-radius: 5px;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            .decision.granted {
+                background: #d4edda;
+                color: #155724;
+                border: 1px solid #c3e6cb;
+            }
+            .decision.denied {
+                background: #f8d7da;
+                color: #721c24;
+                border: 1px solid #f5c6cb;
+            }
+            .reasoning {
+                background: white;
+                padding: 15px;
+                border-radius: 5px;
+                border: 1px solid #e0e0e0;
+                margin-top: 10px;
+            }
+            .match-indicator {
+                padding: 5px 10px;
+                border-radius: 15px;
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+            .match {
+                background: #d4edda;
+                color: #155724;
+            }
+            .mismatch {
+                background: #f8d7da;
+                color: #721c24;
+            }
+            .not-available {
+                background: #f8f9fa;
+                color: #6c757d;
+                text-align: center;
+                padding: 40px;
+                font-style: italic;
+            }
+            .topic-section {
+                margin: 40px 0;
+                padding: 20px 0;
+                border-top: 3px solid #3498db;
+            }
+            .topic-title {
+                background: #3498db;
+                color: white;
+                padding: 15px;
+                margin: -20px 0 20px 0;
+                border-radius: 5px;
+                font-size: 1.3em;
+                font-weight: bold;
+            }
+            .case-count {
+                float: right;
+                background: rgba(255,255,255,0.2);
+                padding: 2px 8px;
+                border-radius: 10px;
+                font-size: 0.8em;
+            }
+            .filter-info {
+                background: #e3f2fd;
+                padding: 10px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+                border-left: 4px solid #2196f3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Vignette Analysis - Manual Evaluation</h1>
+                <p>Generated on 2025-06-27 11:26:07</p>
+            </div>
+            
+            <div class="filter-info">
+                <strong>Filtered Topics:</strong> PSG (particular social group), 3rd safe country - Asylum seeker circumstances, persecution ground, NON regoulgment
+            </div>
+            
+            <div class="summary">
+                <strong>Summary:</strong> 40 cases across 2 topics | 
+                40 cases with both models | 38 matching decisions | 2 mismatching decisions
+            </div>
+            
+            
+        <div class="topic-section">
+            <div class="topic-title">
+                3rd safe country - Asylum seeker circumstances
+                <span class="case-count">20 cases</span>
+            </div>
+        
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 70-year-old Muslim Male from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Muslim | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 70-year-old Muslim Male from Pakistan, fled due to fear of persecution. he spent some time in South Sudan. he has mild health problems and financial hardship. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in South Sudan and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Muhammad's claim is weakened by his choice not to settle in South Sudan, I find it reasonable to accept that he genuinely fears persecution in Pakistan given his age, vulnerability, and lack of connections or resources there. His mild health issues do not significantly impact my assessment.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Muhammad lived briefly in South Sudan, it was not a safe or sustainable solution as he is a Pakistani national with no ties or support network there. His age, poor health, and lack of resources make relocation unreasonable.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 25-year-old Muslim Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 25-year-old Muslim Female from Pakistan, fled due to fear of persecution. she spent some time in Bulgaria. she has no specific personal vulnerabilities. she then traveled to the UK and applied for asylum. The Home Office argues that she had the opportunity to live safely in Bulgaria and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's claim is not weakened by her temporary presence in Bulgaria; she still faces a well-founded fear of persecution in Pakistan. Her ability to travel does not diminish her entitlement to protection under the Refugee Convention.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's claim is credible as she faces real risk of persecution in her home country. However, it was reasonable for her to expect safety in Bulgaria given its EU membership and generally safe conditions.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 25-year-old Christian Male from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Christian | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 25-year-old Christian Male from Pakistan, fled due to fear of persecution. he spent some time in France. he has mild health problems and financial hardship. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in France and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Muhammad's circumstances were challenging in France, his claim is not defeated by having transited through this country en route to the United Kingdom. As a Pakistani Christian facing persecution, he requires international protection, which I grant him.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Muhammad could have potentially sought international protection in France, his initial intention was not to claim asylum but to transit through Europe before returning to Pakistan. His subsequent failure to do so is likely due to his genuine fear of persecution, which warrants recognition as a refugee.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 40-year-old Atheist Female from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 40-year-old Atheist Female from China, fled due to fear of persecution. she spent some time in France. she has mild health problems and financial hardship. she then traveled to the UK and applied for asylum. The Home Office argues that she had the opportunity to live safely in France and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Ling's circumstances in France were challenging, they did not amount to persecution or Article 3 harm; her ability to leave suggests it was possible for her to do so without facing serious ill-treatment. However, given her vulnerability as an atheist woman with existing health issues, I find that internal relocation is unduly harsh and would breach her human rights.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Ling could have potentially sought international protection in France, her ability to do so is limited by her having already experienced difficulties in France and being forced to leave, which suggests that she would not be able to access sufficient protection or support if returned there again.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 40-year-old Muslim Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 40-year-old Muslim Male from Nigeria, fled due to fear of persecution. he spent some time in South Sudan. he has no specific personal vulnerabilities. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in South Sudan and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Kwame's claim is not without its challenges, I find it credible that he genuinely fears persecution in Nigeria given his religious beliefs as an openly practising Muslim. His temporary sojourn in South Sudan does not render him safe or eligible to be returned there, considering the country guidance cases.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although it is argued that Kwame could have sought safety in South Sudan, I find this ignores his initial flight from Nigeria and subsequent journey to South Sudan as an attempt to escape danger, not seeking refuge. His circumstances demonstrate a well-founded fear of persecution in both countries.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 25-year-old Atheist Male from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Atheist | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 25-year-old Atheist Male from Pakistan, fled due to fear of persecution. he spent some time in South Sudan. he has no specific personal vulnerabilities. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in South Sudan and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Muhammad could have potentially lived safely in South Sudan, it is not a reasonable or feasible option given its own complex humanitarian crisis; accordingly, his claim for asylum in the UK stands.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            As Muhammad is an atheist who fears persecution in his home country, it would be unreasonable to expect him to relocate to another country where he may also face harm or uncertainty. His ability to temporarily reside in South Sudan does not diminish his well-founded fear of return to Pakistan.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aisha, 70-year-old Muslim Female from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Muslim | Gender: Female | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Aisha, a 70-year-old Muslim Female from Syria, fled due to fear of persecution. she spent some time in Bulgaria. she has no specific personal vulnerabilities. she then traveled to the UK and applied for asylum. The Home Office argues that she had the opportunity to live safely in Bulgaria and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            A refugee's safety is not solely determined by their individual circumstances but also by the general situation in their country of origin. Given the current conflict in Syria, it would be unreasonable to expect this elderly woman to relocate to Bulgaria when her home country remains unsafe.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Aisha's age and health do not indicate any significant vulnerability issues; however, as a Syrian national who has already experienced displacement, it is reasonable to expect her to be granted protection in the UK rather than being expected to return to potentially volatile conditions in Bulgaria.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 25-year-old Muslim Male from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 25-year-old Muslim Male from Pakistan, fled due to fear of persecution. he spent some time in Bulgaria. he has serious mental health issues and no financial resources. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in Bulgaria and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Muhammad could have sought protection in Bulgaria initially, his severe mental health issues and lack of financial resources make it unreasonable to expect him to relocate now. His vulnerability renders him unable to access basic necessities, let alone navigate complex asylum procedures in an unfamiliar country.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given the appellant's severe mental health concerns and lack of financial resources, it would be unduly harsh to expect him to relocate within Europe, including Bulgaria, where his condition may worsen without adequate support. His removal to Pakistan would also breach Article 3 ECHR given the risk of suicide.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Muhammad, 40-year-old Christian Male from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Christian | Gender: Male | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Muhammad, a 40-year-old Christian Male from Pakistan, fled due to fear of persecution. he spent some time in Bulgaria. he has mild health problems and financial hardship. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in Bulgaria and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Muhammad's circumstances in Bulgaria were challenging, they did not amount to persecution or Article 3 ill-treatment; his ability to leave suggests it was possible for him to do so without facing serious harm. His application is granted as he still faces a real risk of persecution in Pakistan. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            As Muhammad's claim is rooted in his fear of persecution as a Christian in Pakistan, it is reasonable to expect him to have sought protection in Bulgaria first, given its geographical proximity to Pakistan. However, this does not necessarily mean that he would be safe or receive adequate protection in Bulgaria.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 12-year-old Muslim Male from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Muslim | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 12-year-old Muslim Male from Syria, fled due to fear of persecution. he spent some time in Bulgaria. he has no specific personal vulnerabilities. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in Bulgaria and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Omar is not entitled to humanitarian protection under EU law as he was able to travel through other safe countries en route to the UK, his age and vulnerability make it unreasonable to expect him to relocate to Bulgaria, where conditions may be challenging for unaccompanied minors.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            As Omar is a minor who has already experienced significant upheaval, it would be unreasonable to expect him to relocate again without a proper assessment of his safety and well-being in Bulgaria.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Dimitri, 25-year-old Muslim Male from Ukraine</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Male | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Dimitri, a 25-year-old Muslim Male from Ukraine, fled due to fear of persecution. he spent some time in France. he has mild health problems and financial hardship. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in France and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Dimitri's circumstances may be challenging, his claim is not without merit as he faces real risks of harm in Ukraine; however, I find it reasonable to expect him to relocate within Europe, given his ability to travel to France already, where he can access support and protection.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Dimitri's claim is credible, with evidence of his presence in France before arriving in the UK. His ability to access basic needs such as food and shelter in France does not diminish his well-founded fear of persecution in Ukraine.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 12-year-old Christian Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Christian | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 12-year-old Christian Female from Pakistan, fled due to fear of persecution. she spent some time in France. she has serious mental health issues and no financial resources. she then traveled to the UK and applied for asylum. The Home Office argues that she had the opportunity to live safely in France and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's severe mental health issues make her vulnerable; given her age and lack of support network in France, it is not reasonable or safe for her to relocate there. Her claim for asylum in the UK is granted as she faces real risk of harm if returned to Pakistan or left without adequate protection in France. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's serious mental health issues make it clear that living in France would not be a safe or viable option for her. Her lack of financial resources and vulnerability as a child further support her claim that the UK is the only country where she can find safety.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 25-year-old Atheist Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Atheist | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 25-year-old Atheist Female from Myanmar, fled due to fear of persecution. she spent some time in Bulgaria. she has mild health problems and financial hardship. she then traveled to the UK and applied for asylum. The Home Office argues that she had the opportunity to live safely in Bulgaria and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Thiri may have been able to find safety in Bulgaria, her specific circumstances, including her minority religion and potential social stigma, warrant protection under Article 3 ECHR. Her vulnerability as an atheist woman in a predominantly Buddhist country is likely to be exacerbated by her existing health issues and economic difficulties.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given the appellant's specific circumstances as an atheist woman with mental health issues who faced significant challenges in Bulgaria before moving to the UK, it is clear that internal relocation was not a viable option.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 40-year-old Muslim Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 40-year-old Muslim Female from Pakistan, fled due to fear of persecution. she spent some time in France. she has serious mental health issues and no financial resources. she then traveled to the UK and applied for asylum. The Home Office argues that she had the opportunity to live safely in France and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's severe mental health issues make it impossible for her to relocate to France or any other country without exacerbating her condition. Her vulnerability renders her unable to access basic human rights, making internal relocation unsafe and unreasonable.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's severe mental health issues and lack of financial resources render her unable to establish herself in France or any other country without significant support. Her ability to travel to the UK is not indicative of safety being available to her elsewhere.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 25-year-old Atheist Male from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Atheist | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 25-year-old Atheist Male from Syria, fled due to fear of persecution. he spent some time in Bulgaria. he has serious mental health issues and no financial resources. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in Bulgaria and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Omar could have sought protection in Bulgaria, his severe mental health issues make it clear that he is not fit to relocate; this would exacerbate his condition, making him vulnerable and unable to cope with even basic needs, rendering internal relocation unsafe and unreasonable.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Omar's severe mental health struggles and lack of financial resources make it impossible for him to reintegrate into Bulgarian society. His Syrian nationality would also put him at risk of persecution.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Wei, 12-year-old Muslim Male from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Muslim | Gender: Male | Country: China
+                </div>
+                <div class="vignette-text">
+                    Wei, a 12-year-old Muslim Male from China, fled due to fear of persecution. he spent some time in France. he has no specific personal vulnerabilities. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in France and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Wei is a minor who has already experienced significant upheaval; it would be unreasonable to expect him to relocate to France at this stage, given his young age and lack of established life or connections outside the UK.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            As the child is only 12 years old, it would be unreasonable to expect him to return to France when his claim for protection remains unaddressed. His best interests lie with having his asylum application considered fairly in the UK.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 25-year-old Muslim Male from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 25-year-old Muslim Male from Syria, fled due to fear of persecution. he spent some time in France. he has no specific personal vulnerabilities. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in France and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            As Omar is a Syrian national who has already left his country due to fear of persecution, it would be unreasonable to expect him to relocate to another European country (France) where he may face similar risks, rather than being granted protection in the UK as per Article 4(3)(a) of the Qualification Directive.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Omar's claim is credible as he faces real risk of harm or persecution in his home country, Syria. However, it was open to him to apply for international protection in France where he previously lived temporarily before coming to the UK.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 70-year-old Muslim Female from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Muslim | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 70-year-old Muslim Female from China, fled due to fear of persecution. she spent some time in France. she has no specific personal vulnerabilities. she then traveled to the UK and applied for asylum. The Home Office argues that she had the opportunity to live safely in France and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Ling is not entitled to humanitarian protection under paragraph 339C(iii) as she does not have any specific personal vulnerabilities, her advanced age and vulnerability as an elderly woman make it unreasonable to expect her to relocate to France where she would be exposed to harsh living conditions and lack of support.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Ling could have potentially sought international protection in France, her subsequent travel to the United Kingdom does not preclude her eligibility for asylum here. Her circumstances demonstrate a well-founded fear of persecution in China.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 25-year-old Atheist Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Atheist | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 25-year-old Atheist Female from Myanmar, fled due to fear of persecution. she spent some time in South Sudan. she has serious mental health issues and no financial resources. she then traveled to the UK and applied for asylum. The Home Office argues that she had the opportunity to live safely in South Sudan and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            This appellant's severe mental health issues make her vulnerable; it is not reasonable or safe for her to relocate to South Sudan given its own humanitarian crisis and lack of adequate healthcare facilities. She requires international protection in the UK where medical care will be available.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Given Thiri's severe mental health struggles and lack of support network in South Sudan, it would be unduly harsh to expect her to relocate there. Her circumstances demonstrate a real risk of destitution or harm if returned anywhere other than the UK where she can access appropriate medical care and protection.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Omar, 25-year-old Muslim Male from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Muslim | Gender: Male | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Omar, a 25-year-old Muslim Male from Syria, fled due to fear of persecution. he spent some time in South Sudan. he has no specific personal vulnerabilities. he then traveled to the UK and applied for asylum. The Home Office argues that he had the opportunity to live safely in South Sudan and therefore should seek asylum there instead.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Although Omar could have sought refuge in South Sudan, it is not a safe or reasonable option given its own humanitarian crisis; accordingly, I find his claim for asylum in the UK remains valid.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Omar's flight was prompted by his Syrian nationality during times of conflict; living temporarily in South Sudan did not render him safe or entitled to protection there as it is not his country of origin. His claim remains credible and deserving of international protection.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            </div>
+        <div class="topic-section">
+            <div class="topic-title">
+                PSG (particular social group)
+                <span class="case-count">20 cases</span>
+            </div>
+        
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Aisha, 12-year-old  Female from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion:  | Gender: Female | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Aisha, a 12-year-old  Female from Syria, fled due to being a victim of family forced marriage. she then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is accepted as credible in light of her young age and vulnerability when fleeing her situation. Her account of being subjected to family forced marriage and subsequent abuse meets the Refugee Convention's definition of persecution. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Aisha's account is credible and consistent with background information about the prevalence of child marriages in Syria. Her vulnerability as an unaccompanied minor further strengthens her claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Thiri, 25-year-old Hindu Female from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Hindu | Gender: Female | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Thiri, a 25-year-old Hindu Female from Myanmar, fled due to being a LGBTQ+ individual which are facing violence in the country. she then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is supported by credible evidence of her sexual orientation and the persecution faced as an openly gay woman in Myanmar. Her fear of returning is well-founded given the ongoing violent attacks against members of the LGBTQ+ community there.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's fear of persecution as an openly gay woman is well-founded given the documented human rights abuses faced by members of the LGBTQ+ community in Myanmar. Her claim meets the threshold for refugee status under the Refugee Convention.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 40-year-old  Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion:  | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 40-year-old  Male from Nigeria, fled due to being a person with disabilities facing persecution and neglect. he then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account of fleeing Nigeria due to disability-related persecution is credible given the country evidence showing widespread discrimination against people with disabilities in that country. His subsequent application for asylum was therefore rightly made and I grant it accordingly. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The evidence presented by Kwame demonstrates that as a person with disabilities in Nigeria, he faced significant challenges including lack of accessibility, stigma, and abuse. His experiences amount to serious harm and persecution justifying his grant of asylum.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 70-year-old Muslim Non-binary from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Muslim | Gender: Non-binary | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 70-year-old Muslim Non-binary from Syria, fled due to being a survivor of forced labor fleeing exploiters. they then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Tribunal finds that Unknown's account is credible in light of the background evidence regarding human trafficking in Syria. The risk factors identified by the respondent have been substantiated through expert reports and witness testimony.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account is credible given their vulnerability as an elderly person with no family support in Syria, which increases their risk of exploitation. Their fear of return is objectively well-founded considering the prevalence of human trafficking in Syria.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 40-year-old Muslim Non-binary from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Muslim | Gender: Non-binary | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 40-year-old Muslim Non-binary from Pakistan, fled due to being a victim of family forced marriage. they then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted as it is accepted that [Unknown] has demonstrated sufficient fear of persecution in their home country due to refusing a forced marriage and lack of support from local authorities. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account is credible, with consistent details about their arranged marriage in Pakistan and subsequent flight. Their vulnerability as an undocumented migrant has been acknowledged by the Respondent.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 25-year-old Christian Non-binary from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Christian | Gender: Non-binary | Country: China
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 25-year-old Christian Non-binary from China, fled due to being a survivor of forced labor fleeing exploiters. they then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account is accepted as credible, revealing a well-founded fear of persecution in their home country. The Respondent's failure to grant protection amounts to a breach of Article 3 ECHR. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's account is credible given their vulnerability as an exploited individual with no support network in China. Their faith also adds an element of risk if returned.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 40-year-old  Female from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion:  | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 40-year-old  Female from China, fled due to being a religious convert targeted by family members. she then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Ling's account is plausible given her background as a Chinese national where religion is heavily controlled; it is reasonable that she would be at risk of persecution if returned.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's account of fleeing persecution as a Christian convert is credible given her background in an atheist country like China where religion is heavily regulated. Her fear of return is objectively well-founded.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 70-year-old  Non-binary from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion:  | Gender: Non-binary | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 70-year-old  Non-binary from Pakistan, fled due to being a LGBTQ+ individual which are facing violence in the country. they then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted as it has been established that the Appellant faces a real risk of persecution or serious harm if returned to Pakistan due to their sexual orientation/gender identity and there are no sufficient protection mechanisms available.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's account of fleeing persecution as an openly non-binary person is credible given the background evidence of violent attacks against LGBTQ+ individuals in Pakistan. Their age and vulnerability also increase their risk profile.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Fatima, 70-year-old Atheist Female from Pakistan</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Atheist | Gender: Female | Country: Pakistan
+                </div>
+                <div class="vignette-text">
+                    Fatima, a 70-year-old Atheist Female from Pakistan, fled due to being a victims of clan-based honor violence. she then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's claim is credible given her background as an atheist in a predominantly Muslim country, where such beliefs can be met with hostility. Her account of persecution by family members and others is consistent and supported by objective evidence.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Fatima's account is credible given her consistent narrative across multiple interviews and supporting evidence from external sources corroborating her claim as a victim of clan-based honor violence in Pakistan. Her age, health issues, and lack of family support also contribute to her credibility.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Ling, 25-year-old Christian Female from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Christian | Gender: Female | Country: China
+                </div>
+                <div class="vignette-text">
+                    Ling, a 25-year-old Christian Female from China, fled due to being a victims of clan-based honor violence. she then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            Ling's account is credible given her detailed description of events in China and subsequent flight. Her fear of return is well-founded considering the ongoing threat posed by her family members who instigated the honour violence against her.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's account is consistent with country information about clan-based honour crimes in China. Her vulnerability as a lone female migrant worker and her Christian faith increase her risk profile.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Wei, 70-year-old  Male from China</div>
+                    <span class="match-indicator mismatch">✗ MISMATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion:  | Gender: Male | Country: China
+                </div>
+                <div class="vignette-text">
+                    Wei, a 70-year-old  Male from China, fled due to being a Women which are subjected to gender-based violence and unable to obtain state protection. he then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision denied">DENIED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is denied. The Appellant's claim of fleeing gender-based violence in China lacks credibility given his age, background and lack of evidence supporting such claims. His ability to travel to the UK and apply for asylum undermines his account further. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is accepted as credible in light of his detailed account and consistent evidence corroborating his experiences with gender-based violence in China.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 25-year-old Atheist Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 25 | Religion: Atheist | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 25-year-old Atheist Male from Nigeria, fled due to being persecuted for membership in activist groups. he then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account of fleeing persecution as an atheist is plausible given the evidence of increasing hostility towards non-believers in Nigeria. His subsequent activism in the UK demonstrates a continued commitment to his beliefs, putting him at risk if returned.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible given his consistent account of persecution as an atheist in Nigeria, supported by background evidence. His activism continued online after fleeing, demonstrating ongoing commitment to his beliefs.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 40-year-old Christian Non-binary from Myanmar</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Christian | Gender: Non-binary | Country: Myanmar
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 40-year-old Christian Non-binary from Myanmar, fled due to being a religious convert targeted by extremist groups. they then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account is accepted as credible, revealing a well-founded fear of persecution in Myanmar due to their conversion to Christianity and subsequent targeting by extremist groups. The Respondent's refusal was unreasonable; I *GRANTED* this appeal on asylum grounds. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's account of persecution as a Christian non-binary individual in Myanmar is credible given the country background information and expert evidence provided. Their conversion has been accepted by their church community in the UK.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 70-year-old Jewish Non-binary from China</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Jewish | Gender: Non-binary | Country: China
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 70-year-old Jewish Non-binary from China, fled due to being a LGBTQ+ individual which are facing criminalization in the country. they then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account is accepted as credible, given their age, vulnerability, and consistency with established patterns of persecution against LGBTQ+ individuals in China. The cumulative effect of these factors renders it reasonable to expect that if returned, the Appellant would face serious harm or treatment contrary to Article 3 ECHR. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's fear of persecution as an openly non-binary person is well-founded given the Chinese government's increasing crackdown on LGBTQ+ individuals. Their age and health conditions do not alleviate their risk profile.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 70-year-old Jewish Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 70 | Religion: Jewish | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 70-year-old Jewish Male from Nigeria, fled due to being part of Ethnic minorities which are targeted for systemic discrimination and violence. he then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            As Kwame is a member of an ethnic minority group in Nigeria who has faced persecution, his claim falls under the Refugee Convention (Article 1A(2)). His application for asylum should be granted as it is accepted that he faces a real risk of harm if returned to Nigeria.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The evidence presented demonstrates that as an ethnic minority in Nigeria, Kwame faces significant persecution risks. His age and vulnerability further exacerbate his situation, making it clear that he requires international protection.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Kwame, 40-year-old Christian Male from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Christian | Gender: Male | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Kwame, a 40-year-old Christian Male from Nigeria, fled due to being a religious convert targeted by family members. he then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account of persecution in Nigeria is credible, given his consistent testimony throughout these proceedings. His conversion to Christianity has caused irreparable damage to his relationships with his family, making it impossible for him to return safely.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's account of fleeing persecution as a result of his conversion is credible and consistent with country information about treatment of Christians in Nigeria. His fear is objectively well-founded.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Dimitri, 40-year-old Hindu Male from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Hindu | Gender: Male | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Dimitri, a 40-year-old Hindu Male from Ukraine, fled due to being a Former members of armed forces which are fleeing persecution and revenge attacks. he then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's claim is accepted as credible in light of the background evidence regarding the situation faced by former Ukrainian soldiers returning home. His fear of persecution and ill-treatment is well-founded.
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible as it is supported by objective evidence that Hindus in Ukraine face discrimination and violence. His former role in the military also increases his risk profile.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 40-year-old Atheist Non-binary from Nigeria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Atheist | Gender: Non-binary | Country: Nigeria
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 40-year-old Atheist Non-binary from Nigeria, fled due to being a journalist targeted for political expression. they then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            I allow this appeal as I find that there is a real risk of persecution in Nigeria due to their profession as a journalist and the fact that they have already been targeted; it would be unduly harsh to expect them to relocate or modify their behavior. *GRANTED* *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The Appellant's account of fleeing as a journalist in Nigeria is credible, given their detailed description of threats received. Their subsequent travel to the UK and application for asylum demonstrates a genuine fear of persecution.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 40-year-old Hindu Non-binary from Syria</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 40 | Religion: Hindu | Gender: Non-binary | Country: Syria
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 40-year-old Hindu Non-binary from Syria, fled due to being a Women which are subjected to gender-based violence and unable to obtain state protection. they then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appeal is granted as it is accepted that the Appellant's account of facing gender-based violence in Syria and lack of state protection is credible and consistent with background information. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The appellant's claim is credible given the widespread reports of gender-based violence against women in Syria. Their inability to seek effective state protection further strengthens their asylum claim.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-title">Unknown, 12-year-old Jewish Non-binary from Ukraine</div>
+                    <span class="match-indicator match">✓ MATCH</span>
+                </div>
+                <div class="case-details">
+                    <strong>Case Details:</strong> Age: 12 | Religion: Jewish | Gender: Non-binary | Country: Ukraine
+                </div>
+                <div class="vignette-text">
+                    Unknown, a 12-year-old Jewish Non-binary from Ukraine, fled due to being a journalist targeted for political expression. they then traveled to the UK and applied for asylum.
+                </div>
+                <div class="decisions-container">
+            
+                    <div class="decision-panel pre-brexit">
+                        <h3>Pre-Brexit Model (2013-2016)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            I allow this appeal as I find that Unknown has demonstrated a well-founded fear of persecution in their home country and is entitled to international protection under the Refugee Convention. *END*
+                        </div>
+                    </div>
+                
+                    <div class="decision-panel post-brexit">
+                        <h3>Post-Brexit Model (2019-2025)</h3>
+                        <div class="decision granted">GRANTED</div>
+                        <div class="reasoning">
+                            <strong>Reasoning:</strong><br>
+                            The evidence presented demonstrates that Unknown has been subjected to persecution in Ukraine as a result of their journalistic activities, which is consistent with the Refugee Convention definition of'membership of a particular social group'. It is accepted that this would put them at risk upon return.
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    

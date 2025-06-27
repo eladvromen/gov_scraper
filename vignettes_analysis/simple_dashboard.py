@@ -139,7 +139,7 @@ df = st.session_state.df
 # Analysis mode selection
 analysis_mode = st.sidebar.selectbox(
     "📊 Analysis Mode",
-    ["Overview", "Topic Analysis", "Meta Topic Analysis", "Protected Attributes", "Cross-sectional Analysis", "Individual Cases", "Generate Report"]
+    ["Overview", "Model Comparison", "Topic Analysis", "Meta Topic Analysis", "Protected Attributes", "Cross-sectional Analysis", "Individual Cases", "Generate Report"]
 )
 
 # Global filters
@@ -210,6 +210,592 @@ if analysis_mode == "Overview":
                      labels={'mean': 'Agreement Rate'})
         fig.update_xaxes(tickangle=45)
         st.plotly_chart(fig, use_container_width=True)
+
+elif analysis_mode == "Model Comparison":
+    st.markdown("## ⚖️ Comprehensive Model Comparison")
+    st.markdown("*Compare grant rates between Pre-Brexit (2013-2016) and Post-Brexit (2019-2025) models*")
+    
+    # Comparison level selection
+    comparison_level = st.selectbox(
+        "📊 Select Comparison Level:",
+        ["Overview", "Meta Topic Level", "Topic Level", "Protected Attributes", "Topic × Attribute Intersections"]
+    )
+    
+    if comparison_level == "Overview":
+        st.markdown("### 🌍 Overall Model Behavior Comparison")
+        
+        # Overall statistics
+        pre_grant_rate = (filtered_df['pre_brexit_decision'] == 'granted').mean()
+        post_grant_rate = (filtered_df['post_brexit_decision'] == 'granted').mean()
+        grant_rate_diff = post_grant_rate - pre_grant_rate
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.metric("Pre-Brexit Grant Rate", f"{pre_grant_rate:.1%}")
+        with col2:
+            st.metric("Post-Brexit Grant Rate", f"{post_grant_rate:.1%}")
+        with col3:
+            delta_color = "normal" if abs(grant_rate_diff) < 0.05 else "inverse" if grant_rate_diff < 0 else "normal"
+            st.metric("Grant Rate Difference", f"{grant_rate_diff:+.1%}", delta=f"{grant_rate_diff:+.1%}")
+        
+        # Overall comparison visualization
+        fig = go.Figure()
+        fig.add_trace(go.Bar(
+            name='Pre-Brexit Model',
+            x=['Grant Rate', 'Denial Rate'],
+            y=[pre_grant_rate, 1-pre_grant_rate],
+            marker_color='#1f77b4',
+            text=[f'{pre_grant_rate:.1%}', f'{1-pre_grant_rate:.1%}'],
+            textposition='inside'
+        ))
+        fig.add_trace(go.Bar(
+            name='Post-Brexit Model',
+            x=['Grant Rate', 'Denial Rate'],
+            y=[post_grant_rate, 1-post_grant_rate],
+            marker_color='#ff7f0e',
+            text=[f'{post_grant_rate:.1%}', f'{1-post_grant_rate:.1%}'],
+            textposition='inside'
+        ))
+        fig.update_layout(
+            title="Overall Grant vs Denial Rates Comparison",
+            barmode='group',
+            yaxis_title="Rate",
+            height=400
+        )
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Decision pattern analysis
+        st.markdown("### 🔄 Decision Pattern Analysis")
+        pattern_counts = filtered_df['decision_pattern'].value_counts()
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            fig = px.pie(
+                values=pattern_counts.values,
+                names=pattern_counts.index,
+                title="Decision Pattern Distribution",
+                color_discrete_map={
+                    'granted → granted': '#2ecc71',
+                    'denied → denied': '#e74c3c',
+                    'granted → denied': '#f39c12',
+                    'denied → granted': '#3498db'
+                }
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        
+        with col2:
+            # Create summary metrics
+            agreement_cases = len(filtered_df[filtered_df['decisions_match']])
+            granted_to_denied = len(filtered_df[(filtered_df['pre_brexit_decision'] == 'granted') & 
+                                              (filtered_df['post_brexit_decision'] == 'denied')])
+            denied_to_granted = len(filtered_df[(filtered_df['pre_brexit_decision'] == 'denied') & 
+                                              (filtered_df['post_brexit_decision'] == 'granted')])
+            
+            st.markdown("**Decision Pattern Summary:**")
+            st.markdown(f"- **Agreement Cases**: {agreement_cases:,} ({agreement_cases/len(filtered_df):.1%})")
+            st.markdown(f"- **Became More Restrictive**: {granted_to_denied:,} cases")
+            st.markdown(f"- **Became More Permissive**: {denied_to_granted:,} cases")
+            
+            net_change = denied_to_granted - granted_to_denied
+            if net_change > 0:
+                st.markdown(f"- **📈 Net Effect**: {net_change:,} more grants (+{net_change/len(filtered_df):.1%})")
+            elif net_change < 0:
+                st.markdown(f"- **📉 Net Effect**: {abs(net_change):,} fewer grants ({net_change/len(filtered_df):.1%})")
+            else:
+                st.markdown(f"- **⚖️ Net Effect**: Balanced ({net_change:,} difference)")
+    
+    elif comparison_level == "Meta Topic Level":
+        st.markdown("### 🎯 Meta Topic Level Comparison")
+        
+        # Calculate meta topic statistics
+        meta_topic_stats = []
+        for meta_topic in filtered_df['meta_topic'].unique():
+            if meta_topic is None:
+                continue
+            
+            meta_data = filtered_df[filtered_df['meta_topic'] == meta_topic]
+            if len(meta_data) < 5:  # Skip small groups
+                continue
+            
+            pre_grant_rate = (meta_data['pre_brexit_decision'] == 'granted').mean()
+            post_grant_rate = (meta_data['post_brexit_decision'] == 'granted').mean()
+            grant_rate_diff = post_grant_rate - pre_grant_rate
+            
+            stats = {
+                'Meta Topic': meta_topic,
+                'Cases': len(meta_data),
+                'Pre-Brexit Grant Rate': pre_grant_rate,
+                'Post-Brexit Grant Rate': post_grant_rate,
+                'Grant Rate Difference': grant_rate_diff,
+                'Absolute Difference': abs(grant_rate_diff),
+                'Agreement Rate': meta_data['decisions_match'].mean(),
+                'More Permissive': grant_rate_diff > 0.05,
+                'More Restrictive': grant_rate_diff < -0.05
+            }
+            meta_topic_stats.append(stats)
+        
+        if meta_topic_stats:
+            meta_df = pd.DataFrame(meta_topic_stats).sort_values('Grant Rate Difference', ascending=False)
+            
+            # Heatmap visualization
+            st.markdown("#### 🌡️ Grant Rate Difference Heatmap")
+            
+            fig = px.bar(
+                meta_df, 
+                x='Meta Topic', 
+                y='Grant Rate Difference',
+                color='Grant Rate Difference',
+                color_continuous_scale='RdBu_r',
+                title="Grant Rate Changes by Meta Topic (Post-Brexit - Pre-Brexit)",
+                text=meta_df['Grant Rate Difference'].apply(lambda x: f'{x:+.1%}'),
+                hover_data=['Cases', 'Pre-Brexit Grant Rate', 'Post-Brexit Grant Rate', 'Agreement Rate']
+            )
+            fig.add_hline(y=0, line_dash="dash", line_color="black", annotation_text="No Change")
+            fig.update_traces(textposition='outside')
+            fig.update_xaxes(tickangle=45)
+            fig.update_layout(height=500)
+            st.plotly_chart(fig, use_container_width=True)
+            
+            # Side-by-side comparison
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("#### 📈 Most Permissive Changes")
+                permissive_topics = meta_df[meta_df['Grant Rate Difference'] > 0.05].head(5)
+                if len(permissive_topics) > 0:
+                    for _, row in permissive_topics.iterrows():
+                        st.markdown(f"""
+                        **{row['Meta Topic']}**  
+                        {row['Pre-Brexit Grant Rate']:.1%} → {row['Post-Brexit Grant Rate']:.1%} 
+                        ({row['Grant Rate Difference']:+.1%}, n={row['Cases']})
+                        """)
+                else:
+                    st.markdown("*No significant permissive changes found*")
+            
+            with col2:
+                st.markdown("#### 📉 Most Restrictive Changes")
+                restrictive_topics = meta_df[meta_df['Grant Rate Difference'] < -0.05].head(5)
+                if len(restrictive_topics) > 0:
+                    for _, row in restrictive_topics.iterrows():
+                        st.markdown(f"""
+                        **{row['Meta Topic']}**  
+                        {row['Pre-Brexit Grant Rate']:.1%} → {row['Post-Brexit Grant Rate']:.1%} 
+                        ({row['Grant Rate Difference']:+.1%}, n={row['Cases']})
+                        """)
+                else:
+                    st.markdown("*No significant restrictive changes found*")
+            
+            # Detailed table
+            st.markdown("#### 📊 Detailed Meta Topic Statistics")
+            display_df = meta_df[['Meta Topic', 'Cases', 'Pre-Brexit Grant Rate', 'Post-Brexit Grant Rate', 
+                                'Grant Rate Difference', 'Agreement Rate']].copy()
+            for col in ['Pre-Brexit Grant Rate', 'Post-Brexit Grant Rate', 'Grant Rate Difference', 'Agreement Rate']:
+                display_df[col] = display_df[col].apply(lambda x: f'{x:.1%}')
+            st.dataframe(display_df, use_container_width=True)
+    
+    elif comparison_level == "Topic Level":
+        st.markdown("### 📋 Topic Level Comparison")
+        
+        # Topic selection for detailed analysis
+        topic_comparison_mode = st.radio(
+            "Analysis Mode:",
+            ["All Topics Overview", "Individual Topic Deep Dive"]
+        )
+        
+        if topic_comparison_mode == "All Topics Overview":
+            # Calculate topic statistics
+            topic_stats = []
+            for topic in filtered_df['topic'].unique():
+                if topic is None:
+                    continue
+                
+                topic_data = filtered_df[filtered_df['topic'] == topic]
+                if len(topic_data) < 3:  # Skip very small groups
+                    continue
+                
+                pre_grant_rate = (topic_data['pre_brexit_decision'] == 'granted').mean()
+                post_grant_rate = (topic_data['post_brexit_decision'] == 'granted').mean()
+                grant_rate_diff = post_grant_rate - pre_grant_rate
+                
+                stats = {
+                    'Topic': topic,
+                    'Meta Topic': topic_data['meta_topic'].iloc[0] if len(topic_data) > 0 else 'Unknown',
+                    'Cases': len(topic_data),
+                    'Pre-Brexit Grant Rate': pre_grant_rate,
+                    'Post-Brexit Grant Rate': post_grant_rate,
+                    'Grant Rate Difference': grant_rate_diff,
+                    'Agreement Rate': topic_data['decisions_match'].mean()
+                }
+                topic_stats.append(stats)
+            
+            if topic_stats:
+                topic_df = pd.DataFrame(topic_stats)
+                
+                # Filter options
+                min_cases = st.slider("Minimum cases per topic:", 1, 50, 5)
+                topic_df_filtered = topic_df[topic_df['Cases'] >= min_cases].copy()
+                topic_df_filtered = topic_df_filtered.sort_values('Grant Rate Difference', ascending=False)
+                
+                # Visualization options
+                viz_option = st.selectbox("Visualization Type:", 
+                                        ["Grant Rate Difference", "Side-by-Side Comparison", "Scatter Plot"])
+                
+                if viz_option == "Grant Rate Difference":
+                    fig = px.bar(
+                        topic_df_filtered.head(20),  # Top 20 for readability
+                        x='Topic',
+                        y='Grant Rate Difference',
+                        color='Grant Rate Difference',
+                        color_continuous_scale='RdBu_r',
+                        title=f"Grant Rate Changes by Topic (Top 20, min {min_cases} cases)",
+                        hover_data=['Cases', 'Meta Topic', 'Agreement Rate']
+                    )
+                    fig.add_hline(y=0, line_dash="dash", line_color="black")
+                    fig.update_xaxes(tickangle=45)
+                    fig.update_layout(height=600)
+                    st.plotly_chart(fig, use_container_width=True)
+                
+                elif viz_option == "Side-by-Side Comparison":
+                    fig = go.Figure()
+                    
+                    topics_to_show = topic_df_filtered.head(15)['Topic']
+                    
+                    fig.add_trace(go.Bar(
+                        name='Pre-Brexit',
+                        x=topics_to_show,
+                        y=topic_df_filtered.head(15)['Pre-Brexit Grant Rate'],
+                        marker_color='#1f77b4'
+                    ))
+                    fig.add_trace(go.Bar(
+                        name='Post-Brexit',
+                        x=topics_to_show,
+                        y=topic_df_filtered.head(15)['Post-Brexit Grant Rate'],
+                        marker_color='#ff7f0e'
+                    ))
+                    
+                    fig.update_layout(
+                        title=f"Grant Rates Comparison by Topic (Top 15, min {min_cases} cases)",
+                        barmode='group',
+                        xaxis_tickangle=45,
+                        height=600
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                
+                else:  # Scatter Plot
+                    fig = px.scatter(
+                        topic_df_filtered,
+                        x='Pre-Brexit Grant Rate',
+                        y='Post-Brexit Grant Rate',
+                        size='Cases',
+                        color='Meta Topic',
+                        hover_data=['Topic', 'Grant Rate Difference'],
+                        title="Grant Rate Correlation (Pre-Brexit vs Post-Brexit)"
+                    )
+                    # Add diagonal line for reference
+                    fig.add_shape(
+                        type="line",
+                        x0=0, y0=0, x1=1, y1=1,
+                        line=dict(color="red", dash="dash"),
+                    )
+                    fig.add_annotation(
+                        x=0.7, y=0.8,
+                        text="Perfect Agreement Line",
+                        showarrow=True,
+                        arrowhead=2
+                    )
+                    fig.update_layout(height=600)
+                    st.plotly_chart(fig, use_container_width=True)
+                
+                # Summary insights
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.markdown("#### 📈 Biggest Increases in Grant Rate")
+                    increases = topic_df_filtered[topic_df_filtered['Grant Rate Difference'] > 0].head(5)
+                    for _, row in increases.iterrows():
+                        st.markdown(f"**{row['Topic'][:50]}{'...' if len(row['Topic']) > 50 else ''}**")
+                        st.markdown(f"*{row['Grant Rate Difference']:+.1%}* (n={row['Cases']})")
+                
+                with col2:
+                    st.markdown("#### 📉 Biggest Decreases in Grant Rate")
+                    decreases = topic_df_filtered[topic_df_filtered['Grant Rate Difference'] < 0].head(5)
+                    for _, row in decreases.iterrows():
+                        st.markdown(f"**{row['Topic'][:50]}{'...' if len(row['Topic']) > 50 else ''}**")
+                        st.markdown(f"*{row['Grant Rate Difference']:+.1%}* (n={row['Cases']})")
+        
+        else:  # Individual Topic Deep Dive
+            available_topics = sorted([t for t in filtered_df['topic'].unique() if t is not None])
+            selected_topic = st.selectbox("Select topic for detailed analysis:", available_topics)
+            
+            topic_data = filtered_df[filtered_df['topic'] == selected_topic]
+            
+            if len(topic_data) > 0:
+                pre_grant_rate = (topic_data['pre_brexit_decision'] == 'granted').mean()
+                post_grant_rate = (topic_data['post_brexit_decision'] == 'granted').mean()
+                grant_rate_diff = post_grant_rate - pre_grant_rate
+                
+                # Topic overview
+                col1, col2, col3, col4 = st.columns(4)
+                
+                with col1:
+                    st.metric("Cases", len(topic_data))
+                with col2:
+                    st.metric("Pre-Brexit Grant Rate", f"{pre_grant_rate:.1%}")
+                with col3:
+                    st.metric("Post-Brexit Grant Rate", f"{post_grant_rate:.1%}")
+                with col4:
+                    st.metric("Difference", f"{grant_rate_diff:+.1%}")
+                
+                # Decision flow diagram
+                granted_granted = len(topic_data[(topic_data['pre_brexit_decision'] == 'granted') & 
+                                                (topic_data['post_brexit_decision'] == 'granted')])
+                granted_denied = len(topic_data[(topic_data['pre_brexit_decision'] == 'granted') & 
+                                               (topic_data['post_brexit_decision'] == 'denied')])
+                denied_granted = len(topic_data[(topic_data['pre_brexit_decision'] == 'denied') & 
+                                               (topic_data['post_brexit_decision'] == 'granted')])
+                denied_denied = len(topic_data[(topic_data['pre_brexit_decision'] == 'denied') & 
+                                              (topic_data['post_brexit_decision'] == 'denied')])
+                
+                st.markdown("#### 🌊 Decision Flow Analysis")
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    # Sankey-like visualization using bar chart
+                    flow_data = {
+                        'Flow': ['Granted → Granted', 'Granted → Denied', 'Denied → Granted', 'Denied → Denied'],
+                        'Count': [granted_granted, granted_denied, denied_granted, denied_denied],
+                        'Color': ['#2ecc71', '#f39c12', '#3498db', '#e74c3c']
+                    }
+                    
+                    fig = px.bar(
+                        flow_data, 
+                        x='Flow', 
+                        y='Count',
+                        color='Flow',
+                        color_discrete_map=dict(zip(flow_data['Flow'], flow_data['Color'])),
+                        title=f"Decision Flows: {selected_topic}"
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                
+                with col2:
+                    st.markdown("**Flow Summary:**")
+                    st.markdown(f"- **Consistent Grants**: {granted_granted} cases")
+                    st.markdown(f"- **Became Restrictive**: {granted_denied} cases")
+                    st.markdown(f"- **Became Permissive**: {denied_granted} cases")
+                    st.markdown(f"- **Consistent Denials**: {denied_denied} cases")
+                    
+                    net_change = denied_granted - granted_denied
+                    if net_change > 0:
+                        st.markdown(f"- **📈 Net Effect**: +{net_change} more grants")
+                    elif net_change < 0:
+                        st.markdown(f"- **📉 Net Effect**: {net_change} fewer grants")
+                    else:
+                        st.markdown(f"- **⚖️ Net Effect**: No change")
+    
+    elif comparison_level == "Protected Attributes":
+        st.markdown("### 👥 Protected Attributes Comparison")
+        
+        attribute = st.selectbox("Select protected attribute:", ['gender', 'age', 'religion', 'country'])
+        
+        # Calculate statistics by attribute
+        attr_stats = []
+        for value in filtered_df[attribute].unique():
+            if value in ['Unknown', None]:
+                continue
+            
+            subset = filtered_df[filtered_df[attribute] == value]
+            if len(subset) < 3:  # Skip small groups
+                continue
+            
+            pre_grant_rate = (subset['pre_brexit_decision'] == 'granted').mean()
+            post_grant_rate = (subset['post_brexit_decision'] == 'granted').mean()
+            grant_rate_diff = post_grant_rate - pre_grant_rate
+            
+            stats = {
+                'Attribute Value': str(value),
+                'Cases': len(subset),
+                'Pre-Brexit Grant Rate': pre_grant_rate,
+                'Post-Brexit Grant Rate': post_grant_rate,
+                'Grant Rate Difference': grant_rate_diff,
+                'Agreement Rate': subset['decisions_match'].mean()
+            }
+            attr_stats.append(stats)
+        
+        if attr_stats:
+            attr_df = pd.DataFrame(attr_stats).sort_values('Grant Rate Difference', ascending=False)
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                # Grant rate comparison
+                fig = go.Figure()
+                fig.add_trace(go.Bar(
+                    name='Pre-Brexit',
+                    x=attr_df['Attribute Value'],
+                    y=attr_df['Pre-Brexit Grant Rate'],
+                    marker_color='#1f77b4'
+                ))
+                fig.add_trace(go.Bar(
+                    name='Post-Brexit',
+                    x=attr_df['Attribute Value'],
+                    y=attr_df['Post-Brexit Grant Rate'],
+                    marker_color='#ff7f0e'
+                ))
+                fig.update_layout(
+                    title=f"Grant Rates by {attribute.title()}",
+                    barmode='group',
+                    xaxis_tickangle=45
+                )
+                st.plotly_chart(fig, use_container_width=True)
+            
+            with col2:
+                # Grant rate difference
+                fig = px.bar(
+                    attr_df,
+                    x='Attribute Value',
+                    y='Grant Rate Difference',
+                    color='Grant Rate Difference',
+                    color_continuous_scale='RdBu_r',
+                    title=f"Grant Rate Changes by {attribute.title()}"
+                )
+                fig.add_hline(y=0, line_dash="dash", line_color="black")
+                fig.update_xaxes(tickangle=45)
+                st.plotly_chart(fig, use_container_width=True)
+            
+            # Bias analysis
+            st.markdown(f"#### ⚖️ Potential Bias Analysis for {attribute.title()}")
+            
+            # Identify groups with significant changes
+            significant_changes = attr_df[abs(attr_df['Grant Rate Difference']) > 0.1]
+            
+            if len(significant_changes) > 0:
+                st.markdown("**Groups with Significant Changes (>10%):**")
+                for _, row in significant_changes.iterrows():
+                    direction = "more favorable" if row['Grant Rate Difference'] > 0 else "less favorable"
+                    st.markdown(f"- **{row['Attribute Value']}**: Post-Brexit model is {direction} ({row['Grant Rate Difference']:+.1%}, n={row['Cases']})")
+            else:
+                st.markdown("*No significant bias changes detected (all changes <10%)*")
+            
+            # Detailed table
+            st.markdown("#### 📊 Detailed Statistics")
+            display_df = attr_df.copy()
+            for col in ['Pre-Brexit Grant Rate', 'Post-Brexit Grant Rate', 'Grant Rate Difference', 'Agreement Rate']:
+                display_df[col] = display_df[col].apply(lambda x: f'{x:.1%}')
+            st.dataframe(display_df, use_container_width=True)
+    
+    else:  # Topic × Attribute Intersections
+        st.markdown("### 🔀 Topic × Attribute Intersection Analysis")
+        
+        # Selection controls
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            intersection_topic = st.selectbox(
+                "Select topic:",
+                [t for t in filtered_df['topic'].unique() if t is not None]
+            )
+        
+        with col2:
+            intersection_attr = st.selectbox(
+                "Select protected attribute:",
+                ['gender', 'age', 'religion', 'country']
+            )
+        
+        # Filter data for selected topic
+        topic_data = filtered_df[filtered_df['topic'] == intersection_topic]
+        
+        if len(topic_data) > 0:
+            # Calculate intersection statistics
+            intersection_stats = []
+            for attr_value in topic_data[intersection_attr].unique():
+                if attr_value in ['Unknown', None]:
+                    continue
+                
+                subset = topic_data[topic_data[intersection_attr] == attr_value]
+                if len(subset) < 2:  # Skip very small groups
+                    continue
+                
+                pre_grant_rate = (subset['pre_brexit_decision'] == 'granted').mean()
+                post_grant_rate = (subset['post_brexit_decision'] == 'granted').mean()
+                grant_rate_diff = post_grant_rate - pre_grant_rate
+                
+                stats = {
+                    f'{intersection_attr.title()}': str(attr_value),
+                    'Cases': len(subset),
+                    'Pre-Brexit Grant Rate': pre_grant_rate,
+                    'Post-Brexit Grant Rate': post_grant_rate,
+                    'Grant Rate Difference': grant_rate_diff,
+                    'Agreement Rate': subset['decisions_match'].mean()
+                }
+                intersection_stats.append(stats)
+            
+            if intersection_stats:
+                intersection_df = pd.DataFrame(intersection_stats)
+                
+                # Visualizations
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    # Heatmap-style comparison
+                    fig = px.imshow(
+                        intersection_df[['Pre-Brexit Grant Rate', 'Post-Brexit Grant Rate']].values,
+                        x=['Pre-Brexit Grant Rate', 'Post-Brexit Grant Rate'],
+                        y=intersection_df[f'{intersection_attr.title()}'].values,
+                        color_continuous_scale='RdYlGn',
+                        title=f"Grant Rate Heatmap: {intersection_topic} by {intersection_attr.title()}"
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                
+                with col2:
+                    # Grant rate differences
+                    fig = px.bar(
+                        intersection_df,
+                        x=f'{intersection_attr.title()}',
+                        y='Grant Rate Difference',
+                        color='Grant Rate Difference',
+                        color_continuous_scale='RdBu_r',
+                        title=f"Grant Rate Changes: {intersection_topic}",
+                        text=intersection_df['Grant Rate Difference'].apply(lambda x: f'{x:+.1%}')
+                    )
+                    fig.add_hline(y=0, line_dash="dash", line_color="black")
+                    fig.update_traces(textposition='outside')
+                    fig.update_xaxes(tickangle=45)
+                    st.plotly_chart(fig, use_container_width=True)
+                
+                # Intersection insights
+                st.markdown(f"#### 💡 Insights for {intersection_topic}")
+                
+                if len(intersection_df) > 1:
+                    # Compare different attribute values within this topic
+                    max_diff_row = intersection_df.loc[intersection_df['Grant Rate Difference'].idxmax()]
+                    min_diff_row = intersection_df.loc[intersection_df['Grant Rate Difference'].idxmin()]
+                    
+                    if max_diff_row['Grant Rate Difference'] > 0.1:
+                        st.markdown(f"📈 **Most Favorable Change**: {intersection_attr.title()} '{max_diff_row[f'{intersection_attr.title()}']}' saw a {max_diff_row['Grant Rate Difference']:+.1%} increase in grant rates")
+                    
+                    if min_diff_row['Grant Rate Difference'] < -0.1:
+                        st.markdown(f"📉 **Most Restrictive Change**: {intersection_attr.title()} '{min_diff_row[f'{intersection_attr.title()}']}' saw a {min_diff_row['Grant Rate Difference']:+.1%} decrease in grant rates")
+                    
+                    # Check for potential differential impact
+                    diff_range = intersection_df['Grant Rate Difference'].max() - intersection_df['Grant Rate Difference'].min()
+                    if diff_range > 0.2:
+                        st.warning(f"⚠️ **Potential Differential Impact**: Large variation in grant rate changes across {intersection_attr} groups (range: {diff_range:.1%})")
+                
+                # Detailed statistics
+                st.markdown("#### 📊 Detailed Intersection Statistics")
+                display_df = intersection_df.copy()
+                for col in ['Pre-Brexit Grant Rate', 'Post-Brexit Grant Rate', 'Grant Rate Difference', 'Agreement Rate']:
+                    display_df[col] = display_df[col].apply(lambda x: f'{x:.1%}')
+                st.dataframe(display_df, use_container_width=True)
+            
+            else:
+                st.warning(f"Not enough data for intersection analysis between '{intersection_topic}' and {intersection_attr}")
+        
+        else:
+            st.warning("No data available for selected topic")
 
 elif analysis_mode == "Meta Topic Analysis":
     st.markdown("## 🎯 Meta Topic Analysis")
