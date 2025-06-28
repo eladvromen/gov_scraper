@@ -6,6 +6,8 @@ from pathlib import Path
 from datetime import datetime
 from itertools import product
 import random
+import time
+from typing import List, Dict
 
 # Try to import torch and transformers
 try:
@@ -59,38 +61,264 @@ class InferencePipeline:
         self.load_model()
     
     def load_model(self):
-        """Load the model and tokenizer from the specified directory."""
-        print(f"Loading model from: {self.model_path}")
-        try:
-            self.tokenizer = AutoTokenizer.from_pretrained(self.model_path)
+        """Load the model and tokenizer with ULTRA-OPTIMIZED settings for maximum speed."""
+        print(f"🚀 OPTIMIZED MODEL LOADING from: {self.model_path}")
+        
+        # Detect best available GPU for loading
+        if torch.cuda.is_available():
+            available_gpus = self._get_available_gpus()
+            target_gpu = available_gpus[0] if available_gpus else 0
+            print(f"🎯 PRIMARY TARGET: CUDA device {target_gpu} (selected from {len(available_gpus)} available)")
+            print(f"📋 All available CUDA devices: {available_gpus}")
+        else:
+            target_gpu = None
+            available_gpus = []
+            print("⚠️  No CUDA available, using CPU")
             
-            # Optimized model loading for A100s
-            self.model = AutoModelForCausalLM.from_pretrained(
+        try:
+            # OPTIMIZED TOKENIZER LOADING
+            print("📝 Loading tokenizer...")
+            self.tokenizer = AutoTokenizer.from_pretrained(
                 self.model_path,
-                torch_dtype=torch.float16,
-                device_map="auto",
-                use_cache=True,  # Enable KV caching for faster generation
-                low_cpu_mem_usage=True,
-                max_memory={0: "70GB", 1: "70GB", 2: "40GB", 3: "40GB"}  # Better GPU memory allocation
+                use_fast=True,  # Use fast tokenizer
+                local_files_only=not self.use_hf_hub  # Skip online checks for local models
             )
             
-            # Ensure pad token is set and configure for decoder-only models
+            # ULTRA-OPTIMIZED MODEL LOADING
+            print("🧠 Loading model with optimizations...")
+            
+            # Initialize device mapping variables
+            using_device_map = False
+            
+            if torch.cuda.is_available() and available_gpus:
+                # GPU-optimized loading
+                loading_kwargs = {
+                    'torch_dtype': torch.float16,  # Half precision for speed
+                    'low_cpu_mem_usage': True,    # Minimize CPU memory during loading
+                    'use_cache': True,           # Enable KV caching
+                    'local_files_only': not self.use_hf_hub,  # Skip online checks
+                    'trust_remote_code': False,  # Security and speed
+                }
+                
+                # Smart device mapping with fallback mechanism
+                # Try multi-GPU first, fall back to single-GPU if device conflicts occur
+                if len(available_gpus) > 1:
+                    print(f"🔄 Attempting multi-GPU setup first...")
+                    # Multi-GPU: distribute load across available GPUs only
+                    print(f"🔗 Multi-GPU mapping across CUDA devices: {available_gpus}")
+                    device_map = {}
+                    
+                    # Distribute layers across available GPUs
+                    for i in range(32):  # Assume ~32 layers for Llama
+                        gpu_idx = available_gpus[i % len(available_gpus)]
+                        device_map[f"model.layers.{i}"] = gpu_idx
+                    
+                    # Put embeddings and head on the primary GPU
+                    device_map.update({
+                        "model.embed_tokens": available_gpus[0],
+                        "model.norm": available_gpus[0],
+                        "lm_head": available_gpus[0]
+                    })
+                    
+                    loading_kwargs['device_map'] = device_map
+                    using_device_map = True
+                    # Set self.device to the primary GPU where embeddings are located
+                    self.device = torch.device(f"cuda:{available_gpus[0]}")
+                    print(f"📊 Layer distribution: Primary GPU (CUDA {available_gpus[0]}) + {len(available_gpus)-1} additional")
+                    print(f"🎯 Input device set to primary GPU: {self.device}")
+                else:
+                    # Single GPU: direct loading to the available GPU
+                    loading_kwargs['device_map'] = {'': target_gpu}
+                    self.device = torch.device(f"cuda:{target_gpu}")
+                    print(f"🎯 Single GPU loading: CUDA device {target_gpu}")
+                    
+                # Optimize memory allocation per GPU type
+                gpu_info = self._get_gpu_info(target_gpu)
+                if 'A100' in gpu_info['name']:
+                    max_memory_per_gpu = "75GB"  # Conservative for A100 80GB
+                elif 'L40S' in gpu_info['name']:
+                    max_memory_per_gpu = "42GB"  # Conservative for L40S 48GB
+                else:
+                    max_memory_per_gpu = "20GB"  # Conservative default
+                    
+                # Only set memory limits for available GPUs
+                loading_kwargs['max_memory'] = {i: max_memory_per_gpu for i in available_gpus}
+                print(f"💾 Memory allocation: {max_memory_per_gpu} per GPU on devices {available_gpus}")
+                
+            else:
+                # CPU-optimized loading
+                loading_kwargs = {
+                    'torch_dtype': torch.float32,  # CPU doesn't support float16 well
+                    'low_cpu_mem_usage': True,
+                    'device_map': 'cpu',
+                    'local_files_only': not self.use_hf_hub,
+                }
+                self.device = torch.device("cpu")
+                print("🖥️  CPU-optimized loading")
+            
+            # Load model with optimizations and fallback mechanism
+            start_time = time.time()
+            model_loaded_successfully = False
+            
+            try:
+                self.model = AutoModelForCausalLM.from_pretrained(
+                    self.model_path,
+                    **loading_kwargs
+                )
+                loading_time = time.time() - start_time
+                print(f"⚡ Model loaded in {loading_time:.1f}s")
+                
+                # Store device mapping info for inference
+                self.using_device_map = using_device_map
+                
+                # Test for device conflicts if using multi-GPU
+                if using_device_map and len(available_gpus) > 1:
+                    print("🔍 Testing multi-GPU setup for device conflicts...")
+                    try:
+                        # Quick test inference to check for device mismatch
+                        test_input = self.tokenizer("Test", return_tensors="pt")
+                        if hasattr(self, 'using_device_map') and self.using_device_map:
+                            test_input = {k: v.to(self.device) for k, v in test_input.items()}
+                        else:
+                            test_input = test_input.to(self.device)
+                        
+                        with torch.no_grad():
+                            _ = self.model.generate(**test_input, max_new_tokens=1, do_sample=False)
+                        print("✅ Multi-GPU setup working correctly!")
+                        model_loaded_successfully = True
+                        
+                    except Exception as device_error:
+                        if "Expected all tensors to be on the same device" in str(device_error):
+                            print(f"⚠️  Multi-GPU device conflict detected: {device_error}")
+                            print("🔄 Falling back to single-GPU mode...")
+                            # Clean up multi-GPU model
+                            del self.model
+                            if torch.cuda.is_available():
+                                torch.cuda.empty_cache()
+                        else:
+                            # Some other error - let it propagate
+                            raise device_error
+                else:
+                    model_loaded_successfully = True
+                    
+            except Exception as e:
+                if "device" not in str(e).lower():
+                    # Non-device related error - propagate it
+                    raise e
+                print(f"⚠️  Multi-GPU loading failed: {e}")
+                print("🔄 Falling back to single-GPU mode...")
+            
+            # Fallback to single-GPU if multi-GPU failed
+            if not model_loaded_successfully:
+                print("🎯 Loading model on single GPU (fallback mode)...")
+                fallback_kwargs = {
+                    'torch_dtype': torch.float16,
+                    'low_cpu_mem_usage': True,
+                    'use_cache': True,
+                    'local_files_only': not self.use_hf_hub,
+                    'trust_remote_code': False,
+                    'device_map': {'': available_gpus[0]},  # Single GPU
+                }
+                
+                self.model = AutoModelForCausalLM.from_pretrained(
+                    self.model_path,
+                    **fallback_kwargs
+                )
+                self.device = torch.device(f"cuda:{available_gpus[0]}")
+                self.using_device_map = False  # Single GPU mode
+                fallback_loading_time = time.time() - start_time
+                print(f"⚡ Fallback model loaded in {fallback_loading_time:.1f}s")
+                print(f"🎯 Using single GPU: CUDA {available_gpus[0]}")
+                
+            loading_time = time.time() - start_time
+            
+            # Show final device placement
+            if torch.cuda.is_available() and available_gpus:
+                print(f"📍 Model successfully placed on CUDA device(s): {available_gpus}")
+                for i in available_gpus:
+                    allocated = torch.cuda.memory_allocated(i) / (1024**3)
+                    print(f"   CUDA {i}: {allocated:.1f}GB allocated")
+            
+            # Configure tokenizer for decoder-only models
             if self.tokenizer.pad_token is None:
                 self.tokenizer.pad_token = self.tokenizer.eos_token
+            self.tokenizer.padding_side = 'left'  # Better for batching
             
-            # Set left padding for decoder-only models (like Llama)
-            self.tokenizer.padding_side = 'left'
+            # OPTIONAL: PyTorch 2.0 compilation for even more speed
+            if torch.cuda.is_available() and hasattr(torch, 'compile'):
+                try:
+                    print("🔧 Attempting PyTorch 2.0 compilation...")
+                    compile_start = time.time()
+                    self.model = torch.compile(self.model, mode="max-autotune")
+                    compile_time = time.time() - compile_start
+                    print(f"⚡ Model compiled in {compile_time:.1f}s - maximum speed enabled!")
+                except Exception as e:
+                    print(f"⚠️  Compilation skipped: {e}")
             
-            # Optimize model with PyTorch 2.0 compilation (if available)
-            try:
-                self.model = torch.compile(self.model, mode="reduce-overhead")
-                print("Model compiled with PyTorch 2.0 optimizations")
-            except Exception as compile_error:
-                print(f"PyTorch compilation not available: {compile_error}")
+            # Final optimizations
+            self.model.eval()  # Set to evaluation mode
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()  # Clear any loading artifacts
                 
-            print(f"Model loaded successfully on device: {self.device}")
+            print(f"✅ Model ready on device: {self.device}")
+            print(f"🚀 Total loading time: {time.time() - start_time:.1f}s")
+            
         except Exception as e:
-            raise RuntimeError(f"Failed to load model: {str(e)}")
+            raise RuntimeError(f"💥 Model loading failed: {str(e)}")
+    
+    def _get_available_gpus(self) -> List[int]:
+        """
+        Get list of GPUs with available memory (>5GB free).
+        IMPORTANT: Returns PyTorch CUDA device IDs, which may differ from nvidia-smi numbering!
+        """
+        available = []
+        
+        print("🔍 GPU Numbering Verification:")
+        print("   nvidia-smi vs PyTorch CUDA device mapping:")
+        
+        for i in range(torch.cuda.device_count()):
+            try:
+                torch.cuda.set_device(i)
+                
+                # Get GPU properties
+                props = torch.cuda.get_device_properties(i)
+                total_mem = props.total_memory
+                allocated_mem = torch.cuda.memory_allocated(i)
+                free_mem = total_mem - allocated_mem
+                free_gb = free_mem / (1024**3)
+                total_gb = total_mem / (1024**3)
+                
+                # Show the mapping clearly
+                print(f"   PyTorch CUDA {i}: {props.name} ({total_gb:.0f}GB total, {free_gb:.1f}GB free)")
+                
+                if free_gb > 5:  # At least 5GB free
+                    available.append(i)
+                    print(f"   ✅ CUDA {i} AVAILABLE ({free_gb:.1f}GB free)")
+                else:
+                    print(f"   ❌ CUDA {i} TOO BUSY ({free_gb:.1f}GB free, need >5GB)")
+                    
+            except Exception as e:
+                print(f"   ⚠️  CUDA {i}: Error checking - {e}")
+        
+        print(f"\n🎯 Selected CUDA devices for model loading: {available}")
+        
+        if not available:
+            print("⚠️  WARNING: No GPUs have sufficient free memory!")
+            print("   Consider killing other processes or using CPU mode")
+        
+        return available
+    
+    def _get_gpu_info(self, gpu_id: int) -> Dict:
+        """Get GPU information for optimization."""
+        try:
+            props = torch.cuda.get_device_properties(gpu_id)
+            return {
+                'name': props.name,
+                'memory_gb': props.total_memory / (1024**3),
+                'compute_capability': f"{props.major}.{props.minor}"
+            }
+        except Exception:
+            return {'name': 'Unknown', 'memory_gb': 0, 'compute_capability': '0.0'}
     
     def generate_inference_records(self, vignettes):
         """
@@ -273,7 +501,15 @@ class InferencePipeline:
                 truncation=True,
                 max_length=2048,
                 padding=True
-            ).to(self.device)
+            )
+            
+            # Handle device placement based on whether device_map is used
+            if hasattr(self, 'using_device_map') and self.using_device_map:
+                # When using device_map, move ALL input components to the device where embeddings are located
+                inputs = {k: v.to(self.device) for k, v in inputs.items()}
+            else:
+                # Standard device placement for single-device models
+                inputs = inputs.to(self.device)
             
             # Generate response
             with torch.no_grad():
@@ -322,15 +558,23 @@ class InferencePipeline:
                     truncation=True,
                     max_length=2048,
                     padding=True
-                ).to(self.device)
+                )
+                
+                # Handle device placement based on whether device_map is used
+                if hasattr(self, 'using_device_map') and self.using_device_map:
+                    # When using device_map, move ALL input components to the device where embeddings are located
+                    inputs = {k: v.to(self.device) for k, v in inputs.items()}
+                else:
+                    # Standard device placement for single-device models
+                    inputs = inputs.to(self.device)
                 
                 # Generate responses with optimized parameters
                 with torch.no_grad():
                     outputs = self.model.generate(
                         **inputs,
-                        max_new_tokens=1000,
+                        max_new_tokens=200,
                         do_sample=True,
-                        temperature=0.5,#0.7
+                        temperature= 0, #0.5,#0.7
                         top_p=0.6,
                         repetition_penalty=1.2,#1.1
                         pad_token_id=self.tokenizer.eos_token_id,

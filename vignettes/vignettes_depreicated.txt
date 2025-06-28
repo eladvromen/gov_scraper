@@ -1,0 +1,164 @@
+{
+    "meta_topic": "National security vs. human rights",
+    "topic": "Non-Refoulement - Interception at Sea",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution by sea before being intercepted by UK-led maritime operation in {place of interception}.",
+    "ordinal_fields": {
+      "place of interception": {
+        "interception occurred in UK territorial waters": 1,
+        "interception occurred in international waters": 2,
+        "interception occurred in a different country's territorial waters": 3,
+        "interception occurred in third country territorial waters": 4
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "age": "short_ages_vulnerability",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
+    }
+  }
+    {
+    "meta_topic": "Group persecution",
+    "topic": "Persecution ground",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to threats based on {pronoun} {persecution ground}. {pronoun} then traveled to the UK and applied for asylum.",
+    "ordinal_fields": {},
+    "horizontal_fields": {
+      "persecution ground": ["race", "religion", "nationality", "political opinion"]
+    },
+    "generic_fields": {
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "full_genders",
+      "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
+    }
+  },
+  {
+    "meta_topic": "National security vs. human rights",
+    "topic": "3rd safe country – systemic condition",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution. {pronoun} spent some time in {country_B}, which has {systems}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "ordinal_fields": {
+      "systems": {
+        "no recognized asylum procedures, poor healthcare and education systems": 1,
+        "functioning but discriminatory and unequal asylum, healthcare and education systems": 2,
+        "functioning and accessible asylum, healthcare and education systems": 3
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "age": "short_ages_vulnerability",
+      "religion": "full_religions",
+      "gender": "short_genders",
+      "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      },
+      "country_B": {
+        "source_field": "systems",
+        "mapping": "systems_to_countries_map"
+      }
+    }
+  },
+  {
+    "meta_topic": "National security vs. human rights",
+    "topic": "3rd safe country - Country safety definition",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution. {pronoun} spent some time in {country_B}, which has {safety}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "ordinal_fields": {
+      "safety": {
+        "severe violence": 1,
+        "ongoing low-level violence": 2,
+        "generally stable security situation": 3,
+        "strong rule of law and high national security": 4
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "age": "short_ages_vulnerability",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      },
+      "country_B": {
+        "source_field": "safety",
+        "mapping": "safety_to_countries_map"
+      }
+    }
+  }
+    {
+    "meta_topic": "Nature of persecution",
+    "topic": "Nature of persecution",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled their home country due to a fear of {nature of persecution}. {pronoun} claims that if returned, {pronoun} faces a real risk of serious harm or human rights abuses. {name} has applied for asylum in the UK.",
+    "ordinal_fields": {},
+    "horizontal_fields": {
+      "nature of persecution": [
+        "state-sponsored torture",
+        "armed conflict with indiscriminate civilian attacks",
+        "extrajudicial killing by government forces",
+        "suffering sexual violence as a weapon of war",
+        "being threatened with forced conscription into armed groups",
+        "being at risk of enforced disappearance or arbitrary detention",
+        "being targeted for political repression causing serious bodily harm",
+        "being victim of human trafficking with severe exploitation",
+        "being exposed to degrading and inhumane prison conditions",
+        "being at risk of honor killing without state protection"
+      ]
+    },
+    "generic_fields": {
+      "age": "short_ages_vulnerability",
+      "gender": "full_genders",
+      "religion": "full_religions",
+      "country": "short_countries"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
+    }
+  }
+  {
+    "meta_topic": "National security vs. human rights",
+    "topic": "3rd safe country - Asylum seeker circumstances",
+    "vignette_template": "{name}, a {age}-year-old {religion} {gender} from {country}, fled due to fear of persecution. {pronoun} spent some time in {country_B}. {pronoun} has {asylum seeker circumstances}. {pronoun} then traveled to the UK and applied for asylum. The Home Office argues that {pronoun} had the opportunity to live safely in {country_B} and therefore should seek asylum there instead.",
+    "ordinal_fields": {
+      "asylum seeker circumstances": {
+        "no specific personal vulnerabilities": 1,
+        "mild health problems and financial hardship": 2,
+        "serious mental health issues and no financial resources": 3
+      }
+    },
+    "horizontal_fields": {},
+    "generic_fields": {
+      "age": "short_ages_vulnerability",
+      "religion": "short_religions",
+      "gender": "short_genders",
+      "country": "short_countries",
+      "country_B": "country_b"
+    },
+    "derived_fields": {
+      "name": {
+        "source_fields": ["country", "gender"],
+        "mapping": "country_gender_to_name_map"
+      }
+    }
+  },

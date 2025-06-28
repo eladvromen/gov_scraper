@@ -37,6 +37,9 @@ DECISION_VARIANTS = {
     'deny': 'Denied',
     'grant': 'Granted',  # "grant" = Granted
     'asylum': 'Granted',  # "grant asylum" = Granted, "I grant him asylum" = Granted
+    'allows': 'Granted',  # "The Tribunal allows" = Granted
+    'dismisses': 'Denied',  # "The Tribunal dismisses" = Denied
+    'dismiss': 'Denied',   # "leading me to dismiss" = Denied
     # New inconclusive decision categories
     'partially granted': 'Inconclusive',
     'partial': 'Inconclusive',
@@ -54,6 +57,16 @@ DECISION_PATTERNS = [
     r'(?:Decision|DECISION|Decided):\s*(?:ASYLUM\s+|Appeal\s+)?(?P<decision_compound>granted|denied|dismissed|allowed|refused|approved|partially\s+granted)',
     # Alternative format: *GRANTED* or *DENIED* or *PARTIALLY GRANTED*
     r'\*(?P<decision2>granted|denied|dismissed|allowed|refused|approved|partially\s+granted|adjourned)\*',
+    # NEW: "I *DECISION*" format: "I *DENY*", "I *GRANT*"
+    r'I\s+\*(?P<decision_asterisk>granted|denied|dismissed|allowed|refused|approved|grant|deny)\*',
+    # NEW: Asterisk format with ASYLUM: *GRANTED ASYLUM*, *DENIED ASYLUM*
+    r'\*(?P<decision20>granted|denied)\s+asylum\*',
+    # NEW: Asterisk format with ASYLUM CLAIM: *GRANTED ASYLUM CLAIM*, *DENIED ASYLUM CLAIM*
+    r'\*(?P<decision21>granted|denied)\s+asylum\s+claim\*',
+    # NEW: The appeal of [name]... is granted/denied format
+    r'(?:The\s+)?appeal\s+of\s+\w+,?\s+.*?,?\s+is\s+(?P<decision_name>granted|denied|dismissed|allowed|refused|approved)',
+    # NEW: The Tribunal allows/dismisses this appeal format
+    r'(?:The\s+)?Tribunal\s+(?P<decision_tribunal>allows|dismisses)\s+(?:this\s+)?appeal',
     # Appeal/claim/application format: "The appeal/claim/application is [accordingly] granted/denied"
     r'(?:appeal|claim|application)\s+is\s+(?:accordingly\s+)?(?P<decision3>granted|denied|dismissed|allowed|refused|approved)',
     # Application for asylum format: "application for asylum is granted/denied"
@@ -86,10 +99,35 @@ DECISION_PATTERNS = [
     r'(?:Her|His|Their)\s+claim\s+for\s+asylum\s+in\s+the\s+UK\s+is\s+(?P<decision11>granted|denied)',
     # Direct grant by judge: "I grant him asylum", "I grant her asylum"
     r'I\s+grant\s+(?:him|her|them)\s+(?P<decision12>asylum)',
+    # NEW: Flexible "I ... grant/deny asylum" pattern: "I find ... and accordingly grant him asylum"
+    r'I\s+.*?\s+(?P<decision25>grant|deny)\s+(?:him|her|them|the\s+appellant)\s+asylum',
     # Credibility denial: "His application lacks credibility and is denied"
     r'(?:His|Her|Their)\s+application\s+lacks\s+credibility\s+and\s+is\s+(?P<decision13>denied|refused)',
     # Appeal granted: "This appeal is therefore granted on asylum grounds"
     r'This\s+appeal\s+is\s+therefore\s+(?P<decision14>granted|denied)\s+on\s+asylum\s+grounds',
+    # NEW PATTERNS FROM FAILED EXTRACTIONS:
+    # Passive voice with pronouns: "She/He/They has been granted/denied", "She/He/They was granted/denied"
+    r'(?:She|He|They|(?:\w+))\s+(?:has\s+been|was|is)\s+(?P<decision15>granted|denied|dismissed|allowed|refused|approved)',
+    # Incomplete sentence with grant/deny: "She has been granted" (even without explicit object)
+    r'(?:She|He|They|(?:\w+))\s+(?:has\s+been|was|is)\s+(?P<decision16>granted|denied)\s*\*?END\*?',
+    # Leading me to deny (more flexible): "leading me to deny/grant [object]"
+    r'leading\s+me\s+to\s+(?P<decision17>grant|deny|allow|dismiss)\s+(?:the\s+)?(?:appeal|claim|application|it)?',
+    # Missing passive constructions: "is granted/denied", "are granted/denied"
+    r'(?:is|are)\s+(?:therefore\s+|accordingly\s+)?(?P<decision18>granted|denied|dismissed|allowed|refused|approved)',
+    # Name-specific patterns: "[Name] has been granted/denied"
+    r'\w+\s+has\s+been\s+(?P<decision19>granted|denied|dismissed|allowed|refused|approved)',
+    # NEW: Appeal against denial pattern: "appeal against denial of asylum is granted/denied"
+    r'appeal\s+against\s+denial\s+of\s+asylum\s+is\s+(?P<decision22>granted|denied|dismissed|allowed|refused|approved)',
+    # NEW: "Shall be" pattern: "application for asylum shall be granted/denied"
+    r'(?:application|claim)\s+for\s+asylum\s+shall\s+be\s+(?P<decision23>granted|denied|dismissed|allowed|refused|approved)',
+    # NEW: More general "shall be" pattern: "shall be granted/denied"
+    r'shall\s+be\s+(?P<decision24>granted|denied|dismissed|allowed|refused|approved)',
+    # NEW: "I conclude that" pattern: "I conclude that her asylum claim is credible and should be granted"
+    r'I\s+conclude\s+that\s+.*?\s+(?:is|should\s+be)\s+(?P<decision26>granted|denied|dismissed|allowed|refused|approved)',
+    # NEW: "I therefore" pattern: "I therefore grant this appeal"
+    r'I\s+therefore\s+(?P<decision27>grant|deny|allow|dismiss)\s+(?:this\s+)?(?:appeal|claim|application)',
+    # NEW: "credible and granted/denied" pattern: "Her claim for asylum is credible and granted"
+    r'(?:claim|application)\s+(?:for\s+asylum\s+)?is\s+credible\s+and\s+(?P<decision28>granted|denied|dismissed|allowed|refused|approved)',
 ]
 
 def normalize_decision(word: str) -> Optional[str]:
@@ -113,7 +151,7 @@ def extract_primary_decision(response_text: str) -> Optional[str]:
             try:
                 # Try all decision groups
                 decision_word = None
-                for group_name in ['decision', 'decision_compound', 'decision2', 'decision3', 'decision3b', 'decision3c', 'decision4', 'decision5', 'decision5b', 'decision5c', 'decision5d', 'decision6', 'decision7', 'decision7b', 'decision8', 'decision9', 'decision10', 'decision11', 'decision12', 'decision13', 'decision14']:
+                for group_name in ['decision', 'decision_compound', 'decision2', 'decision_asterisk', 'decision_name', 'decision_tribunal', 'decision3', 'decision3b', 'decision3c', 'decision4', 'decision5', 'decision5b', 'decision5c', 'decision5d', 'decision6', 'decision7', 'decision7b', 'decision8', 'decision9', 'decision10', 'decision11', 'decision12', 'decision13', 'decision14', 'decision15', 'decision16', 'decision17', 'decision18', 'decision19', 'decision20', 'decision21', 'decision22', 'decision23', 'decision24', 'decision25', 'decision26', 'decision27', 'decision28']:
                     if group_name in match.groupdict() and match.group(group_name):
                         decision_word = match.group(group_name)
                         break
@@ -210,6 +248,7 @@ def analyze_response(response_text: str, case_metadata: Dict[str, Any]) -> Dict[
     has_decision_format = bool(re.search(r'(?:Decision|DECISION|Decided):\s*\w+', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'(?:Decision|DECISION|Decided):\s*(?:ASYLUM\s+|Appeal\s+)?(?:granted|denied|dismissed|allowed|refused|approved|partially\s+granted)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'\*(?:granted|denied|dismissed|allowed|refused|approved|partially\s+granted|adjourned)\*', response_text, re.IGNORECASE)) or \
+                         bool(re.search(r'I\s+\*(?:granted|denied|dismissed|allowed|refused|approved|grant|deny)\*', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'(?:appeal|claim|application)\s+is\s+(?:accordingly\s+)?(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'application\s+for\s+asylum\s+(?:in\s+the\s+UK\s+)?is\s+(?:therefore\s+)?(?:granted|denied|dismissed|allowed|refused|approved)', response_text, re.IGNORECASE)) or \
                          bool(re.search(r'claim\s+for\s+asylum\s+is\s+(?:accordingly\s+)?(?:granted|denied)', response_text, re.IGNORECASE)) or \

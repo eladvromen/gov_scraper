@@ -25,7 +25,9 @@ from itertools import product
 # Add vignettes directory to path for imports
 vignettes_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../vignettes'))
 sys.path.insert(0, vignettes_path)
-from field_definitions import get_name_for_country_gender, get_pronoun, systems_to_countries_map, safety_to_countries_map
+from field_definitions import (get_name_for_country_gender, get_pronoun, systems_to_countries_map, 
+                              safety_to_countries_map, safety_and_systems_to_countries_map,
+                              get_verb_past_be, get_pronoun_possessive, get_verb_present_third_person)
 
 def filter_vignettes(vignettes, filter_criteria):
     """
@@ -157,10 +159,25 @@ def generate_subset_samples(vignettes, num_samples_per_vignette=3, seed=None):
                             val = sample_values.get(source_field)
                             if val and val in safety_to_countries_map:
                                 sample_values["country_B"] = safety_to_countries_map[val][0]
+                        elif mapping == "safety_and_systems_to_countries_map":
+                            # NEW: Handle combined safety and systems mapping
+                            val = sample_values.get(source_field)
+                            if val and val in safety_and_systems_to_countries_map:
+                                sample_values["country_B"] = safety_and_systems_to_countries_map[val][0]
+                            else:
+                                print(f"DEBUG: Could not find mapping for '{val}' in safety_and_systems_to_countries_map")
+                                print(f"DEBUG: Available keys: {list(safety_and_systems_to_countries_map.keys())}")
             
-            # Add pronoun
+                        # Add pronoun and grammar helpers
             if 'gender' in sample_values:
-                sample_values['pronoun'] = get_pronoun(sample_values['gender'])
+                gender = sample_values['gender']
+                sample_values['pronoun'] = get_pronoun(gender)
+                sample_values['pronoun_was_were'] = get_verb_past_be(gender)
+                sample_values['pronoun_possessive'] = get_pronoun_possessive(gender)
+                # Common verb forms
+                sample_values['pronoun_suffers'] = get_verb_present_third_person(gender, 'suffer')
+                sample_values['pronoun_lives'] = get_verb_present_third_person(gender, 'live')
+                sample_values['pronoun_works'] = get_verb_present_third_person(gender, 'work')
             
             # Generate vignette text
             try:
@@ -246,12 +263,12 @@ def run_production_subset_inference(model_subdir, vignettes_path, filter_criteri
         print("\n[DRY RUN] Would run inference on above samples")
         return sample_records
     
-    # Run inference using ProductionAttentionPipeline
-    print(f"\nInitializing ProductionAttentionPipeline...")
+    # Run inference using OPTIMIZED ProductionAttentionPipeline
+    print(f"\nInitializing OPTIMIZED ProductionAttentionPipeline...")
     if collect_attention:
         print(f"⚠️  Attention collection ENABLED - this will be slower but collect attention data")
     else:
-        print(f"🚀 Attention collection DISABLED - optimized for speed")
+        print(f"🚀 Attention collection DISABLED - using ultra-optimized streaming pipeline")
         
     pipeline = ProductionAttentionPipeline(
         model_subdir, 
@@ -259,30 +276,45 @@ def run_production_subset_inference(model_subdir, vignettes_path, filter_criteri
         collect_attention=collect_attention
     )
     
-    # Create prompts for all samples
-    print(f"Running {'attention-enabled' if collect_attention else 'optimized'} inference...")
-    prompts = []
-    for record in sample_records:
-        prompt = pipeline._create_prompt(record['vignette_text'])
-        prompts.append(prompt)
-    
-    # Run batch inference
+    # OPTIMIZED: Use streaming processing instead of pre-loading all prompts
     if collect_attention:
-        # For attention mode, we need to use the attention-enabled method
-        # This requires creating temporary vignette-like structures
-        print("Note: Attention collection with pre-generated samples not fully implemented")
-        print("Falling back to non-attention mode for now...")
-        responses = pipeline._run_inference_batch_optimized(prompts, batch_size=batch_size)
+        # For attention mode, convert samples back to vignette format for streaming
+        print("Running with attention collection (slower)...")
+        # Convert sample records back to vignette format for the streaming pipeline
+        pseudo_vignettes = []
+        for record in sample_records:
+            pseudo_vignette = {
+                'topic': record['topic'],
+                'meta_topic': record['meta_topic'],
+                'vignette_template': record['vignette_text'],  # Pre-formatted text
+                'generic_fields': {},  # Empty since already formatted
+                'ordinal_fields': {},
+                'horizontal_fields': {},
+                'derived_fields': {}
+            }
+            pseudo_vignettes.append(pseudo_vignette)
+        
+        inference_results = pipeline.generate_inference_records_with_attention_optimized(
+            pseudo_vignettes, batch_size=batch_size
+        )
     else:
-        responses = pipeline._run_inference_batch_optimized(prompts, batch_size=batch_size)
-    
-    # Combine sample records with model responses
-    inference_results = []
-    for record, response in zip(sample_records, responses):
-        result = record.copy()
-        result['model_response'] = response
-        result['inference_timestamp'] = datetime.now().isoformat()
-        inference_results.append(result)
+        # OPTIMIZED: Use ultra-fast batch processing for non-attention mode
+        print(f"Running ULTRA-OPTIMIZED batch inference...")
+        prompts = []
+        for record in sample_records:
+            prompt = pipeline._create_prompt(record['vignette_text'])
+            prompts.append(prompt)
+        
+        # Use optimized batch method
+        responses = pipeline._run_inference_batch_optimized(prompts, batch_size)
+        
+        # Combine sample records with model responses
+        inference_results = []
+        for record, response in zip(sample_records, responses):
+            result = record.copy()
+            result['model_response'] = response
+            result['inference_timestamp'] = datetime.now().isoformat()
+            inference_results.append(result)
     
     # Add sampling metadata to each record
     for record in inference_results:
@@ -290,6 +322,7 @@ def run_production_subset_inference(model_subdir, vignettes_path, filter_criteri
             'num_samples_requested': num_samples,
             'random_seed': seed,
             'production_pipeline': True,
+            'ultra_optimized': True,
             'batch_size': batch_size
         }
     
@@ -302,6 +335,117 @@ def run_production_subset_inference(model_subdir, vignettes_path, filter_criteri
         print(f"✓ All records include proper sample_id for dataset matching")
     
     return inference_results
+
+def run_production_subset_inference_ultra_optimized(model_subdir, vignettes_path, filter_criteria, num_samples=3, 
+                                  output_path=None, seed=None, dry_run=False, all_vignettes=False, 
+                                  use_hf_hub=False, batch_size=None, collect_attention=False, chunk_size=1000):
+    """
+    ULTRA-OPTIMIZED: Run inference with streaming pipeline for maximum efficiency.
+    Uses the new streaming approach that can handle 10,000+ samples efficiently.
+    
+    Args:
+        model_subdir (str): Model subdirectory name or HF Hub model name
+        vignettes_path (str): Path to vignettes JSON file
+        filter_criteria (dict): Criteria for filtering vignettes
+        num_samples (int): Number of random samples per vignette (None for all permutations)
+        output_path (str): Output file path
+        seed (int): Random seed for reproducible sampling
+        dry_run (bool): If True, don't run actual inference
+        all_vignettes (bool): If True, process all vignettes (skip filtering)
+        use_hf_hub (bool): If True, load model from Hugging Face Hub
+        batch_size (int): Batch size for inference (auto-detected if None)
+        collect_attention (bool): If True, collect attention data
+        chunk_size (int): Number of samples to process in each streaming chunk
+    
+    Returns:
+        list: Inference results
+    """
+    # Load vignettes
+    print("🔄 Loading vignettes...")
+    vignettes = load_vignettes(vignettes_path)
+    print(f"Loaded {len(vignettes)} total vignettes")
+    
+    # Filter vignettes (or use all if all_vignettes is True)
+    if all_vignettes:
+        filtered_vignettes = vignettes
+        print(f"Processing all {len(filtered_vignettes)} vignettes")
+    else:
+        filtered_vignettes = filter_vignettes(vignettes, filter_criteria)
+        print(f"Filtered to {len(filtered_vignettes)} vignettes matching criteria")
+    
+    if not filtered_vignettes:
+        print("No vignettes to process!")
+        return []
+    
+    print("\n📋 Selected vignettes:")
+    for i, vignette in enumerate(filtered_vignettes):
+        result = calculate_vignette_permutations(vignette)
+        print(f"  {i+1}. {vignette['topic']} ({result['total']:,} total permutations)")
+    
+    if num_samples:
+        print(f"\n🎯 Processing mode: {num_samples} random samples per vignette")
+        total_samples = len(filtered_vignettes) * num_samples
+        
+        # Use the existing subset sampling approach for small numbers
+        if dry_run:
+            print(f"\n[DRY RUN] Would generate {total_samples} samples")
+            return []
+            
+        return run_production_subset_inference(
+            model_subdir, vignettes_path, filter_criteria, num_samples, 
+            output_path, seed, dry_run, all_vignettes, use_hf_hub, batch_size or 64, collect_attention
+        )
+    else:
+        # STREAMING MODE: Process all permutations efficiently
+        print(f"\n🚀 ULTRA-OPTIMIZED STREAMING MODE: Processing ALL permutations")
+        
+        # Calculate total work
+        total_permutations = 0
+        for vignette in filtered_vignettes:
+            result = calculate_vignette_permutations(vignette)
+            total_permutations += result['total']
+        
+        print(f"Total permutations to process: {total_permutations:,}")
+        
+        if dry_run:
+            print(f"\n[DRY RUN] Would process {total_permutations:,} permutations using streaming pipeline")
+            return []
+    
+        # Initialize ULTRA-OPTIMIZED pipeline
+        print(f"\n🚀 Initializing ULTRA-OPTIMIZED ProductionAttentionPipeline...")
+        if collect_attention:
+            print(f"⚠️  Attention collection ENABLED - this will be slower but collect attention data")
+        else:
+            print(f"⚡ Attention collection DISABLED - maximum speed optimization")
+            
+        pipeline = ProductionAttentionPipeline(
+            model_subdir, 
+            use_hf_hub=use_hf_hub,
+            collect_attention=collect_attention
+        )
+        
+        # Use the optimized method
+        print(f"🌊 Running inference pipeline...")
+        inference_results = pipeline.generate_inference_records(
+            filtered_vignettes, 
+            batch_size=batch_size or 16
+        )
+        
+        # Save results
+        if output_path:
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            
+            # Save with minimal indentation for large files
+            print(f"💾 Saving {len(inference_results):,} results...")
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(inference_results, f, ensure_ascii=False)  # No indent for speed
+            
+            print(f"\n✅ ULTRA-OPTIMIZED inference completed!")
+            print(f"  Results saved to: {output_path}")
+            print(f"  Total records: {len(inference_results):,}")
+            print(f"  File size: {os.path.getsize(output_path) / (1024*1024):.1f} MB")
+        
+        return inference_results
 
 def main():
     parser = argparse.ArgumentParser(
@@ -344,9 +488,11 @@ Examples:
     parser.add_argument("--topic-keywords", nargs='+',
                        help="Keywords that must appear in vignette topic")
     parser.add_argument("--samples", type=int, default=3,
-                       help="Number of random samples per vignette (default: 3)")
-    parser.add_argument("--batch-size", type=int, default=16,
-                       help="Batch size for inference (default: 16)")
+                       help="Number of random samples per vignette (default: 3, use 0 for ALL permutations)")
+    parser.add_argument("--batch-size", type=int,
+                       help="Batch size for inference (auto-detected if not specified)")
+    parser.add_argument("--chunk-size", type=int, default=1000,
+                       help="Chunk size for streaming processing (default: 1000)")
     parser.add_argument("--seed", type=int,
                        help="Random seed for reproducible sampling")
     parser.add_argument("--dry-run", action="store_true",
@@ -399,18 +545,19 @@ Examples:
     
     # Run inference
     try:
-        results = run_production_subset_inference(
+        results = run_production_subset_inference_ultra_optimized(
             model_subdir=args.model_subdir,
             vignettes_path=args.vignettes,
             filter_criteria=filter_criteria,
-            num_samples=args.samples,
+            num_samples=args.samples if args.samples > 0 else None,  # None = all permutations
             output_path=args.output,
             seed=args.seed,
             dry_run=args.dry_run,
             all_vignettes=args.all_vignettes,
             use_hf_hub=args.use_hf_hub,
             batch_size=args.batch_size,
-            collect_attention=args.collect_attention
+            collect_attention=args.collect_attention,
+            chunk_size=args.chunk_size
         )
         
         if not args.dry_run:
