@@ -1,0 +1,61 @@
+# Comparative Fairness Analysis Configuration
+
+# Statistical Parameters
+min_group_size: 30
+significance_threshold: 1.96  # For α = 0.05
+alpha_level: 0.05
+
+# Protected Attributes
+protected_attributes:
+  - country
+  - age
+  - religion
+  - gender
+
+# Intersectional Combinations
+intersections:
+  - gender_x_religion
+  - gender_x_country
+  - religion_x_country
+  - age_x_gender
+  - religion_x_country_x_gender
+
+# Reference Groups (TBD = To Be Determined from data)
+reference_groups:
+  gender: "Male"
+  religion: "TBD"  # Most frequent (will be resolved to actual most frequent)
+  country: "TBD"   # Most frequent (will be resolved to actual most frequent)
+  age: "TBD"       # Most frequent (will be resolved to actual most frequent)
+
+# Data Paths
+data_paths:
+  post_brexit: "/data/shil6369/gov_scraper/inference/results/processed/full_inference_llama3_8b_post_brexit_2019_2025_instruct_20250629_135630_20250630_124832/successful_extractions.json"
+  pre_brexit: "/data/shil6369/gov_scraper/inference/results/processed/full_inference_llama3_8b_pre_brexit_2013_2016_instruct_20250629_190319_20250630_112248/successful_extractions.json"
+
+# Fairness Metrics to Calculate
+metrics:
+  representation:
+    - statistical_parity
+    - counterfactual_flip_rate
+  error_based:
+    - equal_opportunity
+    - false_positive_rate
+    - equalized_odds_l2
+    - agreement_rate
+
+# Topics to Analyze (all 21 specific topics)
+analyze_by_topic: true
+analyze_by_meta_topic: false
+
+# Output Settings
+output_formats:
+  - json
+  - csv
+  - html
+
+# Visualization Settings
+visualization:
+  figure_size: [12, 8]
+  dpi: 300
+  color_palette: "viridis"
+  save_formats: ["png", "pdf"] 

@@ -1,0 +1,205 @@
+=== COMPREHENSIVE GROUP ANALYSIS REPORT ===
+
+=== INDIVIDUAL PROTECTED ATTRIBUTES ===
+
+COUNTRY:
+  Topics with valid groups: 21/21 (100.0%)
+  Total valid groups: 21
+  Valid groups by topic:
+    Asylum seeker circumstances: 1 groups
+    Nature of persecution: 1 groups
+    Non-Refoulement - Interception at Sea: 1 groups
+    Activist Persecution Ground: 1 groups
+    3rd safe country - Country safety definition: 1 groups
+    Firm settlement: 1 groups
+    Assimilation Potential: 1 groups
+    Financial stability: 1 groups
+    Intentions regarding work in the UK: 1 groups
+    Intentions regarding education in the UK: 1 groups
+    PSG (particular social group): 1 groups
+    Disclosure: Political persecution & sexual violence: 1 groups
+    Disclosure: Religious persecution & mental health: 1 groups
+    Disclosure: Domestic violence & criminal threats: 1 groups
+    Disclosure: Ethnic violence & family separation: 1 groups
+    Disclosure: Persecution for sexual orientation & mental health crisis: 1 groups
+    Contradiction: Dates of persecution: 1 groups
+    Contradiction: Persecutor identity confusion: 1 groups
+    Contradiction: Location of harm: 1 groups
+    Contradiction: Family involvement in the persecution: 1 groups
+    Contradiction: Sequence of events: 1 groups
+
+AGE:
+  Topics with valid groups: 21/21 (100.0%)
+  Total valid groups: 21
+  Valid groups by topic:
+    Asylum seeker circumstances: 1 groups
+    Nature of persecution: 1 groups
+    Non-Refoulement - Interception at Sea: 1 groups
+    Activist Persecution Ground: 1 groups
+    3rd safe country - Country safety definition: 1 groups
+    Firm settlement: 1 groups
+    Assimilation Potential: 1 groups
+    Financial stability: 1 groups
+    Intentions regarding work in the UK: 1 groups
+    Intentions regarding education in the UK: 1 groups
+    PSG (particular social group): 1 groups
+    Disclosure: Political persecution & sexual violence: 1 groups
+    Disclosure: Religious persecution & mental health: 1 groups
+    Disclosure: Domestic violence & criminal threats: 1 groups
+    Disclosure: Ethnic violence & family separation: 1 groups
+    Disclosure: Persecution for sexual orientation & mental health crisis: 1 groups
+    Contradiction: Dates of persecution: 1 groups
+    Contradiction: Persecutor identity confusion: 1 groups
+    Contradiction: Location of harm: 1 groups
+    Contradiction: Family involvement in the persecution: 1 groups
+    Contradiction: Sequence of events: 1 groups
+
+RELIGION:
+  Topics with valid groups: 21/21 (100.0%)
+  Total valid groups: 21
+  Valid groups by topic:
+    Asylum seeker circumstances: 1 groups
+    Nature of persecution: 1 groups
+    Non-Refoulement - Interception at Sea: 1 groups
+    Activist Persecution Ground: 1 groups
+    3rd safe country - Country safety definition: 1 groups
+    Firm settlement: 1 groups
+    Assimilation Potential: 1 groups
+    Financial stability: 1 groups
+    Intentions regarding work in the UK: 1 groups
+    Intentions regarding education in the UK: 1 groups
+    PSG (particular social group): 1 groups
+    Disclosure: Political persecution & sexual violence: 1 groups
+    Disclosure: Religious persecution & mental health: 1 groups
+    Disclosure: Domestic violence & criminal threats: 1 groups
+    Disclosure: Ethnic violence & family separation: 1 groups
+    Disclosure: Persecution for sexual orientation & mental health crisis: 1 groups
+    Contradiction: Dates of persecution: 1 groups
+    Contradiction: Persecutor identity confusion: 1 groups
+    Contradiction: Location of harm: 1 groups
+    Contradiction: Family involvement in the persecution: 1 groups
+    Contradiction: Sequence of events: 1 groups
+
+GENDER:
+  Topics with valid groups: 21/21 (100.0%)
+  Total valid groups: 21
+  Valid groups by topic:
+    Asylum seeker circumstances: 1 groups
+    Nature of persecution: 1 groups
+    Non-Refoulement - Interception at Sea: 1 groups
+    Activist Persecution Ground: 1 groups
+    3rd safe country - Country safety definition: 1 groups
+    Firm settlement: 1 groups
+    Assimilation Potential: 1 groups
+    Financial stability: 1 groups
+    Intentions regarding work in the UK: 1 groups
+    Intentions regarding education in the UK: 1 groups
+    PSG (particular social group): 1 groups
+    Disclosure: Political persecution & sexual violence: 1 groups
+    Disclosure: Religious persecution & mental health: 1 groups
+    Disclosure: Domestic violence & criminal threats: 1 groups
+    Disclosure: Ethnic violence & family separation: 1 groups
+    Disclosure: Persecution for sexual orientation & mental health crisis: 1 groups
+    Contradiction: Dates of persecution: 1 groups
+    Contradiction: Persecutor identity confusion: 1 groups
+    Contradiction: Location of harm: 1 groups
+    Contradiction: Family involvement in the persecution: 1 groups
+    Contradiction: Sequence of events: 1 groups
+
+=== INTERSECTIONAL GROUPS ===
+
+GENDER_X_RELIGION:
+  Topics with valid groups: 11/21 (52.4%)
+  Total valid groups: 11
+  Valid groups by topic:
+    Asylum seeker circumstances: 1 groups
+    Nature of persecution: 1 groups
+    Non-Refoulement - Interception at Sea: 1 groups
+    Activist Persecution Ground: 1 groups
+    3rd safe country - Country safety definition: 1 groups
+    Firm settlement: 1 groups
+    Assimilation Potential: 1 groups
+    Financial stability: 1 groups
+    Intentions regarding work in the UK: 1 groups
+    Intentions regarding education in the UK: 1 groups
+    PSG (particular social group): 1 groups
+
+GENDER_X_COUNTRY:
+  Topics with valid groups: 11/21 (52.4%)
+  Total valid groups: 11
+  Valid groups by topic:
+    Asylum seeker circumstances: 1 groups
+    Nature of persecution: 1 groups
+    Non-Refoulement - Interception at Sea: 1 groups
+    Activist Persecution Ground: 1 groups
+    3rd safe country - Country safety definition: 1 groups
+    Firm settlement: 1 groups
+    Assimilation Potential: 1 groups
+    Financial stability: 1 groups
+    Intentions regarding work in the UK: 1 groups
+    Intentions regarding education in the UK: 1 groups
+    PSG (particular social group): 1 groups
+
+RELIGION_X_COUNTRY:
+  Topics with valid groups: 10/21 (47.6%)
+  Total valid groups: 10
+  Valid groups by topic:
+    Asylum seeker circumstances: 1 groups
+    Nature of persecution: 1 groups
+    Non-Refoulement - Interception at Sea: 1 groups
+    Activist Persecution Ground: 1 groups
+    3rd safe country - Country safety definition: 1 groups
+    Firm settlement: 1 groups
+    Assimilation Potential: 1 groups
+    Intentions regarding work in the UK: 1 groups
+    Intentions regarding education in the UK: 1 groups
+    PSG (particular social group): 1 groups
+
+AGE_X_GENDER:
+  Topics with valid groups: 21/21 (100.0%)
+  Total valid groups: 21
+  Valid groups by topic:
+    Asylum seeker circumstances: 1 groups
+    Nature of persecution: 1 groups
+    Non-Refoulement - Interception at Sea: 1 groups
+    Activist Persecution Ground: 1 groups
+    3rd safe country - Country safety definition: 1 groups
+    Firm settlement: 1 groups
+    Assimilation Potential: 1 groups
+    Financial stability: 1 groups
+    Intentions regarding work in the UK: 1 groups
+    Intentions regarding education in the UK: 1 groups
+    PSG (particular social group): 1 groups
+    Disclosure: Political persecution & sexual violence: 1 groups
+    Disclosure: Religious persecution & mental health: 1 groups
+    Disclosure: Domestic violence & criminal threats: 1 groups
+    Disclosure: Ethnic violence & family separation: 1 groups
+    Disclosure: Persecution for sexual orientation & mental health crisis: 1 groups
+    Contradiction: Dates of persecution: 1 groups
+    Contradiction: Persecutor identity confusion: 1 groups
+    Contradiction: Location of harm: 1 groups
+    Contradiction: Family involvement in the persecution: 1 groups
+    Contradiction: Sequence of events: 1 groups
+
+RELIGION_X_COUNTRY_X_GENDER:
+  Topics with valid groups: 6/21 (28.6%)
+  Total valid groups: 6
+  Valid groups by topic:
+    Nature of persecution: 1 groups
+    Firm settlement: 1 groups
+    Assimilation Potential: 1 groups
+    Intentions regarding work in the UK: 1 groups
+    Intentions regarding education in the UK: 1 groups
+    PSG (particular social group): 1 groups
+
+=== OVERALL SUMMARY ===
+Total individual groups for analysis: 84
+Total intersectional groups for analysis: 59
+TOTAL GROUPS FOR FAIRNESS ANALYSIS: 143
+
+=== ANALYSIS READINESS ===
+✅ Individual attribute fairness: READY
+✅ Two-way intersectional fairness: READY
+⚠️  Three-way intersectional fairness: LIMITED
+
+All groups meet minimum sample size requirement (≥30 per model)

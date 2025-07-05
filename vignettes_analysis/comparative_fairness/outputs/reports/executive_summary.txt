@@ -1,0 +1,41 @@
+================================================================================
+COMPARATIVE FAIRNESS ANALYSIS - EXECUTIVE SUMMARY
+================================================================================
+
+OVERALL BIAS ASSESSMENT:
+  Significance Rate: 49.4% of statistical tests show significant bias
+  Total Statistical Tests: 83
+  Significant Disparities Found: 41
+
+PROTECTED ATTRIBUTE BIAS ANALYSIS:
+  GENDER: 60.3% bias rate (41/68 tests)
+
+MOST PROBLEMATIC TOPICS:
+  1. Activist Persecution Ground: 7 bias issues
+     SP: 3, Error: 2, CF: 2
+  2. Disclosure: Ethnic violence & family separation: 7 bias issues
+     SP: 4, Error: 1, CF: 2
+  3. Disclosure: Persecution for sexual orientation & mental health crisis: 6 bias issues
+     SP: 3, Error: 1, CF: 2
+  4. Asylum seeker circumstances: 5 bias issues
+     SP: 2, Error: 1, CF: 2
+  5. Nature of persecution: 5 bias issues
+     SP: 4, Error: 1, CF: 0
+
+TEMPORAL MODEL COMPARISON:
+  Statistical Parity Tests: 68
+  Significant Differences: 41
+  Evidence of Temporal Bias: MODERATE
+
+COUNTERFACTUAL ANALYSIS:
+  Counterfactual Pairs Found: 344736
+  Individual Comparisons: 690
+  Intersectional Comparisons: 84
+
+RECOMMENDATIONS:
+  ⚠️  MODERATE BIAS DETECTED - Monitoring and mitigation advised
+  - Implement ongoing bias monitoring
+  - Review decision patterns for most biased topics
+  - Consider post-processing fairness corrections
+
+================================================================================
