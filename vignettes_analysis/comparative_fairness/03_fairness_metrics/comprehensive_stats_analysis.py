@@ -11,7 +11,7 @@ import json
 
 def load_unified_dataframe():
     """Load the unified fairness dataframe"""
-    df_path = Path("outputs/unified_analysis/unified_fairness_dataframe_topic_granular.csv")
+    df_path = Path("../../../outputs/unified_analysis/unified_fairness_dataframe_topic_granular.csv")
     return pd.read_csv(df_path)
 
 def comprehensive_statistics(df):

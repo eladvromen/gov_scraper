@@ -12,7 +12,7 @@ from pathlib import Path
 def load_unified_dataframe():
     """Load the unified fairness dataframe"""
     
-    df_path = Path("outputs/unified_analysis/unified_fairness_dataframe.csv")
+    df_path = Path("../../../outputs/unified_analysis/unified_fairness_dataframe.csv")
     
     if not df_path.exists():
         raise FileNotFoundError("Unified dataframe not found. Run create_unified_fairness_dataframe.py first.")
@@ -202,7 +202,7 @@ def create_conclusions_summary(df: pd.DataFrame):
 def save_analysis_results(df: pd.DataFrame, user_df: pd.DataFrame):
     """Save analysis results to files"""
     
-    output_dir = Path("outputs/unified_analysis")
+    output_dir = Path("../../../outputs/unified_analysis")
     
     # Save user-requested format
     user_df.to_csv(output_dir / "user_requested_format.csv", index=False)

@@ -1,0 +1,406 @@
+{
+  "overall_divergence": {
+    "cosine_similarity": 0.5300237778629331,
+    "cosine_distance": 0.4699762221370669,
+    "pearson_correlation": 0.5096785804973101,
+    "pearson_p_value": 1.2372091101771325e-05,
+    "spearman_correlation": 0.6317061975038141,
+    "spearman_p_value": 1.2882144519082984e-08,
+    "euclidean_distance": 2.276435888000745,
+    "manhattan_distance": 12.936612197287985,
+    "mean_absolute_difference": 0.19600927571648463,
+    "difference_std": 0.2801311481415032,
+    "vector_length": 66
+  },
+  "subset_analysis": {
+    "ordinal_fields": {
+      "cosine_similarity": 0.4734582372086317,
+      "cosine_distance": 0.5265417627913682,
+      "pearson_correlation": 0.49326861391507915,
+      "pearson_p_value": 0.0007768385196356467,
+      "spearman_correlation": 0.4014102168625952,
+      "spearman_p_value": 0.007632800301293696,
+      "euclidean_distance": 1.9198695747086143,
+      "manhattan_distance": 9.01117532711038,
+      "mean_absolute_difference": 0.2095622169095437,
+      "difference_std": 0.2847027599197062,
+      "vector_length": 43
+    },
+    "horizontal_fields": {
+      "cosine_similarity": 0.6543856995385304,
+      "cosine_distance": 0.34561430046146957,
+      "pearson_correlation": 0.7030273941731013,
+      "pearson_p_value": 0.00018296668855817772,
+      "spearman_correlation": 0.8933616411545886,
+      "spearman_p_value": 9.638632151786777e-09,
+      "euclidean_distance": 1.2232175474076172,
+      "manhattan_distance": 3.925436870177607,
+      "mean_absolute_difference": 0.1706711682685916,
+      "difference_std": 0.23078142644410166,
+      "vector_length": 23
+    },
+    "significant_True": {
+      "cosine_similarity": 0.36395167304099496,
+      "cosine_distance": 0.636048326959005,
+      "pearson_correlation": 0.36430106732735457,
+      "pearson_p_value": 0.016320641823136393,
+      "spearman_correlation": 0.48272128744893333,
+      "spearman_p_value": 0.0010438257058486904,
+      "euclidean_distance": 2.258611682942134,
+      "manhattan_distance": 11.732199080182594,
+      "mean_absolute_difference": 0.2728418390740138,
+      "difference_std": 0.34237675893864283,
+      "vector_length": 43
+    },
+    "significant_False": {
+      "cosine_similarity": 0.9941426688281932,
+      "cosine_distance": 0.005857331171806757,
+      "pearson_correlation": 0.9798504936105316,
+      "pearson_p_value": 3.573859391135963e-16,
+      "spearman_correlation": 0.8499436087406407,
+      "spearman_p_value": 2.851735551665208e-07,
+      "euclidean_distance": 0.2843125355221659,
+      "manhattan_distance": 1.2044131171053911,
+      "mean_absolute_difference": 0.052365787700234395,
+      "difference_std": 0.0298284559726218,
+      "vector_length": 23
+    },
+    "topic_Nature of persecution": {
+      "cosine_similarity": 0.9138310723748476,
+      "cosine_distance": 0.08616892762515238,
+      "pearson_correlation": 0.9254602543071945,
+      "pearson_p_value": 0.00012335124205629228,
+      "spearman_correlation": 0.8718204003035964,
+      "spearman_p_value": 0.001008876972327989,
+      "euclidean_distance": 0.4947017228674344,
+      "manhattan_distance": 1.1020410611362121,
+      "mean_absolute_difference": 0.11020410611362122,
+      "difference_std": 0.15612074531313797,
+      "vector_length": 10
+    },
+    "topic_PSG (particular social group)": {
+      "cosine_similarity": 0.9560857304239433,
+      "cosine_distance": 0.04391426957605671,
+      "pearson_correlation": 0.9972667389492947,
+      "pearson_p_value": 3.5056318635769697e-09,
+      "spearman_correlation": 0.7559289460184544,
+      "spearman_p_value": 0.018451528513015902,
+      "euclidean_distance": 0.2721022789782103,
+      "manhattan_distance": 0.6746212360610224,
+      "mean_absolute_difference": 0.07495791511789138,
+      "difference_std": 0.08636156536763663,
+      "vector_length": 9
+    },
+    "topic_Firm settlement": {
+      "cosine_similarity": 0.6889863094487968,
+      "cosine_distance": 0.3110136905512032,
+      "pearson_correlation": 0.0,
+      "pearson_p_value": 1.0,
+      "spearman_correlation": 0.0,
+      "spearman_p_value": 1.0,
+      "euclidean_distance": 0.5782341694417924,
+      "manhattan_distance": 1.617456040760293,
+      "mean_absolute_difference": 0.17971733786225477,
+      "difference_std": 0.0696577832895913,
+      "vector_length": 9
+    },
+    "topic_Intentions regarding work in the UK": {
+      "cosine_similarity": 0.6161621275531116,
+      "cosine_distance": 0.3838378724468884,
+      "pearson_correlation": 0.7980881116131356,
+      "pearson_p_value": 0.03145498763298983,
+      "spearman_correlation": 0.7500000000000002,
+      "spearman_p_value": 0.05218140045705776,
+      "euclidean_distance": 0.5007744667672769,
+      "manhattan_distance": 1.0683543524249162,
+      "mean_absolute_difference": 0.1526220503464166,
+      "difference_std": 0.1140381794833694,
+      "vector_length": 7
+    },
+    "topic_Intentions regarding education in the UK": {
+      "cosine_similarity": 0.3053211909921273,
+      "cosine_distance": 0.6946788090078727,
+      "pearson_correlation": 0.8228553619688118,
+      "pearson_p_value": 0.023001926212640463,
+      "spearman_correlation": 0.8468812149338255,
+      "spearman_p_value": 0.016197127467871632,
+      "euclidean_distance": 0.5020427382074897,
+      "manhattan_distance": 1.1372408521715254,
+      "mean_absolute_difference": 0.16246297888164649,
+      "difference_std": 0.10874140155523981,
+      "vector_length": 7
+    },
+    "topic_Assimilation Potential": {
+      "cosine_similarity": 0.9769879226397611,
+      "cosine_distance": 0.023012077360238914,
+      "pearson_correlation": 0.6054020866644688,
+      "pearson_p_value": 0.27926845879875817,
+      "spearman_correlation": 0.49999999999999994,
+      "spearman_p_value": 0.39100221895577053,
+      "euclidean_distance": 0.19240538337009788,
+      "manhattan_distance": 0.3707146818729809,
+      "mean_absolute_difference": 0.07414293637459618,
+      "difference_std": 0.0436668214518924,
+      "vector_length": 5
+    },
+    "topic_Asylum seeker circumstances": {
+      "cosine_similarity": 0.8908105516340918,
+      "cosine_distance": 0.10918944836590816,
+      "pearson_correlation": 0.5265243839699497,
+      "pearson_p_value": 0.4734756160300502,
+      "spearman_correlation": 0.19999999999999998,
+      "spearman_p_value": 0.8,
+      "euclidean_distance": 1.270582549235479,
+      "manhattan_distance": 2.5037901305980808,
+      "mean_absolute_difference": 0.6259475326495202,
+      "difference_std": 0.10855731193894741,
+      "vector_length": 4
+    },
+    "topic_Non-Refoulement - Interception at Sea": {
+      "cosine_similarity": 0.9909947110564798,
+      "cosine_distance": 0.009005288943520151,
+      "pearson_correlation": 0.1694078316244594,
+      "pearson_p_value": 0.8305921683755406,
+      "spearman_correlation": -0.10540925533894598,
+      "spearman_p_value": 0.894590744661054,
+      "euclidean_distance": 0.09472338215885655,
+      "manhattan_distance": 0.15076738726657027,
+      "mean_absolute_difference": 0.03769184681664257,
+      "difference_std": 0.0330722459926839,
+      "vector_length": 4
+    },
+    "topic_3rd safe country - Country safety definition": {
+      "cosine_similarity": 0.0918426675102335,
+      "cosine_distance": 0.9081573324897665,
+      "pearson_correlation": 0.9736613805978299,
+      "pearson_p_value": 0.02633861940216997,
+      "spearman_correlation": 0.9486832980505139,
+      "spearman_p_value": 0.051316701949486114,
+      "euclidean_distance": 0.8553537827918826,
+      "manhattan_distance": 1.4146216307065411,
+      "mean_absolute_difference": 0.3536554076766353,
+      "difference_std": 0.24048986684508908,
+      "vector_length": 4
+    },
+    "topic_Activist Persecution Ground": {
+      "cosine_similarity": 0.9207931790880952,
+      "cosine_distance": 0.07920682091190479,
+      "pearson_correlation": -0.2273150615635602,
+      "pearson_p_value": 0.7726849384364398,
+      "spearman_correlation": -0.7999999999999999,
+      "spearman_p_value": 0.20000000000000007,
+      "euclidean_distance": 1.0851229070721724,
+      "manhattan_distance": 2.148774572980372,
+      "mean_absolute_difference": 0.537193643245093,
+      "difference_std": 0.0761309432507853,
+      "vector_length": 4
+    },
+    "topic_Financial stability": {
+      "cosine_similarity": 0.3055420944965173,
+      "cosine_distance": 0.6944579055034827,
+      "pearson_correlation": 0.9986996827200473,
+      "pearson_p_value": 0.032468846428836864,
+      "spearman_correlation": 1.0,
+      "spearman_p_value": 0.0,
+      "euclidean_distance": 0.6758106190297343,
+      "manhattan_distance": 0.7482302513094714,
+      "mean_absolute_difference": 0.2494100837698238,
+      "difference_std": 0.31150056497586853,
+      "vector_length": 3
+    }
+  },
+  "robustness_testing": {
+    "bootstrap_iterations": 1000,
+    "cosine_similarity_mean": 0.5372698500952644,
+    "cosine_similarity_std": 0.06390448593520137,
+    "cosine_similarity_ci": [
+      0.406163493547959,
+      0.6593513316014464
+    ],
+    "pearson_correlation_mean": 0.5172747871431462,
+    "pearson_correlation_std": 0.060446033324571824,
+    "pearson_correlation_ci": [
+      0.39948543452879925,
+      0.6353677694400351
+    ]
+  },
+  "weighted_analysis": {
+    "weighted_mean_difference": 0.17477779722318001,
+    "weighted_cosine_similarity": 0.5703875232237784,
+    "weighted_pearson_correlation": 0.4970688438972075,
+    "weighted_pearson_p_value": 4.103720479639881e-203,
+    "weighted_vector_length": 3261
+  },
+  "topic_exploration": {
+    "topic_divergence_ranking": [
+      {
+        "topic": "3rd safe country - Country safety definition",
+        "cosine_similarity": 0.0918426675102335,
+        "cosine_distance": 0.9081573324897665,
+        "pearson_correlation": 0.9736613805978299,
+        "vector_length": 4
+      },
+      {
+        "topic": "Intentions regarding education in the UK",
+        "cosine_similarity": 0.3053211909921273,
+        "cosine_distance": 0.6946788090078727,
+        "pearson_correlation": 0.8228553619688118,
+        "vector_length": 7
+      },
+      {
+        "topic": "Financial stability",
+        "cosine_similarity": 0.3055420944965173,
+        "cosine_distance": 0.6944579055034827,
+        "pearson_correlation": 0.9986996827200473,
+        "vector_length": 3
+      },
+      {
+        "topic": "Intentions regarding work in the UK",
+        "cosine_similarity": 0.6161621275531116,
+        "cosine_distance": 0.3838378724468884,
+        "pearson_correlation": 0.7980881116131356,
+        "vector_length": 7
+      },
+      {
+        "topic": "Firm settlement",
+        "cosine_similarity": 0.6889863094487968,
+        "cosine_distance": 0.3110136905512032,
+        "pearson_correlation": 0.0,
+        "vector_length": 9
+      },
+      {
+        "topic": "Asylum seeker circumstances",
+        "cosine_similarity": 0.8908105516340918,
+        "cosine_distance": 0.10918944836590816,
+        "pearson_correlation": 0.5265243839699497,
+        "vector_length": 4
+      },
+      {
+        "topic": "Nature of persecution",
+        "cosine_similarity": 0.9138310723748476,
+        "cosine_distance": 0.08616892762515238,
+        "pearson_correlation": 0.9254602543071945,
+        "vector_length": 10
+      },
+      {
+        "topic": "Activist Persecution Ground",
+        "cosine_similarity": 0.9207931790880952,
+        "cosine_distance": 0.07920682091190479,
+        "pearson_correlation": -0.2273150615635602,
+        "vector_length": 4
+      },
+      {
+        "topic": "PSG (particular social group)",
+        "cosine_similarity": 0.9560857304239433,
+        "cosine_distance": 0.04391426957605671,
+        "pearson_correlation": 0.9972667389492947,
+        "vector_length": 9
+      },
+      {
+        "topic": "Assimilation Potential",
+        "cosine_similarity": 0.9769879226397611,
+        "cosine_distance": 0.023012077360238914,
+        "pearson_correlation": 0.6054020866644688,
+        "vector_length": 5
+      },
+      {
+        "topic": "Non-Refoulement - Interception at Sea",
+        "cosine_similarity": 0.9909947110564798,
+        "cosine_distance": 0.009005288943520151,
+        "pearson_correlation": 0.1694078316244594,
+        "vector_length": 4
+      }
+    ],
+    "topic_field_analysis": {
+      "Asylum seeker circumstances": {
+        "mean_absolute_difference": 0.6259475326495202,
+        "max_absolute_difference": 0.7985498332135982,
+        "most_divergent_field": "emotional dependency on a partner currently residing in the UK",
+        "most_divergent_difference": -0.7985498332135982,
+        "num_comparisons": 4,
+        "significant_comparisons": 4
+      },
+      "Nature of persecution": {
+        "mean_absolute_difference": 0.11020410611362115,
+        "max_absolute_difference": 0.4248612711690711,
+        "most_divergent_field": "forced ideological re-education without physical violence",
+        "most_divergent_difference": -0.4248612711690711,
+        "num_comparisons": 10,
+        "significant_comparisons": 6
+      },
+      "Non-Refoulement - Interception at Sea": {
+        "mean_absolute_difference": 0.037691846816642505,
+        "max_absolute_difference": 0.0834578231453935,
+        "most_divergent_field": "interception occurred in a different country's territorial waters",
+        "most_divergent_difference": 0.0834578231453935,
+        "num_comparisons": 4,
+        "significant_comparisons": 0
+      },
+      "Activist Persecution Ground": {
+        "mean_absolute_difference": 0.537193643245093,
+        "max_absolute_difference": 0.6168475323265267,
+        "most_divergent_field": "religion",
+        "most_divergent_difference": 0.6168475323265267,
+        "num_comparisons": 4,
+        "significant_comparisons": 4
+      },
+      "3rd safe country - Country safety definition": {
+        "mean_absolute_difference": 0.3536554076766353,
+        "max_absolute_difference": 0.6034423643097859,
+        "most_divergent_field": "strong rule of law and high national security and functioning and accessible asylum, healthcare and education systems",
+        "most_divergent_difference": 0.6034423643097859,
+        "num_comparisons": 4,
+        "significant_comparisons": 3
+      },
+      "Firm settlement": {
+        "mean_absolute_difference": 0.17971733786225474,
+        "max_absolute_difference": 0.2883101024683175,
+        "most_divergent_field": "was unemployed",
+        "most_divergent_difference": -0.2883101024683175,
+        "num_comparisons": 9,
+        "significant_comparisons": 9
+      },
+      "Assimilation Potential": {
+        "mean_absolute_difference": 0.07414293637459612,
+        "max_absolute_difference": 0.1402335126163161,
+        "most_divergent_field": "British-accented English and strong UK ties \u2014 spouse and children with legal status",
+        "most_divergent_difference": 0.1402335126163161,
+        "num_comparisons": 5,
+        "significant_comparisons": 1
+      },
+      "Financial stability": {
+        "mean_absolute_difference": 0.2494100837698238,
+        "max_absolute_difference": 0.6733652650657383,
+        "most_divergent_field": "multiple properties and a successful business in {pronoun} home country and received significant financial support from immediate family living abroad",
+        "most_divergent_difference": -0.6733652650657383,
+        "num_comparisons": 3,
+        "significant_comparisons": 2
+      },
+      "Intentions regarding work in the UK": {
+        "mean_absolute_difference": 0.15262205034641657,
+        "max_absolute_difference": 0.3188040744423858,
+        "most_divergent_field": "plans to actively pursue career advancement and economic opportunities",
+        "most_divergent_difference": 0.3188040744423858,
+        "num_comparisons": 7,
+        "significant_comparisons": 5
+      },
+      "Intentions regarding education in the UK": {
+        "mean_absolute_difference": 0.16246297888164649,
+        "max_absolute_difference": 0.3064511614008389,
+        "most_divergent_field": "does not plan to pursue education, focusing solely on safety",
+        "most_divergent_difference": -0.3064511614008389,
+        "num_comparisons": 7,
+        "significant_comparisons": 7
+      },
+      "PSG (particular social group)": {
+        "mean_absolute_difference": 0.07495791511789131,
+        "max_absolute_difference": 0.2125779697045943,
+        "most_divergent_field": "being a Women which are subjected to gender-based violence and unable to obtain state protection",
+        "most_divergent_difference": -0.2125779697045943,
+        "num_comparisons": 9,
+        "significant_comparisons": 2
+      }
+    }
+  },
+  "analysis_timestamp": "2025-07-13T16:54:25.267199"
+}

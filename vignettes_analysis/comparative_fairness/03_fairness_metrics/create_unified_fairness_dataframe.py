@@ -19,7 +19,7 @@ from typing import Dict, List, Optional, Tuple
 def load_metric_data() -> Tuple[Dict, Dict]:
     """Load all required metric data files"""
     
-    metrics_dir = Path("outputs/metrics")
+    metrics_dir = Path("../../../outputs/metrics")
     
     # Load statistical parity results (ALL PAIRS)
     sp_file = metrics_dir / "statistical_parity_all_pairs_results.json"
@@ -235,7 +235,7 @@ def main():
     summary = create_summary_statistics(df)
     
     # Save results
-    output_dir = Path("outputs/unified_analysis")
+    output_dir = Path("../../../outputs/unified_analysis")
     output_dir.mkdir(exist_ok=True)
     
     # Save dataframe

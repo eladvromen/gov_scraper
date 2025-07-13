@@ -1,0 +1,11 @@
+{
+  "model_overall_grant_rates": {
+    "post_brexit": 0.8026097363239779,
+    "pre_brexit": 0.7612136184667645
+  },
+  "total_records_analyzed": 51840,
+  "topics_analyzed": 22,
+  "total_field_comparisons": 66,
+  "significant_differences": 43,
+  "analysis_timestamp": "2025-07-13T16:39:34.162219"
+}
