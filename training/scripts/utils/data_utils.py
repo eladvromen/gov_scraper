@@ -30,6 +30,7 @@ class DataConfig:
     train_split: float = 0.95
     eval_split: float = 0.05
     seed: int = 42
+    data_split_seed: int = 42  # Separate seed for data splitting (for robustness experiments)
     text_column: str = "text"
     add_eos_token: bool = True
     chunk_size: int = 2048
@@ -83,7 +84,7 @@ class LegalChunkDataset(Dataset):
         if split != "all":
             split_dataset = self.dataset.train_test_split(
                 train_size=config.train_split,
-                seed=config.seed
+                seed=config.data_split_seed
             )
             self.dataset = split_dataset["train" if split == "train" else "test"]
             

@@ -1,14 +1,17 @@
-
-edit the vignette meta topics for a more balances analytical framework
-- immigration from poland? generaly, EU
- - employment type
- - refign completion
- - some more range of economic opportunism?
-### inference pipeline
--test attnetion working correctly
+fairness component:
+- sp and relatives seems to work fine. 
+- counterfactial is not realy working - should be seperated by model and optimized with numba
+- try to diverge from statistical sagnificant so we can do this with the interpetive metrics
 
 
-run inference temp =0 
+need to dev the interpative metrics
+
+- vision for the component: 
+each model pairs have a vector of topic\protected attribute+
+significance difference.
+one for fairness one for interpetation
+this is the operationalized bias state!
+
 
 
 

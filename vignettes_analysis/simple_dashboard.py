@@ -92,12 +92,12 @@ st.sidebar.markdown("## 📂 Data Loading")
 # File inputs
 pre_brexit_file = st.sidebar.text_input(
     "Pre-Brexit File:",
-    value="inference/results/processed/processed_production_subset_inference_llama3_8b_pre_brexit_2013_2016_instruct_20250623_194615_20250625_133855/successful_extractions.json"
+    value="/data/shil6369/gov_scraper/inference/results/processed/full_inference_llama3_8b_pre_brexit_2013_2016_instruct_20250629_190319_20250630_112248/successful_extractions.json"
 )
 
 post_brexit_file = st.sidebar.text_input(
     "Post-Brexit File:",
-    value="inference/results/processed/processed_production_subset_inference_llama3_8b_post_brexit_2019_2025_instruct_20250623_203131_20250625_134035/successful_extractions.json"
+    value="/data/shil6369/gov_scraper/inference/results/processed/full_inference_llama3_8b_post_brexit_2019_2025_instruct_20250629_135630_20250630_124832/successful_extractions.json"
 )
 
 # Load data button

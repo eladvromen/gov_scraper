@@ -12,7 +12,8 @@ data:
   dataset_patterns: ["pre_brexit_2013_2016_chunks.jsonl"]
   train_split: 0.90
   eval_split: 0.10
-  seed: 42
+  seed: 42  # Training randomness seed (can be overridden for robustness testing)
+  data_split_seed: 42  # Fixed seed for train/test split (keep identical across rounds)
   text_column: "text"
   add_eos_token: true
   chunk_size: 512  # Further reduced for speed

@@ -517,7 +517,7 @@ class InferencePipeline:
                     **inputs,
                     max_new_tokens=200,          # Much shorter to prevent runaway
                     do_sample=True,
-                    temperature=0.3,             # More focused
+                    temperature=0.0,             # More focused
                     top_p=0.7,
                     repetition_penalty= 1.2,      # Reduce repetition
                     pad_token_id=self.tokenizer.eos_token_id

@@ -1,0 +1,63 @@
+# Post-Brexit (2019-2025) LLaMA Fine-tuning Configuration - ROUND 2 ROBUSTNESS TEST
+model:
+  model_name_or_path: "meta-llama/Meta-Llama-3-8B"  # Identical to Round 1
+  use_flash_attention_2: false
+  torch_dtype: "bfloat16"
+  device_map: "cuda:3"  # Use GPU 3 (A100 with ~67GB available)
+  use_cache: false  # Disable KV cache during training for memory efficiency
+  low_cpu_mem_usage: true  # Load model with minimal CPU memory usage
+
+data:
+  data_dir: "/data/shil6369/gov_scraper/preprocessing/outputs/llama_training_ready/post_brexit_2019_2025"
+  dataset_patterns: ["post_brexit_2019_2025_chunks.jsonl"]
+  train_split: 0.90  # IDENTICAL to Round 1
+  eval_split: 0.10   # IDENTICAL to Round 1
+  seed: 100          # DIFFERENT from Round 1 (was 42) - for robustness testing
+  data_split_seed: 42  # SAME as Round 1 - ensures identical train/test splits
+  text_column: "text"
+  add_eos_token: true
+  chunk_size: 512  # IDENTICAL to Round 1
+  preprocessing_num_workers: 4  # IDENTICAL to Round 1
+  # Full dataset - no sample limits
+
+training:
+  output_dir: "/data/shil6369/gov_scraper/models/llama3_8b_post_brexit_2019_2025_round2"  # Different output dir
+  run_name: "llama3_8b_post_brexit_2019_2025_round2"          # Different run name
+  
+  # IDENTICAL hyperparameters to Round 1 for fair comparison
+  learning_rate: 3e-5           # SAME as Round 1
+  num_train_epochs: 2           # SAME as Round 1
+  per_device_train_batch_size: 2  # SAME as Round 1
+  per_device_eval_batch_size: 2   # SAME as Round 1
+  gradient_accumulation_steps: 16 # SAME as Round 1
+  dataloader_num_workers: 4       # SAME as Round 1
+  dataloader_pin_memory: true     # SAME as Round 1
+  
+  # Training stability - IDENTICAL to Round 1
+  warmup_ratio: 0.05         # SAME as Round 1
+  weight_decay: 0.01         # SAME as Round 1
+  max_grad_norm: 1.0         # SAME as Round 1
+  lr_scheduler_type: "cosine" # SAME as Round 1
+  
+  # Checkpointing - IDENTICAL to Round 1
+  save_strategy: "steps"
+  save_steps: 5000           # SAME as Round 1
+  save_total_limit: 1        # SAME as Round 1
+  save_only_model: true      # SAME as Round 1
+  
+  # Evaluation - IDENTICAL to Round 1
+  evaluation_strategy: "steps"
+  eval_steps: 5000           # SAME as Round 1
+  max_eval_samples: 50       # SAME as Round 1
+  
+  # Logging - IDENTICAL to Round 1
+  logging_steps: 50          # SAME as Round 1
+  log_level: "info"          # SAME as Round 1
+  
+  # Speed optimizations - IDENTICAL to Round 1
+  use_deepspeed: false       # SAME as Round 1
+  use_wandb: false           # SAME as Round 1
+  fp16: false                # SAME as Round 1
+  bf16: true                 # SAME as Round 1
+  remove_unused_columns: true    # SAME as Round 1
+  dataloader_drop_last: true     # SAME as Round 1 

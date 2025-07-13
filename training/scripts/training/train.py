@@ -29,12 +29,14 @@ def load_config(config_path: str) -> dict:
 @click.option('--dataset-patterns', '-d', multiple=True, help='Dataset file patterns to train on (e.g. "*_2013_2016_*.jsonl")')
 @click.option('--output-dir', '-o', help='Override output directory from config')
 @click.option('--run-name', '-n', help='Override run name from config')
+@click.option('--training-seed', type=int, help='Override training seed (for robustness testing)')
 @click.option('--local_rank', type=int, default=-1, help='Local rank for distributed training')
 def main(
     config_path: str,
     dataset_patterns: Optional[List[str]],
     output_dir: Optional[str],
     run_name: Optional[str],
+    training_seed: Optional[int],
     local_rank: int,
 ):
     """Train LLaMA model on legal text data.
@@ -57,12 +59,15 @@ def main(
     )
     
     # Create data config
+    config_seed = training_seed if training_seed is not None else config['data'].get('seed', 42)
+    
     data_config = DataConfig(
         data_dir=config['data']['data_dir'],
         dataset_patterns=dataset_patterns or config['data'].get('dataset_patterns', []),
         train_split=config['data'].get('train_split', 0.95),
         eval_split=config['data'].get('eval_split', 0.05),
-        seed=config['data'].get('seed', 42),
+        seed=config_seed,  # Use overridden seed if provided
+        data_split_seed=config['data'].get('data_split_seed', 42),  # Always use fixed data split seed
         text_column=config['data'].get('text_column', 'text'),
         add_eos_token=config['data'].get('add_eos_token', True),
         chunk_size=config['data'].get('chunk_size', 2048),
