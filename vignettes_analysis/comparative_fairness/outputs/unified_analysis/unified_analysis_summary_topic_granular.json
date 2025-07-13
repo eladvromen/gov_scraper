@@ -1,0 +1,43 @@
+{
+  "total_comparisons": 1414,
+  "protected_attributes": 4,
+  "unique_topics": 21,
+  "attributes_breakdown": {
+    "country": 630,
+    "religion": 438,
+    "age": 252,
+    "gender": 94
+  },
+  "topics_breakdown": {
+    "Nature of persecution": 78,
+    "Activist Persecution Ground": 78,
+    "PSG (particular social group)": 78,
+    "Disclosure: Religious persecution & mental health": 78,
+    "Disclosure: Political persecution & sexual violence": 78,
+    "Contradiction: Family involvement in the persecution": 78,
+    "Contradiction: Location of harm": 78,
+    "Contradiction: Sequence of events": 78,
+    "Contradiction: Persecutor identity confusion": 78,
+    "Contradiction: Dates of persecution": 78,
+    "Disclosure: Persecution for sexual orientation & mental health crisis": 78,
+    "Disclosure: Ethnic violence & family separation": 78,
+    "Disclosure: Domestic violence & criminal threats": 78,
+    "3rd safe country - Country safety definition": 50,
+    "Non-Refoulement - Interception at Sea": 50,
+    "Asylum seeker circumstances": 50,
+    "Intentions regarding education in the UK": 50,
+    "Firm settlement": 50,
+    "Assimilation Potential": 50,
+    "Financial stability": 50,
+    "Intentions regarding work in the UK": 50
+  },
+  "pre_brexit_significant_count": "444",
+  "post_brexit_significant_count": "382",
+  "both_significant_count": "170",
+  "significance_change_count": "486",
+  "mean_sp_difference": 2.551785594081866e-19,
+  "median_sp_difference": 0.0,
+  "sp_difference_std": 0.11438783466188164,
+  "equal_opportunity_coverage": "386",
+  "complete_records": "386"
+}

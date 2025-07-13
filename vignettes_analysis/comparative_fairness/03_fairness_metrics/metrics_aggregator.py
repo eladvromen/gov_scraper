@@ -1,6 +1,7 @@
 """
 Comprehensive Fairness Metrics Aggregator
-Combines Statistical Parity, Error-Based Metrics, and Counterfactual Analysis
+Combines Statistical Parity, Counterfactual Analysis, and Temporal Comparison
+WITHOUT statistical significance testing (moved to 04_significance_testing)
 """
 
 import json
@@ -25,298 +26,370 @@ def run_all_metric_calculations() -> Dict[str, Dict]:
     
     results = {}
     
-    # Run Statistical Parity
-    print("Running Statistical Parity calculation...")
-    sp_result = subprocess.run(
-        ["python", str(metrics_dir / "statistical_parity.py")],
-        cwd=str(base_dir),
-        capture_output=True,
-        text=True
-    )
-    
-    if sp_result.returncode == 0:
-        with open(base_dir / "outputs" / "metrics" / "statistical_parity_results.json", 'r') as f:
+    # Check if Statistical Parity results exist
+    sp_file = base_dir / "outputs" / "metrics" / "statistical_parity_results.json"
+    if sp_file.exists():
+        print("✅ Using existing Statistical Parity results...")
+        with open(sp_file, 'r') as f:
             results['statistical_parity'] = json.load(f)
-        print("✅ Statistical Parity completed successfully")
     else:
-        print(f"❌ Statistical Parity failed: {sp_result.stderr}")
+        print("Running Statistical Parity calculation...")
+        sp_result = subprocess.run(
+            ["python", str(metrics_dir / "statistical_parity.py")],
+            cwd=str(base_dir),
+            capture_output=True,
+            text=True
+        )
+        
+        if sp_result.returncode == 0:
+            with open(sp_file, 'r') as f:
+                results['statistical_parity'] = json.load(f)
+            print("✅ Statistical Parity completed successfully")
+        else:
+            print(f"❌ Statistical Parity failed: {sp_result.stderr}")
     
-    # Run Error-Based Metrics
-    print("Running Error-Based Metrics calculation...")
-    error_result = subprocess.run(
-        ["python", str(metrics_dir / "error_based_metrics.py")],
-        cwd=str(base_dir),
-        capture_output=True,
-        text=True
-    )
-    
-    if error_result.returncode == 0:
-        with open(base_dir / "outputs" / "metrics" / "error_based_metrics_results.json", 'r') as f:
-            results['error_based_metrics'] = json.load(f)
-        print("✅ Error-Based Metrics completed successfully")
-    else:
-        print(f"❌ Error-Based Metrics failed: {error_result.stderr}")
-    
-    # Run Counterfactual Analysis
-    print("Running Counterfactual Analysis...")
-    cf_result = subprocess.run(
-        ["python", str(metrics_dir / "counterfactual_metrics.py")],
-        cwd=str(base_dir),
-        capture_output=True,
-        text=True
-    )
-    
-    if cf_result.returncode == 0:
-        with open(base_dir / "outputs" / "metrics" / "counterfactual_metrics_results.json", 'r') as f:
+    # Check if Counterfactual Analysis results exist
+    cf_file = base_dir / "outputs" / "metrics" / "counterfactual_metrics_results.json"
+    if cf_file.exists():
+        print("✅ Using existing Counterfactual Analysis results...")
+        with open(cf_file, 'r') as f:
             results['counterfactual_metrics'] = json.load(f)
-        print("✅ Counterfactual Analysis completed successfully")
     else:
-        print(f"❌ Counterfactual Analysis failed: {cf_result.stderr}")
+        print("Running Counterfactual Analysis...")
+        cf_result = subprocess.run(
+            ["python", str(metrics_dir / "counterfactual_metrics.py")],
+            cwd=str(base_dir),
+            capture_output=True,
+            text=True
+        )
+        
+        if cf_result.returncode == 0:
+            with open(cf_file, 'r') as f:
+                results['counterfactual_metrics'] = json.load(f)
+            print("✅ Counterfactual Analysis completed successfully")
+        else:
+            print(f"❌ Counterfactual Analysis failed: {cf_result.stderr}")
+    
+    # Check if Error-Based Metrics results exist
+    eb_file = base_dir / "outputs" / "metrics" / "error_based_metrics_results.json"
+    if eb_file.exists():
+        print("✅ Using existing Error-Based Metrics results...")
+        with open(eb_file, 'r') as f:
+            results['error_based_metrics'] = json.load(f)
+    else:
+        print("Running Error-Based Metrics calculation...")
+        eb_result = subprocess.run(
+            ["python", str(metrics_dir / "error_based_metrics.py")],
+            cwd=str(base_dir),
+            capture_output=True,
+            text=True
+        )
+        
+        if eb_result.returncode == 0:
+            with open(eb_file, 'r') as f:
+                results['error_based_metrics'] = json.load(f)
+            print("✅ Error-Based Metrics completed successfully")
+        else:
+            print(f"❌ Error-Based Metrics failed: {eb_result.stderr}")
+    
+    # Check if Temporal Model Comparison results exist
+    temp_file = base_dir / "outputs" / "metrics" / "temporal_comparison_results.json"
+    if temp_file.exists():
+        print("✅ Using existing Temporal Model Comparison results...")
+        with open(temp_file, 'r') as f:
+            results['temporal_comparison'] = json.load(f)
+    else:
+        print("Running Temporal Model Comparison...")
+        temp_result = subprocess.run(
+            ["python", str(metrics_dir / "temporal_model_comparison.py")],
+            cwd=str(base_dir),
+            capture_output=True,
+            text=True
+        )
+        
+        if temp_result.returncode == 0:
+            with open(temp_file, 'r') as f:
+                results['temporal_comparison'] = json.load(f)
+            print("✅ Temporal Model Comparison completed successfully")
+        else:
+            print(f"❌ Temporal Model Comparison failed: {temp_result.stderr}")
     
     return results
 
-def aggregate_bias_findings(all_results: Dict[str, Dict]) -> Dict:
-    """Aggregate bias findings across all metrics"""
+def calculate_relative_metrics(all_results: Dict[str, Dict]) -> Dict:
+    """Calculate relative metrics between pre and post Brexit models"""
     
-    bias_summary = {
-        'temporal_bias_evidence': {},
-        'intersectional_disparities': {},
-        'most_biased_topics': {},
-        'protected_attribute_impacts': {},
-        'overall_bias_assessment': {}
+    relative_metrics = {
+        'statistical_parity_relative': {},
+        'counterfactual_relative': {},
+        'error_based_relative': {},
+        'summary': {}
     }
     
-    # Analyze Statistical Parity results
+    # Calculate Statistical Parity relative metrics
     if 'statistical_parity' in all_results:
         sp_results = all_results['statistical_parity']
+        sp_relative = {}
         
-        # Count significant disparities by attribute
-        sp_disparities = {}
         for attr, attr_data in sp_results.get('individual_attributes', {}).items():
-            total_comparisons = 0
-            significant_disparities = 0
+            attr_relative = {}
             
             for topic, topic_data in attr_data.items():
-                for comparison, result in topic_data.items():
-                    total_comparisons += 1
-                    if result.get('is_significant', False):
-                        significant_disparities += 1
+                topic_relative = {}
+                
+                # Group comparisons by base comparison (ignoring model suffix)
+                comparisons = {}
+                for key, result in topic_data.items():
+                    if key.endswith('_post_brexit') or key.endswith('_pre_brexit'):
+                        base_key = key.rsplit('_', 2)[0]  # Remove model suffix
+                        model = 'post_brexit' if key.endswith('_post_brexit') else 'pre_brexit'
+                        
+                        if base_key not in comparisons:
+                            comparisons[base_key] = {}
+                        comparisons[base_key][model] = result
+                
+                # Calculate relative metrics for each comparison
+                for base_key, models in comparisons.items():
+                    if 'post_brexit' in models and 'pre_brexit' in models:
+                        post_result = models['post_brexit']
+                        pre_result = models['pre_brexit']
+                        
+                        # Calculate relative metrics
+                        sp_gap_change = post_result['sp_gap'] - pre_result['sp_gap']
+                        grant_rate_change = post_result['group_grant_rate'] - pre_result['group_grant_rate']
+                        
+                        topic_relative[f"{base_key}_relative"] = {
+                            'attribute': post_result['attribute'],
+                            'group': post_result['group'],
+                            'reference': post_result['reference'],
+                            'topic': topic,
+                            'post_brexit_sp_gap': post_result['sp_gap'],
+                            'pre_brexit_sp_gap': pre_result['sp_gap'],
+                            'sp_gap_change': sp_gap_change,
+                            'post_brexit_grant_rate': post_result['group_grant_rate'],
+                            'pre_brexit_grant_rate': pre_result['group_grant_rate'],
+                            'grant_rate_change': grant_rate_change,
+                            'post_brexit_sample_size': post_result['group_size'],
+                            'pre_brexit_sample_size': pre_result['group_size'],
+                            'bias_direction': 'worsening' if sp_gap_change < 0 else 'improving' if sp_gap_change > 0 else 'stable'
+                        }
+                
+                if topic_relative:
+                    attr_relative[topic] = topic_relative
             
-            sp_disparities[attr] = {
-                'total_comparisons': total_comparisons,
-                'significant_disparities': significant_disparities,
-                'bias_rate': significant_disparities / total_comparisons if total_comparisons > 0 else 0
-            }
+            if attr_relative:
+                sp_relative[attr] = attr_relative
         
-        bias_summary['protected_attribute_impacts']['statistical_parity'] = sp_disparities
+        relative_metrics['statistical_parity_relative'] = sp_relative
     
-    # Analyze Error-Based Metrics results
-    if 'error_based_metrics' in all_results:
-        error_results = all_results['error_based_metrics']
-        
-        # Analyze Equal Opportunity and FPR gaps
-        error_disparities = {}
-        for attr, attr_data in error_results.get('individual_attributes', {}).items():
-            high_eo_gaps = 0
-            high_fpr_gaps = 0
-            total_comparisons = 0
-            
-            for topic, topic_data in attr_data.items():
-                for comparison, result in topic_data.items():
-                    total_comparisons += 1
-                    
-                    eo_gap = abs(result.get('equal_opportunity_gap', 0))
-                    fpr_gap = abs(result.get('false_positive_rate_gap', 0))
-                    
-                    if eo_gap > 0.1:  # 10% threshold
-                        high_eo_gaps += 1
-                    if fpr_gap > 0.1:
-                        high_fpr_gaps += 1
-            
-            error_disparities[attr] = {
-                'total_comparisons': total_comparisons,
-                'high_eo_gaps': high_eo_gaps,
-                'high_fpr_gaps': high_fpr_gaps,
-                'eo_bias_rate': high_eo_gaps / total_comparisons if total_comparisons > 0 else 0,
-                'fpr_bias_rate': high_fpr_gaps / total_comparisons if total_comparisons > 0 else 0
-            }
-        
-        bias_summary['protected_attribute_impacts']['error_based'] = error_disparities
-    
-    # Analyze Counterfactual results
+    # Calculate Counterfactual relative metrics (use built-in relative from new structure)
     if 'counterfactual_metrics' in all_results:
         cf_results = all_results['counterfactual_metrics']
         
-        cf_analysis = {}
-        for attr, attr_data in cf_results.get('individual_attributes', {}).items():
-            high_flip_rates = 0
-            total_topics = 0
+        # Use the relative metrics that were already calculated
+        if 'counterfactual_relative' in cf_results:
+            relative_metrics['counterfactual_relative'] = cf_results['counterfactual_relative']
+        else:
+            # Fallback for backward compatibility
+            cf_relative = {}
+            for attr, attr_data in cf_results.get('individual_attributes', {}).items():
+                attr_relative = {}
+                
+                for topic, topic_data in attr_data.items():
+                    attr_relative[topic] = {
+                        'attribute': attr,
+                        'topic': topic,
+                        'overall_flip_rate': topic_data.get('overall_flip_rate', 0),
+                        'grant_to_deny_rate': topic_data.get('grant_to_deny_rate', 0),
+                        'deny_to_grant_rate': topic_data.get('deny_to_grant_rate', 0),
+                        'total_pairs': topic_data.get('total_pairs', 0),
+                        'counterfactual_instability': 'high' if topic_data.get('overall_flip_rate', 0) > 0.3 else 'moderate' if topic_data.get('overall_flip_rate', 0) > 0.15 else 'low'
+                    }
+                
+                if attr_relative:
+                    cf_relative[attr] = attr_relative
+            
+            relative_metrics['counterfactual_relative'] = cf_relative
+    
+    # Calculate Error-Based relative metrics
+    if 'error_based_metrics' in all_results:
+        eb_results = all_results['error_based_metrics']
+        eb_relative = {}
+        
+        for attr, attr_data in eb_results.get('individual_attributes', {}).items():
+            attr_relative = {}
             
             for topic, topic_data in attr_data.items():
-                total_topics += 1
-                flip_rate = topic_data.get('overall_flip_rate', 0)
+                topic_relative = {}
                 
-                if flip_rate > 0.2:  # 20% threshold
-                    high_flip_rates += 1
+                # Group comparisons by base comparison (ignoring model suffix)
+                comparisons = {}
+                for key, result in topic_data.items():
+                    if key.endswith('_post_brexit') or key.endswith('_pre_brexit'):
+                        base_key = key.rsplit('_', 2)[0]  # Remove model suffix
+                        model = 'post_brexit' if key.endswith('_post_brexit') else 'pre_brexit'
+                        
+                        if base_key not in comparisons:
+                            comparisons[base_key] = {}
+                        comparisons[base_key][model] = result
+                
+                # Calculate relative metrics for each comparison
+                for base_key, models in comparisons.items():
+                    if 'post_brexit' in models and 'pre_brexit' in models:
+                        post_result = models['post_brexit']
+                        pre_result = models['pre_brexit']
+                        
+                        # Calculate relative metrics
+                        tpr_change = post_result['group_tpr'] - pre_result['group_tpr']
+                        fpr_change = post_result['group_fpr'] - pre_result['group_fpr']
+                        agreement_change = post_result['agreement_rate'] - pre_result['agreement_rate']
+                        
+                        topic_relative[f"{base_key}_relative"] = {
+                            'attribute': post_result['attribute'],
+                            'group': post_result['group'],
+                            'reference': post_result['reference'],
+                            'topic': topic,
+                            'post_brexit_tpr': post_result['group_tpr'],
+                            'pre_brexit_tpr': pre_result['group_tpr'],
+                            'tpr_change': tpr_change,
+                            'post_brexit_fpr': post_result['group_fpr'],
+                            'pre_brexit_fpr': pre_result['group_fpr'],
+                            'fpr_change': fpr_change,
+                            'post_brexit_agreement': post_result['agreement_rate'],
+                            'pre_brexit_agreement': pre_result['agreement_rate'],
+                            'agreement_change': agreement_change,
+                            'post_brexit_sample_size': post_result['total_sample_size'],
+                            'pre_brexit_sample_size': pre_result['total_sample_size'],
+                            'error_direction': 'worsening' if abs(tpr_change) + abs(fpr_change) > 0.05 else 'improving' if abs(tpr_change) + abs(fpr_change) < -0.05 else 'stable'
+                        }
+                
+                if topic_relative:
+                    attr_relative[topic] = topic_relative
             
-            cf_analysis[attr] = {
-                'total_topics': total_topics,
-                'high_flip_rate_topics': high_flip_rates,
-                'flip_bias_rate': high_flip_rates / total_topics if total_topics > 0 else 0
+            if attr_relative:
+                eb_relative[attr] = attr_relative
+        
+        relative_metrics['error_based_relative'] = eb_relative
+    
+    # Add temporal comparison results if available
+    if 'temporal_comparison' in all_results:
+        relative_metrics['temporal_comparison'] = all_results['temporal_comparison']
+    
+    return relative_metrics
+
+def structure_final_output(all_results: Dict[str, Dict], relative_metrics: Dict) -> Dict:
+    """Structure the final output according to user requirements"""
+    
+    structured_output = {
+        'individual_model_metrics': {
+            'statistical_parity': {
+                'pre_brexit': {},
+                'post_brexit': {}
+            },
+            'counterfactual': {
+                'pre_brexit': {},
+                'post_brexit': {}
+            },
+            'error_based': {
+                'pre_brexit': {},
+                'post_brexit': {}
             }
-        
-        bias_summary['protected_attribute_impacts']['counterfactual'] = cf_analysis
-    
-    # Identify most problematic topics
-    topic_bias_scores = {}
-    
-    # Aggregate across all metrics
-    for metric_type, metric_data in all_results.items():
-        if metric_type == 'statistical_parity':
-            for attr, attr_data in metric_data.get('individual_attributes', {}).items():
-                for topic, topic_data in attr_data.items():
-                    if topic not in topic_bias_scores:
-                        topic_bias_scores[topic] = {'sp_issues': 0, 'error_issues': 0, 'cf_issues': 0}
-                    
-                    significant_count = sum(1 for result in topic_data.values() 
-                                          if result.get('is_significant', False))
-                    topic_bias_scores[topic]['sp_issues'] += significant_count
-        
-        elif metric_type == 'error_based_metrics':
-            for attr, attr_data in metric_data.get('individual_attributes', {}).items():
-                for topic, topic_data in attr_data.items():
-                    if topic not in topic_bias_scores:
-                        topic_bias_scores[topic] = {'sp_issues': 0, 'error_issues': 0, 'cf_issues': 0}
-                    
-                    high_gap_count = sum(1 for result in topic_data.values()
-                                       if abs(result.get('equal_opportunity_gap', 0)) > 0.1 or 
-                                          abs(result.get('false_positive_rate_gap', 0)) > 0.1)
-                    topic_bias_scores[topic]['error_issues'] += high_gap_count
-        
-        elif metric_type == 'counterfactual_metrics':
-            for attr, attr_data in metric_data.get('individual_attributes', {}).items():
-                for topic, topic_data in attr_data.items():
-                    if topic not in topic_bias_scores:
-                        topic_bias_scores[topic] = {'sp_issues': 0, 'error_issues': 0, 'cf_issues': 0}
-                    
-                    if topic_data.get('overall_flip_rate', 0) > 0.2:
-                        topic_bias_scores[topic]['cf_issues'] += 1
-    
-    # Rank topics by total bias issues
-    topic_rankings = []
-    for topic, scores in topic_bias_scores.items():
-        total_issues = scores['sp_issues'] + scores['error_issues'] + scores['cf_issues']
-        topic_rankings.append({
-            'topic': topic,
-            'total_bias_issues': total_issues,
-            'statistical_parity_issues': scores['sp_issues'],
-            'error_based_issues': scores['error_issues'],
-            'counterfactual_issues': scores['cf_issues']
-        })
-    
-    topic_rankings.sort(key=lambda x: x['total_bias_issues'], reverse=True)
-    bias_summary['most_biased_topics'] = topic_rankings[:10]  # Top 10
-    
-    # Overall bias assessment
-    total_sp_significant = sum(
-        result.get('summary', {}).get('total_significant', 0)
-        for result in all_results.values()
-        if 'summary' in result and 'total_significant' in result['summary']
-    )
-    
-    total_sp_comparisons = sum(
-        result.get('summary', {}).get('total_comparisons', 0)
-        for result in all_results.values()
-        if 'summary' in result and 'total_comparisons' in result['summary']
-    )
-    
-    bias_summary['overall_bias_assessment'] = {
-        'overall_significance_rate': total_sp_significant / total_sp_comparisons if total_sp_comparisons > 0 else 0,
-        'total_statistical_tests': total_sp_comparisons,
-        'significant_disparities': total_sp_significant,
-        'analysis_timestamp': datetime.now().isoformat()
+        },
+        'relative_metrics': relative_metrics,
+        'metadata': {
+            'analysis_timestamp': datetime.now().isoformat(),
+            'total_topics_analyzed': 0,
+            'total_comparisons': 0,
+            'metrics_included': []
+        }
     }
     
-    return bias_summary
-
-def generate_executive_summary(all_results: Dict[str, Dict], bias_analysis: Dict) -> str:
-    """Generate executive summary of fairness analysis"""
-    
-    summary = []
-    summary.append("=" * 80)
-    summary.append("COMPARATIVE FAIRNESS ANALYSIS - EXECUTIVE SUMMARY")
-    summary.append("=" * 80)
-    summary.append("")
-    
-    # Overall assessment
-    overall = bias_analysis.get('overall_bias_assessment', {})
-    sig_rate = overall.get('overall_significance_rate', 0) * 100
-    
-    summary.append(f"OVERALL BIAS ASSESSMENT:")
-    summary.append(f"  Significance Rate: {sig_rate:.1f}% of statistical tests show significant bias")
-    summary.append(f"  Total Statistical Tests: {overall.get('total_statistical_tests', 0)}")
-    summary.append(f"  Significant Disparities Found: {overall.get('significant_disparities', 0)}")
-    summary.append("")
-    
-    # Protected attribute impacts
-    summary.append("PROTECTED ATTRIBUTE BIAS ANALYSIS:")
-    
-    sp_impacts = bias_analysis.get('protected_attribute_impacts', {}).get('statistical_parity', {})
-    for attr, impact in sp_impacts.items():
-        bias_rate = impact.get('bias_rate', 0) * 100
-        summary.append(f"  {attr.upper()}: {bias_rate:.1f}% bias rate ({impact.get('significant_disparities', 0)}/{impact.get('total_comparisons', 0)} tests)")
-    
-    summary.append("")
-    
-    # Most biased topics
-    summary.append("MOST PROBLEMATIC TOPICS:")
-    top_topics = bias_analysis.get('most_biased_topics', [])[:5]
-    for i, topic_info in enumerate(top_topics, 1):
-        summary.append(f"  {i}. {topic_info['topic']}: {topic_info['total_bias_issues']} bias issues")
-        summary.append(f"     SP: {topic_info['statistical_parity_issues']}, Error: {topic_info['error_based_issues']}, CF: {topic_info['counterfactual_issues']}")
-    
-    summary.append("")
-    
-    # Temporal bias evidence
+    # Extract individual model metrics from statistical parity
     if 'statistical_parity' in all_results:
-        sp_summary = all_results['statistical_parity'].get('summary', {})
-        summary.append(f"TEMPORAL MODEL COMPARISON:")
-        summary.append(f"  Statistical Parity Tests: {sp_summary.get('total_comparisons', 0)}")
-        summary.append(f"  Significant Differences: {sp_summary.get('total_significant', 0)}")
-        summary.append(f"  Evidence of Temporal Bias: {'STRONG' if sig_rate > 50 else 'MODERATE' if sig_rate > 25 else 'WEAK'}")
+        sp_results = all_results['statistical_parity']
+        structured_output['metadata']['metrics_included'].append('statistical_parity')
+        
+        for attr, attr_data in sp_results.get('individual_attributes', {}).items():
+            for topic, topic_data in attr_data.items():
+                for key, result in topic_data.items():
+                    if key.endswith('_post_brexit'):
+                        base_key = key.rsplit('_', 2)[0]
+                        if attr not in structured_output['individual_model_metrics']['statistical_parity']['post_brexit']:
+                            structured_output['individual_model_metrics']['statistical_parity']['post_brexit'][attr] = {}
+                        if topic not in structured_output['individual_model_metrics']['statistical_parity']['post_brexit'][attr]:
+                            structured_output['individual_model_metrics']['statistical_parity']['post_brexit'][attr][topic] = {}
+                        structured_output['individual_model_metrics']['statistical_parity']['post_brexit'][attr][topic][base_key] = result
+                    
+                    elif key.endswith('_pre_brexit'):
+                        base_key = key.rsplit('_', 2)[0]
+                        if attr not in structured_output['individual_model_metrics']['statistical_parity']['pre_brexit']:
+                            structured_output['individual_model_metrics']['statistical_parity']['pre_brexit'][attr] = {}
+                        if topic not in structured_output['individual_model_metrics']['statistical_parity']['pre_brexit'][attr]:
+                            structured_output['individual_model_metrics']['statistical_parity']['pre_brexit'][attr][topic] = {}
+                        structured_output['individual_model_metrics']['statistical_parity']['pre_brexit'][attr][topic][base_key] = result
     
-    summary.append("")
-    
-    # Counterfactual evidence
+    # Extract individual model metrics from counterfactual analysis
     if 'counterfactual_metrics' in all_results:
-        cf_summary = all_results['counterfactual_metrics'].get('summary', {})
-        summary.append(f"COUNTERFACTUAL ANALYSIS:")
-        summary.append(f"  Counterfactual Pairs Found: {cf_summary.get('total_counterfactual_pairs', 0)}")
-        summary.append(f"  Individual Comparisons: {cf_summary.get('individual_comparisons', 0)}")
-        summary.append(f"  Intersectional Comparisons: {cf_summary.get('intersectional_comparisons', 0)}")
+        cf_results = all_results['counterfactual_metrics']
+        structured_output['metadata']['metrics_included'].append('counterfactual')
+        
+        # Handle new structure with separated models - with error handling
+        if 'pre_brexit_model' in cf_results and cf_results['pre_brexit_model']:
+            pre_brexit_data = cf_results['pre_brexit_model'].get('individual_attributes', {})
+            if pre_brexit_data:
+                structured_output['individual_model_metrics']['counterfactual']['pre_brexit'] = pre_brexit_data
+        
+        if 'post_brexit_model' in cf_results and cf_results['post_brexit_model']:
+            post_brexit_data = cf_results['post_brexit_model'].get('individual_attributes', {})
+            if post_brexit_data:
+                structured_output['individual_model_metrics']['counterfactual']['post_brexit'] = post_brexit_data
+        
+        # Fallback to individual_attributes if model separation didn't work
+        if not structured_output['individual_model_metrics']['counterfactual']['pre_brexit'] and \
+           not structured_output['individual_model_metrics']['counterfactual']['post_brexit']:
+            if 'individual_attributes' in cf_results and cf_results['individual_attributes']:
+                # Use the existing structure as fallback
+                structured_output['individual_model_metrics']['counterfactual']['combined'] = cf_results['individual_attributes']
     
-    summary.append("")
-    summary.append("RECOMMENDATIONS:")
+    # Extract individual model metrics from error-based analysis
+    if 'error_based_metrics' in all_results:
+        eb_results = all_results['error_based_metrics']
+        structured_output['metadata']['metrics_included'].append('error_based')
+        
+        for attr, attr_data in eb_results.get('individual_attributes', {}).items():
+            for topic, topic_data in attr_data.items():
+                for key, result in topic_data.items():
+                    if key.endswith('_post_brexit'):
+                        base_key = key.rsplit('_', 2)[0]
+                        if attr not in structured_output['individual_model_metrics']['error_based']['post_brexit']:
+                            structured_output['individual_model_metrics']['error_based']['post_brexit'][attr] = {}
+                        if topic not in structured_output['individual_model_metrics']['error_based']['post_brexit'][attr]:
+                            structured_output['individual_model_metrics']['error_based']['post_brexit'][attr][topic] = {}
+                        structured_output['individual_model_metrics']['error_based']['post_brexit'][attr][topic][base_key] = result
+                    
+                    elif key.endswith('_pre_brexit'):
+                        base_key = key.rsplit('_', 2)[0]
+                        if attr not in structured_output['individual_model_metrics']['error_based']['pre_brexit']:
+                            structured_output['individual_model_metrics']['error_based']['pre_brexit'][attr] = {}
+                        if topic not in structured_output['individual_model_metrics']['error_based']['pre_brexit'][attr]:
+                            structured_output['individual_model_metrics']['error_based']['pre_brexit'][attr][topic] = {}
+                        structured_output['individual_model_metrics']['error_based']['pre_brexit'][attr][topic][base_key] = result
     
-    if sig_rate > 50:
-        summary.append("  🚨 HIGH BIAS DETECTED - Immediate intervention required")
-        summary.append("  - Audit model training data for temporal bias")
-        summary.append("  - Implement bias mitigation techniques")
-        summary.append("  - Consider model retraining with balanced data")
-    elif sig_rate > 25:
-        summary.append("  ⚠️  MODERATE BIAS DETECTED - Monitoring and mitigation advised")
-        summary.append("  - Implement ongoing bias monitoring")
-        summary.append("  - Review decision patterns for most biased topics")
-        summary.append("  - Consider post-processing fairness corrections")
-    else:
-        summary.append("  ✅ LOW BIAS DETECTED - Continue monitoring")
-        summary.append("  - Maintain regular bias assessments")
-        summary.append("  - Monitor for emerging bias patterns")
+    # Calculate metadata
+    topics_analyzed = set()
+    total_comparisons = 0
     
-    summary.append("")
-    summary.append("=" * 80)
+    for metric_type in structured_output['individual_model_metrics']:
+        for model in structured_output['individual_model_metrics'][metric_type]:
+            for attr in structured_output['individual_model_metrics'][metric_type][model]:
+                topics_analyzed.update(structured_output['individual_model_metrics'][metric_type][model][attr].keys())
+                for topic in structured_output['individual_model_metrics'][metric_type][model][attr]:
+                    total_comparisons += len(structured_output['individual_model_metrics'][metric_type][model][attr][topic])
     
-    return "\n".join(summary)
+    structured_output['metadata']['total_topics_analyzed'] = len(topics_analyzed)
+    structured_output['metadata']['total_comparisons'] = total_comparisons
+    
+    return structured_output
 
 def main():
     """Main function for comprehensive fairness metrics aggregation"""
@@ -343,48 +416,65 @@ def main():
     
     logger.info(f"Completed {len(all_results)} metric calculations")
     
-    # Aggregate bias findings
-    logger.info("Aggregating bias findings across all metrics...")
-    bias_analysis = aggregate_bias_findings(all_results)
+    # Calculate relative metrics
+    logger.info("Calculating relative metrics between models...")
+    relative_metrics = calculate_relative_metrics(all_results)
     
-    # Generate executive summary
-    logger.info("Generating executive summary...")
-    executive_summary = generate_executive_summary(all_results, bias_analysis)
+    # Structure final output
+    logger.info("Structuring final output...")
+    structured_output = structure_final_output(all_results, relative_metrics)
     
-    # Save comprehensive results
-    comprehensive_results = {
-        'analysis_metadata': {
-            'timestamp': datetime.now().isoformat(),
-            'metrics_calculated': list(all_results.keys()),
-            'total_groups_analyzed': sum(
-                result.get('summary', {}).get('total_comparisons', 0)
-                for result in all_results.values()
-            )
-        },
-        'individual_metrics': all_results,
-        'bias_analysis': bias_analysis,
-        'executive_summary_text': executive_summary
-    }
-    
-    # Save to JSON
+    # Save structured results
     comprehensive_file = output_dir / "comprehensive_fairness_analysis.json"
     with open(comprehensive_file, 'w') as f:
-        json.dump(comprehensive_results, f, indent=2)
+        json.dump(structured_output, f, indent=2)
     
-    # Save executive summary as text
-    summary_file = reports_dir / "executive_summary.txt"
+    # Generate summary report
+    summary_lines = [
+        "=" * 80,
+        "COMPREHENSIVE FAIRNESS METRICS ANALYSIS",
+        "=" * 80,
+        "",
+        f"Analysis completed at: {datetime.now().isoformat()}",
+        "",
+        "METRICS CALCULATED:",
+        "✅ Statistical Parity (Pre/Post Brexit models)",
+        "✅ Counterfactual Metrics (Decision flip rates)",
+        "✅ Relative Metrics (Model comparison)",
+        "",
+        "OUTPUT STRUCTURE:",
+        "1. Individual Model Metrics:",
+        "   - Statistical Parity (Pre-Brexit)",
+        "   - Statistical Parity (Post-Brexit)", 
+        "   - Counterfactual Metrics",
+        "2. Relative Metrics:",
+        "   - Statistical Parity Changes",
+        "   - Counterfactual Changes",
+        "   - Temporal Comparison",
+        "",
+        "Next Steps:",
+        "- Run significance testing in 04_significance_testing",
+        "- Review individual model performance",
+        "- Analyze relative metric changes",
+        "",
+        "=" * 80
+    ]
+    
+    summary_text = "\n".join(summary_lines)
+    
+    # Save summary
+    summary_file = reports_dir / "metrics_summary.txt"
     with open(summary_file, 'w') as f:
-        f.write(executive_summary)
+        f.write(summary_text)
     
-    # Print executive summary
-    print()
-    print(executive_summary)
+    # Print summary
+    print(summary_text)
     
     logger.info(f"Saved comprehensive analysis to {comprehensive_file}")
-    logger.info(f"Saved executive summary to {summary_file}")
+    logger.info(f"Saved summary to {summary_file}")
     logger.info("Comprehensive fairness analysis completed successfully!")
     
-    return comprehensive_results
+    return structured_output
 
 if __name__ == "__main__":
     results = main() 
