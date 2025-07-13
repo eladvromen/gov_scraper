@@ -58,6 +58,7 @@ def create_unified_fairness_dataframe(sp_data: Dict, error_data: Dict) -> pd.Dat
         
         # Process each TOPIC separately to maintain granularity
         for topic in sp_attr_data:
+            
             print(f"  Processing topic: {topic}")
             
             topic_sp_data = sp_attr_data[topic]

@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Error-Based Fairness Metrics with ALL PAIRWISE COMPARISONS
