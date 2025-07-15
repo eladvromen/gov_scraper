@@ -1,0 +1,42 @@
+{
+  "pre_brexit": {
+    "original_count": 444,
+    "bonferroni_count": 22,
+    "fdr_count": 158,
+    "holm_count": 22,
+    "total_comparisons": 1414,
+    "bonferroni_reduction": 0.9504504504504504,
+    "fdr_reduction": 0.6441441441441441,
+    "holm_reduction": 0.9504504504504504,
+    "bonferroni_fdr_agreement": 0.9038189533239038,
+    "bonferroni_holm_agreement": 1.0,
+    "fdr_holm_agreement": 0.9038189533239038,
+    "only_original": 286,
+    "survived_fdr": 158,
+    "survived_bonferroni": 22
+  },
+  "post_brexit": {
+    "original_count": 382,
+    "bonferroni_count": 30,
+    "fdr_count": 148,
+    "holm_count": 30,
+    "total_comparisons": 1414,
+    "bonferroni_reduction": 0.9214659685863874,
+    "fdr_reduction": 0.612565445026178,
+    "holm_reduction": 0.9214659685863874,
+    "bonferroni_fdr_agreement": 0.9165487977369166,
+    "bonferroni_holm_agreement": 1.0,
+    "fdr_holm_agreement": 0.9165487977369166,
+    "only_original": 234,
+    "survived_fdr": 148,
+    "survived_bonferroni": 30
+  },
+  "cross_model": {
+    "original_both_significant": 170,
+    "fdr_both_significant": 70,
+    "bonferroni_both_significant": 2,
+    "original_consistency": 0.6562942008486563,
+    "fdr_consistency": 0.8826025459688827,
+    "bonferroni_consistency": 0.9660537482319661
+  }
+}

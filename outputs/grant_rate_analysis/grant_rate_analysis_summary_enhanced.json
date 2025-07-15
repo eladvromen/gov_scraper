@@ -1,0 +1,21 @@
+{
+  "model_overall_grant_rates": {
+    "post_brexit": 0.8026097363239779,
+    "pre_brexit": 0.7612136184667645
+  },
+  "total_records_analyzed": 51840,
+  "topics_analyzed": 22,
+  "total_field_comparisons": 78,
+  "significant_differences": 53,
+  "disclosure_topics_included": 6,
+  "contradiction_topics_included": 6,
+  "enhanced_features": {
+    "disclosure_contradiction_support": true,
+    "aggregated_topic_categories": [
+      "Disclosure",
+      "Contradiction"
+    ],
+    "granular_disclosure_contradiction_variations": 10
+  },
+  "analysis_timestamp": "2025-07-15T16:17:47.441346"
+}

@@ -1,0 +1,3 @@
+model,original_significant,bonferroni_significant,fdr_significant,holm_significant,bonferroni_reduction_rate,fdr_reduction_rate,holm_reduction_rate
+pre_brexit,444,22,158,22,95.0%,64.4%,95.0%
+post_brexit,382,30,148,30,92.1%,61.3%,92.1%

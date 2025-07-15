@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "analysis_date": "2025-07-15T17:09:09.362581",
+    "total_comparisons": 1414,
+    "correction_methods": [
+      "bonferroni",
+      "fdr_bh",
+      "holm_bonferroni"
+    ],
+    "alpha_level": 0.05
+  },
+  "original_analysis": {
+    "pre_brexit": {
+      "significant_count": 444,
+      "significant_rate": 0.314002828854314,
+      "total_comparisons": 1414
+    },
+    "post_brexit": {
+      "significant_count": 382,
+      "significant_rate": 0.27015558698727016,
+      "total_comparisons": 1414
+    }
+  },
+  "corrected_analysis": {
+    "pre_brexit": {
+      "bonferroni": {
+        "significant_count": 22,
+        "reduction_rate": 0.9504504504504504,
+        "survival_rate": 0.0495495495495496
+      },
+      "fdr": {
+        "significant_count": 158,
+        "reduction_rate": 0.6441441441441441,
+        "survival_rate": 0.3558558558558559
+      },
+      "holm": {
+        "significant_count": 22,
+        "reduction_rate": 0.9504504504504504,
+        "survival_rate": 0.0495495495495496
+      }
+    },
+    "post_brexit": {
+      "bonferroni": {
+        "significant_count": 30,
+        "reduction_rate": 0.9214659685863874,
+        "survival_rate": 0.07853403141361259
+      },
+      "fdr": {
+        "significant_count": 148,
+        "reduction_rate": 0.612565445026178,
+        "survival_rate": 0.38743455497382195
+      },
+      "holm": {
+        "significant_count": 30,
+        "reduction_rate": 0.9214659685863874,
+        "survival_rate": 0.07853403141361259
+      }
+    }
+  },
+  "validity_assessment": {
+    "multiple_testing_severity": "HIGH",
+    "expected_false_positives_original": 70.7,
+    "false_positive_risk": "Substantial risk of false discoveries without correction",
+    "correction_necessity": "REQUIRED",
+    "cross_model_consistency": {
+      "original": 0.6562942008486563,
+      "fdr_corrected": 0.8826025459688827,
+      "bonferroni_corrected": 0.9660537482319661
+    }
+  },
+  "recommendations": {
+    "primary_method": "fdr",
+    "rationale": "False Discovery Rate provides optimal balance between Type I and Type II error control",
+    "use_cases": {
+      "exploratory_analysis": "Use FDR-corrected vectors for balanced discovery",
+      "confirmatory_analysis": "Use Bonferroni-corrected vectors for conservative claims",
+      "reporting": "Report both original and FDR-corrected results with clear methodology"
+    },
+    "interpretation_guidelines": [
+      "FDR-corrected results represent more reliable significant differences",
+      "Original results may contain ~71 false positives",
+      "Magnitude vectors remain valid regardless of significance correction",
+      "Use corrected significance for hypothesis testing, original for pattern exploration"
+    ]
+  }
+}
