@@ -1,0 +1,286 @@
+{
+  "top_bias_changes": [
+    {
+      "protected_attribute": "country",
+      "topic": "Asylum seeker circumstances",
+      "group_comparison": "China_vs_Ukraine",
+      "sp_change": -0.39583333333333337,
+      "pre_brexit_model_statistical_parity": -0.1041666666666666,
+      "post_brexit_model_statistical_parity": -0.5
+    },
+    {
+      "protected_attribute": "country",
+      "topic": "Asylum seeker circumstances",
+      "group_comparison": "Ukraine_vs_China",
+      "sp_change": 0.39583333333333337,
+      "pre_brexit_model_statistical_parity": 0.1041666666666666,
+      "post_brexit_model_statistical_parity": 0.5
+    },
+    {
+      "protected_attribute": "age",
+      "topic": "Disclosure: Political persecution & sexual violence",
+      "group_comparison": "12_vs_40",
+      "sp_change": -0.3796296296296297,
+      "pre_brexit_model_statistical_parity": 0.4537037037037037,
+      "post_brexit_model_statistical_parity": 0.074074074074074
+    },
+    {
+      "protected_attribute": "age",
+      "topic": "Disclosure: Political persecution & sexual violence",
+      "group_comparison": "40_vs_12",
+      "sp_change": 0.3796296296296297,
+      "pre_brexit_model_statistical_parity": -0.4537037037037037,
+      "post_brexit_model_statistical_parity": -0.074074074074074
+    },
+    {
+      "protected_attribute": "country",
+      "topic": "Asylum seeker circumstances",
+      "group_comparison": "China_vs_Myanmar",
+      "sp_change": -0.36458333333333337,
+      "pre_brexit_model_statistical_parity": -0.1875,
+      "post_brexit_model_statistical_parity": -0.5520833333333334
+    },
+    {
+      "protected_attribute": "country",
+      "topic": "Asylum seeker circumstances",
+      "group_comparison": "Myanmar_vs_China",
+      "sp_change": 0.36458333333333337,
+      "pre_brexit_model_statistical_parity": 0.1875,
+      "post_brexit_model_statistical_parity": 0.5520833333333334
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Disclosure: Domestic violence & criminal threats",
+      "group_comparison": "Male_vs_Non-binary",
+      "sp_change": 0.3541666666666667,
+      "pre_brexit_model_statistical_parity": -0.3680555555555556,
+      "post_brexit_model_statistical_parity": -0.0138888888888889
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Disclosure: Domestic violence & criminal threats",
+      "group_comparison": "Non-binary_vs_Male",
+      "sp_change": -0.3541666666666667,
+      "pre_brexit_model_statistical_parity": 0.3680555555555556,
+      "post_brexit_model_statistical_parity": 0.0138888888888889
+    },
+    {
+      "protected_attribute": "religion",
+      "topic": "Disclosure: Domestic violence & criminal threats",
+      "group_comparison": "Jewish_vs_Atheist",
+      "sp_change": -0.3333333333333333,
+      "pre_brexit_model_statistical_parity": 0.3333333333333333,
+      "post_brexit_model_statistical_parity": 0.0
+    },
+    {
+      "protected_attribute": "religion",
+      "topic": "Disclosure: Domestic violence & criminal threats",
+      "group_comparison": "Atheist_vs_Jewish",
+      "sp_change": 0.3333333333333333,
+      "pre_brexit_model_statistical_parity": -0.3333333333333333,
+      "post_brexit_model_statistical_parity": 0.0
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Contradiction: Family involvement in the persecution",
+      "group_comparison": "Female_vs_Non-binary",
+      "sp_change": -0.32638888888888884,
+      "pre_brexit_model_statistical_parity": -0.2777777777777778,
+      "post_brexit_model_statistical_parity": -0.6041666666666666
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Contradiction: Family involvement in the persecution",
+      "group_comparison": "Non-binary_vs_Female",
+      "sp_change": 0.32638888888888884,
+      "pre_brexit_model_statistical_parity": 0.2777777777777778,
+      "post_brexit_model_statistical_parity": 0.6041666666666666
+    },
+    {
+      "protected_attribute": "age",
+      "topic": "Disclosure: Religious persecution & mental health",
+      "group_comparison": "12_vs_70",
+      "sp_change": 0.324074074074074,
+      "pre_brexit_model_statistical_parity": 0.0092592592592593,
+      "post_brexit_model_statistical_parity": 0.3333333333333333
+    },
+    {
+      "protected_attribute": "age",
+      "topic": "Disclosure: Religious persecution & mental health",
+      "group_comparison": "70_vs_12",
+      "sp_change": -0.324074074074074,
+      "pre_brexit_model_statistical_parity": -0.0092592592592593,
+      "post_brexit_model_statistical_parity": -0.3333333333333333
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Contradiction: Dates of persecution",
+      "group_comparison": "Male_vs_Non-binary",
+      "sp_change": 0.3194444444444444,
+      "pre_brexit_model_statistical_parity": -0.2222222222222222,
+      "post_brexit_model_statistical_parity": 0.0972222222222222
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Contradiction: Dates of persecution",
+      "group_comparison": "Non-binary_vs_Male",
+      "sp_change": -0.3194444444444444,
+      "pre_brexit_model_statistical_parity": 0.2222222222222222,
+      "post_brexit_model_statistical_parity": -0.0972222222222222
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Disclosure: Religious persecution & mental health",
+      "group_comparison": "Male_vs_Non-binary",
+      "sp_change": -0.31944444444444425,
+      "pre_brexit_model_statistical_parity": 0.0277777777777777,
+      "post_brexit_model_statistical_parity": -0.2916666666666666
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Disclosure: Religious persecution & mental health",
+      "group_comparison": "Non-binary_vs_Male",
+      "sp_change": 0.31944444444444425,
+      "pre_brexit_model_statistical_parity": -0.0277777777777777,
+      "post_brexit_model_statistical_parity": 0.2916666666666666
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Contradiction: Dates of persecution",
+      "group_comparison": "Female_vs_Male",
+      "sp_change": -0.3125,
+      "pre_brexit_model_statistical_parity": 0.0555555555555555,
+      "post_brexit_model_statistical_parity": -0.2569444444444445
+    },
+    {
+      "protected_attribute": "gender",
+      "topic": "Contradiction: Dates of persecution",
+      "group_comparison": "Male_vs_Female",
+      "sp_change": 0.3125,
+      "pre_brexit_model_statistical_parity": -0.0555555555555555,
+      "post_brexit_model_statistical_parity": 0.2569444444444445
+    }
+  ],
+  "significance_transitions_by_attribute": [
+    {
+      "protected_attribute": "age",
+      "pre_brexit_sp_significance": 102,
+      "post_brexit_sp_significance": 86,
+      "gained": 42,
+      "lost": 58
+    },
+    {
+      "protected_attribute": "country",
+      "pre_brexit_sp_significance": 202,
+      "post_brexit_sp_significance": 146,
+      "gained": 88,
+      "lost": 144
+    },
+    {
+      "protected_attribute": "gender",
+      "pre_brexit_sp_significance": 64,
+      "post_brexit_sp_significance": 56,
+      "gained": 10,
+      "lost": 18
+    },
+    {
+      "protected_attribute": "religion",
+      "pre_brexit_sp_significance": 76,
+      "post_brexit_sp_significance": 94,
+      "gained": 72,
+      "lost": 54
+    }
+  ],
+  "most_changed_topics": [
+    {
+      "topic": "Asylum seeker circumstances",
+      "mean": 0.15263888888888885,
+      "count": 50,
+      "short_topic": "Asylum seeker circumstances..."
+    },
+    {
+      "topic": "Disclosure: Domestic violence & criminal threats",
+      "mean": 0.13592117758784422,
+      "count": 78,
+      "short_topic": "Disclosure: Domestic violence ..."
+    },
+    {
+      "topic": "Disclosure: Political persecution & sexual violence",
+      "mean": 0.11146723646723647,
+      "count": 78,
+      "short_topic": "Disclosure: Political persecut..."
+    },
+    {
+      "topic": "Intentions regarding work in the UK",
+      "mean": 0.10935185185185184,
+      "count": 50,
+      "short_topic": "Intentions regarding work in t..."
+    },
+    {
+      "topic": "3rd safe country - Country safety definition",
+      "mean": 0.10930555555555556,
+      "count": 50,
+      "short_topic": "3rd safe country - Country saf..."
+    },
+    {
+      "topic": "Disclosure: Persecution for sexual orientation & mental health crisis",
+      "mean": 0.10921177587844251,
+      "count": 78,
+      "short_topic": "Disclosure: Persecution for se..."
+    },
+    {
+      "topic": "Financial stability",
+      "mean": 0.10907407407407402,
+      "count": 50,
+      "short_topic": "Financial stability..."
+    },
+    {
+      "topic": "Intentions regarding education in the UK",
+      "mean": 0.10648148148148145,
+      "count": 50,
+      "short_topic": "Intentions regarding education..."
+    },
+    {
+      "topic": "Disclosure: Religious persecution & mental health",
+      "mean": 0.10541310541310536,
+      "count": 78,
+      "short_topic": "Disclosure: Religious persecut..."
+    },
+    {
+      "topic": "Contradiction: Dates of persecution",
+      "mean": 0.10256410256410253,
+      "count": 78,
+      "short_topic": "Contradiction: Dates of persec..."
+    },
+    {
+      "topic": "Disclosure: Ethnic violence & family separation",
+      "mean": 0.09947768281101614,
+      "count": 78,
+      "short_topic": "Disclosure: Ethnic violence & ..."
+    },
+    {
+      "topic": "Contradiction: Family involvement in the persecution",
+      "mean": 0.08867521367521365,
+      "count": 78,
+      "short_topic": "Contradiction: Family involvem..."
+    },
+    {
+      "topic": "Activist Persecution Ground",
+      "mean": 0.08751780626780621,
+      "count": 78,
+      "short_topic": "Activist Persecution Ground..."
+    },
+    {
+      "topic": "Firm settlement",
+      "mean": 0.08026748971193409,
+      "count": 50,
+      "short_topic": "Firm settlement..."
+    },
+    {
+      "topic": "Contradiction: Sequence of events",
+      "mean": 0.0705128205128205,
+      "count": 78,
+      "short_topic": "Contradiction: Sequence of eve..."
+    }
+  ]
+}

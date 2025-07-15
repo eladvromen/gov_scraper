@@ -1,0 +1,313 @@
+================================================================================
+DIVERGENCE ANALYSIS SUMMARY
+================================================================================
+
+## SP_MAGNITUDE_DIVERGENCE
+----------------------------------------
+
+Divergence Metrics:
+  cosine_similarity: 0.4261
+  cosine_distance: 0.5739
+  pearson_correlation: 0.4046
+  euclidean_distance: 0.0945
+  manhattan_distance: 0.0650
+  mean_absolute_difference: 0.0650
+  vector_length: 1414
+  effective_sample_size: 1414.0000
+
+Vector Statistics:
+  vector1:
+    mean: -0.0000
+    std: 0.0870
+    min: -0.4537
+    max: 0.4537
+    weighted: True
+  vector2:
+    mean: 0.0000
+    std: 0.0861
+    min: -0.6042
+    max: 0.6042
+    weighted: True
+  difference:
+    mean: 0.0000
+    std: 0.0945
+    min: -0.3958
+    max: 0.3958
+    mean_absolute: 0.0650
+    weighted: True
+  direction_analysis:
+    positive_changes: 650
+    negative_changes: 650
+    no_changes: 114
+    positive_rate: 0.4597
+    negative_rate: 0.4597
+    no_change_rate: 0.0806
+
+## SP_SIGNIFICANCE_DIVERGENCE
+----------------------------------------
+
+Significance Pattern Analysis:
+  vector1_significant_count: 444
+  vector2_significant_count: 382
+  vector1_significance_rate: 31.40%
+  vector2_significance_rate: 27.02%
+  both_significant_count: 170
+  neither_significant_count: 758
+  pattern_agreement_count: 928
+  pattern_agreement_rate: 65.63%
+  pattern_change_count: 486
+  pattern_change_rate: 34.37%
+
+Significance Transitions:
+  gained_significance: 212
+  lost_significance: 274
+  remained_significant: 170
+  remained_non_significant: 758
+
+## PROTECTED_ATTRIBUTE_COUNTRY_MAGNITUDE
+----------------------------------------
+
+Divergence Metrics:
+  cosine_similarity: 0.2678
+  cosine_distance: 0.7322
+  pearson_correlation: 0.2285
+  euclidean_distance: 0.1001
+  manhattan_distance: 0.0702
+  mean_absolute_difference: 0.0702
+  vector_length: 630
+  effective_sample_size: 630.0000
+
+Vector Statistics:
+  vector1:
+    mean: 0.0000
+    std: 0.0834
+    min: -0.3299
+    max: 0.3299
+    weighted: True
+  vector2:
+    mean: 0.0000
+    std: 0.0776
+    min: -0.5521
+    max: 0.5521
+    weighted: True
+  difference:
+    mean: -0.0000
+    std: 0.1001
+    min: -0.3958
+    max: 0.3958
+    mean_absolute: 0.0702
+    weighted: True
+  direction_analysis:
+    positive_changes: 293
+    negative_changes: 293
+    no_changes: 44
+    positive_rate: 0.4651
+    negative_rate: 0.4651
+    no_change_rate: 0.0698
+
+## PROTECTED_ATTRIBUTE_COUNTRY_SIGNIFICANCE
+----------------------------------------
+
+Significance Pattern Analysis:
+  vector1_significant_count: 202
+  vector2_significant_count: 146
+  vector1_significance_rate: 32.06%
+  vector2_significance_rate: 23.17%
+  both_significant_count: 58
+  neither_significant_count: 340
+  pattern_agreement_count: 398
+  pattern_agreement_rate: 63.17%
+  pattern_change_count: 232
+  pattern_change_rate: 36.83%
+
+Significance Transitions:
+  gained_significance: 88
+  lost_significance: 144
+  remained_significant: 58
+  remained_non_significant: 340
+
+## PROTECTED_ATTRIBUTE_AGE_MAGNITUDE
+----------------------------------------
+
+Divergence Metrics:
+  cosine_similarity: 0.5341
+  cosine_distance: 0.4659
+  pearson_correlation: 0.4205
+  euclidean_distance: 0.1006
+  manhattan_distance: 0.0675
+  mean_absolute_difference: 0.0675
+  vector_length: 252
+  effective_sample_size: 252.0000
+
+Vector Statistics:
+  vector1:
+    mean: 0.0000
+    std: 0.1009
+    min: -0.4537
+    max: 0.4537
+    weighted: True
+  vector2:
+    mean: 0.0000
+    std: 0.0840
+    min: -0.3519
+    max: 0.3519
+    weighted: True
+  difference:
+    mean: 0.0000
+    std: 0.1006
+    min: -0.3796
+    max: 0.3796
+    mean_absolute: 0.0675
+    weighted: True
+  direction_analysis:
+    positive_changes: 117
+    negative_changes: 117
+    no_changes: 18
+    positive_rate: 0.4643
+    negative_rate: 0.4643
+    no_change_rate: 0.0714
+
+## PROTECTED_ATTRIBUTE_AGE_SIGNIFICANCE
+----------------------------------------
+
+Significance Pattern Analysis:
+  vector1_significant_count: 102
+  vector2_significant_count: 86
+  vector1_significance_rate: 40.48%
+  vector2_significance_rate: 34.13%
+  both_significant_count: 44
+  neither_significant_count: 108
+  pattern_agreement_count: 152
+  pattern_agreement_rate: 60.32%
+  pattern_change_count: 100
+  pattern_change_rate: 39.68%
+
+Significance Transitions:
+  gained_significance: 42
+  lost_significance: 58
+  remained_significant: 44
+  remained_non_significant: 108
+
+## PROTECTED_ATTRIBUTE_RELIGION_MAGNITUDE
+----------------------------------------
+
+Divergence Metrics:
+  cosine_similarity: 0.3176
+  cosine_distance: 0.6824
+  pearson_correlation: 0.2150
+  euclidean_distance: 0.0757
+  manhattan_distance: 0.0531
+  mean_absolute_difference: 0.0531
+  vector_length: 438
+  effective_sample_size: 438.0000
+
+Vector Statistics:
+  vector1:
+    mean: -0.0000
+    std: 0.0628
+    min: -0.3333
+    max: 0.3333
+    weighted: True
+  vector2:
+    mean: -0.0000
+    std: 0.0579
+    min: -0.3333
+    max: 0.3333
+    weighted: True
+  difference:
+    mean: 0.0000
+    std: 0.0757
+    min: -0.3333
+    max: 0.3333
+    mean_absolute: 0.0531
+    weighted: True
+  direction_analysis:
+    positive_changes: 196
+    negative_changes: 196
+    no_changes: 46
+    positive_rate: 0.4475
+    negative_rate: 0.4475
+    no_change_rate: 0.1050
+
+## PROTECTED_ATTRIBUTE_RELIGION_SIGNIFICANCE
+----------------------------------------
+
+Significance Pattern Analysis:
+  vector1_significant_count: 76
+  vector2_significant_count: 94
+  vector1_significance_rate: 17.35%
+  vector2_significance_rate: 21.46%
+  both_significant_count: 22
+  neither_significant_count: 290
+  pattern_agreement_count: 312
+  pattern_agreement_rate: 71.23%
+  pattern_change_count: 126
+  pattern_change_rate: 28.77%
+
+Significance Transitions:
+  gained_significance: 72
+  lost_significance: 54
+  remained_significant: 22
+  remained_non_significant: 290
+
+## PROTECTED_ATTRIBUTE_GENDER_MAGNITUDE
+----------------------------------------
+
+Divergence Metrics:
+  cosine_similarity: 0.7126
+  cosine_distance: 0.2874
+  pearson_correlation: 0.7242
+  euclidean_distance: 0.1029
+  manhattan_distance: 0.0717
+  mean_absolute_difference: 0.0717
+  vector_length: 94
+  effective_sample_size: 94.0000
+
+Vector Statistics:
+  vector1:
+    mean: 0.0000
+    std: 0.1141
+    min: -0.3750
+    max: 0.3750
+    weighted: True
+  vector2:
+    mean: 0.0000
+    std: 0.1490
+    min: -0.6042
+    max: 0.6042
+    weighted: True
+  difference:
+    mean: 0.0000
+    std: 0.1029
+    min: -0.3542
+    max: 0.3542
+    mean_absolute: 0.0717
+    weighted: True
+  direction_analysis:
+    positive_changes: 44
+    negative_changes: 44
+    no_changes: 6
+    positive_rate: 0.4681
+    negative_rate: 0.4681
+    no_change_rate: 0.0638
+
+## PROTECTED_ATTRIBUTE_GENDER_SIGNIFICANCE
+----------------------------------------
+
+Significance Pattern Analysis:
+  vector1_significant_count: 64
+  vector2_significant_count: 56
+  vector1_significance_rate: 68.09%
+  vector2_significance_rate: 59.57%
+  both_significant_count: 46
+  neither_significant_count: 20
+  pattern_agreement_count: 66
+  pattern_agreement_rate: 70.21%
+  pattern_change_count: 28
+  pattern_change_rate: 29.79%
+
+Significance Transitions:
+  gained_significance: 10
+  lost_significance: 18
+  remained_significant: 46
+  remained_non_significant: 20

@@ -1,0 +1,116 @@
+# Divergence Analysis Configuration
+# Modular configuration for fairness and normative divergence analysis
+
+# Data sources and paths
+data_sources:
+  fairness_dataframe: "outputs/unified_analysis/unified_fairness_dataframe_topic_granular.csv"
+  normative_dataframe: "outputs/grant_rate_analysis/grant_rate_analysis_by_vignette_fields.csv"
+  
+# Vector extraction settings
+vector_extraction:
+  fairness:
+    magnitude_column: "pre_brexit_model_statistical_parity"  # Column for bias magnitude
+    significance_column: "pre_brexit_sp_significance"        # Column for significance
+    group_size_column: "pre_brexit_group_size"              # Column for sample sizes
+    models: ["pre_brexit", "post_brexit"]                   # Models to compare
+    
+  normative:
+    magnitude_column: "pre_brexit_normalized"               # Column for normalized scores
+    significance_column: "statistical_significance"         # Column for significance
+    group_size_column: "pre_brexit_sample_size"            # Column for sample sizes
+    models: ["pre_brexit", "post_brexit"]                  # Models to compare
+
+# Divergence analysis settings
+divergence_analysis:
+  methods:
+    - cosine_similarity    # Primary divergence metric
+    - pearson_correlation  # Alternative correlation measure
+    - euclidean_distance   # L2 distance metric
+    - manhattan_distance   # L1 distance metric
+    - mean_absolute_diff   # Simple magnitude difference
+    
+  significance_threshold: 0.05     # P-value threshold for significance
+  bootstrap_iterations: 1000       # Number of bootstrap samples
+  confidence_level: 0.95          # Confidence interval level
+  
+  # Weighting strategies
+  weighting:
+    enabled: true
+    strategy: "min_sample_size"     # "min_sample_size", "equal", "log_sample_size"
+    min_weight: 1                   # Minimum weight for any comparison
+    
+# Stratification settings
+stratification:
+  fairness:
+    by_attribute: 
+      enabled: true
+      attributes: ["country", "religion", "age", "gender"]
+    by_topic:
+      enabled: true
+      min_comparisons_per_topic: 5   # Minimum comparisons to analyze a topic
+    by_significance:
+      enabled: true
+      levels: ["significant", "non_significant", "changed_significance"]
+    by_magnitude:
+      enabled: true
+      thresholds: [0.05, 0.1, 0.2]   # Small, Medium, Large, Very Large
+      
+  normative:
+    by_field_type:
+      enabled: true
+      types: ["ordinal", "horizontal"]
+    by_topic:
+      enabled: true
+      min_comparisons_per_topic: 3
+    by_significance:
+      enabled: true
+      
+# Output settings
+output:
+  save_vectors: true
+  save_detailed_results: true
+  save_summary_stats: true
+  
+  formats:
+    - json
+    - csv
+    
+  visualizations:
+    enabled: true
+    save_plots: true
+    plot_formats: ["png", "pdf"]
+    figure_size: [12, 8]
+    dpi: 300
+    
+# Analysis specific settings
+analysis_types:
+  fairness_divergence:
+    enabled: true
+    cross_model_comparison: true
+    temporal_analysis: true
+    
+  normative_divergence:
+    enabled: true
+    field_level_analysis: true
+    
+  cross_divergence:
+    enabled: true
+    fairness_normative_correlation: true
+    
+# Robustness testing
+robustness:
+  bootstrap:
+    enabled: true
+    sample_fraction: 1.0           # Fraction of data to sample
+    random_seed: 42               # For reproducibility
+    
+  sensitivity_analysis:
+    enabled: true
+    threshold_variations: [0.01, 0.05, 0.1]  # Test different significance thresholds
+    
+# Logging and debugging
+logging:
+  level: "INFO"                   # DEBUG, INFO, WARNING, ERROR
+  save_detailed_logs: true
+  log_vector_stats: true
+  log_intermediate_results: false 
