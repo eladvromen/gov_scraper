@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 def load_analysis_results() -> pd.DataFrame:
     """Load the detailed analysis results"""
-    results_file = "../../../outputs/grant_rate_analysis/grant_rate_analysis_by_vignette_fields.csv"
+    results_file = "../../../outputs/grant_rate_analysis/grant_rate_analysis_by_vignette_fields_enhanced.csv"
     df = pd.read_csv(results_file)
     logger.info(f"Loaded {len(df)} field comparisons")
     return df

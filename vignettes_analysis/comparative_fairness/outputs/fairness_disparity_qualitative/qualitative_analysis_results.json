@@ -1,0 +1,1116 @@
+{
+  "by_protected_attribute": {
+    "by_attribute": {
+      "Consistently Non-significant_count": {
+        "age": 1491,
+        "country": 5817,
+        "gender": 338,
+        "religion": 3055
+      },
+      "Consistently Non-significant_pct": {
+        "age": 70.7977207977208,
+        "country": 87.93650793650794,
+        "gender": 43.38896020539153,
+        "religion": 91.16681587585795
+      },
+      "Disappeared Disparities_count": {
+        "age": 201,
+        "country": 399,
+        "gender": 73,
+        "religion": 152
+      },
+      "Disappeared Disparities_pct": {
+        "age": 9.544159544159545,
+        "country": 6.031746031746032,
+        "gender": 9.370988446726573,
+        "religion": 4.5359594150999705
+      },
+      "Newly Emerged Disparities_count": {
+        "age": 288,
+        "country": 231,
+        "gender": 102,
+        "religion": 102
+      },
+      "Newly Emerged Disparities_pct": {
+        "age": 13.675213675213676,
+        "country": 3.492063492063492,
+        "gender": 13.093709884467266,
+        "religion": 3.043867502238138
+      },
+      "Persistent Disparities_count": {
+        "age": 126,
+        "country": 168,
+        "gender": 266,
+        "religion": 42
+      },
+      "Persistent Disparities_pct": {
+        "age": 5.982905982905983,
+        "country": 2.5396825396825395,
+        "gender": 34.146341463414636,
+        "religion": 1.2533572068039391
+      }
+    },
+    "Newly Emerged Disparities": {
+      "count": {
+        "age": 288,
+        "country": 231,
+        "religion": 102,
+        "gender": 102
+      },
+      "percentage": {
+        "age": 39.83402489626556,
+        "country": 31.950207468879665,
+        "religion": 14.107883817427386,
+        "gender": 14.107883817427386
+      }
+    },
+    "Disappeared Disparities": {
+      "count": {
+        "country": 399,
+        "age": 201,
+        "religion": 152,
+        "gender": 73
+      },
+      "percentage": {
+        "country": 48.36363636363637,
+        "age": 24.363636363636363,
+        "religion": 18.424242424242422,
+        "gender": 8.848484848484848
+      }
+    },
+    "Persistent Disparities": {
+      "count": {
+        "gender": 266,
+        "country": 168,
+        "age": 126,
+        "religion": 42
+      },
+      "percentage": {
+        "gender": 44.18604651162791,
+        "country": 27.906976744186046,
+        "age": 20.930232558139537,
+        "religion": 6.976744186046512
+      }
+    },
+    "Consistently Non-significant": {
+      "count": {
+        "country": 5817,
+        "religion": 3055,
+        "age": 1491,
+        "gender": 338
+      },
+      "percentage": {
+        "country": 54.359405663022144,
+        "religion": 28.548733763199703,
+        "age": 13.93327726380712,
+        "gender": 3.158583309971031
+      }
+    }
+  },
+  "by_topic": {
+    "by_topic": {
+      "Consistently Non-significant_count": {
+        "3rd safe country - Country safety definition": 419,
+        "Activist Persecution Ground": 575,
+        "Assimilation Potential": 419,
+        "Asylum seeker circumstances": 419,
+        "Contradiction: Dates of persecution": 575,
+        "Contradiction: Family involvement in the persecution": 575,
+        "Contradiction: Location of harm": 575,
+        "Contradiction: Persecutor identity confusion": 575,
+        "Contradiction: Sequence of events": 575,
+        "Disclosure: Domestic violence & criminal threats": 575,
+        "Disclosure: Ethnic violence & family separation": 575,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 575,
+        "Disclosure: Political persecution & sexual violence": 575,
+        "Disclosure: Religious persecution & mental health": 575,
+        "Financial stability": 377,
+        "Firm settlement": 419,
+        "Intentions regarding education in the UK": 377,
+        "Intentions regarding work in the UK": 377,
+        "Nature of persecution": 575,
+        "Non-Refoulement - Interception at Sea": 419,
+        "PSG (particular social group)": 575
+      },
+      "Consistently Non-significant_pct": {
+        "3rd safe country - Country safety definition": 82.15686274509804,
+        "Activist Persecution Ground": 83.09248554913295,
+        "Assimilation Potential": 82.15686274509804,
+        "Asylum seeker circumstances": 82.15686274509804,
+        "Contradiction: Dates of persecution": 83.09248554913295,
+        "Contradiction: Family involvement in the persecution": 83.09248554913295,
+        "Contradiction: Location of harm": 83.09248554913295,
+        "Contradiction: Persecutor identity confusion": 83.09248554913295,
+        "Contradiction: Sequence of events": 83.09248554913295,
+        "Disclosure: Domestic violence & criminal threats": 83.09248554913295,
+        "Disclosure: Ethnic violence & family separation": 83.09248554913295,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 83.09248554913295,
+        "Disclosure: Political persecution & sexual violence": 83.09248554913295,
+        "Disclosure: Religious persecution & mental health": 83.09248554913295,
+        "Financial stability": 86.66666666666667,
+        "Firm settlement": 82.15686274509804,
+        "Intentions regarding education in the UK": 86.66666666666667,
+        "Intentions regarding work in the UK": 86.66666666666667,
+        "Nature of persecution": 83.09248554913295,
+        "Non-Refoulement - Interception at Sea": 82.15686274509804,
+        "PSG (particular social group)": 83.09248554913295
+      },
+      "Disappeared Disparities_count": {
+        "3rd safe country - Country safety definition": 37,
+        "Activist Persecution Ground": 43,
+        "Assimilation Potential": 37,
+        "Asylum seeker circumstances": 37,
+        "Contradiction: Dates of persecution": 43,
+        "Contradiction: Family involvement in the persecution": 43,
+        "Contradiction: Location of harm": 43,
+        "Contradiction: Persecutor identity confusion": 43,
+        "Contradiction: Sequence of events": 43,
+        "Disclosure: Domestic violence & criminal threats": 43,
+        "Disclosure: Ethnic violence & family separation": 43,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 43,
+        "Disclosure: Political persecution & sexual violence": 43,
+        "Disclosure: Religious persecution & mental health": 43,
+        "Financial stability": 27,
+        "Firm settlement": 37,
+        "Intentions regarding education in the UK": 27,
+        "Intentions regarding work in the UK": 27,
+        "Nature of persecution": 43,
+        "Non-Refoulement - Interception at Sea": 37,
+        "PSG (particular social group)": 43
+      },
+      "Disappeared Disparities_pct": {
+        "3rd safe country - Country safety definition": 7.254901960784315,
+        "Activist Persecution Ground": 6.213872832369942,
+        "Assimilation Potential": 7.254901960784315,
+        "Asylum seeker circumstances": 7.254901960784315,
+        "Contradiction: Dates of persecution": 6.213872832369942,
+        "Contradiction: Family involvement in the persecution": 6.213872832369942,
+        "Contradiction: Location of harm": 6.213872832369942,
+        "Contradiction: Persecutor identity confusion": 6.213872832369942,
+        "Contradiction: Sequence of events": 6.213872832369942,
+        "Disclosure: Domestic violence & criminal threats": 6.213872832369942,
+        "Disclosure: Ethnic violence & family separation": 6.213872832369942,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 6.213872832369942,
+        "Disclosure: Political persecution & sexual violence": 6.213872832369942,
+        "Disclosure: Religious persecution & mental health": 6.213872832369942,
+        "Financial stability": 6.206896551724138,
+        "Firm settlement": 7.254901960784315,
+        "Intentions regarding education in the UK": 6.206896551724138,
+        "Intentions regarding work in the UK": 6.206896551724138,
+        "Nature of persecution": 6.213872832369942,
+        "Non-Refoulement - Interception at Sea": 7.254901960784315,
+        "PSG (particular social group)": 6.213872832369942
+      },
+      "Newly Emerged Disparities_count": {
+        "3rd safe country - Country safety definition": 33,
+        "Activist Persecution Ground": 39,
+        "Assimilation Potential": 33,
+        "Asylum seeker circumstances": 33,
+        "Contradiction: Dates of persecution": 39,
+        "Contradiction: Family involvement in the persecution": 39,
+        "Contradiction: Location of harm": 39,
+        "Contradiction: Persecutor identity confusion": 39,
+        "Contradiction: Sequence of events": 39,
+        "Disclosure: Domestic violence & criminal threats": 39,
+        "Disclosure: Ethnic violence & family separation": 39,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 39,
+        "Disclosure: Political persecution & sexual violence": 39,
+        "Disclosure: Religious persecution & mental health": 39,
+        "Financial stability": 17,
+        "Firm settlement": 33,
+        "Intentions regarding education in the UK": 17,
+        "Intentions regarding work in the UK": 17,
+        "Nature of persecution": 39,
+        "Non-Refoulement - Interception at Sea": 33,
+        "PSG (particular social group)": 39
+      },
+      "Newly Emerged Disparities_pct": {
+        "3rd safe country - Country safety definition": 6.470588235294119,
+        "Activist Persecution Ground": 5.635838150289017,
+        "Assimilation Potential": 6.470588235294119,
+        "Asylum seeker circumstances": 6.470588235294119,
+        "Contradiction: Dates of persecution": 5.635838150289017,
+        "Contradiction: Family involvement in the persecution": 5.635838150289017,
+        "Contradiction: Location of harm": 5.635838150289017,
+        "Contradiction: Persecutor identity confusion": 5.635838150289017,
+        "Contradiction: Sequence of events": 5.635838150289017,
+        "Disclosure: Domestic violence & criminal threats": 5.635838150289017,
+        "Disclosure: Ethnic violence & family separation": 5.635838150289017,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 5.635838150289017,
+        "Disclosure: Political persecution & sexual violence": 5.635838150289017,
+        "Disclosure: Religious persecution & mental health": 5.635838150289017,
+        "Financial stability": 3.9080459770114944,
+        "Firm settlement": 6.470588235294119,
+        "Intentions regarding education in the UK": 3.9080459770114944,
+        "Intentions regarding work in the UK": 3.9080459770114944,
+        "Nature of persecution": 5.635838150289017,
+        "Non-Refoulement - Interception at Sea": 6.470588235294119,
+        "PSG (particular social group)": 5.635838150289017
+      },
+      "Persistent Disparities_count": {
+        "3rd safe country - Country safety definition": 21,
+        "Activist Persecution Ground": 35,
+        "Assimilation Potential": 21,
+        "Asylum seeker circumstances": 21,
+        "Contradiction: Dates of persecution": 35,
+        "Contradiction: Family involvement in the persecution": 35,
+        "Contradiction: Location of harm": 35,
+        "Contradiction: Persecutor identity confusion": 35,
+        "Contradiction: Sequence of events": 35,
+        "Disclosure: Domestic violence & criminal threats": 35,
+        "Disclosure: Ethnic violence & family separation": 35,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 35,
+        "Disclosure: Political persecution & sexual violence": 35,
+        "Disclosure: Religious persecution & mental health": 35,
+        "Financial stability": 14,
+        "Firm settlement": 21,
+        "Intentions regarding education in the UK": 14,
+        "Intentions regarding work in the UK": 14,
+        "Nature of persecution": 35,
+        "Non-Refoulement - Interception at Sea": 21,
+        "PSG (particular social group)": 35
+      },
+      "Persistent Disparities_pct": {
+        "3rd safe country - Country safety definition": 4.117647058823529,
+        "Activist Persecution Ground": 5.057803468208093,
+        "Assimilation Potential": 4.117647058823529,
+        "Asylum seeker circumstances": 4.117647058823529,
+        "Contradiction: Dates of persecution": 5.057803468208093,
+        "Contradiction: Family involvement in the persecution": 5.057803468208093,
+        "Contradiction: Location of harm": 5.057803468208093,
+        "Contradiction: Persecutor identity confusion": 5.057803468208093,
+        "Contradiction: Sequence of events": 5.057803468208093,
+        "Disclosure: Domestic violence & criminal threats": 5.057803468208093,
+        "Disclosure: Ethnic violence & family separation": 5.057803468208093,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 5.057803468208093,
+        "Disclosure: Political persecution & sexual violence": 5.057803468208093,
+        "Disclosure: Religious persecution & mental health": 5.057803468208093,
+        "Financial stability": 3.218390804597701,
+        "Firm settlement": 4.117647058823529,
+        "Intentions regarding education in the UK": 3.218390804597701,
+        "Intentions regarding work in the UK": 3.218390804597701,
+        "Nature of persecution": 5.057803468208093,
+        "Non-Refoulement - Interception at Sea": 4.117647058823529,
+        "PSG (particular social group)": 5.057803468208093
+      }
+    },
+    "Newly Emerged Disparities": {
+      "count": {
+        "Nature of persecution": 39,
+        "Activist Persecution Ground": 39,
+        "PSG (particular social group)": 39,
+        "Disclosure: Religious persecution & mental health": 39,
+        "Disclosure: Political persecution & sexual violence": 39,
+        "Contradiction: Family involvement in the persecution": 39,
+        "Contradiction: Location of harm": 39,
+        "Contradiction: Sequence of events": 39,
+        "Contradiction: Persecutor identity confusion": 39,
+        "Contradiction: Dates of persecution": 39,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 39,
+        "Disclosure: Ethnic violence & family separation": 39,
+        "Disclosure: Domestic violence & criminal threats": 39,
+        "3rd safe country - Country safety definition": 33,
+        "Non-Refoulement - Interception at Sea": 33,
+        "Asylum seeker circumstances": 33,
+        "Firm settlement": 33,
+        "Assimilation Potential": 33,
+        "Intentions regarding education in the UK": 17,
+        "Financial stability": 17,
+        "Intentions regarding work in the UK": 17
+      },
+      "percentage": {
+        "Nature of persecution": 5.394190871369295,
+        "Activist Persecution Ground": 5.394190871369295,
+        "PSG (particular social group)": 5.394190871369295,
+        "Disclosure: Religious persecution & mental health": 5.394190871369295,
+        "Disclosure: Political persecution & sexual violence": 5.394190871369295,
+        "Contradiction: Family involvement in the persecution": 5.394190871369295,
+        "Contradiction: Location of harm": 5.394190871369295,
+        "Contradiction: Sequence of events": 5.394190871369295,
+        "Contradiction: Persecutor identity confusion": 5.394190871369295,
+        "Contradiction: Dates of persecution": 5.394190871369295,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 5.394190871369295,
+        "Disclosure: Ethnic violence & family separation": 5.394190871369295,
+        "Disclosure: Domestic violence & criminal threats": 5.394190871369295,
+        "3rd safe country - Country safety definition": 4.564315352697095,
+        "Non-Refoulement - Interception at Sea": 4.564315352697095,
+        "Asylum seeker circumstances": 4.564315352697095,
+        "Firm settlement": 4.564315352697095,
+        "Assimilation Potential": 4.564315352697095,
+        "Intentions regarding education in the UK": 2.351313969571231,
+        "Financial stability": 2.351313969571231,
+        "Intentions regarding work in the UK": 2.351313969571231
+      }
+    },
+    "Disappeared Disparities": {
+      "count": {
+        "Nature of persecution": 43,
+        "Activist Persecution Ground": 43,
+        "PSG (particular social group)": 43,
+        "Disclosure: Religious persecution & mental health": 43,
+        "Disclosure: Political persecution & sexual violence": 43,
+        "Contradiction: Family involvement in the persecution": 43,
+        "Contradiction: Location of harm": 43,
+        "Contradiction: Sequence of events": 43,
+        "Contradiction: Persecutor identity confusion": 43,
+        "Contradiction: Dates of persecution": 43,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 43,
+        "Disclosure: Ethnic violence & family separation": 43,
+        "Disclosure: Domestic violence & criminal threats": 43,
+        "3rd safe country - Country safety definition": 37,
+        "Non-Refoulement - Interception at Sea": 37,
+        "Asylum seeker circumstances": 37,
+        "Firm settlement": 37,
+        "Assimilation Potential": 37,
+        "Intentions regarding education in the UK": 27,
+        "Financial stability": 27,
+        "Intentions regarding work in the UK": 27
+      },
+      "percentage": {
+        "Nature of persecution": 5.212121212121213,
+        "Activist Persecution Ground": 5.212121212121213,
+        "PSG (particular social group)": 5.212121212121213,
+        "Disclosure: Religious persecution & mental health": 5.212121212121213,
+        "Disclosure: Political persecution & sexual violence": 5.212121212121213,
+        "Contradiction: Family involvement in the persecution": 5.212121212121213,
+        "Contradiction: Location of harm": 5.212121212121213,
+        "Contradiction: Sequence of events": 5.212121212121213,
+        "Contradiction: Persecutor identity confusion": 5.212121212121213,
+        "Contradiction: Dates of persecution": 5.212121212121213,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 5.212121212121213,
+        "Disclosure: Ethnic violence & family separation": 5.212121212121213,
+        "Disclosure: Domestic violence & criminal threats": 5.212121212121213,
+        "3rd safe country - Country safety definition": 4.484848484848484,
+        "Non-Refoulement - Interception at Sea": 4.484848484848484,
+        "Asylum seeker circumstances": 4.484848484848484,
+        "Firm settlement": 4.484848484848484,
+        "Assimilation Potential": 4.484848484848484,
+        "Intentions regarding education in the UK": 3.272727272727273,
+        "Financial stability": 3.272727272727273,
+        "Intentions regarding work in the UK": 3.272727272727273
+      }
+    },
+    "Persistent Disparities": {
+      "count": {
+        "Nature of persecution": 35,
+        "Activist Persecution Ground": 35,
+        "PSG (particular social group)": 35,
+        "Disclosure: Religious persecution & mental health": 35,
+        "Disclosure: Political persecution & sexual violence": 35,
+        "Contradiction: Family involvement in the persecution": 35,
+        "Contradiction: Location of harm": 35,
+        "Contradiction: Sequence of events": 35,
+        "Contradiction: Persecutor identity confusion": 35,
+        "Contradiction: Dates of persecution": 35,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 35,
+        "Disclosure: Ethnic violence & family separation": 35,
+        "Disclosure: Domestic violence & criminal threats": 35,
+        "3rd safe country - Country safety definition": 21,
+        "Non-Refoulement - Interception at Sea": 21,
+        "Asylum seeker circumstances": 21,
+        "Firm settlement": 21,
+        "Assimilation Potential": 21,
+        "Intentions regarding education in the UK": 14,
+        "Financial stability": 14,
+        "Intentions regarding work in the UK": 14
+      },
+      "percentage": {
+        "Nature of persecution": 5.813953488372093,
+        "Activist Persecution Ground": 5.813953488372093,
+        "PSG (particular social group)": 5.813953488372093,
+        "Disclosure: Religious persecution & mental health": 5.813953488372093,
+        "Disclosure: Political persecution & sexual violence": 5.813953488372093,
+        "Contradiction: Family involvement in the persecution": 5.813953488372093,
+        "Contradiction: Location of harm": 5.813953488372093,
+        "Contradiction: Sequence of events": 5.813953488372093,
+        "Contradiction: Persecutor identity confusion": 5.813953488372093,
+        "Contradiction: Dates of persecution": 5.813953488372093,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 5.813953488372093,
+        "Disclosure: Ethnic violence & family separation": 5.813953488372093,
+        "Disclosure: Domestic violence & criminal threats": 5.813953488372093,
+        "3rd safe country - Country safety definition": 3.488372093023256,
+        "Non-Refoulement - Interception at Sea": 3.488372093023256,
+        "Asylum seeker circumstances": 3.488372093023256,
+        "Firm settlement": 3.488372093023256,
+        "Assimilation Potential": 3.488372093023256,
+        "Intentions regarding education in the UK": 2.3255813953488373,
+        "Financial stability": 2.3255813953488373,
+        "Intentions regarding work in the UK": 2.3255813953488373
+      }
+    },
+    "Consistently Non-significant": {
+      "count": {
+        "Nature of persecution": 575,
+        "Activist Persecution Ground": 575,
+        "PSG (particular social group)": 575,
+        "Disclosure: Religious persecution & mental health": 575,
+        "Disclosure: Political persecution & sexual violence": 575,
+        "Contradiction: Family involvement in the persecution": 575,
+        "Contradiction: Location of harm": 575,
+        "Contradiction: Sequence of events": 575,
+        "Contradiction: Persecutor identity confusion": 575,
+        "Contradiction: Dates of persecution": 575,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 575,
+        "Disclosure: Ethnic violence & family separation": 575,
+        "Disclosure: Domestic violence & criminal threats": 575,
+        "3rd safe country - Country safety definition": 419,
+        "Non-Refoulement - Interception at Sea": 419,
+        "Asylum seeker circumstances": 419,
+        "Firm settlement": 419,
+        "Assimilation Potential": 419,
+        "Intentions regarding education in the UK": 377,
+        "Financial stability": 377,
+        "Intentions regarding work in the UK": 377
+      },
+      "percentage": {
+        "Nature of persecution": 5.373329595364919,
+        "Activist Persecution Ground": 5.373329595364919,
+        "PSG (particular social group)": 5.373329595364919,
+        "Disclosure: Religious persecution & mental health": 5.373329595364919,
+        "Disclosure: Political persecution & sexual violence": 5.373329595364919,
+        "Contradiction: Family involvement in the persecution": 5.373329595364919,
+        "Contradiction: Location of harm": 5.373329595364919,
+        "Contradiction: Sequence of events": 5.373329595364919,
+        "Contradiction: Persecutor identity confusion": 5.373329595364919,
+        "Contradiction: Dates of persecution": 5.373329595364919,
+        "Disclosure: Persecution for sexual orientation & mental health crisis": 5.373329595364919,
+        "Disclosure: Ethnic violence & family separation": 5.373329595364919,
+        "Disclosure: Domestic violence & criminal threats": 5.373329595364919,
+        "3rd safe country - Country safety definition": 3.9155219138398283,
+        "Non-Refoulement - Interception at Sea": 3.9155219138398283,
+        "Asylum seeker circumstances": 3.9155219138398283,
+        "Firm settlement": 3.9155219138398283,
+        "Assimilation Potential": 3.9155219138398283,
+        "Intentions regarding education in the UK": 3.523035230352303,
+        "Financial stability": 3.523035230352303,
+        "Intentions regarding work in the UK": 3.523035230352303
+      }
+    }
+  },
+  "cross_tabulation": {
+    "Newly Emerged Disparities": {
+      "3rd safe country - Country safety definition": {
+        "age": 16,
+        "country": 11,
+        "gender": 3,
+        "religion": 3,
+        "All": 33
+      },
+      "Activist Persecution Ground": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Assimilation Potential": {
+        "age": 16,
+        "country": 11,
+        "gender": 3,
+        "religion": 3,
+        "All": 33
+      },
+      "Asylum seeker circumstances": {
+        "age": 16,
+        "country": 11,
+        "gender": 3,
+        "religion": 3,
+        "All": 33
+      },
+      "Contradiction: Dates of persecution": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Contradiction: Family involvement in the persecution": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Contradiction: Location of harm": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Contradiction: Persecutor identity confusion": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Contradiction: Sequence of events": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Disclosure: Domestic violence & criminal threats": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Disclosure: Ethnic violence & family separation": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Disclosure: Persecution for sexual orientation & mental health crisis": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Disclosure: Political persecution & sexual violence": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Disclosure: Religious persecution & mental health": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Financial stability": {
+        "age": 0,
+        "country": 11,
+        "gender": 3,
+        "religion": 3,
+        "All": 17
+      },
+      "Firm settlement": {
+        "age": 16,
+        "country": 11,
+        "gender": 3,
+        "religion": 3,
+        "All": 33
+      },
+      "Intentions regarding education in the UK": {
+        "age": 0,
+        "country": 11,
+        "gender": 3,
+        "religion": 3,
+        "All": 17
+      },
+      "Intentions regarding work in the UK": {
+        "age": 0,
+        "country": 11,
+        "gender": 3,
+        "religion": 3,
+        "All": 17
+      },
+      "Nature of persecution": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "Non-Refoulement - Interception at Sea": {
+        "age": 16,
+        "country": 11,
+        "gender": 3,
+        "religion": 3,
+        "All": 33
+      },
+      "PSG (particular social group)": {
+        "age": 16,
+        "country": 11,
+        "gender": 6,
+        "religion": 6,
+        "All": 39
+      },
+      "All": {
+        "age": 288,
+        "country": 231,
+        "gender": 102,
+        "religion": 102,
+        "All": 723
+      }
+    },
+    "Disappeared Disparities": {
+      "3rd safe country - Country safety definition": {
+        "age": 11,
+        "country": 19,
+        "gender": 1,
+        "religion": 6,
+        "All": 37
+      },
+      "Activist Persecution Ground": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Assimilation Potential": {
+        "age": 11,
+        "country": 19,
+        "gender": 1,
+        "religion": 6,
+        "All": 37
+      },
+      "Asylum seeker circumstances": {
+        "age": 11,
+        "country": 19,
+        "gender": 1,
+        "religion": 6,
+        "All": 37
+      },
+      "Contradiction: Dates of persecution": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Contradiction: Family involvement in the persecution": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Contradiction: Location of harm": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Contradiction: Persecutor identity confusion": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Contradiction: Sequence of events": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Disclosure: Domestic violence & criminal threats": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Disclosure: Ethnic violence & family separation": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Disclosure: Persecution for sexual orientation & mental health crisis": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Disclosure: Political persecution & sexual violence": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Disclosure: Religious persecution & mental health": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Financial stability": {
+        "age": 1,
+        "country": 19,
+        "gender": 1,
+        "religion": 6,
+        "All": 27
+      },
+      "Firm settlement": {
+        "age": 11,
+        "country": 19,
+        "gender": 1,
+        "religion": 6,
+        "All": 37
+      },
+      "Intentions regarding education in the UK": {
+        "age": 1,
+        "country": 19,
+        "gender": 1,
+        "religion": 6,
+        "All": 27
+      },
+      "Intentions regarding work in the UK": {
+        "age": 1,
+        "country": 19,
+        "gender": 1,
+        "religion": 6,
+        "All": 27
+      },
+      "Nature of persecution": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "Non-Refoulement - Interception at Sea": {
+        "age": 11,
+        "country": 19,
+        "gender": 1,
+        "religion": 6,
+        "All": 37
+      },
+      "PSG (particular social group)": {
+        "age": 11,
+        "country": 19,
+        "gender": 5,
+        "religion": 8,
+        "All": 43
+      },
+      "All": {
+        "age": 201,
+        "country": 399,
+        "gender": 73,
+        "religion": 152,
+        "All": 825
+      }
+    },
+    "Persistent Disparities": {
+      "3rd safe country - Country safety definition": {
+        "age": 7,
+        "country": 8,
+        "gender": 4,
+        "religion": 2,
+        "All": 21
+      },
+      "Activist Persecution Ground": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Assimilation Potential": {
+        "age": 7,
+        "country": 8,
+        "gender": 4,
+        "religion": 2,
+        "All": 21
+      },
+      "Asylum seeker circumstances": {
+        "age": 7,
+        "country": 8,
+        "gender": 4,
+        "religion": 2,
+        "All": 21
+      },
+      "Contradiction: Dates of persecution": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Contradiction: Family involvement in the persecution": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Contradiction: Location of harm": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Contradiction: Persecutor identity confusion": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Contradiction: Sequence of events": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Disclosure: Domestic violence & criminal threats": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Disclosure: Ethnic violence & family separation": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Disclosure: Persecution for sexual orientation & mental health crisis": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Disclosure: Political persecution & sexual violence": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Disclosure: Religious persecution & mental health": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Financial stability": {
+        "age": 0,
+        "country": 8,
+        "gender": 4,
+        "religion": 2,
+        "All": 14
+      },
+      "Firm settlement": {
+        "age": 7,
+        "country": 8,
+        "gender": 4,
+        "religion": 2,
+        "All": 21
+      },
+      "Intentions regarding education in the UK": {
+        "age": 0,
+        "country": 8,
+        "gender": 4,
+        "religion": 2,
+        "All": 14
+      },
+      "Intentions regarding work in the UK": {
+        "age": 0,
+        "country": 8,
+        "gender": 4,
+        "religion": 2,
+        "All": 14
+      },
+      "Nature of persecution": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "Non-Refoulement - Interception at Sea": {
+        "age": 7,
+        "country": 8,
+        "gender": 4,
+        "religion": 2,
+        "All": 21
+      },
+      "PSG (particular social group)": {
+        "age": 7,
+        "country": 8,
+        "gender": 18,
+        "religion": 2,
+        "All": 35
+      },
+      "All": {
+        "age": 126,
+        "country": 168,
+        "gender": 266,
+        "religion": 42,
+        "All": 602
+      }
+    },
+    "Consistently Non-significant": {
+      "3rd safe country - Country safety definition": {
+        "age": 77,
+        "country": 277,
+        "gender": 13,
+        "religion": 52,
+        "All": 419
+      },
+      "Activist Persecution Ground": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Assimilation Potential": {
+        "age": 77,
+        "country": 277,
+        "gender": 13,
+        "religion": 52,
+        "All": 419
+      },
+      "Asylum seeker circumstances": {
+        "age": 77,
+        "country": 277,
+        "gender": 13,
+        "religion": 52,
+        "All": 419
+      },
+      "Contradiction: Dates of persecution": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Contradiction: Family involvement in the persecution": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Contradiction: Location of harm": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Contradiction: Persecutor identity confusion": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Contradiction: Sequence of events": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Disclosure: Domestic violence & criminal threats": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Disclosure: Ethnic violence & family separation": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Disclosure: Persecution for sexual orientation & mental health crisis": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Disclosure: Political persecution & sexual violence": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Disclosure: Religious persecution & mental health": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Financial stability": {
+        "age": 35,
+        "country": 277,
+        "gender": 13,
+        "religion": 52,
+        "All": 377
+      },
+      "Firm settlement": {
+        "age": 77,
+        "country": 277,
+        "gender": 13,
+        "religion": 52,
+        "All": 419
+      },
+      "Intentions regarding education in the UK": {
+        "age": 35,
+        "country": 277,
+        "gender": 13,
+        "religion": 52,
+        "All": 377
+      },
+      "Intentions regarding work in the UK": {
+        "age": 35,
+        "country": 277,
+        "gender": 13,
+        "religion": 52,
+        "All": 377
+      },
+      "Nature of persecution": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "Non-Refoulement - Interception at Sea": {
+        "age": 77,
+        "country": 277,
+        "gender": 13,
+        "religion": 52,
+        "All": 419
+      },
+      "PSG (particular social group)": {
+        "age": 77,
+        "country": 277,
+        "gender": 18,
+        "religion": 203,
+        "All": 575
+      },
+      "All": {
+        "age": 1491,
+        "country": 5817,
+        "gender": 338,
+        "religion": 3055,
+        "All": 10701
+      }
+    }
+  }
+}

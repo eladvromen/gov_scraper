@@ -1,16 +1,10 @@
-fairness component:
-- sp and relatives seems to work fine. 
-- counterfactial is not realy working - should be seperated by model and optimized with numba
-- try to diverge from statistical sagnificant so we can do this with the interpetive metrics
+present:
+1. ADD SIGNIGICENCE ROBUSTENSS TO NORMATIVE
+1. significance divergence (different levels of robustness)
+- both normative and fairness
+2. add cohen alpha 
+3. deep dive into the most significant differences!
 
-
-need to dev the interpative metrics
-
-- vision for the component: 
-each model pairs have a vector of topic\protected attribute+
-significance difference.
-one for fairness one for interpetation
-this is the operationalized bias state!
 
 
 

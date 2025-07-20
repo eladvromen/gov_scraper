@@ -1,0 +1,26 @@
+================================================================================
+FAIRNESS DISPARITY QUALITATIVE ANALYSIS SUMMARY
+================================================================================
+
+📊 OVERALL STATISTICS
+   Total Unique Comparisons: 12851
+   Consistently Non-significant: 10701 (83.3%)
+   Disappeared Disparities: 825 (6.4%)
+   Newly Emerged Disparities: 723 (5.6%)
+   Persistent Disparities: 602 (4.7%)
+
+🏷️  PROTECTED ATTRIBUTE INSIGHTS
+   Newly Emerged Disparities:
+     Most affected: age (288 comparisons, 39.8%)
+   Disappeared Disparities:
+     Most affected: country (399 comparisons, 48.4%)
+
+📋 TOPIC INSIGHTS
+   Newly Emerged Disparities:
+     Most affected: Nature of persecution
+     Count: 39 (5.4%)
+   Disappeared Disparities:
+     Most affected: Nature of persecution
+     Count: 43 (5.2%)
+
+================================================================================

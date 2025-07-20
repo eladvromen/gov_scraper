@@ -420,7 +420,14 @@ def main():
     detailed_df = create_detailed_results_dataframe(normalized_data, topic_fields)
     topic_tendencies_df = create_topic_tendencies_dataframe(topic_tendencies)
     
-    # Step 8: Save enhanced outputs
+    # Step 8: Save enhanced outputs to correct directory
+    correct_output_dir = Path("../outputs/grant_rate_analysis")
+    correct_output_dir.mkdir(parents=True, exist_ok=True)
+    
+    detailed_df.to_csv(correct_output_dir / "grant_rate_analysis_by_vignette_fields_enhanced.csv", index=False)
+    topic_tendencies_df.to_csv(correct_output_dir / "topic_tendencies_analysis_enhanced.csv", index=False)
+    
+    # Also save to original location for compatibility
     detailed_df.to_csv(output_dir / "grant_rate_analysis_by_vignette_fields_enhanced.csv", index=False)
     topic_tendencies_df.to_csv(output_dir / "topic_tendencies_analysis_enhanced.csv", index=False)
     
@@ -441,6 +448,10 @@ def main():
         'analysis_timestamp': pd.Timestamp.now().isoformat()
     }
     
+    with open(correct_output_dir / "grant_rate_analysis_summary_enhanced.json", 'w') as f:
+        json.dump(summary_stats, f, indent=2)
+    
+    # Also save to original location for compatibility
     with open(output_dir / "grant_rate_analysis_summary_enhanced.json", 'w') as f:
         json.dump(summary_stats, f, indent=2)
     
