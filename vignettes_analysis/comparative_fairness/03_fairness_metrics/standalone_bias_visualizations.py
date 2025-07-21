@@ -18,6 +18,7 @@ import seaborn as sns
 from collections import Counter
 import re
 import textwrap
+import matplotlib.patches as mpatches
 
 def wrap_topic_labels(topic_list):
     """
@@ -34,6 +35,40 @@ def wrap_topic_labels(topic_list):
         else:
             wrapped_labels.append(topic)
     return wrapped_labels
+
+def create_attribute_color_palette():
+    """
+    Create color palette with 4 shades for each category
+    Each protected attribute gets a different shade within the category color
+    """
+    # Base colors
+    base_colors = {
+        'Newly Emerged': '#FF6B6B',  # Red
+        'Persistent': '#4D96FF',     # Blue  
+        'Disappeared': '#FFA94D'     # Orange
+    }
+    
+    # Attribute order for consistent shading
+    attributes = ['gender', 'religion', 'age', 'country']
+    
+    # Create shaded versions (darkest to lightest)
+    shade_factors = [0.4, 0.6, 0.8, 1.0]  # gender=darkest, country=lightest
+    
+    color_palette = {}
+    
+    for category, base_color in base_colors.items():
+        # Convert hex to RGB
+        hex_color = base_color.lstrip('#')
+        rgb = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+        
+        for i, attribute in enumerate(attributes):
+            # Apply shade factor
+            shaded_rgb = tuple(int(c * shade_factors[i]) for c in rgb)
+            # Convert back to hex
+            shaded_hex = '#%02x%02x%02x' % shaded_rgb
+            color_palette[f'{category}_{attribute}'] = shaded_hex
+    
+    return color_palette, attributes
 
 def parse_comparison_label(label):
     """
@@ -312,6 +347,199 @@ def plot_2_topic_fairness_reconfiguration(analysis_df):
     
     return breakdown_df
 
+def plot_enhanced_topic_breakdown_by_attribute(analysis_df):
+    """
+    Enhanced Plot: Topic-Level Bias Breakdown by Protected Attribute
+    Each topic bar is subdivided by protected attribute with different color shades
+    """
+    
+    print("🎨 Creating Enhanced Plot: Topic Breakdown by Protected Attribute...")
+    
+    # Get color palette
+    color_palette, attributes = create_attribute_color_palette()
+    
+    # Prepare data by topic AND protected attribute
+    topic_attr_breakdown = {}
+    
+    for topic in analysis_df['topic'].unique():
+        topic_subset = analysis_df[analysis_df['topic'] == topic]
+        
+        # Initialize topic breakdown
+        topic_attr_breakdown[topic] = {}
+        
+        for category in ['Newly Emerged', 'Persistent', 'Disappeared']:
+            topic_attr_breakdown[topic][category] = {}
+            
+            for attr in attributes:
+                # Filter by category and attribute
+                if category == 'Newly Emerged':
+                    mask = topic_subset['newly_emerged'] & (topic_subset['protected_attribute'] == attr)
+                elif category == 'Persistent': 
+                    mask = topic_subset['persistent'] & (topic_subset['protected_attribute'] == attr)
+                else:  # Disappeared
+                    mask = topic_subset['disappeared'] & (topic_subset['protected_attribute'] == attr)
+                
+                count = mask.sum()
+                topic_attr_breakdown[topic][category][attr] = count
+    
+    # Convert to organized DataFrame for plotting
+    plot_data = []
+    for topic, categories in topic_attr_breakdown.items():
+        row = {'topic': topic}
+        total = 0
+        
+        for category in ['Newly Emerged', 'Persistent', 'Disappeared']:
+            for attr in attributes:
+                key = f'{category}_{attr}'
+                value = categories[category][attr]
+                row[key] = value
+                total += value
+        
+        row['total'] = total
+        plot_data.append(row)
+    
+    # Convert to DataFrame and sort by total
+    plot_df = pd.DataFrame(plot_data)
+    plot_df = plot_df.sort_values('total', ascending=True)
+    
+    # Calculate totals for each category per topic
+    topic_totals = {}
+    for _, row in plot_df.iterrows():
+        topic = row['topic']
+        newly_emerged_total = sum(row[f'Newly Emerged_{attr}'] for attr in attributes)
+        persistent_total = sum(row[f'Persistent_{attr}'] for attr in attributes) 
+        disappeared_total = sum(row[f'Disappeared_{attr}'] for attr in attributes)
+        
+        topic_totals[topic] = {
+            'newly_emerged': newly_emerged_total,
+            'persistent': persistent_total,
+            'disappeared': disappeared_total
+        }
+    
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(24, 16))
+    
+    y_positions = range(len(plot_df))
+    bar_height = 0.8
+    
+    # Plot for each topic
+    for i, (_, row) in enumerate(plot_df.iterrows()):
+        topic = row['topic']
+        totals = topic_totals[topic]
+        
+        # Calculate center positions for centered layout
+        persistent_half = totals['persistent'] / 2
+        
+        # Starting positions for each category section
+        newly_emerged_start = -(persistent_half + totals['newly_emerged'])
+        persistent_start = -persistent_half  # Single centered persistent section
+        disappeared_start = persistent_half
+        
+        # Plot newly emerged segments (leftmost)
+        current_pos = newly_emerged_start
+        for attr in attributes:
+            width = row[f'Newly Emerged_{attr}']
+            if width > 0:
+                color = color_palette[f'Newly Emerged_{attr}']
+                ax.barh(i, width, left=current_pos, height=bar_height, 
+                       color=color, alpha=0.9, edgecolor='white', linewidth=0.5)
+                
+                # Add count label if significant enough
+                if width >= 1:
+                    ax.text(current_pos + width/2, i, str(int(width)), 
+                           ha='center', va='center', fontsize=8, color='white', fontweight='bold')
+            current_pos += width
+        
+        # Plot persistent segments (center) - SINGLE STACK, NOT DUPLICATED
+        current_pos = persistent_start
+        for attr in attributes:
+            width = row[f'Persistent_{attr}']  # Full width, not split
+            if width > 0:
+                color = color_palette[f'Persistent_{attr}']
+                ax.barh(i, width, left=current_pos, height=bar_height,
+                       color=color, alpha=0.9, edgecolor='white', linewidth=0.5)
+                
+                # Add count label if significant enough
+                if width >= 1:
+                    ax.text(current_pos + width/2, i, str(int(width)), 
+                           ha='center', va='center', fontsize=8, color='white', fontweight='bold')
+            current_pos += width
+        
+        # Plot disappeared segments (rightmost)
+        current_pos = disappeared_start
+        for attr in attributes:
+            width = row[f'Disappeared_{attr}']
+            if width > 0:
+                color = color_palette[f'Disappeared_{attr}']
+                ax.barh(i, width, left=current_pos, height=bar_height,
+                       color=color, alpha=0.9, edgecolor='white', linewidth=0.5)
+                
+                # Add count label if significant enough
+                if width >= 1:
+                    ax.text(current_pos + width/2, i, str(int(width)), 
+                           ha='center', va='center', fontsize=8, color='white', fontweight='bold')
+            current_pos += width
+    
+    # Customize plot
+    ax.set_title('Enhanced Topic-Level Bias Breakdown by Protected Attribute\n' +
+                 'Bias Significance Changes Across Topics and Demographics', 
+                 fontsize=18, fontweight='bold', pad=25)
+    ax.set_xlabel('← Newly Emerged    |    Persistent    |    Disappeared →', 
+                  fontsize=14, fontweight='bold')
+    ax.set_ylabel('Asylum Topics', fontsize=14, fontweight='bold')
+    
+    # Set y-axis labels with wrapping
+    ax.set_yticks(y_positions)
+    wrapped_labels = wrap_topic_labels(plot_df['topic'].tolist())
+    ax.set_yticklabels(wrapped_labels, fontsize=11, ha='right', va='center')
+    
+    # Add vertical line at x=0
+    ax.axvline(x=0, color='black', linestyle='-', alpha=0.8, linewidth=2)
+    
+    # Create IMPROVED legend with better alignment
+    legend_elements = []
+    
+    # Create a more organized legend layout
+    legend_elements.append(mpatches.Patch(color='none', label='NEWLY EMERGED:'))
+    for attr in attributes:
+        color = color_palette[f'Newly Emerged_{attr}']
+        shade_desc = ['Dark', 'Medium', 'Regular', 'Light'][attributes.index(attr)]
+        legend_elements.append(mpatches.Patch(color=color, label=f'  {attr.title()} ({shade_desc})'))
+    
+    legend_elements.append(mpatches.Patch(color='none', label=''))  # Spacer
+    legend_elements.append(mpatches.Patch(color='none', label='PERSISTENT:'))
+    for attr in attributes:
+        color = color_palette[f'Persistent_{attr}']
+        shade_desc = ['Dark', 'Medium', 'Regular', 'Light'][attributes.index(attr)]
+        legend_elements.append(mpatches.Patch(color=color, label=f'  {attr.title()} ({shade_desc})'))
+    
+    legend_elements.append(mpatches.Patch(color='none', label=''))  # Spacer
+    legend_elements.append(mpatches.Patch(color='none', label='DISAPPEARED:'))
+    for attr in attributes:
+        color = color_palette[f'Disappeared_{attr}']
+        shade_desc = ['Dark', 'Medium', 'Regular', 'Light'][attributes.index(attr)]
+        legend_elements.append(mpatches.Patch(color=color, label=f'  {attr.title()} ({shade_desc})'))
+    
+    # Place legend with better positioning
+    ax.legend(handles=legend_elements, title='Bias Change by Attribute\n(Dark→Light: Gender→Country)', 
+              title_fontsize=11, fontsize=9, loc='center left', 
+              bbox_to_anchor=(1.02, 0.5), frameon=True, fancybox=True, shadow=True)
+    
+    # Style improvements
+    ax.grid(axis='x', alpha=0.3)
+    ax.set_axisbelow(True)
+    
+    # Adjust layout to accommodate legend and prevent topic name cutoff
+    plt.tight_layout()
+    plt.subplots_adjust(left=0.45, right=0.75)  # Extra space to prevent topic name cropping
+    
+    # Save the plot
+    plt.savefig("../outputs/bias_vector_drift/enhanced_topic_breakdown_by_attribute.png", 
+                dpi=300, bbox_inches='tight')
+    plt.show()
+    
+    return plot_df, color_palette
+
 def plot_3_topic_model_salience(all_df):
     """
     Plot 3: Topic-Level Fairness Salience by Model (Dual Bar Plots)
@@ -414,6 +642,175 @@ def create_summary_stats(analysis_df, all_df):
     print(f"   Post-Brexit significant comparisons: {post_total}")
     print(f"   Change: {post_total - pre_total:+d} ({((post_total - pre_total) / pre_total * 100):+.1f}%)")
 
+def analyze_enhanced_breakdown_insights(analysis_df):
+    """
+    Analyze key insights from the enhanced topic breakdown by protected attribute
+    """
+    print("\n🔍 ENHANCED BREAKDOWN INSIGHTS")
+    print("=" * 60)
+    
+    # 1. Which protected attributes drive bias changes the most?
+    attr_totals = {}
+    for attr in ['gender', 'religion', 'age', 'country']:
+        attr_subset = analysis_df[analysis_df['protected_attribute'] == attr]
+        newly_emerged = attr_subset['newly_emerged'].sum()
+        persistent = attr_subset['persistent'].sum()
+        disappeared = attr_subset['disappeared'].sum()
+        total = newly_emerged + persistent + disappeared
+        
+        attr_totals[attr] = {
+            'newly_emerged': newly_emerged,
+            'persistent': persistent, 
+            'disappeared': disappeared,
+            'total': total
+        }
+    
+    print("🏷️  PROTECTED ATTRIBUTE IMPACT RANKING:")
+    sorted_attrs = sorted(attr_totals.items(), key=lambda x: x[1]['total'], reverse=True)
+    for i, (attr, counts) in enumerate(sorted_attrs, 1):
+        print(f"   {i}. {attr.upper()}: {counts['total']} changes")
+        print(f"      Newly Emerged: {counts['newly_emerged']}, Persistent: {counts['persistent']}, Disappeared: {counts['disappeared']}")
+    
+    # NEW: Statistical Insights for Research Directions
+    print(f"\n📊 KEY STATISTICAL INSIGHTS & RESEARCH DIRECTIONS")
+    print("=" * 60)
+    
+    # Persistence Analysis
+    print("🔵 PERSISTENT BIAS PATTERNS (Stable Discrimination):")
+    persistent_ranking = sorted([(attr, counts['persistent']) for attr, counts in attr_totals.items()], 
+                               key=lambda x: x[1], reverse=True)
+    dominant_persistent = persistent_ranking[0]
+    print(f"   • MOST PERSISTENT: {dominant_persistent[0].upper()} bias ({dominant_persistent[1]} cases)")
+    print(f"     → RESEARCH FOCUS: This represents systemic bias that survived model retraining")
+    print(f"     → INVESTIGATE: Why {dominant_persistent[0]} disparities persist across both time periods")
+    
+    # Emerging bias analysis
+    print(f"\n🔴 NEWLY EMERGING BIAS PATTERNS (Post-Brexit Deterioration):")
+    emerging_ranking = sorted([(attr, counts['newly_emerged']) for attr, counts in attr_totals.items()], 
+                             key=lambda x: x[1], reverse=True)
+    dominant_emerging = emerging_ranking[0]
+    print(f"   • MOST EMERGING: {dominant_emerging[0].upper()} bias ({dominant_emerging[1]} new cases)")
+    print(f"     → CRITICAL FINDING: Post-Brexit model developed NEW {dominant_emerging[0]} discrimination")
+    print(f"     → INVESTIGATE: What in post-2019 data caused {dominant_emerging[0]} bias emergence?")
+    
+    # Disappearing bias analysis
+    print(f"\n🟠 DISAPPEARING BIAS PATTERNS (Potential Improvement):")
+    disappearing_ranking = sorted([(attr, counts['disappeared']) for attr, counts in attr_totals.items()], 
+                                 key=lambda x: x[1], reverse=True)
+    dominant_disappearing = disappearing_ranking[0]
+    print(f"   • MOST DISAPPEARED: {dominant_disappearing[0].upper()} bias ({dominant_disappearing[1]} cases)")
+    print(f"     → POSITIVE FINDING: Post-Brexit model reduced {dominant_disappearing[0]} discrimination")
+    print(f"     → INVESTIGATE: What factors led to {dominant_disappearing[0]} bias reduction?")
+    
+    # Topic hotspots analysis
+    topic_analysis = {}
+    for topic in analysis_df['topic'].unique():
+        topic_subset = analysis_df[analysis_df['topic'] == topic]
+        
+        newly_emerged = topic_subset['newly_emerged'].sum()
+        persistent = topic_subset['persistent'].sum()
+        disappeared = topic_subset['disappeared'].sum()
+        total = newly_emerged + persistent + disappeared
+        
+        if total > 0:
+            topic_analysis[topic] = {
+                'newly_emerged': newly_emerged,
+                'persistent': persistent,
+                'disappeared': disappeared,
+                'total': total,
+                'bias_intensity': total / len(topic_subset) if len(topic_subset) > 0 else 0
+            }
+    
+    print(f"\n🎯 BIAS HOTSPOT TOPICS (High-Risk Areas):")
+    hotspot_topics = sorted(topic_analysis.items(), key=lambda x: x[1]['total'], reverse=True)[:3]
+    for i, (topic, stats) in enumerate(hotspot_topics, 1):
+        short_topic = topic[:40] + "..." if len(topic) > 40 else topic
+        print(f"   {i}. {short_topic}")
+        print(f"      Total changes: {stats['total']} | Intensity: {stats['bias_intensity']:.2f}")
+        print(f"      Breakdown: +{stats['newly_emerged']} emerged, {stats['persistent']} persistent, -{stats['disappeared']} disappeared")
+        if stats['newly_emerged'] > stats['disappeared']:
+            print(f"      ⚠️  DETERIORATING: More bias emerged than disappeared - PRIORITY FOR INVESTIGATION")
+        elif stats['disappeared'] > stats['newly_emerged']:
+            print(f"      ✅ IMPROVING: More bias disappeared than emerged")
+        else:
+            print(f"      ⚖️  STABLE: Equal emergence and disappearance")
+    
+    print(f"\n🏆 BIAS IMPROVEMENT AREAS (Successful Bias Reduction):")
+    improvement_topics = sorted([(topic, stats) for topic, stats in topic_analysis.items() 
+                               if stats['disappeared'] > stats['newly_emerged']], 
+                              key=lambda x: x[1]['disappeared'] - x[1]['newly_emerged'], reverse=True)[:3]
+    
+    if improvement_topics:
+        for i, (topic, stats) in enumerate(improvement_topics, 1):
+            short_topic = topic[:40] + "..." if len(topic) > 40 else topic
+            net_improvement = stats['disappeared'] - stats['newly_emerged']
+            print(f"   {i}. {short_topic}")
+            print(f"      Net bias reduction: {net_improvement} cases")
+            print(f"      → RESEARCH OPPORTUNITY: Study why this topic improved")
+    else:
+        print("   No topics showed clear bias improvement patterns")
+    
+    # Cross-attribute patterns
+    print(f"\n🔄 CROSS-ATTRIBUTE INTERACTION PATTERNS:")
+    
+    # Find topics with multiple attribute problems
+    multi_attr_topics = {}
+    for topic in analysis_df['topic'].unique():
+        topic_subset = analysis_df[analysis_df['topic'] == topic]
+        attrs_with_issues = set()
+        
+        for attr in ['gender', 'religion', 'age', 'country']:
+            attr_subset = topic_subset[topic_subset['protected_attribute'] == attr]
+            if len(attr_subset) > 0 and (attr_subset['newly_emerged'].sum() + 
+                                       attr_subset['persistent'].sum() + 
+                                       attr_subset['disappeared'].sum()) > 0:
+                attrs_with_issues.add(attr)
+        
+        if len(attrs_with_issues) >= 3:  # 3+ attributes affected
+            multi_attr_topics[topic] = {
+                'affected_attributes': list(attrs_with_issues),
+                'count': len(attrs_with_issues)
+            }
+    
+    if multi_attr_topics:
+        print(f"   INTERSECTIONAL BIAS TOPICS ({len(multi_attr_topics)} topics with 3+ attribute issues):")
+        for topic, info in list(multi_attr_topics.items())[:3]:
+            short_topic = topic[:35] + "..." if len(topic) > 35 else topic
+            print(f"   • {short_topic}")
+            print(f"     Affected: {', '.join(info['affected_attributes'])}")
+            print(f"     → INTERSECTIONAL RESEARCH: Complex multi-attribute bias patterns")
+    
+    # Severity analysis
+    print(f"\n⚡ BIAS SEVERITY ANALYSIS:")
+    total_emerged = sum(counts['newly_emerged'] for counts in attr_totals.values())
+    total_persistent = sum(counts['persistent'] for counts in attr_totals.values())
+    total_disappeared = sum(counts['disappeared'] for counts in attr_totals.values())
+    
+    net_bias_change = total_emerged - total_disappeared
+    bias_stability = total_persistent / (total_emerged + total_persistent + total_disappeared) * 100
+    
+    print(f"   • NET BIAS CHANGE: {net_bias_change:+d} cases ({'DETERIORATION' if net_bias_change > 0 else 'IMPROVEMENT' if net_bias_change < 0 else 'STABLE'})")
+    print(f"   • BIAS STABILITY: {bias_stability:.1f}% of bias patterns are persistent")
+    print(f"   • TURNOVER RATE: {(total_emerged + total_disappeared)/(total_emerged + total_persistent + total_disappeared)*100:.1f}% bias patterns changed")
+    
+    if net_bias_change > 5:
+        print(f"   ⚠️  CRITICAL: Significant bias deterioration detected!")
+    elif net_bias_change < -5:
+        print(f"   ✅ POSITIVE: Significant bias improvement detected!")
+    
+    # Research recommendations
+    print(f"\n🎯 TOP RESEARCH PRIORITIES:")
+    print("   1. PERSISTENT GENDER BIAS: Why does gender discrimination survive model updates?")
+    if dominant_emerging[0] != 'gender':
+        print(f"   2. EMERGING {dominant_emerging[0].upper()} BIAS: What post-Brexit factors caused new discrimination?")
+    if dominant_disappearing[0] not in ['gender', dominant_emerging[0]]:
+        print(f"   3. {dominant_disappearing[0].upper()} BIAS REDUCTION: Can this success be replicated?")
+    print(f"   4. HOTSPOT TOPICS: Deep-dive into '{hotspot_topics[0][0][:30]}...' (highest bias changes)")
+    if multi_attr_topics:
+        print(f"   5. INTERSECTIONAL ANALYSIS: Multi-attribute bias in complex topics")
+    
+    return attr_totals, topic_analysis, multi_attr_topics
+
 def main():
     """Main execution function"""
     
@@ -435,6 +832,12 @@ def main():
     # Plot 3: Topic-Level Fairness Salience by Model
     pre_counts, post_counts = plot_3_topic_model_salience(all_df)
     
+    # Enhanced Plot: Topic Breakdown by Protected Attribute
+    plot_df, color_palette = plot_enhanced_topic_breakdown_by_attribute(analysis_df)
+    
+    # Analyze insights from enhanced breakdown
+    attr_totals, topic_analysis, multi_attr_topics = analyze_enhanced_breakdown_insights(analysis_df)
+    
     # Summary statistics
     create_summary_stats(analysis_df, all_df)
     
@@ -443,6 +846,10 @@ def main():
     print("   • plot1_protected_attribute_significance_types.png")
     print("   • plot2_topic_fairness_reconfiguration.png") 
     print("   • plot3_topic_model_salience.png")
+    print("   • enhanced_topic_breakdown_by_attribute.png")
+    print("\n💡 The enhanced plot shows how each protected attribute contributes")
+    print("   to bias changes within specific asylum topics, revealing which")
+    print("   demographic factors drive bias shifts in different contexts.")
 
 if __name__ == "__main__":
     main() 
