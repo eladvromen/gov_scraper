@@ -1,0 +1,3 @@
+topic_category,bias_count,avg_magnitude,magnitude_std,avg_abs_magnitude,avg_change,change_std
+Credibility Assessment,7,-0.0387,0.2146,0.1576,0.0034,0.1249
+Other,11,-0.2693,0.244,0.3116,-0.0684,0.14

@@ -1,9 +1,7 @@
-present:
-1. ADD SIGNIGICENCE ROBUSTENSS TO NORMATIVE
-1. significance divergence (different levels of robustness)
-- both normative and fairness
-2. add cohen alpha 
-3. deep dive into the most significant differences!
+add:
+attribute segregation to the topic based plot!
+
+than deep dive into 1\2. 
 
 
 

@@ -1,0 +1,19 @@
+topic,topic_category,comparison_type,favors_gender,disfavors_gender,pre_brexit_sp_magnitude,post_brexit_sp_magnitude,sp_magnitude_difference,bias_strength,bias_trend
+Asylum seeker circumstances,Credibility Assessment,Female_vs_Male (gender) [Asylum seeker circumstances],Female,Male,0.1423611111111111,0.3993055555555555,0.2569444444444444,Very Strong,Strengthening
+Nature of persecution,Credibility Assessment,Male_vs_Non-binary (gender) [Nature of persecution],Male,Non-binary,-0.1041666666666667,-0.1652777777777777,-0.0611111111111109,Strong,Strengthening
+Nature of persecution,Credibility Assessment,Female_vs_Non-binary (gender) [Nature of persecution],Female,Non-binary,-0.0611111111111111,-0.0916666666666666,-0.0305555555555555,Moderate,Stable
+Activist Persecution Ground,Credibility Assessment,Male_vs_Non-binary (gender) [Activist Persecution Ground],Male,Non-binary,-0.1423611111111111,-0.2621527777777778,-0.1197916666666666,Strong,Strengthening
+Activist Persecution Ground,Credibility Assessment,Female_vs_Non-binary (gender) [Activist Persecution Ground],Female,Non-binary,-0.1215277777777777,-0.1493055555555555,-0.0277777777777777,Moderate,Stable
+Intentions regarding work i...,Other,Female_vs_Male (gender) [Intentions regarding work i...],Female,Male,0.0844907407407407,0.1516203703703703,0.0671296296296296,Strong,Strengthening
+Intentions regarding educat...,Other,Female_vs_Male (gender) [Intentions regarding educat...],Female,Male,0.0810185185185186,0.0810185185185184,-1.9428902930940242e-16,Moderate,Stable
+PSG (particular social group),Credibility Assessment,Male_vs_Non-binary (gender) [PSG (particular social group)],Male,Non-binary,-0.0841049382716049,-0.0185185185185186,0.0655864197530863,Weak,Weakening
+PSG (particular social group),Credibility Assessment,Female_vs_Male (gender) [PSG (particular social group)],Female,Male,0.0763888888888888,0.0169753086419753,-0.0594135802469135,Weak,Weakening
+Disclosure: Ethnic violence...,Other,Male_vs_Non-binary (gender) [Disclosure: Ethnic violence...],Male,Non-binary,-0.3263888888888889,-0.4236111111111111,-0.0972222222222222,Very Strong,Strengthening
+Disclosure: Ethnic violence...,Other,Female_vs_Non-binary (gender) [Disclosure: Ethnic violence...],Female,Non-binary,-0.1805555555555555,-0.2291666666666666,-0.0486111111111111,Strong,Stable
+Disclosure: Persecution for...,Other,Male_vs_Non-binary (gender) [Disclosure: Persecution for...],Male,Non-binary,-0.375,-0.4791666666666667,-0.1041666666666666,Very Strong,Strengthening
+Disclosure: Persecution for...,Other,Female_vs_Non-binary (gender) [Disclosure: Persecution for...],Female,Non-binary,-0.3680555555555556,-0.2638888888888889,0.1041666666666666,Strong,Weakening
+Contradiction: Location of ...,Other,Male_vs_Non-binary (gender) [Contradiction: Location of ...],Male,Non-binary,-0.1041666666666666,-0.1666666666666666,-0.0625,Strong,Strengthening
+Contradiction: Family invol...,Other,Male_vs_Non-binary (gender) [Contradiction: Family invol...],Male,Non-binary,-0.2708333333333333,-0.5833333333333333,-0.3124999999999999,Very Strong,Strengthening
+Contradiction: Family invol...,Other,Female_vs_Non-binary (gender) [Contradiction: Family invol...],Female,Non-binary,-0.2777777777777778,-0.6041666666666666,-0.3263888888888888,Very Strong,Strengthening
+Contradiction: Sequence of ...,Other,Male_vs_Non-binary (gender) [Contradiction: Sequence of ...],Male,Non-binary,-0.2708333333333333,-0.2361111111111111,0.0347222222222222,Strong,Stable
+Contradiction: Sequence of ...,Other,Female_vs_Non-binary (gender) [Contradiction: Sequence of ...],Female,Non-binary,-0.2013888888888889,-0.2083333333333333,-0.0069444444444443,Strong,Stable
