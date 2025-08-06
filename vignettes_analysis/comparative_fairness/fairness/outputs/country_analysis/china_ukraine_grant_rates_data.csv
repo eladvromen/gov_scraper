@@ -1,0 +1,5 @@
+topic,country,model,grant_rate,grants,total,sample_size
+Asylum seeker circumstances,China,pre_brexit,0.0,0,96,96
+Asylum seeker circumstances,China,post_brexit,31.25,30,96,96
+Asylum seeker circumstances,Ukraine,pre_brexit,10.416666666666668,10,96,96
+Asylum seeker circumstances,Ukraine,post_brexit,81.25,78,96,96

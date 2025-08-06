@@ -1,0 +1,59 @@
+{
+  "analysis_metadata": {
+    "focus_countries": [
+      "Syria",
+      "Nigeria",
+      "Myanmar"
+    ],
+    "focus_topic": "Intentions regarding work in the UK",
+    "analysis_date": "2025-07-22T16:44:58.557114",
+    "total_patterns_analyzed": 12,
+    "total_completions_analyzed": 7
+  },
+  "pattern_statistics": {
+    "newly_emerged_patterns": 3,
+    "disappeared_patterns": 4,
+    "persistent_patterns": 4,
+    "non_significant_patterns": 1,
+    "high_magnitude_patterns": 8,
+    "mean_sp_change": -0.029513888888888857,
+    "median_sp_change": -0.0329861111111111,
+    "max_sp_change": 0.2638888888888888,
+    "std_sp_change": 0.18568790927055656
+  },
+  "completion_statistics": {
+    "high_bias_completions": 5,
+    "work_intentions_completions": 3,
+    "profession_completions": 4,
+    "mean_rate_change": 0.15106390412522314,
+    "median_rate_change": 0.1433613733107571,
+    "max_rate_change": 0.3188040744423858,
+    "std_rate_change": 0.12317531182503538
+  },
+  "country_specific_summary": {
+    "Syria": {
+      "total_patterns": 5,
+      "advantageous_changes": 3,
+      "disadvantageous_changes": 2,
+      "net_change": 1,
+      "mean_sp_impact": -0.07499999999999996,
+      "high_magnitude_patterns": 2
+    },
+    "Nigeria": {
+      "total_patterns": 5,
+      "advantageous_changes": 1,
+      "disadvantageous_changes": 4,
+      "net_change": -3,
+      "mean_sp_impact": -0.07222222222222219,
+      "high_magnitude_patterns": 4
+    },
+    "Myanmar": {
+      "total_patterns": 5,
+      "advantageous_changes": 0,
+      "disadvantageous_changes": 5,
+      "net_change": -5,
+      "mean_sp_impact": -0.011111111111111061,
+      "high_magnitude_patterns": 4
+    }
+  }
+}

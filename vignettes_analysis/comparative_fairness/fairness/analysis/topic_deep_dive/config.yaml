@@ -1,0 +1,60 @@
+# 🎯 Topic Deep Dive Analyzer Configuration
+
+# Analysis Settings
+analysis:
+  fdr_correction: true
+  min_magnitude_threshold: 0.0
+  include_subtopics: true
+  generate_visualizations: true
+
+# Output Settings  
+output:
+  create_report: true
+  save_data: true
+  figure_format: 'png'
+  figure_dpi: 300
+
+# Topic Examples (use with --topic flag)
+predefined_topics:
+  work_intentions: "Intentions regarding work"
+  education_intentions: "Intentions regarding education" 
+  asylum_circumstances: "Asylum seeker circumstances"
+  persecution_nature: "Nature of persecution"
+  non_refoulement: "Non-Refoulement"
+  activist_persecution: "Activist Persecution Ground"
+  firm_settlement: "Firm settlement"
+  financial_stability: "Financial stability"
+  psg: "PSG (particular social group)"
+  political_persecution: "Disclosure: Political persecution"
+  religious_persecution: "Disclosure: Religious persecution"
+
+# Protected Attributes to Analyze
+protected_attributes:
+  - country
+  - age  
+  - religion
+  - gender
+
+# Data Paths (relative to script location)
+data_paths:
+  fairness_comparisons: "vector_drift/deduplicated_fairness_comparisons.csv"
+  detailed_transitions: "country_analysis/detailed_pattern_transitions.csv"
+  country_significant: "country_analysis/significant_country_comparisons_fdr.csv"
+  topic_attribute_data: "visualizations/topic_attribute_analysis_data.csv"
+  gender_bias: "gender_analysis/persistent_gender_bias_detailed.csv"
+  grant_rate_analysis: "../../../normative/outputs/grant_rate_analysis/grant_rate_analysis_by_vignette_fields_enhanced_FIXED.csv"
+
+# Visualization Settings
+visualizations:
+  pattern_transitions: true
+  cross_attribute_comparison: true  
+  country_impact_heatmap: true
+  magnitude_distribution: true
+  timeline_analysis: false  # Future feature
+  
+# Report Settings
+report:
+  include_methodology: true
+  include_data_sources: true
+  include_limitations: true
+  executive_summary: true 

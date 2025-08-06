@@ -1,0 +1,7 @@
+,abs_sp_change,abs_sp_change,abs_sp_change,abs_sp_change,both_significant,gained_significance,lost_significance
+,count,mean,max,std,sum,sum,sum
+protected_attribute,,,,,,,
+age,35,0.174,0.38,0.093,7,16,12
+country,38,0.166,0.396,0.093,8,11,19
+gender,29,0.135,0.354,0.118,18,6,5
+religion,16,0.113,0.333,0.09,2,6,8

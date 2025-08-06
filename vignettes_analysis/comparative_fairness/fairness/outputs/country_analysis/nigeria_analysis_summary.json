@@ -1,0 +1,9 @@
+{
+  "pre_brexit_mean_sp": -0.009832451499118162,
+  "post_brexit_mean_sp": -0.010094062316284522,
+  "sp_change": -0.00026161081716635955,
+  "pre_brexit_significance": 0.3836559874270187,
+  "post_brexit_significance": 0.20920339183709713,
+  "change_significance": 0.9839795044878816,
+  "total_comparisons": 105,
+  "fdr_significant_comparisons": 

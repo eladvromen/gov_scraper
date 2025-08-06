@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+    #!/usr/bin/env python3
 """
 Grant Rate Analysis by Vignette-Specific Fields - Fixed Statistical Testing
 FIXED: Now uses proper McNemar's test for paired binary data
@@ -18,8 +18,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Any, Optional
 from collections import defaultdict
 import logging
-from scipy.stats import chi2_contingency, mcnemar
-from scipy.stats.contingency import mcnemar as mcnemar_test
+from scipy.stats import chi2_contingency, chi2
 import warnings
 
 # Set up logging
@@ -240,11 +239,11 @@ def mcnemar_test_fixed(paired_decisions_data: Dict[str, Dict[str, str]]) -> Tupl
             
             if pre_decision == 'GRANT' and post_decision == 'GRANT':
                 both_grant += 1
-            elif pre_decision == 'GRANT' and post_decision == 'REJECT':
+            elif pre_decision == 'GRANT' and post_decision == 'DENY':
                 pre_grant_post_reject += 1
-            elif pre_decision == 'REJECT' and post_decision == 'GRANT':
+            elif pre_decision == 'DENY' and post_decision == 'GRANT':
                 pre_reject_post_grant += 1
-            elif pre_decision == 'REJECT' and post_decision == 'REJECT':
+            elif pre_decision == 'DENY' and post_decision == 'DENY':
                 both_reject += 1
     
     # Create McNemar's 2x2 table
@@ -269,15 +268,31 @@ def mcnemar_test_fixed(paired_decisions_data: Dict[str, Dict[str, str]]) -> Tupl
                                 total_disagreements, 0.5, alternative='two-sided')
             return p_value < 0.05, p_value
     else:
-        # Use standard McNemar's test
+        # Use standard McNemar's test (implemented manually)
         try:
-            result = mcnemar_test(mcnemar_table, exact=False, correction=True)
-            return result.pvalue < 0.05, result.pvalue
+            # McNemar's test statistic with continuity correction
+            # Formula: ((|b - c| - 0.5)^2) / (b + c)
+            # where b = pre_grant_post_reject, c = pre_reject_post_grant
+            
+            b = pre_grant_post_reject
+            c = pre_reject_post_grant
+            
+            if (b + c) == 0:
+                # No disagreements = no difference
+                return False, 1.0
+            
+            # McNemar's test statistic with continuity correction
+            test_statistic = ((abs(b - c) - 0.5) ** 2) / (b + c)
+            
+            # p-value from chi-square distribution with 1 degree of freedom
+            p_value = 1 - chi2.cdf(test_statistic, df=1)
+            
+            return p_value < 0.05, p_value
         except Exception as e:
             logger.warning(f"McNemar's test failed: {e}. Falling back to chi-square.")
             # Fallback to chi-square if McNemar's fails
             try:
-                chi2, p_value, dof, expected = chi2_contingency(mcnemar_table)
+                chi2_stat, p_value, dof, expected = chi2_contingency(mcnemar_table)
                 return p_value < 0.05, p_value
             except:
                 return False, 1.0

@@ -1,0 +1,106 @@
+comparison_label,nigeria_role,opponent_country,topic,pre_nigeria_sp,post_nigeria_sp,sp_change,pre_significant,post_significant,fdr_significant,pattern_type
+Nigeria_vs_Myanmar (country) [Asylum seeker circumstances],country1,Myanmar,Asylum seeker circumstances,-0.03125,-0.25,-0.21875,False,True,True,EMERGED_POST_UNFAVORABLE
+Ukraine_vs_Nigeria (country) [Asylum seeker circumstances],country2,Ukraine,Asylum seeker circumstances,0.0520833333333333,-0.1979166666666666,-0.2499999999999999,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Asylum seeker circumstances],country1,Pakistan,Asylum seeker circumstances,-0.0520833333333333,-0.0520833333333332,1.0408340855860843e-16,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Asylum seeker circumstances],country2,Syria,Asylum seeker circumstances,-0.0729166666666666,-0.0625,0.010416666666666602,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Asylum seeker circumstances],country2,China,Asylum seeker circumstances,0.15625,0.3020833333333333,0.14583333333333331,True,True,True,PERSISTENT_FAVORABLE
+Nigeria_vs_Myanmar (country) [Nature of persecution],country1,Myanmar,Nature of persecution,-0.0597222222222222,-0.011111111111111,0.048611111111111195,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Nature of persecution],country2,Ukraine,Nature of persecution,-0.0402777777777778,0.0541666666666666,0.0944444444444444,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Nature of persecution],country1,Pakistan,Nature of persecution,-0.0347222222222222,0.0291666666666666,0.0638888888888888,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Nature of persecution],country2,Syria,Nature of persecution,-0.0791666666666667,-0.0013888888888888,0.0777777777777779,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+China_vs_Nigeria (country) [Nature of persecution],country2,China,Nature of persecution,-0.0847222222222222,0.0013888888888889,0.0861111111111111,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+Nigeria_vs_Myanmar (country) [Non-Refoulement - Intercept...],country1,Myanmar,Non-Refoulement - Intercept...,-0.09375,0.0416666666666667,0.13541666666666669,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Non-Refoulement - Intercept...],country2,Ukraine,Non-Refoulement - Intercept...,-0.0104166666666666,0.0208333333333333,0.031249999999999903,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Non-Refoulement - Intercept...],country1,Pakistan,Non-Refoulement - Intercept...,-0.0625,0.0,0.0625,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Non-Refoulement - Intercept...],country2,Syria,Non-Refoulement - Intercept...,-0.09375,0.0208333333333333,0.1145833333333333,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Non-Refoulement - Intercept...],country2,China,Non-Refoulement - Intercept...,-0.0416666666666666,0.0104166666666667,0.0520833333333333,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Activist Persecution Ground],country1,Myanmar,Activist Persecution Ground,-0.1284722222222222,0.0555555555555555,0.1840277777777777,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Activist Persecution Ground],country2,Ukraine,Activist Persecution Ground,-0.0451388888888888,-0.0034722222222222,0.041666666666666595,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Activist Persecution Ground],country1,Pakistan,Activist Persecution Ground,-0.0555555555555555,0.1215277777777777,0.1770833333333332,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Activist Persecution Ground],country2,Syria,Activist Persecution Ground,-0.017361111111111,-0.0625,-0.045138888888889,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Activist Persecution Ground],country2,China,Activist Persecution Ground,-0.0277777777777777,-0.0069444444444444,0.0208333333333333,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [3rd safe country - Country ...],country1,Myanmar,3rd safe country - Country ...,0.0104166666666666,-0.2083333333333333,-0.2187499999999999,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [3rd safe country - Country ...],country2,Ukraine,3rd safe country - Country ...,0.0625,-0.1145833333333333,-0.17708333333333331,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [3rd safe country - Country ...],country1,Pakistan,3rd safe country - Country ...,0.0625,-0.0416666666666667,-0.1041666666666667,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [3rd safe country - Country ...],country2,Syria,3rd safe country - Country ...,0.0520833333333333,-0.1666666666666667,-0.21875,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [3rd safe country - Country ...],country2,China,3rd safe country - Country ...,-0.0208333333333333,-0.0833333333333333,-0.0625,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Firm settlement],country1,Myanmar,Firm settlement,0.0555555555555555,0.0,-0.0555555555555555,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Firm settlement],country2,Ukraine,Firm settlement,0.007716049382716,-0.0,-0.007716049382716,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Firm settlement],country1,Pakistan,Firm settlement,0.0416666666666667,0.0,-0.0416666666666667,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Firm settlement],country2,Syria,Firm settlement,-0.074074074074074,-0.0,0.074074074074074,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Firm settlement],country2,China,Firm settlement,-0.0570987654320986,-0.0,0.0570987654320986,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Assimilation Potential],country1,Myanmar,Assimilation Potential,0.0,-0.0222222222222221,-0.0222222222222221,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Assimilation Potential],country2,Ukraine,Assimilation Potential,-0.0027777777777777,-0.0138888888888888,-0.0111111111111111,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Assimilation Potential],country1,Pakistan,Assimilation Potential,-0.0083333333333333,-0.0333333333333333,-0.024999999999999998,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Assimilation Potential],country2,Syria,Assimilation Potential,-0.0444444444444444,-0.0499999999999999,-0.005555555555555501,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Assimilation Potential],country2,China,Assimilation Potential,-0.0416666666666666,0.0027777777777778,0.044444444444444405,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Financial stability],country1,Myanmar,Financial stability,-0.1527777777777778,0.0,0.1527777777777778,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Financial stability],country2,Ukraine,Financial stability,0.0138888888888889,0.0138888888888889,0.0,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Financial stability],country1,Pakistan,Financial stability,-0.1944444444444444,0.0138888888888889,0.2083333333333333,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Financial stability],country2,Syria,Financial stability,-0.1944444444444444,0.1111111111111111,0.30555555555555547,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Financial stability],country2,China,Financial stability,-0.1944444444444444,0.0277777777777777,0.2222222222222221,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Intentions regarding work i...],country1,Myanmar,Intentions regarding work i...,-0.1770833333333333,-0.2013888888888888,-0.024305555555555525,True,True,True,PERSISTENT_UNFAVORABLE
+Ukraine_vs_Nigeria (country) [Intentions regarding work i...],country2,Ukraine,Intentions regarding work i...,-0.0833333333333333,0.0694444444444444,0.1527777777777777,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Intentions regarding work i...],country1,Pakistan,Intentions regarding work i...,-0.1840277777777778,0.0555555555555555,0.2395833333333333,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+Syria_vs_Nigeria (country) [Intentions regarding work i...],country2,Syria,Intentions regarding work i...,-0.3055555555555556,-0.1111111111111111,0.19444444444444448,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+China_vs_Nigeria (country) [Intentions regarding work i...],country2,China,Intentions regarding work i...,-0.1909722222222222,0.0381944444444444,0.2291666666666666,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+Nigeria_vs_Myanmar (country) [Intentions regarding educat...],country1,Myanmar,Intentions regarding educat...,-0.2222222222222222,-0.0416666666666666,0.1805555555555556,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+Ukraine_vs_Nigeria (country) [Intentions regarding educat...],country2,Ukraine,Intentions regarding educat...,-0.1770833333333333,0.0034722222222222,0.1805555555555555,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+Nigeria_vs_Pakistan (country) [Intentions regarding educat...],country1,Pakistan,Intentions regarding educat...,-0.2465277777777778,0.0208333333333333,0.2673611111111111,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+Syria_vs_Nigeria (country) [Intentions regarding educat...],country2,Syria,Intentions regarding educat...,-0.3298611111111111,-0.0243055555555555,0.3055555555555556,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+China_vs_Nigeria (country) [Intentions regarding educat...],country2,China,Intentions regarding educat...,-0.2048611111111111,0.0069444444444444,0.2118055555555555,True,False,True,DISAPPEARED_PRE_UNFAVORABLE
+Nigeria_vs_Myanmar (country) [PSG (particular social group)],country1,Myanmar,,-0.029320987654321,0.0061728395061728,0.0354938271604938,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [PSG (particular social group)],country2,Ukraine,,-0.0216049382716049,-0.0030864197530864,0.0185185185185185,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [PSG (particular social group)],country1,Pakistan,,-0.0185185185185186,0.0092592592592593,0.0277777777777779,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [PSG (particular social group)],country2,Syria,,-0.029320987654321,0.0046296296296296,0.0339506172839506,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [PSG (particular social group)],country2,China,,-0.0185185185185186,0.0092592592592593,0.0277777777777779,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Disclosure: Political perse...],country1,Myanmar,Disclosure: Political perse...,0.1388888888888888,-0.0833333333333332,-0.22222222222222202,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Disclosure: Political perse...],country2,Ukraine,Disclosure: Political perse...,0.1805555555555555,0.2222222222222223,0.041666666666666796,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Disclosure: Political perse...],country1,Pakistan,Disclosure: Political perse...,0.2916666666666667,0.0694444444444445,-0.22222222222222218,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Disclosure: Political perse...],country2,Syria,Disclosure: Political perse...,-0.0,-0.0277777777777776,-0.0277777777777776,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Disclosure: Political perse...],country2,China,Disclosure: Political perse...,0.2361111111111111,0.0277777777777777,-0.2083333333333334,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Disclosure: Religious perse...],country1,Myanmar,Disclosure: Religious perse...,0.0138888888888889,0.1111111111111111,0.09722222222222221,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Disclosure: Religious perse...],country2,Ukraine,Disclosure: Religious perse...,0.0138888888888889,0.0833333333333333,0.0694444444444444,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Disclosure: Religious perse...],country1,Pakistan,Disclosure: Religious perse...,0.0277777777777777,-0.0277777777777777,-0.0555555555555554,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Disclosure: Religious perse...],country2,Syria,Disclosure: Religious perse...,-0.0138888888888888,-0.0,0.0138888888888888,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Disclosure: Religious perse...],country2,China,Disclosure: Religious perse...,-0.0277777777777777,-0.0,0.0277777777777777,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Disclosure: Domestic violen...],country1,Myanmar,Disclosure: Domestic violen...,0.0694444444444444,-0.0138888888888888,-0.0833333333333332,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Disclosure: Domestic violen...],country2,Ukraine,Disclosure: Domestic violen...,0.0833333333333333,0.0277777777777777,-0.0555555555555556,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Disclosure: Domestic violen...],country1,Pakistan,Disclosure: Domestic violen...,0.0277777777777777,0.0138888888888889,-0.0138888888888888,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Disclosure: Domestic violen...],country2,Syria,Disclosure: Domestic violen...,0.0277777777777777,-0.0,-0.0277777777777777,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Disclosure: Domestic violen...],country2,China,Disclosure: Domestic violen...,-0.1527777777777778,-0.0,0.1527777777777778,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Disclosure: Ethnic violence...],country1,Myanmar,Disclosure: Ethnic violence...,-0.0416666666666666,-0.1666666666666666,-0.125,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Disclosure: Ethnic violence...],country2,Ukraine,Disclosure: Ethnic violence...,0.0555555555555555,-0.0972222222222222,-0.15277777777777768,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Disclosure: Ethnic violence...],country1,Pakistan,Disclosure: Ethnic violence...,0.1805555555555555,-0.0277777777777777,-0.2083333333333332,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Disclosure: Ethnic violence...],country2,Syria,Disclosure: Ethnic violence...,0.0416666666666667,-0.1527777777777778,-0.19444444444444448,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Disclosure: Ethnic violence...],country2,China,Disclosure: Ethnic violence...,0.0277777777777777,-0.0416666666666666,-0.06944444444444431,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Disclosure: Persecution for...],country1,Myanmar,Disclosure: Persecution for...,0.0277777777777777,-0.0555555555555555,-0.0833333333333332,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Disclosure: Persecution for...],country2,Ukraine,Disclosure: Persecution for...,0.1527777777777778,-0.0,-0.1527777777777778,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Disclosure: Persecution for...],country1,Pakistan,Disclosure: Persecution for...,0.0972222222222222,0.0833333333333333,-0.013888888888888895,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Disclosure: Persecution for...],country2,Syria,Disclosure: Persecution for...,0.0833333333333332,0.0138888888888889,-0.06944444444444431,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Disclosure: Persecution for...],country2,China,Disclosure: Persecution for...,0.125,-0.0555555555555555,-0.1805555555555555,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Contradiction: Dates of per...],country1,Myanmar,Contradiction: Dates of per...,0.1666666666666666,0.0555555555555555,-0.1111111111111111,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Contradiction: Dates of per...],country2,Ukraine,Contradiction: Dates of per...,0.2083333333333333,-0.0555555555555555,-0.2638888888888888,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Contradiction: Dates of per...],country1,Pakistan,Contradiction: Dates of per...,0.2361111111111111,0.1111111111111111,-0.125,True,False,True,DISAPPEARED_PRE_FAVORABLE
+Syria_vs_Nigeria (country) [Contradiction: Dates of per...],country2,Syria,Contradiction: Dates of per...,0.1944444444444444,0.0555555555555555,-0.1388888888888889,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Contradiction: Dates of per...],country2,China,Contradiction: Dates of per...,0.1805555555555555,-0.0833333333333333,-0.2638888888888888,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Contradiction: Persecutor i...],country1,Myanmar,Contradiction: Persecutor i...,0.0,0.0,0.0,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Contradiction: Persecutor i...],country2,Ukraine,Contradiction: Persecutor i...,-0.0,-0.0,0.0,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Contradiction: Persecutor i...],country1,Pakistan,Contradiction: Persecutor i...,0.0,0.0,0.0,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Contradiction: Persecutor i...],country2,Syria,Contradiction: Persecutor i...,-0.0,-0.0,0.0,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Contradiction: Persecutor i...],country2,China,Contradiction: Persecutor i...,-0.0,-0.0,0.0,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Contradiction: Location of ...],country1,Myanmar,Contradiction: Location of ...,-0.0277777777777777,-0.0694444444444444,-0.041666666666666706,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Contradiction: Location of ...],country2,Ukraine,Contradiction: Location of ...,-0.0416666666666666,-0.1805555555555555,-0.1388888888888889,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Contradiction: Location of ...],country1,Pakistan,Contradiction: Location of ...,0.0138888888888888,0.0,-0.0138888888888888,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Contradiction: Location of ...],country2,Syria,Contradiction: Location of ...,-0.0,-0.0138888888888888,-0.0138888888888888,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Contradiction: Location of ...],country2,China,Contradiction: Location of ...,-0.0138888888888888,-0.0,0.0138888888888888,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Contradiction: Family invol...],country1,Myanmar,Contradiction: Family invol...,-0.2083333333333333,-0.0416666666666666,0.16666666666666669,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Contradiction: Family invol...],country2,Ukraine,Contradiction: Family invol...,-0.0277777777777777,-0.0833333333333333,-0.0555555555555556,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Contradiction: Family invol...],country1,Pakistan,Contradiction: Family invol...,-0.0277777777777777,0.0694444444444444,0.0972222222222221,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Contradiction: Family invol...],country2,Syria,Contradiction: Family invol...,-0.0,0.1944444444444444,0.1944444444444444,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Contradiction: Family invol...],country2,China,Contradiction: Family invol...,-0.0555555555555555,-0.0555555555555555,0.0,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Myanmar (country) [Contradiction: Sequence of ...],country1,Myanmar,Contradiction: Sequence of ...,0.0138888888888888,-0.125,-0.1388888888888888,False,False,False,NON_SIGNIFICANT
+Ukraine_vs_Nigeria (country) [Contradiction: Sequence of ...],country2,Ukraine,Contradiction: Sequence of ...,0.1111111111111111,-0.0694444444444444,-0.18055555555555552,False,False,False,NON_SIGNIFICANT
+Nigeria_vs_Pakistan (country) [Contradiction: Sequence of ...],country1,Pakistan,Contradiction: Sequence of ...,0.1388888888888889,0.0416666666666666,-0.0972222222222223,False,False,False,NON_SIGNIFICANT
+Syria_vs_Nigeria (country) [Contradiction: Sequence of ...],country2,Syria,Contradiction: Sequence of ...,0.0694444444444444,0.0138888888888888,-0.05555555555555561,False,False,False,NON_SIGNIFICANT
+China_vs_Nigeria (country) [Contradiction: Sequence of ...],country2,China,Contradiction: Sequence of ...,0.1111111111111111,-0.0138888888888888,-0.1249999999999999,False,False,False,NON_SIGNIFICANT

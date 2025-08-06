@@ -1,0 +1,61 @@
+{
+  "data_dictionary": {
+    "focus_country_bias_patterns.csv": {
+      "description": "Raw statistical parity patterns for focus countries",
+      "fields": {
+        "comparison_id": "Unique identifier for country comparison (e.g., 'Syria_vs_Myanmar')",
+        "group_1": "First country in comparison",
+        "group_2": "Second country in comparison",
+        "pre_brexit_sp_magnitude": "Statistical parity value in pre-Brexit model (-1 to 1)",
+        "post_brexit_sp_magnitude": "Statistical parity value in post-Brexit model (-1 to 1)",
+        "sp_magnitude_change": "Change in statistical parity (post - pre)",
+        "abs_sp_change": "Absolute magnitude of change",
+        "pre_brexit_significant": "Whether pre-Brexit bias was FDR-significant",
+        "post_brexit_significant": "Whether post-Brexit bias was FDR-significant",
+        "pattern_type": "Classification: Newly_Emerged, Disappeared, Persistent, Non_Significant",
+        "bias_direction": "Which country/group is favored",
+        "is_high_magnitude": "Whether |change| > 0.15 (threshold for major bias shift)"
+      }
+    },
+    "vignette_completion_bias_data.csv": {
+      "description": "Raw bias data for specific vignette field completions",
+      "fields": {
+        "field_name": "Vignette field (e.g., 'work intentions', 'profession')",
+        "field_value": "Specific completion text",
+        "pre_brexit_raw_rate": "Grant rate in pre-Brexit model (0-1)",
+        "post_brexit_raw_rate": "Grant rate in post-Brexit model (0-1)",
+        "cross_model_difference": "Difference in grant rates (post - pre)",
+        "statistical_significance": "Whether difference is statistically significant",
+        "p_value": "Statistical significance p-value",
+        "is_high_bias": "Whether |difference| > 0.1 AND statistically significant"
+      }
+    },
+    "statistical_summary.json": {
+      "description": "Aggregate statistics and summary metrics",
+      "sections": {
+        "pattern_statistics": "Counts and statistics for bias patterns",
+        "completion_statistics": "Statistics for vignette completion bias",
+        "country_specific_summary": "Per-country impact analysis"
+      }
+    },
+    "high_priority_cases_for_manual_review.csv": {
+      "description": "Cases with highest bias magnitude requiring manual investigation",
+      "note": "Sorted by absolute statistical parity change, filtered for |change| > 0.15"
+    },
+    "high_bias_completions.csv": {
+      "description": "Vignette completions with statistically significant bias > 10%",
+      "note": "These are the specific field values driving bias patterns"
+    }
+  },
+  "methodology": {
+    "statistical_parity": "Difference in positive decision rates between groups, range [-1, 1]",
+    "fdr_correction": "False Discovery Rate correction applied to significance testing",
+    "bias_threshold": "High bias defined as |change| > 0.10 for grant rates, > 0.15 for SP",
+    "focus_countries": [
+      "Syria",
+      "Nigeria",
+      "Myanmar"
+    ],
+    "focus_topic": "Intentions regarding work in the UK"
+  }
+}
