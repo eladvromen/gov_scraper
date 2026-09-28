@@ -1,6 +1,5 @@
-# Interpretative Drift: Legal Training Data and LLM Decision-Making
+# Interpretative Drift: 
 
-Code and data for the paper *Interpretative Drift: Political Transformations in Legal Training Data Systematically Reconfigure AI Reasoning* (under review).
 
 We continued-pretrain two copies of LLaMA-3-8B on decisions of the UK Upper Tribunal (Immigration and Asylum Chamber) from two periods, 2013–2016 and 2019–2025, and compare how the two models decide the same 25,920 controlled asylum vignettes. The comparison is made at three levels: the model, the legal topic, and the individual evidentiary field.
 
